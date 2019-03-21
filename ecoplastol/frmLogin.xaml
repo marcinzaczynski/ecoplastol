@@ -1,0 +1,17 @@
+﻿<Window x:Class="ecoplastol.frmLogin"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ecoplastol"
+        mc:Ignorable="d"
+        Title="Logowanie" Height="334" Width="588" WindowStartupLocation="CenterScreen">
+    <Grid Background="{DynamicResource {x:Static SystemColors.ActiveCaptionBrushKey}}">
+        <ComboBox HorizontalAlignment="Left" Margin="218,54,0,0" VerticalAlignment="Top" Width="247" Name="cbbLogin" FontSize="30" TabIndex="1"/>
+        <Label Content="Login" HorizontalAlignment="Left" Margin="84,54,0,0" VerticalAlignment="Top" FontSize="30" RenderTransformOrigin="0.988,0.54"/>
+        <Label Content="Hasło" HorizontalAlignment="Left" Margin="84,109,0,0" VerticalAlignment="Top" FontSize="30"/>
+        <Button Content="Zaloguj" HorizontalAlignment="Left" VerticalAlignment="Top" Width="478" Margin="49,204,0,0" Height="68" FontSize="30" Name="btnZaloguj" Click="btnZaloguj_Click" TabIndex="3"/>
+        <PasswordBox HorizontalAlignment="Left" Margin="218,113,0,0" VerticalAlignment="Top" Width="247" Height="46" FontSize="30" TabIndex="2" Name="psbHaslo"/>
+
+    </Grid>
+</Window>

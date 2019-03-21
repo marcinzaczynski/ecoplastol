@@ -1,0 +1,1380 @@
+﻿using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Text.RegularExpressions;
+using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Shapes;
+
+namespace ecoplastol
+{
+    /// <summary>
+    /// Interaction logic for frmWyroby.xaml
+    /// </summary>
+    public partial class frmWyroby : Window
+    {
+        private kod25 kod25;
+        private kodTrace kodTrace;
+
+        private string _akcja;
+        private int _id_upd;
+        private int dgBookmark;
+        private List<wyroby> listWyroby;
+        private List<parameters> listTypyWyrobow;
+        private List<parameters> listWyrobZakresSDR;
+        private List<parameters> listWyrobZastZaworu;
+        private List<parameters> listWyrobRodzajDrutu;
+
+        private List<parameters> listITFKategorie;
+        private List<parameters> listITFZnaki1;
+        private List<parameters> listITFZnaki2;
+        private List<parameters> listITFicc;
+        private List<parameters> listITFcc1;
+        private List<parameters> listITFcc2;
+        private List<parameters> listITFsmin;
+        private List<parameters> listITFsmax;
+        private List<parameters> listITFtrn;
+        private List<parameters> listITFodch;
+
+        private List<parameters> listTraceZnaki1;
+        private List<parameters> listTraceZnaki2;
+        private List<parameters> listTraceKategorie;
+        private List<parameters> listTraceSmin;
+        private List<parameters> listTraceSmax;
+        private List<parameters> listTraceZaklad;
+        private List<parameters> listTraceSDR;
+        private List<parameters> listTracePEm;
+        private List<parameters> listTraceMaterial;
+        private List<parameters> listTracePEo;
+        private List<parameters> listTraceMFR;
+
+        public frmWyroby()
+        {
+            InitializeComponent();
+            gridWyrob.IsEnabled = false;
+            listWyroby = frmWyroby_db.GetProducts();
+            dgWyroby.ItemsSource = listWyroby;
+
+
+            // var firsItem = dgWyroby.Items[0];
+            //dgWyroby.SelectedItem = firsItem;
+            //dgWyroby.CurrentItem = firsItem;
+            //dgWyroby.ScrollIntoView(firsItem);
+
+            UstawWyrob();
+            UstawITF();
+            UstawTrace();
+
+            kod25 = new kod25();
+            kodTrace = new kodTrace();
+
+            if (listWyroby.Count == 0)
+                UstawPrzyciski(0);
+            else
+            {
+                dgWyroby.Focus();
+                dgWyroby.SelectedIndex = 0;
+
+                DgWyroby_SelectionChanged(null, null);
+                UstawPrzyciski(1);
+            }
+
+
+
+        }
+
+        // DESTRUKTOR
+        //~frmWyroby()
+        //{
+        //    MessageBox.Show("Destruktor");
+        //}
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+
+            System.Windows.Data.CollectionViewSource wyrobyViewSource = ((System.Windows.Data.CollectionViewSource)(this.FindResource("wyrobyViewSource")));
+            // Load data by setting the CollectionViewSource.Source property:
+            // wyrobyViewSource.Source = [generic data source]
+        }
+        private void UstawPrzyciski(int i)
+        {
+            // i == 0 - nie ma żadnego rekordu z tabeli
+            // i == 1 - jest co najmniej jeden rekord z tabeli
+            switch (i)
+            {
+                case 0:
+                    btnDodaj.IsEnabled = true;
+                    btnKlonuj.IsEnabled = false;
+                    btnPopraw.IsEnabled = false;
+                    btnUsun.IsEnabled = false;
+                    btnAnuluj.IsEnabled = false;
+                    btnZatwierdz.IsEnabled = false;
+                    break;
+                case 1:
+                    btnDodaj.IsEnabled = true;
+                    btnKlonuj.IsEnabled = true;
+                    btnPopraw.IsEnabled = true;
+                    btnUsun.IsEnabled = true;
+                    btnAnuluj.IsEnabled = false;
+                    btnZatwierdz.IsEnabled = false;
+                    break;
+            }
+        }
+
+        private void BtnDodaj_Click(object sender, RoutedEventArgs e)
+        {
+            _akcja = "D";
+
+            dgWyroby.IsEnabled = false;
+            btnDodaj.IsEnabled = false;
+            btnKlonuj.IsEnabled = false;
+            btnPopraw.IsEnabled = false;
+            btnUsun.IsEnabled = false;
+            btnAnuluj.IsEnabled = true;
+            btnZatwierdz.IsEnabled = true;
+            btnZamknij.IsEnabled = false;
+
+            gridWyrob.IsEnabled = true;
+            WyczyscKontrolkiWyrob();
+            WyczyscKontrolkiKodKr();
+        }
+
+        public static List<T> GetLogicalChildCollection<T>(object parent) where T : DependencyObject
+        {
+            List<T> logicalCollection = new List<T>();
+            GetLogicalChildCollection(parent as DependencyObject, logicalCollection);
+            return logicalCollection;
+        }
+
+        private static void GetLogicalChildCollection<T>(DependencyObject parent, List<T> logicalCollection) where T : DependencyObject
+        {
+            IEnumerable children = LogicalTreeHelper.GetChildren(parent);
+            foreach (object child in children)
+            {
+                if (child is DependencyObject)
+                {
+                    DependencyObject depChild = child as DependencyObject;
+                    if (child is T)
+                    {
+                        logicalCollection.Add(child as T);
+                    }
+                    GetLogicalChildCollection(depChild, logicalCollection);
+                }
+            }
+        }
+
+        private void WyczyscKontrolkiWyrob()
+        {
+            txtWyrobKod.Text = "";
+            txtWyrobIndeks.Text = "";
+            txtWyrobOpis.Text = "";
+            txtWyrobIwOpZ.Text = "";
+            txtWyrobWagaOp.Text = "";
+            txtWyrobWaga1szt.Text = "";
+
+            txtITFprn.Text = "";
+            txtITFrez.Text = "";
+            txtITFcz1.Text = "";
+            txtITFcz2.Text = "";
+            txtITFke.Text = "";
+            txtTracePartia.Text = "";
+
+            List<ComboBox> comboBoxes = GetLogicalChildCollection<ComboBox>(gridWyrob);
+            foreach (var cmbBox in comboBoxes)
+            {
+                cmbBox.SelectedValue = -1;
+                //MessageBox.Show(cmbBox.Name);
+            }
+
+        }
+
+        private void WyczyscKontrolkiKodKr()
+        {
+            List<TextBox> TextBoxes = GetLogicalChildCollection<TextBox>(gridKody);
+            foreach (var txtBox in TextBoxes)
+            {
+                txtBox.Text = "";
+                //MessageBox.Show(cmbBox.Name);
+            }
+        }
+
+        private void UstawWyrob()
+        {
+            listTypyWyrobow = frmWyroby_db.GetParams("WYROB", "TYP_WYROBU");
+            cbbWyrobTyp.ItemsSource = listTypyWyrobow;
+            cbbWyrobTyp.SelectedValuePath = "indeks";
+
+            listWyrobZakresSDR = frmWyroby_db.GetParams("WYROB", "ZAKRES_SDR");
+            cbbWyrobZakresSDR.ItemsSource = listWyrobZakresSDR;
+            cbbWyrobZakresSDR.SelectedValuePath = "indeks";
+
+            listWyrobZastZaworu = frmWyroby_db.GetParams("WYROB", "ZAST_ZAWORU");
+            cbbWyrobZastZaworu.ItemsSource = listWyrobZastZaworu;
+            cbbWyrobZastZaworu.SelectedValuePath = "indeks";
+
+            listWyrobRodzajDrutu = frmWyroby_db.GetParams("WYROB", "DRUT");
+            cbbWyrobRodzajDrutu.ItemsSource = listWyrobRodzajDrutu;
+            cbbWyrobRodzajDrutu.SelectedValuePath = "indeks";
+        }
+
+        private void UstawITF()
+        {
+            // wczytuje parametry do cbb dla kodu ITF
+            listITFKategorie = frmWyroby_db.GetParams("ITF", "KATEGORIA");
+            cbbITFKategoria.ItemsSource = listITFKategorie;
+            cbbITFKategoria.SelectedValuePath = "indeks";
+
+            listITFZnaki1 = frmWyroby_db.GetParams("ITF", "ZNAK");
+            cbbITFZnak1.ItemsSource = listITFZnaki1;
+            cbbITFZnak1.SelectedValuePath = "indeks";
+
+            listITFZnaki2 = frmWyroby_db.GetParams("ITF", "ZNAK");
+            cbbITFZnak2.ItemsSource = listITFZnaki2;
+            cbbITFZnak2.SelectedValuePath = "indeks";
+
+            listITFicc = frmWyroby_db.GetParams("ITF", "ICC");
+            cbbITFICC.ItemsSource = listITFicc;
+            cbbITFICC.SelectedValuePath = "indeks";
+
+            listITFcc1 = frmWyroby_db.GetParams("ITF", "CC");
+            cbbITFCC1.ItemsSource = listITFcc1;
+            cbbITFCC1.SelectedValuePath = "indeks";
+
+            listITFcc2 = frmWyroby_db.GetParams("ITF", "CC");
+            cbbITFCC2.ItemsSource = listITFcc2;
+            cbbITFCC2.SelectedValuePath = "indeks";
+
+            listITFsmin = frmWyroby_db.GetParams("ITF", "SR");
+            cbbITFsmin.ItemsSource = listITFsmin;
+            cbbITFsmin.SelectedValuePath = "indeks";
+
+            listITFsmax = frmWyroby_db.GetParams("ITF", "SR");
+            cbbITFsmax.ItemsSource = listITFsmax;
+            cbbITFsmax.SelectedValuePath = "indeks";
+
+            listITFtrn = frmWyroby_db.GetParams("ITF", "TRN");
+            cbbITFtrn.ItemsSource = listITFtrn;
+            cbbITFtrn.SelectedValuePath = "indeks";
+
+            listITFodch = frmWyroby_db.GetParams("ITF", "ODCH");
+            cbbITFodch.ItemsSource = listITFodch;
+            cbbITFodch.SelectedValuePath = "indeks";
+        }
+
+        private void UstawTrace()
+        {
+            // wczytuje parametry do cbb dla kodu Traceability
+            listTraceZnaki1 = frmWyroby_db.GetParams("TRACEABILITY", "ZNAK");
+            cbbTraceZnak1.ItemsSource = listTraceZnaki1;
+            cbbTraceZnak1.SelectedValuePath = "indeks";
+
+            listTraceZnaki2 = frmWyroby_db.GetParams("TRACEABILITY", "ZNAK");
+            cbbTraceZnak2.ItemsSource = listTraceZnaki2;
+            cbbTraceZnak2.SelectedValuePath = "indeks";
+
+            listTraceKategorie = frmWyroby_db.GetParams("TRACEABILITY", "KATEGORIA");
+            cbbTraceKategoria.ItemsSource = listTraceKategorie;
+            cbbTraceKategoria.SelectedValuePath = "indeks";
+
+            listTraceSmin = frmWyroby_db.GetParams("TRACEABILITY", "SR");
+            cbbTraceSmin.ItemsSource = listTraceSmin;
+            cbbTraceSmin.SelectedValuePath = "indeks";
+
+            listTraceSmax = frmWyroby_db.GetParams("TRACEABILITY", "SR");
+            cbbTraceSmax.ItemsSource = listTraceSmax;
+            cbbTraceSmax.SelectedValuePath = "indeks";
+
+            listTraceZaklad = frmWyroby_db.GetParams("TRACEABILITY", "PRODUCENT");
+            cbbTraceProducent.ItemsSource = listTraceZaklad;
+            cbbTraceProducent.SelectedValuePath = "indeks";
+
+            listTraceSDR = frmWyroby_db.GetParams("TRACEABILITY", "SDR");
+            cbbTraceSDR.ItemsSource = listTraceSDR;
+            cbbTraceSDR.SelectedValuePath = "indeks";
+
+            listTracePEm = frmWyroby_db.GetParams("TRACEABILITY", "PE_MIESZANKA");
+            cbbTracePEm.ItemsSource = listTracePEm;
+            cbbTracePEm.SelectedValuePath = "indeks";
+
+            listTraceMaterial = frmWyroby_db.GetParams("TRACEABILITY", "MATERIAL");
+            cbbTraceMaterial.ItemsSource = listTraceMaterial;
+            cbbTraceMaterial.SelectedValuePath = "indeks";
+
+            listTracePEo = frmWyroby_db.GetParams("TRACEABILITY", "PE_OZNACZENIE");
+            cbbTracePEo.ItemsSource = listTracePEo;
+            cbbTracePEo.SelectedValuePath = "indeks";
+
+            listTraceMFR = frmWyroby_db.GetParams("TRACEABILITY", "MFR");
+            cbbTraceMFR.ItemsSource = listTraceMFR;
+            cbbTraceMFR.SelectedValuePath = "indeks";
+        }
+
+        private void DgWyroby_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            try
+            {
+                var row = dgWyroby.SelectedItem as wyroby;
+                _id_upd = row.id;
+                cbbWyrobTyp.SelectedValue = row.wyrob_typ;
+                txtWyrobKod.Text = row.wyrob_kod;
+                txtWyrobIndeks.Text = row.wyrob_kod_indeks;
+                txtWyrobOpis.Text = row.wyrob_kod_opis;
+                txtWyrobIwOpZ.Text = row.wyrob_il_w_op_zb.ToString();
+                txtWyrobWagaOp.Text = row.wyrob_waga_op.ToString();
+                txtWyrobWaga1szt.Text = row.wyrob_waga_1szt.ToString();
+                cbbWyrobZakresSDR.SelectedValue = row.wyrob_zakres_sdr;
+                cbbWyrobZastZaworu.SelectedValue = row.wyrob_zast_zaworu;
+                cbbWyrobRodzajDrutu.SelectedValue = row.wyrob_rodzaj_drutu;
+                // ITF
+                cbbITFKategoria.SelectedValue = row.itf_kategoria;
+                cbbITFZnak1.SelectedValue = row.itf_znak1;
+                cbbITFZnak2.SelectedValue = row.itf_znak2;
+                cbbITFICC.SelectedValue = row.itf_icc;
+                cbbITFCC1.SelectedValue = row.itf_cc1;
+                cbbITFCC2.SelectedValue = row.itf_cc2;
+                cbbITFsmin.SelectedValue = row.itf_smin;
+                cbbITFsmax.SelectedValue = row.itf_smax;
+                cbbITFtrn.SelectedValue = row.itf_trn;
+                txtITFprn.Text = row.itf_prn;
+                txtITFrez.Text = row.itf_rez;
+                cbbITFodch.SelectedValue = row.itf_odch;
+                txtITFcz1.Text = row.itf_cz1;
+                txtITFcz2.Text = row.itf_cz2;
+                txtITFke.Text = row.itf_ke;
+                // TRACEABILITY
+                cbbTraceZnak1.SelectedValue = row.trace_znak1;
+                cbbTraceZnak2.SelectedValue = row.trace_znak2;
+                cbbTraceKategoria.SelectedValue = row.trace_kategoria;
+                cbbTraceSmin.SelectedValue = row.trace_smin;
+                cbbTraceSmax.SelectedValue = row.trace_smax;
+                txtTracePartia.Text = row.trace_partia;
+                cbbTraceProducent.SelectedValue = row.trace_producent;
+                cbbTraceSDR.SelectedValue = row.trace_sdr;
+                cbbTracePEm.SelectedValue = row.trace_pe_m;
+                cbbTraceMaterial.SelectedValue = row.trace_material;
+                cbbTracePEo.SelectedValue = row.trace_pe_o;
+                cbbTraceMFR.SelectedValue = row.trace_mfr;
+
+                WyczyscKontrolkiKodKr();
+                PrzygotujPodKodKrITF();
+                UzupelnijKodITF();
+                PrzygotujPodKodKrTrace();
+                UzupelnijKodTrace();
+
+            }
+            catch
+            {
+                //txtWyrobKod.Text = "";
+            }
+        }
+
+        private void PrzygotujPodKodKrITF()
+        // przeleci przez wszystkie kontrolki dot. kodu ITF i ustawi właściwości klasy kod25
+        {
+            // kategoria
+            CbbITFKategoria_DropDownClosed(null, null);
+
+            // znak 1
+            CbbITFZnak1_DropDownClosed(null, null);
+
+            // znak 2
+            CbbITFZnak2_DropDownClosed(null, null);
+
+            // icc
+            CbbITFICC_DropDownClosed(null, null);
+
+            // cc1
+            CbbITFCC1_DropDownClosed(null, null);
+
+            // cc2
+            CbbITFCC2_DropDownClosed(null, null);
+
+            // smin
+            CbbITFsmin_DropDownClosed(null, null);
+
+            // smax
+            CbbITFsmax_DropDownClosed(null, null);
+
+            // trn
+            CbbITFtrn_DropDownClosed(null, null);
+
+            // prn
+            TxtITFprn_KeyUp(null, null);
+
+            // rez
+            TxtITFrez_KeyUp(null, null);
+
+            // odch
+            CbbITFodch_DropDownClosed(null, null);
+
+            // cz 1
+            TxtITFcz1_KeyUp(null, null);
+            // cz 2
+
+            TxtITFcz2_KeyUp(null, null);
+
+            // ke
+            TxtITFke_KeyUp(null, null);
+
+            kod25.GenerujKody();
+        }
+
+        private void PrzygotujPodKodKrTrace()
+        // przeleci przez wszystkie kontrolki dot. kodu Traceability i ustawi właściwości klasy kod25
+        {
+            // znak1
+            CbbTraceZnak1_DropDownClosed(null, null);
+            // znak2
+            CbbTraceZnak2_DropDownClosed(null, null);
+            // kategoria
+            CbbTraceKategoria_DropDownClosed(null, null);
+            // smin
+            CbbTraceSmin_DropDownClosed(null, null);
+            // smax
+            CbbTraceSmax_DropDownClosed(null, null);
+            // partia
+            TxtTracePartia_KeyUp(null, null);
+            // producent
+            CbbTraceProducent_DropDownClosed(null, null);
+            // sdr
+            CbbTraceSDR_DropDownClosed(null, null);
+            // pem
+            CbbTracePEm_DropDownClosed(null, null);
+            // material
+            CbbTraceMaterial_DropDownClosed(null, null);
+            // peo
+            CbbTracePEo_DropDownClosed(null, null);
+            // mfr
+            CbbTraceMFR_DropDownClosed(null, null);
+
+            kodTrace.GenerujKod();
+        }
+
+        private void BtnKlonuj_Click(object sender, RoutedEventArgs e)
+        {
+            _akcja = "K";
+
+            dgWyroby.IsEnabled = false;
+            btnDodaj.IsEnabled = false;
+            btnKlonuj.IsEnabled = false;
+            btnPopraw.IsEnabled = false;
+            btnUsun.IsEnabled = false;
+            btnAnuluj.IsEnabled = true;
+            btnZatwierdz.IsEnabled = true;
+            btnZamknij.IsEnabled = false;
+
+            gridWyrob.IsEnabled = true;
+        }
+
+        private void BtnPopraw_Click(object sender, RoutedEventArgs e)
+        {
+            _akcja = "P";
+            dgBookmark = dgWyroby.SelectedIndex;
+
+            dgWyroby.IsEnabled = false;
+            btnDodaj.IsEnabled = false;
+            btnKlonuj.IsEnabled = false;
+            btnPopraw.IsEnabled = false;
+            btnUsun.IsEnabled = false;
+            btnAnuluj.IsEnabled = true;
+            btnZatwierdz.IsEnabled = true;
+            btnZamknij.IsEnabled = false;
+
+            gridWyrob.IsEnabled = true;
+        }
+
+        private void BtnAnuluj_Click(object sender, RoutedEventArgs e)
+        {
+            dgWyroby.IsEnabled = true;
+            btnZamknij.IsEnabled = true;
+            if (listWyroby.Count == 0)
+            {
+                UstawPrzyciski(0);
+            }
+            else
+            {
+                UstawPrzyciski(1);
+            }
+            gridWyrob.IsEnabled = false;
+            listWyroby = frmWyroby_db.GetProducts();
+            dgWyroby.ItemsSource = listWyroby;
+            dgWyroby.SelectedIndex = dgBookmark;
+        }
+
+        private void BtnZamknij_Click(object sender, RoutedEventArgs e)
+        {
+            Close();
+        }
+
+        private void BtnZatwierdz_Click(object sender, RoutedEventArgs e)
+        {
+            var nowyWyrob = new wyroby();
+            nowyWyrob.wyrob_kod = txtWyrobKod.Text;              // [wyrob_kod] [varchar] (20) NULL,
+            nowyWyrob.wyrob_kod_indeks = txtWyrobIndeks.Text; //	[wyrob_kod_indeks] [varchar] (20) NULL,
+            nowyWyrob.wyrob_kod_opis = txtWyrobOpis.Text;     // [wyrob_kod_opis] [varchar] (100) NULL,
+            nowyWyrob.wyrob_typ = Int32.Parse(cbbWyrobTyp.SelectedValue.ToString());        // [wyrob_typ] [int] NULL,
+            nowyWyrob.wyrob_il_w_op_zb = Int32.Parse(txtWyrobIwOpZ.Text);
+            nowyWyrob.wyrob_waga_op = Int32.Parse(txtWyrobWagaOp.Text);
+            nowyWyrob.wyrob_waga_1szt = Int32.Parse(txtWyrobWaga1szt.Text);
+            nowyWyrob.wyrob_zakres_sdr = Int32.Parse(cbbWyrobZakresSDR.SelectedValue.ToString());
+            nowyWyrob.wyrob_zast_zaworu = Int32.Parse(cbbWyrobZastZaworu.SelectedValue.ToString());
+            nowyWyrob.wyrob_rodzaj_drutu = Int32.Parse(cbbWyrobRodzajDrutu.SelectedValue.ToString());
+            nowyWyrob.itf_kategoria = Int32.Parse(cbbITFKategoria.SelectedValue.ToString()); // [itf_kategoria] [int] NULL,
+            nowyWyrob.itf_znak1 = Int32.Parse(cbbITFZnak1.SelectedValue.ToString());         // [itf_znak1] [int] NULL,
+            nowyWyrob.itf_znak2 = Int32.Parse(cbbITFZnak2.SelectedValue.ToString());         // [itf_znak2] [int] NULL,
+            nowyWyrob.itf_icc = Int32.Parse(cbbITFICC.SelectedValue.ToString());             // [itf_icc] [int] NULL,
+            nowyWyrob.itf_cc1 = Int32.Parse(cbbITFCC1.SelectedValue.ToString());             // [itf_cc1] [int] NULL,
+            nowyWyrob.itf_cc2 = Int32.Parse(cbbITFCC2.SelectedValue.ToString());             // [itf_cc2] [int] NULL,
+            nowyWyrob.itf_smin = Int32.Parse(cbbITFsmin.SelectedValue.ToString());           // [itf_smin] [int] NULL,
+            nowyWyrob.itf_smax = Int32.Parse(cbbITFsmax.SelectedValue.ToString());           // [itf_smax] [int] NULL,
+            nowyWyrob.itf_trn = Int32.Parse(cbbITFtrn.SelectedValue.ToString());             // [itf_trn] [int] NULL,
+            nowyWyrob.itf_prn = txtITFprn.Text;                                              // [itf_prn] [varchar] (2) NULL,
+            nowyWyrob.itf_rez = txtITFrez.Text;                                              // [itf_rez] [varchar] (50) NULL,
+            nowyWyrob.itf_odch = Int32.Parse(cbbITFodch.SelectedValue.ToString());           // [itf_odch] [int] NULL,
+            nowyWyrob.itf_cz1 = txtITFcz1.Text;                                              // [itf_cz1] [varchar] (2) NULL,
+            nowyWyrob.itf_cz2 = txtITFcz2.Text;                                              // [itf_cz2] [varchar] (2) NULL,
+            nowyWyrob.itf_ke = txtITFke.Text;                                                // [itf_ke] [varchar] (2) NULL,
+            nowyWyrob.trace_znak1 = Int32.Parse(cbbTraceZnak1.SelectedValue.ToString());     // [trace_znak1] [int] NULL,
+            nowyWyrob.trace_znak2 = Int32.Parse(cbbTraceZnak2.SelectedValue.ToString());     // [trace_znak2] [int] NULL,
+            nowyWyrob.trace_kategoria = Int32.Parse(cbbTraceKategoria.SelectedValue.ToString());     // 	[trace_kategoria] [int] NULL,
+            nowyWyrob.trace_smin = Int32.Parse(cbbTraceSmin.SelectedValue.ToString());       // [trace_smin] [int] NULL,
+            nowyWyrob.trace_smax = Int32.Parse(cbbTraceSmax.SelectedValue.ToString());       // [trace_smax] [int] NULL,
+            nowyWyrob.trace_partia = txtTracePartia.Text;                                    // [trace_partia] [varchar] (6) NULL,
+            nowyWyrob.trace_producent = Int32.Parse(cbbTraceProducent.SelectedValue.ToString());     // 	[trace_producent] [int] NULL,
+            nowyWyrob.trace_sdr = Int32.Parse(cbbTraceSDR.SelectedValue.ToString());         // [trace_sdr] [int] NULL,
+            nowyWyrob.trace_pe_m = Int32.Parse(cbbTracePEm.SelectedValue.ToString());        // [trace_pe_m] [int] NULL,
+            nowyWyrob.trace_material = Int32.Parse(cbbTraceMaterial.SelectedValue.ToString());     //  	[trace_material] [int] NULL,
+            nowyWyrob.trace_pe_o = Int32.Parse(cbbTracePEo.SelectedValue.ToString());        // [trace_pe_o] [int] NULL,
+            nowyWyrob.trace_mfr = Int32.Parse(cbbTraceMFR.SelectedValue.ToString());         // [trace_mfr] [int] NULL,
+            if (_akcja == "D")
+            {
+                // [id][int] IDENTITY(1, 1) NOT NULL,
+                nowyWyrob.opw = frmLogin.LoggedUser.login;            	                     // [opw] [varchar] (20) NULL,
+                nowyWyrob.czasw = DateTime.Now;                           	                     // [czasw] [datetime] NULL,
+                nowyWyrob.opm = frmLogin.LoggedUser.login;                                   // [opm] [varchar] (20) NULL,
+                nowyWyrob.czasm = DateTime.Now;          	                                     // [czasm] [datetime] NULL,
+                frmWyroby_db.AddProduct(nowyWyrob);
+            }
+            else if (_akcja == "K")
+            {
+                nowyWyrob.opw = frmLogin.LoggedUser.login;            	                     // [opw] [varchar] (20) NULL,
+                nowyWyrob.czasw = DateTime.Now;                           	                     // [czasw] [datetime] NULL,
+                nowyWyrob.opm = frmLogin.LoggedUser.login;                                   // [opm] [varchar] (20) NULL,
+                nowyWyrob.czasm = DateTime.Now;          	                                     // [czasm] [datetime] NULL,
+                frmWyroby_db.AddProduct(nowyWyrob);
+            }
+            else if (_akcja == "P")
+            {
+                var row = dgWyroby.SelectedItem as wyroby;
+                nowyWyrob.id = row.id;
+                nowyWyrob.opw = row.opw;            	                     // [opw] [varchar] (20) NULL,
+                nowyWyrob.czasw = row.czasw;                           	                     // [czasw] [datetime] NULL,
+                nowyWyrob.opm = frmLogin.LoggedUser.login;                                   // [opm] [varchar] (20) NULL,
+                nowyWyrob.czasm = DateTime.Now;          	                                     // [czasm] [datetime] NULL,
+                frmWyroby_db.UpdProduct(nowyWyrob);
+            };
+
+            listWyroby = frmWyroby_db.GetProducts();
+            dgWyroby.ItemsSource = listWyroby;
+            dgWyroby.SelectedIndex = dgBookmark;
+
+            dgWyroby.IsEnabled = true;
+            btnZamknij.IsEnabled = true;
+            if (listWyroby.Count == 0)
+            {
+                UstawPrzyciski(0);
+            }
+            else
+            {
+                UstawPrzyciski(1);
+            }
+            gridWyrob.IsEnabled = false;
+        }
+
+        private void CbbITFKategoria_DropDownClosed(object sender, EventArgs e)
+        {
+            //if (cbbITFKategoria.SelectedIndex > 0)
+            {
+                var item = cbbITFKategoria.SelectedItem as parameters;
+                kod25.kategoria = item.wartosc;
+            }
+        }
+
+        private void CbbITFZnak1_DropDownClosed(object sender, EventArgs e)
+        {
+            var item = cbbITFZnak1.SelectedItem as parameters;
+            kod25.znak1 = item.parametr;
+        }
+
+        private void CbbITFZnak2_DropDownClosed(object sender, EventArgs e)
+        {
+            var item = cbbITFZnak2.SelectedItem as parameters;
+            kod25.znak2 = item.parametr;
+        }
+
+        private void UzupelnijKodITF()
+        {
+            string kodITF1;
+            string kodITF2;
+            try
+            {
+                kodITF1 = kod25.kod1;
+                kodITF2 = kod25.kod2;
+            }
+            catch
+            {
+                MessageBox.Show("Nie wypełnione wszystkie pola.");
+                kodITF1 = "0000000000000000000000000";
+                kodITF2 = "0000000000000000000000000";
+            }
+
+            txtITFp1.Text = kodITF1[0].ToString();
+            txtITFp2.Text = kodITF1[1].ToString();
+            txtITFp3.Text = kodITF1[2].ToString();
+            txtITFp4.Text = kodITF1[3].ToString();
+            txtITFp5.Text = kodITF1[4].ToString();
+            txtITFp6.Text = kodITF1[5].ToString();
+            txtITFp7.Text = kodITF1[6].ToString();
+            txtITFp8.Text = kodITF1[7].ToString();
+            txtITFp9.Text = kodITF1[8].ToString();
+            txtITFp10.Text = kodITF1[9].ToString();
+            txtITFp11.Text = kodITF1[10].ToString();
+            txtITFp12.Text = kodITF1[11].ToString();
+            txtITFp13.Text = kodITF1[12].ToString();
+            txtITFp14.Text = kodITF1[13].ToString();
+            txtITFp15.Text = kodITF1[14].ToString();
+            txtITFp16.Text = kodITF1[15].ToString();
+            txtITFp17.Text = kodITF1[16].ToString();
+            txtITFp18.Text = kodITF1[17].ToString();
+            txtITFp19.Text = kodITF1[18].ToString();
+            txtITFp20.Text = kodITF1[19].ToString();
+            txtITFp21.Text = kodITF1[20].ToString();
+            txtITFp22.Text = kodITF1[21].ToString();
+            txtITFp23.Text = kodITF1[22].ToString();
+            txtITFp24.Text = kodITF1[23].ToString();
+
+            txtITF2p1.Text = kodITF2[0].ToString();
+            txtITF2p2.Text = kodITF2[1].ToString();
+            txtITF2p3.Text = kodITF2[2].ToString();
+            txtITF2p4.Text = kodITF2[3].ToString();
+            txtITF2p5.Text = kodITF2[4].ToString();
+            txtITF2p6.Text = kodITF2[5].ToString();
+            txtITF2p7.Text = kodITF2[6].ToString();
+            txtITF2p8.Text = kodITF2[7].ToString();
+            txtITF2p9.Text = kodITF2[8].ToString();
+            txtITF2p10.Text = kodITF2[9].ToString();
+            txtITF2p11.Text = kodITF2[10].ToString();
+            txtITF2p12.Text = kodITF2[11].ToString();
+            txtITF2p13.Text = kodITF2[12].ToString();
+            txtITF2p14.Text = kodITF2[13].ToString();
+            txtITF2p15.Text = kodITF2[14].ToString();
+            txtITF2p16.Text = kodITF2[15].ToString();
+            txtITF2p17.Text = kodITF2[16].ToString();
+            txtITF2p18.Text = kodITF2[17].ToString();
+            txtITF2p19.Text = kodITF2[18].ToString();
+            txtITF2p20.Text = kodITF2[19].ToString();
+            txtITF2p21.Text = kodITF2[20].ToString();
+            txtITF2p22.Text = kodITF2[21].ToString();
+            txtITF2p23.Text = kodITF2[22].ToString();
+            txtITF2p24.Text = kodITF2[23].ToString();
+        }
+
+        private void UzupelnijKodTrace()
+        {
+            string kodTrace1;
+            try
+            {
+                kodTrace1 = kodTrace.kod;
+            }
+            catch
+            {
+                MessageBox.Show("Nie wypełnione wszystkie pola.");
+                kodTrace1 = "00000000000000000000000000";
+            }
+
+            txtTracep1.Text = kodTrace1[0].ToString();
+            txtTracep2.Text = kodTrace1[1].ToString();
+            txtTracep3.Text = kodTrace1[2].ToString();
+            txtTracep4.Text = kodTrace1[3].ToString();
+            txtTracep5.Text = kodTrace1[4].ToString();
+            txtTracep6.Text = kodTrace1[5].ToString();
+            txtTracep7.Text = kodTrace1[6].ToString();
+            txtTracep8.Text = kodTrace1[7].ToString();
+            txtTracep9.Text = kodTrace1[8].ToString();
+            txtTracep10.Text = kodTrace1[9].ToString();
+            txtTracep11.Text = kodTrace1[10].ToString();
+            txtTracep12.Text = kodTrace1[11].ToString();
+            txtTracep13.Text = kodTrace1[12].ToString();
+            txtTracep14.Text = kodTrace1[13].ToString();
+            txtTracep15.Text = kodTrace1[14].ToString();
+            txtTracep16.Text = kodTrace1[15].ToString();
+            txtTracep17.Text = kodTrace1[16].ToString();
+            txtTracep18.Text = kodTrace1[17].ToString();
+            txtTracep19.Text = kodTrace1[18].ToString();
+            txtTracep20.Text = kodTrace1[19].ToString();
+            txtTracep21.Text = kodTrace1[20].ToString();
+            txtTracep22.Text = kodTrace1[21].ToString();
+            txtTracep23.Text = kodTrace1[22].ToString();
+            txtTracep24.Text = kodTrace1[23].ToString();
+            txtTracep25.Text = kodTrace1[24].ToString();
+            txtTracep26.Text = kodTrace1[25].ToString();
+        }
+
+
+
+        private void CbbITFICC_DropDownClosed(object sender, EventArgs e)
+        {
+            var item = cbbITFICC.SelectedItem as parameters;
+            if (item.parametr == "3")
+            {
+                cbbITFCC1.IsEnabled = true;
+                cbbITFCC2.IsEnabled = true;
+                kod25.icc = item.parametr;
+            }
+            else
+            {
+                cbbITFCC1.SelectedIndex = 0;
+                cbbITFCC1.IsEnabled = false;
+                cbbITFCC2.SelectedIndex = 0;
+                cbbITFCC2.IsEnabled = false;
+                kod25.icc = "2";
+                kod25.cc1 = "1";
+                kod25.cc2 = "1";
+            }
+        }
+
+        private void CbbITFCC1_DropDownClosed(object sender, EventArgs e)
+        {
+            var item = cbbITFCC1.SelectedItem as parameters;
+            kod25.cc1 = item.parametr;
+        }
+
+        private void CbbITFCC2_DropDownClosed(object sender, EventArgs e)
+        {
+            var item = cbbITFCC2.SelectedItem as parameters;
+            kod25.cc2 = item.parametr;
+        }
+
+        private void CbbITFsmin_DropDownClosed(object sender, EventArgs e)
+        {
+            var item = cbbITFsmin.SelectedItem as parameters;
+            kod25.smin_p = item.parametr;
+            kod25.smin_w = item.wartosc;
+        }
+
+        private void CbbITFsmax_DropDownClosed(object sender, EventArgs e)
+        {
+            var item = cbbITFsmax.SelectedItem as parameters;
+            kod25.smax_p = item.parametr;
+            kod25.smax_w = item.wartosc;
+        }
+
+        private void CbbITFtrn_DropDownClosed(object sender, EventArgs e)
+        {
+            var item = cbbITFtrn.SelectedItem as parameters;
+            kod25.trn = item.parametr;
+        }
+
+        private void CbbITFodch_DropDownClosed(object sender, EventArgs e)
+        {
+            var item = cbbITFodch.SelectedItem as parameters;
+            kod25.odch = item.parametr;
+        }
+
+        private void TxtITFprn_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            var str = e.Text;
+            Regex _regex = new Regex("[^0-9]+");
+            e.Handled = _regex.IsMatch(str);
+        }
+
+        private void TxtITFrez_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            var str = e.Text;
+            Regex _regex = new Regex("[^0-9]+");
+            e.Handled = _regex.IsMatch(str);
+        }
+
+        private void TxtITFcz1_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            var str = e.Text;
+            Regex _regex = new Regex("[^0-9]+");
+            e.Handled = _regex.IsMatch(str);
+        }
+
+        private void TxtITFcz2_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            var str = e.Text;
+            Regex _regex = new Regex("[^0-9]+");
+            e.Handled = _regex.IsMatch(str);
+        }
+
+        private void TxtITFke_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            var str = e.Text;
+            Regex _regex = new Regex("[^0-9]+");
+            e.Handled = _regex.IsMatch(str);
+        }
+
+        private void TxtWyrobIwOpZ_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            var str = e.Text;
+            Regex _regex = new Regex("[^0-9]+");
+            e.Handled = _regex.IsMatch(str);
+        }
+
+        private void TxtWyrobWagaOp_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            var str = e.Text;
+            Regex _regex = new Regex("[^0-9]+");
+            e.Handled = _regex.IsMatch(str);
+        }
+
+        private void TxtWyrobWaga1szt_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            var str = e.Text;
+            Regex _regex = new Regex("[^0-9]+");
+            e.Handled = _regex.IsMatch(str);
+        }
+
+        private void TxtITFprn_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (!Int32.TryParse(txtITFprn.Text, out int value))
+            {
+                value = 0;
+            }
+
+            string result = String.Format("{0,2:00}", value);
+            kod25.prn = result;
+        }
+
+        private void TxtITFrez_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (!Int32.TryParse(txtITFrez.Text, out int value))
+            {
+                value = 0;
+            }
+
+            string result = String.Format("{0,3:000}", value);
+            kod25.rez = result;
+        }
+
+        private void TxtITFcz1_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (!Int32.TryParse(txtITFcz1.Text, out int value))
+            {
+                value = 0;
+            }
+
+            string result = String.Format("{0,3:000}", value);
+            kod25.cz1 = result;
+        }
+
+        private void TxtITFcz2_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (!Int32.TryParse(txtITFcz2.Text, out int value))
+            {
+                value = 0;
+            }
+
+            string result = String.Format("{0,3:000}", value);
+            kod25.cz2 = result;
+        }
+
+        private void TxtITFke_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (!Int32.TryParse(txtITFke.Text, out int value))
+            {
+                value = 0;
+            }
+
+            string result = String.Format("{0,2:00}", value);
+            kod25.ke = result;
+        }
+
+        private void Wykonaj(object sender, ExecutedRoutedEventArgs e)
+        {
+            MessageBox.Show("ok");
+        }
+
+        private void Sprawdz(object sender, CanExecuteRoutedEventArgs e)
+        {
+            e.CanExecute = true;
+        }
+
+        private void CbbTraceZnak1_DropDownClosed(object sender, EventArgs e)
+        {
+            var item = cbbTraceZnak1.SelectedItem as parameters;
+            kodTrace.znak1 = item.parametr;
+        }
+
+        private void CbbTraceZnak2_DropDownClosed(object sender, EventArgs e)
+        {
+            var item = cbbTraceZnak2.SelectedItem as parameters;
+            kodTrace.znak2 = item.parametr;
+        }
+
+        private void CbbTraceKategoria_DropDownClosed(object sender, EventArgs e)
+        {
+            var item = cbbTraceKategoria.SelectedItem as parameters;
+            kodTrace.kategoria = item.parametr;
+        }
+
+        private void CbbTraceSmin_DropDownClosed(object sender, EventArgs e)
+        {
+            var item = cbbTraceSmin.SelectedItem as parameters;
+            kodTrace.smin_p = item.parametr;
+            kodTrace.smin_w = item.wartosc;
+        }
+
+        private void CbbTraceSmax_DropDownClosed(object sender, EventArgs e)
+        {
+            var item = cbbTraceSmax.SelectedItem as parameters;
+            kodTrace.smax_p = item.parametr;
+            kodTrace.smax_w = item.wartosc;
+        }
+
+        private void CbbTraceProducent_DropDownClosed(object sender, EventArgs e)
+        {
+            var item = cbbTraceProducent.SelectedItem as parameters;
+            kodTrace.producent = item.parametr;
+        }
+
+        private void CbbTraceSDR_DropDownClosed(object sender, EventArgs e)
+        {
+            var item = cbbTraceSDR.SelectedItem as parameters;
+            kodTrace.sdr = item.parametr;
+        }
+
+        private void CbbTracePEm_DropDownClosed(object sender, EventArgs e)
+        {
+            var item = cbbTracePEm.SelectedItem as parameters;
+            kodTrace.pem = item.wartosc;
+        }
+
+        private void CbbTraceMaterial_DropDownClosed(object sender, EventArgs e)
+        {
+            var item = cbbTraceMaterial.SelectedItem as parameters;
+            kodTrace.material = item.parametr;
+        }
+
+        private void CbbTracePEo_DropDownClosed(object sender, EventArgs e)
+        {
+            var item = cbbTracePEo.SelectedItem as parameters;
+            kodTrace.peo = item.parametr;
+        }
+
+        private void CbbTraceMFR_DropDownClosed(object sender, EventArgs e)
+        {
+            var item = cbbTraceMFR.SelectedItem as parameters;
+            kodTrace.mfr = item.parametr;
+        }
+
+        private void TxtTracePartia_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (!Int32.TryParse(txtTracePartia.Text, out int value))
+            {
+                value = 0;
+            }
+
+            string result = String.Format("{0,6:000000}", value);
+            kodTrace.partia = result;
+        }
+
+        private void TxtTracePartia_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            var str = e.Text;
+            Regex _regex = new Regex("[^0-9]+");
+            e.Handled = _regex.IsMatch(str);
+        }
+
+        private void CbbITFKategoria_GotFocus(object sender, RoutedEventArgs e)
+        {
+            txtITFp1.Background = Brushes.Yellow;
+            txtITFp2.Background = Brushes.Yellow;
+            txtITF2p1.Background = Brushes.Yellow;
+            txtITF2p2.Background = Brushes.Yellow;
+        }
+
+        private void CbbITFKategoria_LostFocus(object sender, RoutedEventArgs e)
+        {
+            txtITFp1.Background = Brushes.White;
+            txtITFp2.Background = Brushes.White;
+            txtITF2p1.Background = Brushes.White;
+            txtITF2p2.Background = Brushes.White;
+        }
+
+        private void CbbITFZnak1_GotFocus(object sender, RoutedEventArgs e)
+        {
+            txtITFp3.Background = Brushes.Yellow;
+            txtITFp4.Background = Brushes.Yellow;
+            txtITF2p3.Background = Brushes.Yellow;
+            txtITF2p4.Background = Brushes.Yellow;
+        }
+
+        private void CbbITFZnak1_LostFocus(object sender, RoutedEventArgs e)
+        {
+            txtITFp3.Background = Brushes.White;
+            txtITFp4.Background = Brushes.White;
+            txtITF2p3.Background = Brushes.White;
+            txtITF2p4.Background = Brushes.White;
+        }
+
+        private void CbbITFZnak2_GotFocus(object sender, RoutedEventArgs e)
+        {
+            txtITFp5.Background = Brushes.Yellow;
+            txtITFp6.Background = Brushes.Yellow;
+            txtITF2p5.Background = Brushes.Yellow;
+            txtITF2p6.Background = Brushes.Yellow;
+        }
+
+        private void CbbITFZnak2_LostFocus(object sender, RoutedEventArgs e)
+        {
+            txtITFp5.Background = Brushes.White;
+            txtITFp6.Background = Brushes.White;
+            txtITF2p5.Background = Brushes.White;
+            txtITF2p6.Background = Brushes.White;
+        }
+
+        private void CbbITFICC_GotFocus(object sender, RoutedEventArgs e)
+        {
+            txtITFp7.Background = Brushes.Yellow;
+            txtITF2p7.Background = Brushes.Yellow;
+        }
+
+        private void CbbITFICC_LostFocus(object sender, RoutedEventArgs e)
+        {
+            txtITFp7.Background = Brushes.White;
+            txtITF2p7.Background = Brushes.White;
+        }
+
+        private void CbbITFCC1_GotFocus(object sender, RoutedEventArgs e)
+        {
+            txtITFp8.Background = Brushes.Yellow;
+        }
+
+        private void CbbITFCC1_LostFocus(object sender, RoutedEventArgs e)
+        {
+            txtITFp8.Background = Brushes.White;
+        }
+
+        private void CbbITFCC2_GotFocus(object sender, RoutedEventArgs e)
+        {
+            txtITF2p8.Background = Brushes.Yellow;
+        }
+
+        private void CbbITFCC2_LostFocus(object sender, RoutedEventArgs e)
+        {
+            txtITF2p8.Background = Brushes.White;
+        }
+
+        private void CbbITFsmin_GotFocus(object sender, RoutedEventArgs e)
+        {
+            txtITFp9.Background = Brushes.Yellow;
+            txtITFp10.Background = Brushes.Yellow;
+            txtITFp11.Background = Brushes.Yellow;
+            txtITF2p9.Background = Brushes.Yellow;
+            txtITF2p10.Background = Brushes.Yellow;
+            txtITF2p11.Background = Brushes.Yellow;
+        }
+
+        private void CbbITFsmin_LostFocus(object sender, RoutedEventArgs e)
+        {
+            txtITFp9.Background = Brushes.White;
+            txtITFp10.Background = Brushes.White;
+            txtITFp11.Background = Brushes.White;
+            txtITF2p9.Background = Brushes.White;
+            txtITF2p10.Background = Brushes.White;
+            txtITF2p11.Background = Brushes.White;
+        }
+
+        private void CbbITFsmax_GotFocus(object sender, RoutedEventArgs e)
+        {
+            txtITFp9.Background = Brushes.Yellow;
+            txtITFp10.Background = Brushes.Yellow;
+            txtITFp11.Background = Brushes.Yellow;
+            txtITF2p9.Background = Brushes.Yellow;
+            txtITF2p10.Background = Brushes.Yellow;
+            txtITF2p11.Background = Brushes.Yellow;
+        }
+
+        private void CbbITFsmax_LostFocus(object sender, RoutedEventArgs e)
+        {
+            txtITFp9.Background = Brushes.White;
+            txtITFp10.Background = Brushes.White;
+            txtITFp11.Background = Brushes.White;
+            txtITF2p9.Background = Brushes.White;
+            txtITF2p10.Background = Brushes.White;
+            txtITF2p11.Background = Brushes.White;
+        }
+
+        private void CbbITFtrn_GotFocus(object sender, RoutedEventArgs e)
+        {
+            txtITFp12.Background = Brushes.Yellow;
+            txtITF2p12.Background = Brushes.Yellow;
+        }
+
+        private void CbbITFtrn_LostFocus(object sender, RoutedEventArgs e)
+        {
+            txtITFp12.Background = Brushes.White;
+            txtITF2p12.Background = Brushes.White;
+        }
+
+        private void TxtITFprn_GotFocus(object sender, RoutedEventArgs e)
+        {
+            txtITFp13.Background = Brushes.Yellow;
+            txtITFp14.Background = Brushes.Yellow;
+            txtITF2p13.Background = Brushes.Yellow;
+            txtITF2p14.Background = Brushes.Yellow;
+        }
+
+        private void TxtITFprn_LostFocus(object sender, RoutedEventArgs e)
+        {
+            txtITFp13.Background = Brushes.White;
+            txtITFp14.Background = Brushes.White;
+            txtITF2p13.Background = Brushes.White;
+            txtITF2p14.Background = Brushes.White;
+        }
+
+        private void TxtITFrez_GotFocus(object sender, RoutedEventArgs e)
+        {
+            txtITFp15.Background = Brushes.Yellow;
+            txtITFp16.Background = Brushes.Yellow;
+            txtITFp17.Background = Brushes.Yellow;
+            txtITF2p15.Background = Brushes.Yellow;
+            txtITF2p16.Background = Brushes.Yellow;
+            txtITF2p17.Background = Brushes.Yellow;
+        }
+
+        private void TxtITFrez_LostFocus(object sender, RoutedEventArgs e)
+        {
+            txtITFp15.Background = Brushes.White;
+            txtITFp16.Background = Brushes.White;
+            txtITFp17.Background = Brushes.White;
+            txtITF2p15.Background = Brushes.White;
+            txtITF2p16.Background = Brushes.White;
+            txtITF2p17.Background = Brushes.White;
+        }
+
+        private void CbbITFodch_GotFocus(object sender, RoutedEventArgs e)
+        {
+            txtITFp18.Background = Brushes.Yellow;
+            txtITF2p18.Background = Brushes.Yellow;
+        }
+
+        private void CbbITFodch_LostFocus(object sender, RoutedEventArgs e)
+        {
+            txtITFp18.Background = Brushes.White;
+            txtITF2p18.Background = Brushes.White;
+        }
+
+        private void TxtITFcz1_GotFocus(object sender, RoutedEventArgs e)
+        {
+            txtITFp19.Background = Brushes.Yellow;
+            txtITFp20.Background = Brushes.Yellow;
+            txtITFp21.Background = Brushes.Yellow;
+        }
+
+        private void TxtITFcz1_LostFocus(object sender, RoutedEventArgs e)
+        {
+            txtITFp19.Background = Brushes.White;
+            txtITFp20.Background = Brushes.White;
+            txtITFp21.Background = Brushes.White;
+
+        }
+
+        private void TxtITFcz2_GotFocus(object sender, RoutedEventArgs e)
+        {
+            txtITF2p19.Background = Brushes.Yellow;
+            txtITF2p20.Background = Brushes.Yellow;
+            txtITF2p21.Background = Brushes.Yellow;
+        }
+
+        private void TxtITFcz2_LostFocus(object sender, RoutedEventArgs e)
+        {
+            txtITF2p19.Background = Brushes.White;
+            txtITF2p20.Background = Brushes.White;
+            txtITF2p21.Background = Brushes.White;
+        }
+
+        private void TxtITFke_GotFocus(object sender, RoutedEventArgs e)
+        {
+            txtITFp22.Background = Brushes.Yellow;
+            txtITFp23.Background = Brushes.Yellow;
+            txtITF2p22.Background = Brushes.Yellow;
+            txtITF2p23.Background = Brushes.Yellow;
+        }
+
+        private void TxtITFke_LostFocus(object sender, RoutedEventArgs e)
+        {
+            txtITFp22.Background = Brushes.White;
+            txtITFp23.Background = Brushes.White;
+            txtITF2p22.Background = Brushes.White;
+            txtITF2p23.Background = Brushes.White;
+        }
+
+        private void CbbTraceZnak1_GotFocus(object sender, RoutedEventArgs e)
+        {
+            txtTracep1.Background = Brushes.Yellow;
+            txtTracep2.Background = Brushes.Yellow;
+        }
+
+        private void CbbTraceZnak1_LostFocus(object sender, RoutedEventArgs e)
+        {
+            txtTracep1.Background = Brushes.White;
+            txtTracep2.Background = Brushes.White;
+        }
+
+        private void CbbTraceZnak2_GotFocus(object sender, RoutedEventArgs e)
+        {
+            txtTracep3.Background = Brushes.Yellow;
+            txtTracep4.Background = Brushes.Yellow;
+        }
+
+        private void CbbTraceZnak2_LostFocus(object sender, RoutedEventArgs e)
+        {
+            txtTracep3.Background = Brushes.White;
+            txtTracep4.Background = Brushes.White;
+        }
+
+        private void CbbTraceKategoria_GotFocus(object sender, RoutedEventArgs e)
+        {
+            txtTracep5.Background = Brushes.Yellow;
+            txtTracep6.Background = Brushes.Yellow;
+        }
+
+        private void CbbTraceKategoria_LostFocus(object sender, RoutedEventArgs e)
+        {
+            txtTracep5.Background = Brushes.White;
+            txtTracep6.Background = Brushes.White;
+        }
+
+        private void CbbTraceSmin_GotFocus(object sender, RoutedEventArgs e)
+        {
+            txtTracep1.Background = Brushes.Yellow;
+            txtTracep7.Background = Brushes.Yellow;
+            txtTracep8.Background = Brushes.Yellow;
+            txtTracep9.Background = Brushes.Yellow;
+        }
+
+        private void CbbTraceSmin_LostFocus(object sender, RoutedEventArgs e)
+        {
+            txtTracep1.Background = Brushes.White;
+            txtTracep7.Background = Brushes.White;
+            txtTracep8.Background = Brushes.White;
+            txtTracep9.Background = Brushes.White;
+        }
+
+        private void CbbTraceSmax_GotFocus(object sender, RoutedEventArgs e)
+        {
+            txtTracep1.Background = Brushes.Yellow;
+            txtTracep7.Background = Brushes.Yellow;
+            txtTracep8.Background = Brushes.Yellow;
+            txtTracep9.Background = Brushes.Yellow;
+        }
+
+        private void CbbTraceSmax_LostFocus(object sender, RoutedEventArgs e)
+        {
+            txtTracep1.Background = Brushes.White;
+            txtTracep7.Background = Brushes.White;
+            txtTracep8.Background = Brushes.White;
+            txtTracep9.Background = Brushes.White;
+        }
+
+        private void TxtTracePartia_GotFocus(object sender, RoutedEventArgs e)
+        {
+            txtTracep10.Background = Brushes.Yellow;
+            txtTracep11.Background = Brushes.Yellow;
+            txtTracep12.Background = Brushes.Yellow;
+            txtTracep13.Background = Brushes.Yellow;
+            txtTracep14.Background = Brushes.Yellow;
+            txtTracep15.Background = Brushes.Yellow;
+        }
+
+        private void TxtTracePartia_LostFocus(object sender, RoutedEventArgs e)
+        {
+            txtTracep10.Background = Brushes.White;
+            txtTracep11.Background = Brushes.White;
+            txtTracep12.Background = Brushes.White;
+            txtTracep13.Background = Brushes.White;
+            txtTracep14.Background = Brushes.White;
+            txtTracep15.Background = Brushes.White;
+        }
+
+        private void CbbTraceProducent_GotFocus(object sender, RoutedEventArgs e)
+        {
+            txtTracep16.Background = Brushes.Yellow;
+            txtTracep17.Background = Brushes.Yellow;
+        }
+
+        private void CbbTraceProducent_LostFocus(object sender, RoutedEventArgs e)
+        {
+            txtTracep16.Background = Brushes.White;
+            txtTracep17.Background = Brushes.White;
+        }
+
+        private void CbbTraceSDR_GotFocus(object sender, RoutedEventArgs e)
+        {
+            txtTracep18.Background = Brushes.Yellow;
+        }
+
+        private void CbbTraceSDR_LostFocus(object sender, RoutedEventArgs e)
+        {
+            txtTracep18.Background = Brushes.White;
+        }
+
+        private void CbbTracePEm_GotFocus(object sender, RoutedEventArgs e)
+        {
+            txtTracep19.Background = Brushes.Yellow;
+            txtTracep20.Background = Brushes.Yellow;
+            txtTracep21.Background = Brushes.Yellow;
+            txtTracep22.Background = Brushes.Yellow;
+        }
+
+        private void CbbTracePEm_LostFocus(object sender, RoutedEventArgs e)
+        {
+            txtTracep19.Background = Brushes.White;
+            txtTracep20.Background = Brushes.White;
+            txtTracep21.Background = Brushes.White;
+            txtTracep22.Background = Brushes.White;
+        }
+
+        private void CbbTraceMaterial_GotFocus(object sender, RoutedEventArgs e)
+        {
+            txtTracep23.Background = Brushes.Yellow;
+        }
+
+        private void CbbTraceMaterial_LostFocus(object sender, RoutedEventArgs e)
+        {
+            txtTracep23.Background = Brushes.White;
+        }
+
+        private void CbbTracePEo_GotFocus(object sender, RoutedEventArgs e)
+        {
+            txtTracep24.Background = Brushes.Yellow;
+        }
+
+        private void CbbTracePEo_LostFocus(object sender, RoutedEventArgs e)
+        {
+            txtTracep24.Background = Brushes.White;
+        }
+
+        private void CbbTraceMFR_GotFocus(object sender, RoutedEventArgs e)
+        {
+            txtTracep25.Background = Brushes.Yellow;
+        }
+
+        private void CbbTraceMFR_LostFocus(object sender, RoutedEventArgs e)
+        {
+            txtTracep25.Background = Brushes.White;
+        }
+    }
+}

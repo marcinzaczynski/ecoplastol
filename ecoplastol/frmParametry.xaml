@@ -1,0 +1,79 @@
+﻿<Window x:Class="ecoplastol.frmParametry"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ecoplastol"
+        mc:Ignorable="d"
+        Title="frmParametry" Height="697" Width="998" Loaded="Window_Loaded">
+    <Window.Resources>
+        <CollectionViewSource x:Key="parametersViewSource" d:DesignSource="{d:DesignInstance {x:Type local:parameters}, CreateList=True}"/>
+    </Window.Resources>
+    <Grid HorizontalAlignment="Stretch" Height="auto" VerticalAlignment="Stretch" Width="auto" DataContext="{StaticResource parametersViewSource}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="23"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="300"/>
+            <RowDefinition Height="40"/>
+        </Grid.RowDefinitions>
+        <TabControl x:Name="TabControl1" Grid.Row="2" HorizontalAlignment="Left" Height="23" Margin="0,12,0,0" VerticalAlignment="Top" Width="auto" SelectionChanged="TabControl1_SelectionChanged" Grid.ColumnSpan="2">
+            <TabItem Header="ADMINISTRACJA">
+                <Grid Background="#FFE5E5E5"/>
+            </TabItem>
+            <TabItem Header="SIEĆ">
+                <Grid Background="#FFE5E5E5"/>
+            </TabItem>
+            <TabItem Header="ITF">
+                <Grid Background="#FFE5E5E5"/>
+            </TabItem>
+            <TabItem Header="TRACEABILITY">
+                <Grid Background="#FFE5E5E5"/>
+            </TabItem>
+            <TabItem Header="WYRÓB">
+                <Grid Background="#FFE5E5E5"/>
+            </TabItem>
+        </TabControl>
+        <DataGrid x:Name="dgParametry" Grid.Row="2" Padding="3" AutoGenerateColumns="False" Grid.ColumnSpan="2" EnableRowVirtualization="True" ItemsSource="{Binding}" Margin="0,35,0,0"  RowDetailsVisibilityMode="VisibleWhenSelected" SelectionChanged="DgParametry_SelectionChanged" IsSynchronizedWithCurrentItem="True" CanUserDeleteRows="False" CanUserAddRows="False" IsReadOnly="True">
+            <DataGrid.Columns>
+                <DataGridTextColumn x:Name="idColumn" Binding="{Binding id}" Header="id" Width="SizeToHeader" Visibility="Hidden"/>
+                <DataGridTextColumn x:Name="kategoriaColumn" Binding="{Binding kategoria}" Header="Kategoria" Width="100"/>
+                <DataGridTextColumn x:Name="grupaColumn" Binding="{Binding grupa}" Header="Grupa" Width="80"/>
+                <DataGridTextColumn x:Name="indeksColumn" Binding="{Binding indeks}" Header="Indeks" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="parametrColumn" Binding="{Binding parametr}" Header="Parametr" Width="80"/>
+                <DataGridTextColumn x:Name="wartoscColumn" Binding="{Binding wartosc}" Header="Wartość" Width="100"/>
+                <DataGridTextColumn x:Name="opisColumn" Binding="{Binding opis}" Header="Opis" Width="*"/>
+                <DataGridTextColumn x:Name="opwColumn" Binding="{Binding opw}" Header="opw" Width="60"/>
+                <DataGridTextColumn x:Name="czaswColumn" Binding="{Binding czasw, StringFormat=\{0:yyyy-MM-dd HH:mm:ss\}}" Header="czasw" Width="100"/>
+                <DataGridTextColumn x:Name="opmColumn" Binding="{Binding opm}" Header="opm" Width="60"/>
+                <DataGridTextColumn x:Name="czasmColumn" Binding="{Binding czasm, StringFormat=\{0:yyyy-MM-dd HH:mm:ss\}}" Header="czasm" Width="100"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Canvas Grid.Row="3" Grid.ColumnSpan="2">
+            <Button x:Name="btnDodaj" Content="DODAJ" HorizontalAlignment="Left" Margin="5,0,0,0" VerticalAlignment="Top" Width="100" Height="30" FontSize="14" Click="BtnDodaj_Click"/>
+            <Button x:Name="btnKlonuj" Content="KLONUJ" HorizontalAlignment="Left" Margin="104,0,0,0" VerticalAlignment="Top" Width="100" Height="30" FontSize="14" Click="BtnKlonuj_Click"/>
+            <Button x:Name="btnPopraw" Content="POPRAW" HorizontalAlignment="Left" Margin="203,0,0,0" VerticalAlignment="Top" Width="100" Height="30" FontSize="14" Click="BtnPopraw_Click"/>
+            <Button x:Name="btnUsun" Content="USUŃ" HorizontalAlignment="Left" Margin="302,0,0,0" VerticalAlignment="Top" Width="100" Height="30" FontSize="14" RenderTransformOrigin="1.09,0.567" Foreground="Red"/>
+            <Button x:Name="btnAnuluj" Content="ANULUJ" HorizontalAlignment="Left" Margin="401,0,0,0" VerticalAlignment="Top" Width="100" Height="30" FontSize="14" RenderTransformOrigin="1.2,0.733" Foreground="Red" Click="BtnAnuluj_Click"/>
+            <Button x:Name="btnZatwierdz" Content="ZATWIERDŹ" HorizontalAlignment="Left" Margin="500,0,0,0" VerticalAlignment="Top" Width="100" Height="30" FontSize="14" RenderTransformOrigin="1.77,0.867" Foreground="#FF00B000" Click="BtnZatwierdz_Click"/>
+
+            <Label Content="Kategoria :" HorizontalAlignment="Left" VerticalAlignment="Center" Canvas.Left="10" Canvas.Top="71" FontSize="14"/>
+            <Label Content="Grupa :" HorizontalAlignment="Left" VerticalAlignment="Center" Canvas.Left="10" Canvas.Top="99" FontSize="14"/>
+            <Label Content="Indeks :" HorizontalAlignment="Left" VerticalAlignment="Center" Canvas.Left="10" Canvas.Top="128" FontSize="14"/>
+            <Label Content="Parametr :" HorizontalAlignment="Left" VerticalAlignment="Center" Canvas.Left="10" Canvas.Top="155" FontSize="14"/>
+            <Label Content="Wartość :" HorizontalAlignment="Left" VerticalAlignment="Center"  Canvas.Left="10" Canvas.Top="183" FontSize="14"/>
+            <Label Content="Opis :" HorizontalAlignment="Left" VerticalAlignment="Center" Canvas.Left="10" Canvas.Top="211" FontSize="14"/>
+            <TextBox x:Name="txtKategoria" HorizontalAlignment="Left" Height="23" Text="{Binding kategoria, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="208" Canvas.Left="120" Canvas.Top="75" FontSize="14"/>
+            <TextBox x:Name="txtGrupa" HorizontalAlignment="Left" Height="23" Text="{Binding grupa, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="208" Canvas.Left="120" Canvas.Top="103" FontSize="14"/>
+            <TextBox x:Name="txtIndeks" HorizontalAlignment="Left" Height="23" Text="{Binding indeks, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="208" Canvas.Left="120" Canvas.Top="131" FontSize="14"/>
+            <TextBox x:Name="txtParametr"  HorizontalAlignment="Left" Height="23" Text="{Binding parametr, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="208" Canvas.Left="120" Canvas.Top="159" FontSize="14"/>
+            <TextBox x:Name="txtWartosc" HorizontalAlignment="Left" Height="23" Text="{Binding wartosc, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="781" Canvas.Left="120" Canvas.Top="187" FontSize="14"/>
+            <TextBox x:Name="txtOpis" Grid.Column="1" HorizontalAlignment="Left" Height="23" Text="{Binding opis, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" VerticalAlignment="Center" Width="781" Canvas.Left="120" Canvas.Top="215" FontSize="14"/>
+
+        </Canvas>
+        <StackPanel Grid.Row="4" HorizontalAlignment="Right">
+            <Button x:Name="btnZamknij" Content="ZAMKNIJ" Width="100" Height="40" FontSize="14" FontWeight="Bold" Click="BtnZamknij_Click"/>
+        </StackPanel>
+    </Grid>
+
+</Window>
