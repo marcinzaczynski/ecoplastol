@@ -12,12 +12,12 @@ namespace ecoplastol
     using System;
     using System.Collections.Generic;
     
-    public partial class parameters
+    public partial class parametry
     {
         public int id { get; set; }
         public string kategoria { get; set; }
         public string grupa { get; set; }
-        public Nullable<int> indeks { get; set; }
+        public int indeks { get; set; }
         public string parametr { get; set; }
         public string wartosc { get; set; }
         public string opis { get; set; }

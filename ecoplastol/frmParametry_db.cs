@@ -8,32 +8,32 @@ namespace ecoplastol
 {
     class frmParametry_db
     {
-        public static List<parameters> GetParameters(string _kategoria)
+        public static List<parametry> GetParameters(string _kategoria)
         {
-            using (var db = new wannaEntities())
+            using (var db = new ecoplastolEntities())
             {
-                var listP = (from par in db.parameters
+                var listP = (from par in db.parametry
                              where par.kategoria == _kategoria
                              orderby par.grupa, par.indeks ascending
                              select par).ToList();
                 return listP;
             }
         }
-        public static void AddParameter(parameters _newParameter)
+        public static void AddParameter(parametry _newParameter)
         {
-            using (var db = new wannaEntities())
+            using (var db = new ecoplastolEntities())
             {
 
-                db.parameters.Add(_newParameter);
+                db.parametry.Add(_newParameter);
                 db.SaveChanges();
             }
         }
 
-        public static void UpdParameter(parameters _newParameter)
+        public static void UpdParameter(parametry _newParameter)
         {
-            using (var db = new wannaEntities())
+            using (var db = new ecoplastolEntities())
             {
-                var entity = db.parameters.Find(_newParameter.id);
+                var entity = db.parametry.Find(_newParameter.id);
                 if (entity != null)
                 {
                     entity.grupa = _newParameter.grupa;
@@ -47,9 +47,9 @@ namespace ecoplastol
             }
         }
 
-        public static void UpdParameter2(parameters _newParameter)
+        public static void UpdParameter2(parametry _newParameter)
         {
-            using (var db = new wannaEntities())
+            using (var db = new ecoplastolEntities())
             {
                 db.Entry(_newParameter).State = System.Data.Entity.EntityState.Modified;
                 db.SaveChanges();
@@ -58,11 +58,11 @@ namespace ecoplastol
 
         public static void DeletedParameter(int _ParametrId)
         {
-            using (var db = new wannaEntities())
+            using (var db = new ecoplastolEntities())
             {
-                var row = new parameters() { id = _ParametrId };
-                db.parameters.Attach(row);
-                db.parameters.Remove(row);
+                var row = new parametry() { id = _ParametrId };
+                db.parametry.Attach(row);
+                db.parametry.Remove(row);
                 db.SaveChanges();
             }
         }

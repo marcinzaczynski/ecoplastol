@@ -13,10 +13,10 @@ namespace ecoplastol
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class wannaEntities : DbContext
+    public partial class ecoplastolEntities : DbContext
     {
-        public wannaEntities()
-            : base("name=wannaEntities")
+        public ecoplastolEntities()
+            : base("name=ecoplastolEntities")
         {
         }
     
@@ -25,8 +25,8 @@ namespace ecoplastol
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<parameters> parameters { get; set; }
-        public virtual DbSet<users> users { get; set; }
+        public virtual DbSet<uzytkownicy> uzytkownicy { get; set; }
+        public virtual DbSet<parametry> parametry { get; set; }
         public virtual DbSet<wyroby> wyroby { get; set; }
     }
 }

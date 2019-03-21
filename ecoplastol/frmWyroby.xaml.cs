@@ -28,33 +28,33 @@ namespace ecoplastol
         private int _id_upd;
         private int dgBookmark;
         private List<wyroby> listWyroby;
-        private List<parameters> listTypyWyrobow;
-        private List<parameters> listWyrobZakresSDR;
-        private List<parameters> listWyrobZastZaworu;
-        private List<parameters> listWyrobRodzajDrutu;
+        private List<parametry> listTypyWyrobow;
+        private List<parametry> listWyrobZakresSDR;
+        private List<parametry> listWyrobZastZaworu;
+        private List<parametry> listWyrobRodzajDrutu;
 
-        private List<parameters> listITFKategorie;
-        private List<parameters> listITFZnaki1;
-        private List<parameters> listITFZnaki2;
-        private List<parameters> listITFicc;
-        private List<parameters> listITFcc1;
-        private List<parameters> listITFcc2;
-        private List<parameters> listITFsmin;
-        private List<parameters> listITFsmax;
-        private List<parameters> listITFtrn;
-        private List<parameters> listITFodch;
+        private List<parametry> listITFKategorie;
+        private List<parametry> listITFZnaki1;
+        private List<parametry> listITFZnaki2;
+        private List<parametry> listITFicc;
+        private List<parametry> listITFcc1;
+        private List<parametry> listITFcc2;
+        private List<parametry> listITFsmin;
+        private List<parametry> listITFsmax;
+        private List<parametry> listITFtrn;
+        private List<parametry> listITFodch;
 
-        private List<parameters> listTraceZnaki1;
-        private List<parameters> listTraceZnaki2;
-        private List<parameters> listTraceKategorie;
-        private List<parameters> listTraceSmin;
-        private List<parameters> listTraceSmax;
-        private List<parameters> listTraceZaklad;
-        private List<parameters> listTraceSDR;
-        private List<parameters> listTracePEm;
-        private List<parameters> listTraceMaterial;
-        private List<parameters> listTracePEo;
-        private List<parameters> listTraceMFR;
+        private List<parametry> listTraceZnaki1;
+        private List<parametry> listTraceZnaki2;
+        private List<parametry> listTraceKategorie;
+        private List<parametry> listTraceSmin;
+        private List<parametry> listTraceSmax;
+        private List<parametry> listTraceZaklad;
+        private List<parametry> listTraceSDR;
+        private List<parametry> listTracePEm;
+        private List<parametry> listTraceMaterial;
+        private List<parametry> listTracePEo;
+        private List<parametry> listTraceMFR;
 
         public frmWyroby()
         {
@@ -603,20 +603,20 @@ namespace ecoplastol
         {
             //if (cbbITFKategoria.SelectedIndex > 0)
             {
-                var item = cbbITFKategoria.SelectedItem as parameters;
+                var item = cbbITFKategoria.SelectedItem as parametry;
                 kod25.kategoria = item.wartosc;
             }
         }
 
         private void CbbITFZnak1_DropDownClosed(object sender, EventArgs e)
         {
-            var item = cbbITFZnak1.SelectedItem as parameters;
+            var item = cbbITFZnak1.SelectedItem as parametry;
             kod25.znak1 = item.parametr;
         }
 
         private void CbbITFZnak2_DropDownClosed(object sender, EventArgs e)
         {
-            var item = cbbITFZnak2.SelectedItem as parameters;
+            var item = cbbITFZnak2.SelectedItem as parametry;
             kod25.znak2 = item.parametr;
         }
 
@@ -732,7 +732,7 @@ namespace ecoplastol
 
         private void CbbITFICC_DropDownClosed(object sender, EventArgs e)
         {
-            var item = cbbITFICC.SelectedItem as parameters;
+            var item = cbbITFICC.SelectedItem as parametry;
             if (item.parametr == "3")
             {
                 cbbITFCC1.IsEnabled = true;
@@ -753,39 +753,39 @@ namespace ecoplastol
 
         private void CbbITFCC1_DropDownClosed(object sender, EventArgs e)
         {
-            var item = cbbITFCC1.SelectedItem as parameters;
+            var item = cbbITFCC1.SelectedItem as parametry;
             kod25.cc1 = item.parametr;
         }
 
         private void CbbITFCC2_DropDownClosed(object sender, EventArgs e)
         {
-            var item = cbbITFCC2.SelectedItem as parameters;
+            var item = cbbITFCC2.SelectedItem as parametry;
             kod25.cc2 = item.parametr;
         }
 
         private void CbbITFsmin_DropDownClosed(object sender, EventArgs e)
         {
-            var item = cbbITFsmin.SelectedItem as parameters;
+            var item = cbbITFsmin.SelectedItem as parametry;
             kod25.smin_p = item.parametr;
             kod25.smin_w = item.wartosc;
         }
 
         private void CbbITFsmax_DropDownClosed(object sender, EventArgs e)
         {
-            var item = cbbITFsmax.SelectedItem as parameters;
+            var item = cbbITFsmax.SelectedItem as parametry;
             kod25.smax_p = item.parametr;
             kod25.smax_w = item.wartosc;
         }
 
         private void CbbITFtrn_DropDownClosed(object sender, EventArgs e)
         {
-            var item = cbbITFtrn.SelectedItem as parameters;
+            var item = cbbITFtrn.SelectedItem as parametry;
             kod25.trn = item.parametr;
         }
 
         private void CbbITFodch_DropDownClosed(object sender, EventArgs e)
         {
-            var item = cbbITFodch.SelectedItem as parameters;
+            var item = cbbITFodch.SelectedItem as parametry;
             kod25.odch = item.parametr;
         }
 
@@ -912,69 +912,69 @@ namespace ecoplastol
 
         private void CbbTraceZnak1_DropDownClosed(object sender, EventArgs e)
         {
-            var item = cbbTraceZnak1.SelectedItem as parameters;
+            var item = cbbTraceZnak1.SelectedItem as parametry;
             kodTrace.znak1 = item.parametr;
         }
 
         private void CbbTraceZnak2_DropDownClosed(object sender, EventArgs e)
         {
-            var item = cbbTraceZnak2.SelectedItem as parameters;
+            var item = cbbTraceZnak2.SelectedItem as parametry;
             kodTrace.znak2 = item.parametr;
         }
 
         private void CbbTraceKategoria_DropDownClosed(object sender, EventArgs e)
         {
-            var item = cbbTraceKategoria.SelectedItem as parameters;
+            var item = cbbTraceKategoria.SelectedItem as parametry;
             kodTrace.kategoria = item.parametr;
         }
 
         private void CbbTraceSmin_DropDownClosed(object sender, EventArgs e)
         {
-            var item = cbbTraceSmin.SelectedItem as parameters;
+            var item = cbbTraceSmin.SelectedItem as parametry;
             kodTrace.smin_p = item.parametr;
             kodTrace.smin_w = item.wartosc;
         }
 
         private void CbbTraceSmax_DropDownClosed(object sender, EventArgs e)
         {
-            var item = cbbTraceSmax.SelectedItem as parameters;
+            var item = cbbTraceSmax.SelectedItem as parametry;
             kodTrace.smax_p = item.parametr;
             kodTrace.smax_w = item.wartosc;
         }
 
         private void CbbTraceProducent_DropDownClosed(object sender, EventArgs e)
         {
-            var item = cbbTraceProducent.SelectedItem as parameters;
+            var item = cbbTraceProducent.SelectedItem as parametry;
             kodTrace.producent = item.parametr;
         }
 
         private void CbbTraceSDR_DropDownClosed(object sender, EventArgs e)
         {
-            var item = cbbTraceSDR.SelectedItem as parameters;
+            var item = cbbTraceSDR.SelectedItem as parametry;
             kodTrace.sdr = item.parametr;
         }
 
         private void CbbTracePEm_DropDownClosed(object sender, EventArgs e)
         {
-            var item = cbbTracePEm.SelectedItem as parameters;
+            var item = cbbTracePEm.SelectedItem as parametry;
             kodTrace.pem = item.wartosc;
         }
 
         private void CbbTraceMaterial_DropDownClosed(object sender, EventArgs e)
         {
-            var item = cbbTraceMaterial.SelectedItem as parameters;
+            var item = cbbTraceMaterial.SelectedItem as parametry;
             kodTrace.material = item.parametr;
         }
 
         private void CbbTracePEo_DropDownClosed(object sender, EventArgs e)
         {
-            var item = cbbTracePEo.SelectedItem as parameters;
+            var item = cbbTracePEo.SelectedItem as parametry;
             kodTrace.peo = item.parametr;
         }
 
         private void CbbTraceMFR_DropDownClosed(object sender, EventArgs e)
         {
-            var item = cbbTraceMFR.SelectedItem as parameters;
+            var item = cbbTraceMFR.SelectedItem as parametry;
             kodTrace.mfr = item.parametr;
         }
 

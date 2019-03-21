@@ -12,15 +12,15 @@ namespace ecoplastol
     using System;
     using System.Collections.Generic;
     
-    public partial class users
+    public partial class uzytkownicy
     {
         public int id { get; set; }
         public string login { get; set; }
         public string pass { get; set; }
         public string profil { get; set; }
         public string opw { get; set; }
-        public Nullable<System.DateTime> czasw { get; set; }
+        public System.DateTime czasw { get; set; }
         public string opm { get; set; }
-        public Nullable<System.DateTime> czasm { get; set; }
+        public System.DateTime czasm { get; set; }
     }
 }

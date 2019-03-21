@@ -19,7 +19,7 @@ namespace ecoplastol
     /// </summary>
     public partial class frmLogin : Window
     {
-        public static users LoggedUser;
+        public static uzytkownicy LoggedUser;
 
         public frmLogin()
         {

@@ -8,24 +8,23 @@ namespace ecoplastol
 {
     class frmUzytkownicy_db
     {
-        //lll
-        public static users PobierzUzytkownika(string _user)
+        public static uzytkownicy PobierzUzytkownika(string _user)
         {
-            using (var db = new wannaEntities())
+            using (var db = new ecoplastolEntities())
             {
 
-                var dbUser = db.users.Single(users => users.login == _user);
+                var dbUser = db.uzytkownicy.Single(users => users.login == _user);
 
 
                 return dbUser;
             }
         }
 
-        public static List<users> PobierzUzytkownikow()
+        public static List<uzytkownicy> PobierzUzytkownikow()
         {
-            using (var db = new wannaEntities())
+            using (var db = new ecoplastolEntities())
             {
-                var listUzytkownicy = (from us in db.users
+                var listUzytkownicy = (from us in db.uzytkownicy
                                        orderby us.id ascending
                                        select us).ToList();
                 return listUzytkownicy;

@@ -20,7 +20,7 @@ namespace ecoplastol
     /// </summary>
     public partial class frmParametry : Window
     {
-        private List<parameters> listP;
+        private List<parametry> listP;
         private int _id_upd;
         private string _akcja;
 
@@ -97,7 +97,7 @@ namespace ecoplastol
             //var row = dgParametry.SelectedRows[0].DataBoundItem as parameters;
             try
             {
-                var row = dgParametry.SelectedItem as parameters;
+                var row = dgParametry.SelectedItem as parametry;
                 _id_upd = row.id;
                 txtKategoria.Text = row.kategoria;
                 txtGrupa.Text = row.grupa;
@@ -231,7 +231,7 @@ namespace ecoplastol
 
         private void BtnZatwierdz_Click(object sender, RoutedEventArgs e)
         {
-            var newParameter = new parameters();
+            var newParameter = new parametry();
             newParameter.kategoria = txtKategoria.Text;
             newParameter.grupa = txtGrupa.Text;
             newParameter.indeks = Int32.Parse(txtIndeks.Text);
@@ -260,7 +260,7 @@ namespace ecoplastol
             }
             else if (_akcja == "P")
             {
-                var row = dgParametry.SelectedItem as parameters;
+                var row = dgParametry.SelectedItem as parametry;
                 newParameter.id = row.id;
                 newParameter.opw = row.opw;
                 newParameter.czasw = row.czasw;
