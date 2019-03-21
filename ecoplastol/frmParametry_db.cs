@@ -8,6 +8,15 @@ namespace ecoplastol
 {
     class frmParametry_db
     {
+        public static int Id()
+        {
+            using (var db = new ecoplastolEntities())
+            {
+                int newId = db.parametry.Max(p => p.id) + 1;
+                return newId;
+            }
+        }
+
         public static List<parametry> GetParameters(string _kategoria)
         {
             using (var db = new ecoplastolEntities())
@@ -19,6 +28,7 @@ namespace ecoplastol
                 return listP;
             }
         }
+
         public static void AddParameter(parametry _newParameter)
         {
             using (var db = new ecoplastolEntities())

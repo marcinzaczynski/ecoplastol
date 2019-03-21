@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ecoplastol
 {
-    class kod25
+    class kodITF
     {
         private char[] arr = new char[24];
         private char[] arr2 = new char[24];
@@ -53,8 +53,26 @@ namespace ecoplastol
         public string kod2 { get { return _kod2; } set { _kod2 = value; } }
 
 
-        public kod25()
+        public kodITF()
         {
+            _kategoria = "00";
+            _znak1 = "00";
+            _znak2 = "00";
+            _icc = "0";
+            _cc1 = "0";
+            _cc2 = "0";
+            _smin_p = "0";
+            _smin_w = "000";
+            _smax_p = "0";
+            _smax_w = "000";
+            _trn = "0";
+            _prn = "00";
+            _rez = "000";
+            _odch = "0";
+            _cz1 = "000";
+            _cz2 = "000";
+            _ke = "00";
+
             int licznik = 0;
             foreach (int i in arr)
             {

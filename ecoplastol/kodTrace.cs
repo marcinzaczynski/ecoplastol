@@ -46,6 +46,21 @@ namespace ecoplastol
 
         public kodTrace()
         {
+            _znak1 = "00";
+            _znak2 = "00";
+            _kategoria = "00";
+            _smin_p = "0";
+            _smin_w = "000";
+            _smax_p = "0";
+            _smax_w = "000";
+            _partia = "000000";
+            _producent = "00";
+            _sdr = "0";
+            _pem = "0000";
+            _material = "0";
+            _peo = "0";
+            _mfr = "0";
+
             int licznik = 0;
             foreach (int i in arr)
             {

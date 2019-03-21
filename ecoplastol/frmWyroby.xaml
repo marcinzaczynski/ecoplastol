@@ -45,7 +45,6 @@
             x:Name="dgWyroby" 
             Grid.Row="1" 
             AutoGenerateColumns="False" 
-            EnableRowVirtualization="True" 
             ItemsSource="{Binding}" 
             RowDetailsVisibilityMode="VisibleWhenSelected" 
             SelectionChanged="DgWyroby_SelectionChanged"
@@ -285,7 +284,7 @@
             <Label VerticalAlignment="Center" FontSize="14" Grid.Row="8" Grid.Column="2" Padding="10,0,0,0" Content="Odchylenia :" />
             <Label VerticalAlignment="Center" FontSize="14" Grid.Row="9" Grid.Column="2" Padding="10,0,0,0" Content="Czas zgrzewania 1 | 2 :" />
             <Label VerticalAlignment="Center" FontSize="14" Grid.Row="10" Grid.Column="2" Padding="10,0,0,0" Content="Korekcja energii :" />
-            <ComboBox x:Name="cbbITFKategoria" Grid.Row="0" Grid.Column="3" FontSize="14" DropDownClosed="CbbITFKategoria_DropDownClosed" GotFocus="CbbITFKategoria_GotFocus" LostFocus="CbbITFKategoria_LostFocus">
+            <ComboBox x:Name="cbbITFKategoria" Grid.Row="0" Grid.Column="3" FontSize="14" DropDownClosed="CbbITFKategoria_DropDownClosed" GotFocus="CbbITFKategoria_GotFocus" LostFocus="CbbITFKategoria_LostFocus" Height="26" VerticalAlignment="Top">
                 <ComboBox.ItemTemplateSelector>
                     <ts:ComboBoxItemTemplateSelector>
                         <ts:ComboBoxItemTemplateSelector.SelectedTemplate>

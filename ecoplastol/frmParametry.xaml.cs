@@ -61,7 +61,7 @@ namespace ecoplastol
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
 
-            System.Windows.Data.CollectionViewSource parametersViewSource = ((System.Windows.Data.CollectionViewSource)(this.FindResource("parametersViewSource")));
+            System.Windows.Data.CollectionViewSource parametryViewSource = ((System.Windows.Data.CollectionViewSource)(this.FindResource("parametryViewSource")));
             // Load data by setting the CollectionViewSource.Source property:
             // parametersViewSource.Source = [generic data source]
         }
@@ -240,17 +240,17 @@ namespace ecoplastol
             newParameter.opis = txtOpis.Text;
             if (_akcja == "D")
             {
-
+                newParameter.id = frmParametry_db.Id();
                 newParameter.opw = frmLogin.LoggedUser.login;
                 newParameter.czasw = DateTime.Now;
                 newParameter.opm = frmLogin.LoggedUser.login;
                 newParameter.czasm = DateTime.Now;
                 frmParametry_db.AddParameter(newParameter);
                 TabControl1_SelectionChanged(null, null);
-
             }
             else if (_akcja == "K")
             {
+                newParameter.id = frmParametry_db.Id();
                 newParameter.opw = frmLogin.LoggedUser.login;
                 newParameter.czasw = DateTime.Now;
                 newParameter.opm = frmLogin.LoggedUser.login;

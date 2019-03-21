@@ -152,7 +152,7 @@
       <DependentUpon>frmWyroby.xaml</DependentUpon>
     </Compile>
     <Compile Include="frmWyroby_db.cs" />
-    <Compile Include="kod25.cs" />
+    <Compile Include="kodITF.cs" />
     <Compile Include="kodTrace.cs" />
     <Compile Include="PGEntity.Context.cs">
       <AutoGen>True</AutoGen>

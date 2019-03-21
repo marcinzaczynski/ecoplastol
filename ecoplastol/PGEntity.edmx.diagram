@@ -5,9 +5,9 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="dbaf2b62894d479582209c328e875733" Name="Diagram1">
-        <EntityTypeShape EntityType="ecoplastolModel.uzytkownicy" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="ecoplastolModel.parametry" Width="1.5" PointX="0.875" PointY="0.75" />
-        <EntityTypeShape EntityType="ecoplastolModel.wyroby" Width="1.5" PointX="5.125" PointY="0.75" />
+        <EntityTypeShape EntityType="ecoplastolModel.uzytkownicy" Width="1.5" PointX="2.125" PointY="0.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="ecoplastolModel.parametry" Width="1.5" PointX="0.5" PointY="0.5" />
+        <EntityTypeShape EntityType="ecoplastolModel.wyroby" Width="1.5" PointX="3.875" PointY="0.5" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

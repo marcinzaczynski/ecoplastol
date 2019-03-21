@@ -21,7 +21,7 @@ namespace ecoplastol
     /// </summary>
     public partial class frmWyroby : Window
     {
-        private kod25 kod25;
+        private kodITF kodITF;
         private kodTrace kodTrace;
 
         private string _akcja;
@@ -73,7 +73,7 @@ namespace ecoplastol
             UstawITF();
             UstawTrace();
 
-            kod25 = new kod25();
+            kodITF = new kodITF();
             kodTrace = new kodTrace();
 
             if (listWyroby.Count == 0)
@@ -86,9 +86,6 @@ namespace ecoplastol
                 DgWyroby_SelectionChanged(null, null);
                 UstawPrzyciski(1);
             }
-
-
-
         }
 
         // DESTRUKTOR
@@ -423,8 +420,6 @@ namespace ecoplastol
 
             // ke
             TxtITFke_KeyUp(null, null);
-
-            kod25.GenerujKody();
         }
 
         private void PrzygotujPodKodKrTrace()
@@ -454,8 +449,6 @@ namespace ecoplastol
             CbbTracePEo_DropDownClosed(null, null);
             // mfr
             CbbTraceMFR_DropDownClosed(null, null);
-
-            kodTrace.GenerujKod();
         }
 
         private void BtnKlonuj_Click(object sender, RoutedEventArgs e)
@@ -604,20 +597,32 @@ namespace ecoplastol
             //if (cbbITFKategoria.SelectedIndex > 0)
             {
                 var item = cbbITFKategoria.SelectedItem as parametry;
-                kod25.kategoria = item.wartosc;
+
+                //zabezpieczenie jak wybierze się pierwszą, pustą pozycję
+                if (item.wartosc != "") { kodITF.kategoria = item.wartosc; } else { kodITF.kategoria = "00"; }
+                
             }
+            kodITF.GenerujKody();
+            UzupelnijKodITF();
         }
 
         private void CbbITFZnak1_DropDownClosed(object sender, EventArgs e)
         {
             var item = cbbITFZnak1.SelectedItem as parametry;
-            kod25.znak1 = item.parametr;
+            //zabezpieczenie jak wybierze się pierwszą, pustą pozycję
+            if (item.parametr != "") { kodITF.znak1 = item.parametr; } else { kodITF.znak1 = "00"; }
+            
+            kodITF.GenerujKody();
+            UzupelnijKodITF();
         }
 
         private void CbbITFZnak2_DropDownClosed(object sender, EventArgs e)
         {
             var item = cbbITFZnak2.SelectedItem as parametry;
-            kod25.znak2 = item.parametr;
+            //zabezpieczenie jak wybierze się pierwszą, pustą pozycję
+            if (item.parametr != "") { kodITF.znak2 = item.parametr; } else { kodITF.znak2 = "00"; }
+            kodITF.GenerujKody();
+            UzupelnijKodITF();
         }
 
         private void UzupelnijKodITF()
@@ -626,8 +631,8 @@ namespace ecoplastol
             string kodITF2;
             try
             {
-                kodITF1 = kod25.kod1;
-                kodITF2 = kod25.kod2;
+                kodITF1 = kodITF.kod1;
+                kodITF2 = kodITF.kod2;
             }
             catch
             {
@@ -737,7 +742,8 @@ namespace ecoplastol
             {
                 cbbITFCC1.IsEnabled = true;
                 cbbITFCC2.IsEnabled = true;
-                kod25.icc = item.parametr;
+                //zabezpieczenie jak wybierze się pierwszą, pustą pozycję
+                if (item.parametr != "") { kodITF.icc = item.parametr; } else { kodITF.icc = "0"; }
             }
             else
             {
@@ -745,48 +751,95 @@ namespace ecoplastol
                 cbbITFCC1.IsEnabled = false;
                 cbbITFCC2.SelectedIndex = 0;
                 cbbITFCC2.IsEnabled = false;
-                kod25.icc = "2";
-                kod25.cc1 = "1";
-                kod25.cc2 = "1";
+                kodITF.icc = "2";
+                kodITF.cc1 = "1";
+                kodITF.cc2 = "1";
             }
+            kodITF.GenerujKody();
+            UzupelnijKodITF();
         }
 
         private void CbbITFCC1_DropDownClosed(object sender, EventArgs e)
         {
             var item = cbbITFCC1.SelectedItem as parametry;
-            kod25.cc1 = item.parametr;
+
+            //zabezpieczenie jak wybierze się pierwszą, pustą pozycję
+            if (item.parametr != "") { kodITF.cc1 = item.parametr; } else { kodITF.cc1 = "0"; }
+          
+            kodITF.GenerujKody();
+            UzupelnijKodITF();
         }
 
         private void CbbITFCC2_DropDownClosed(object sender, EventArgs e)
         {
             var item = cbbITFCC2.SelectedItem as parametry;
-            kod25.cc2 = item.parametr;
+
+            //zabezpieczenie jak wybierze się pierwszą, pustą pozycję
+            if (item.parametr != "") { kodITF.cc2 = item.parametr; } else { kodITF.cc2 = "0"; }
+
+            kodITF.GenerujKody();
+            UzupelnijKodITF();
         }
 
         private void CbbITFsmin_DropDownClosed(object sender, EventArgs e)
         {
             var item = cbbITFsmin.SelectedItem as parametry;
-            kod25.smin_p = item.parametr;
-            kod25.smin_w = item.wartosc;
+
+            //zabezpieczenie jak wybierze się pierwszą, pustą pozycję
+            if (item.parametr != "")
+            {
+                kodITF.smin_p = item.parametr;
+                kodITF.smin_w = item.wartosc;
+            } else
+            {
+                kodITF.smin_p = "0";
+                kodITF.smin_w = "000";
+            }
+            
+            kodITF.GenerujKody();
+            UzupelnijKodITF();
         }
 
         private void CbbITFsmax_DropDownClosed(object sender, EventArgs e)
         {
             var item = cbbITFsmax.SelectedItem as parametry;
-            kod25.smax_p = item.parametr;
-            kod25.smax_w = item.wartosc;
+
+            //zabezpieczenie jak wybierze się pierwszą, pustą pozycję
+            if (item.parametr != "")
+            {
+                kodITF.smax_p = item.parametr;
+                kodITF.smax_w = item.wartosc;
+            }
+            else
+            {
+                kodITF.smax_p = "0";
+                kodITF.smax_w = "000";
+            }
+
+            kodITF.GenerujKody();
+            UzupelnijKodITF();
         }
 
         private void CbbITFtrn_DropDownClosed(object sender, EventArgs e)
         {
             var item = cbbITFtrn.SelectedItem as parametry;
-            kod25.trn = item.parametr;
+            
+            //zabezpieczenie jak wybierze się pierwszą, pustą pozycję
+            if (item.parametr != "") { kodITF.trn = item.parametr; } else { kodITF.trn = "0"; }
+
+            kodITF.GenerujKody();
+            UzupelnijKodITF();
         }
 
         private void CbbITFodch_DropDownClosed(object sender, EventArgs e)
         {
             var item = cbbITFodch.SelectedItem as parametry;
-            kod25.odch = item.parametr;
+
+            //zabezpieczenie jak wybierze się pierwszą, pustą pozycję
+            if (item.parametr != "") { kodITF.odch = item.parametr; } else { kodITF.odch = "0"; }
+
+            kodITF.GenerujKody();
+            UzupelnijKodITF();
         }
 
         private void TxtITFprn_PreviewTextInput(object sender, TextCompositionEventArgs e)
@@ -853,7 +906,10 @@ namespace ecoplastol
             }
 
             string result = String.Format("{0,2:00}", value);
-            kod25.prn = result;
+            kodITF.prn = result;
+
+            kodITF.GenerujKody();
+            UzupelnijKodITF();
         }
 
         private void TxtITFrez_KeyUp(object sender, KeyEventArgs e)
@@ -864,7 +920,10 @@ namespace ecoplastol
             }
 
             string result = String.Format("{0,3:000}", value);
-            kod25.rez = result;
+            kodITF.rez = result;
+
+            kodITF.GenerujKody();
+            UzupelnijKodITF();
         }
 
         private void TxtITFcz1_KeyUp(object sender, KeyEventArgs e)
@@ -875,7 +934,10 @@ namespace ecoplastol
             }
 
             string result = String.Format("{0,3:000}", value);
-            kod25.cz1 = result;
+            kodITF.cz1 = result;
+
+            kodITF.GenerujKody();
+            UzupelnijKodITF();
         }
 
         private void TxtITFcz2_KeyUp(object sender, KeyEventArgs e)
@@ -886,7 +948,10 @@ namespace ecoplastol
             }
 
             string result = String.Format("{0,3:000}", value);
-            kod25.cz2 = result;
+            kodITF.cz2 = result;
+
+            kodITF.GenerujKody();
+            UzupelnijKodITF();
         }
 
         private void TxtITFke_KeyUp(object sender, KeyEventArgs e)
@@ -897,7 +962,10 @@ namespace ecoplastol
             }
 
             string result = String.Format("{0,2:00}", value);
-            kod25.ke = result;
+            kodITF.ke = result;
+
+            kodITF.GenerujKody();
+            UzupelnijKodITF();
         }
 
         private void Wykonaj(object sender, ExecutedRoutedEventArgs e)
@@ -913,69 +981,139 @@ namespace ecoplastol
         private void CbbTraceZnak1_DropDownClosed(object sender, EventArgs e)
         {
             var item = cbbTraceZnak1.SelectedItem as parametry;
-            kodTrace.znak1 = item.parametr;
+
+            //zabezpieczenie jak wybierze się pierwszą, pustą pozycję
+            if (item.parametr != "") { kodTrace.znak1 = item.parametr; } else { kodTrace.znak1 = "00"; }
+
+            kodTrace.GenerujKod();
+            UzupelnijKodTrace();
         }
 
         private void CbbTraceZnak2_DropDownClosed(object sender, EventArgs e)
         {
             var item = cbbTraceZnak2.SelectedItem as parametry;
-            kodTrace.znak2 = item.parametr;
+
+            //zabezpieczenie jak wybierze się pierwszą, pustą pozycję
+            if (item.parametr != "") { kodTrace.znak2 = item.parametr; } else { kodTrace.znak2 = "00"; }
+
+            kodTrace.GenerujKod();
+            UzupelnijKodTrace();
         }
 
         private void CbbTraceKategoria_DropDownClosed(object sender, EventArgs e)
         {
             var item = cbbTraceKategoria.SelectedItem as parametry;
-            kodTrace.kategoria = item.parametr;
+
+            //zabezpieczenie jak wybierze się pierwszą, pustą pozycję
+            if (item.parametr != "") { kodTrace.kategoria = item.parametr; } else { kodTrace.kategoria = "00"; }
+
+            kodTrace.GenerujKod();
+            UzupelnijKodTrace();
         }
 
         private void CbbTraceSmin_DropDownClosed(object sender, EventArgs e)
         {
             var item = cbbTraceSmin.SelectedItem as parametry;
-            kodTrace.smin_p = item.parametr;
-            kodTrace.smin_w = item.wartosc;
+            
+            //zabezpieczenie jak wybierze się pierwszą, pustą pozycję
+            if (item.parametr != "")
+            {
+                kodTrace.smin_p = item.parametr;
+                kodTrace.smin_w = item.wartosc;
+            } else
+            {
+                kodTrace.smin_p = "0";
+                kodTrace.smin_w = "000";
+            }
+
+            kodTrace.GenerujKod();
+            UzupelnijKodTrace();
         }
 
         private void CbbTraceSmax_DropDownClosed(object sender, EventArgs e)
         {
             var item = cbbTraceSmax.SelectedItem as parametry;
-            kodTrace.smax_p = item.parametr;
-            kodTrace.smax_w = item.wartosc;
+
+            //zabezpieczenie jak wybierze się pierwszą, pustą pozycję
+            if (item.parametr != "")
+            {
+                kodTrace.smax_p = item.parametr;
+                kodTrace.smax_w = item.wartosc;
+            }
+            else
+            {
+                kodTrace.smax_p = "0";
+                kodTrace.smax_w = "000";
+            }
+
+            kodTrace.GenerujKod();
+            UzupelnijKodTrace();
         }
 
         private void CbbTraceProducent_DropDownClosed(object sender, EventArgs e)
         {
             var item = cbbTraceProducent.SelectedItem as parametry;
-            kodTrace.producent = item.parametr;
+
+            //zabezpieczenie jak wybierze się pierwszą, pustą pozycję
+            if (item.parametr != "") { kodTrace.producent = item.parametr; } else { kodTrace.producent = "00"; }
+
+            kodTrace.GenerujKod();
+            UzupelnijKodTrace();
         }
 
         private void CbbTraceSDR_DropDownClosed(object sender, EventArgs e)
         {
             var item = cbbTraceSDR.SelectedItem as parametry;
-            kodTrace.sdr = item.parametr;
+
+            //zabezpieczenie jak wybierze się pierwszą, pustą pozycję
+            if (item.parametr != "") { kodTrace.sdr = item.parametr; } else { kodTrace.sdr = "0"; }
+
+            kodTrace.GenerujKod();
+            UzupelnijKodTrace();
         }
 
         private void CbbTracePEm_DropDownClosed(object sender, EventArgs e)
         {
             var item = cbbTracePEm.SelectedItem as parametry;
-            kodTrace.pem = item.wartosc;
+
+            //zabezpieczenie jak wybierze się pierwszą, pustą pozycję
+            if (item.wartosc != "") { kodTrace.pem = item.wartosc; } else { kodTrace.pem = "0000"; }
+
+            kodTrace.GenerujKod();
+            UzupelnijKodTrace();
         }
 
         private void CbbTraceMaterial_DropDownClosed(object sender, EventArgs e)
         {
             var item = cbbTraceMaterial.SelectedItem as parametry;
-            kodTrace.material = item.parametr;
+
+            //zabezpieczenie jak wybierze się pierwszą, pustą pozycję
+            if (item.parametr != "") { kodTrace.material = item.parametr; } else { kodTrace.material = "0"; }
+
+            kodTrace.GenerujKod();
+            UzupelnijKodTrace();
         }
 
         private void CbbTracePEo_DropDownClosed(object sender, EventArgs e)
         {
             var item = cbbTracePEo.SelectedItem as parametry;
-            kodTrace.peo = item.parametr;
+
+            //zabezpieczenie jak wybierze się pierwszą, pustą pozycję
+            if (item.parametr != "") { kodTrace.peo = item.parametr; } else { kodTrace.peo = "0"; }
+
+            kodTrace.GenerujKod();
+            UzupelnijKodTrace();
         }
 
         private void CbbTraceMFR_DropDownClosed(object sender, EventArgs e)
         {
             var item = cbbTraceMFR.SelectedItem as parametry;
-            kodTrace.mfr = item.parametr;
+
+            //zabezpieczenie jak wybierze się pierwszą, pustą pozycję
+            if (item.parametr != "") { kodTrace.mfr = item.parametr; } else { kodTrace.mfr = "0"; }
+
+            kodTrace.GenerujKod();
+            UzupelnijKodTrace();
         }
 
         private void TxtTracePartia_KeyUp(object sender, KeyEventArgs e)
@@ -987,6 +1125,9 @@ namespace ecoplastol
 
             string result = String.Format("{0,6:000000}", value);
             kodTrace.partia = result;
+
+            kodTrace.GenerujKod();
+            UzupelnijKodTrace();
         }
 
         private void TxtTracePartia_PreviewTextInput(object sender, TextCompositionEventArgs e)
@@ -1376,5 +1517,6 @@ namespace ecoplastol
         {
             txtTracep25.Background = Brushes.White;
         }
+
     }
 }

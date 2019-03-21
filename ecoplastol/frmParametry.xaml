@@ -7,9 +7,9 @@
         mc:Ignorable="d"
         Title="frmParametry" Height="697" Width="998" Loaded="Window_Loaded">
     <Window.Resources>
-        <CollectionViewSource x:Key="parametersViewSource" d:DesignSource="{d:DesignInstance {x:Type local:parameters}, CreateList=True}"/>
+        <CollectionViewSource x:Key="parametryViewSource" d:DesignSource="{d:DesignInstance {x:Type local:parametry}, CreateList=True}"/>
     </Window.Resources>
-    <Grid HorizontalAlignment="Stretch" Height="auto" VerticalAlignment="Stretch" Width="auto" DataContext="{StaticResource parametersViewSource}">
+    <Grid HorizontalAlignment="Stretch" Height="auto" VerticalAlignment="Stretch" Width="auto" DataContext="{StaticResource parametryViewSource}">
         <Grid.RowDefinitions>
             <RowDefinition Height="40"/>
             <RowDefinition Height="23"/>

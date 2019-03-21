@@ -9,7 +9,7 @@
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="int4" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id" Type="int4" Nullable="false" />
           <Property Name="kategoria" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="grupa" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="indeks" Type="int4" Nullable="false" />
@@ -38,48 +38,48 @@
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="int4" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id" Type="int4" Nullable="false" />
           <Property Name="wyrob_kod" Type="varchar" MaxLength="20" Nullable="false" />
           <Property Name="wyrob_kod_indeks" Type="varchar" MaxLength="20" />
           <Property Name="wyrob_kod_opis" Type="varchar" MaxLength="100" />
-          <Property Name="wyrob_typ" Type="int4" />
+          <Property Name="wyrob_typ" Type="int4" Nullable="false" />
           <Property Name="wyrob_il_w_op_zb" Type="int4" />
           <Property Name="wyrob_waga_op" Type="int4" />
           <Property Name="wyrob_waga_1szt" Type="int4" />
           <Property Name="wyrob_zakres_sdr" Type="int4" />
           <Property Name="wyrob_zast_zaworu" Type="int4" />
           <Property Name="wyrob_rodzaj_drutu" Type="int4" />
-          <Property Name="itf_kategoria" Type="int4" />
-          <Property Name="itf_znak1" Type="int4" />
-          <Property Name="itf_znak2" Type="int4" />
-          <Property Name="itf_icc" Type="int4" />
-          <Property Name="itf_cc1" Type="int4" />
-          <Property Name="itf_cc2" Type="int4" />
-          <Property Name="itf_smin" Type="int4" />
-          <Property Name="itf_smax" Type="int4" />
-          <Property Name="itf_trn" Type="int4" />
+          <Property Name="itf_kategoria" Type="int4" Nullable="false" />
+          <Property Name="itf_znak1" Type="int4" Nullable="false" />
+          <Property Name="itf_znak2" Type="int4" Nullable="false" />
+          <Property Name="itf_icc" Type="int4" Nullable="false" />
+          <Property Name="itf_cc1" Type="int4" Nullable="false" />
+          <Property Name="itf_cc2" Type="int4" Nullable="false" />
+          <Property Name="itf_smin" Type="int4" Nullable="false" />
+          <Property Name="itf_smax" Type="int4" Nullable="false" />
+          <Property Name="itf_trn" Type="int4" Nullable="false" />
           <Property Name="itf_prn" Type="varchar" MaxLength="2" />
           <Property Name="itf_rez" Type="varchar" MaxLength="3" />
-          <Property Name="itf_odch" Type="int4" />
+          <Property Name="itf_odch" Type="int4" Nullable="false" />
           <Property Name="itf_cz1" Type="varchar" MaxLength="3" />
           <Property Name="itf_cz2" Type="varchar" MaxLength="3" />
           <Property Name="itf_ke" Type="varchar" MaxLength="2" />
-          <Property Name="trace_znak1" Type="int4" />
-          <Property Name="trace_znak2" Type="int4" />
-          <Property Name="trace_kategoria" Type="int4" />
-          <Property Name="trace_smin" Type="int4" />
-          <Property Name="trace_smax" Type="int4" />
+          <Property Name="trace_znak1" Type="int4" Nullable="false" />
+          <Property Name="trace_znak2" Type="int4" Nullable="false" />
+          <Property Name="trace_kategoria" Type="int4" Nullable="false" />
+          <Property Name="trace_smin" Type="int4" Nullable="false" />
+          <Property Name="trace_smax" Type="int4" Nullable="false" />
           <Property Name="trace_partia" Type="varchar" MaxLength="6" />
-          <Property Name="trace_producent" Type="int4" />
-          <Property Name="trace_sdr" Type="int4" />
-          <Property Name="trace_pe_m" Type="int4" />
-          <Property Name="trace_material" Type="int4" />
-          <Property Name="trace_pe_o" Type="int4" />
-          <Property Name="trace_mfr" Type="int4" />
-          <Property Name="opw" Type="varchar" MaxLength="20" />
-          <Property Name="czasw" Type="timestamp" />
-          <Property Name="opm" Type="varchar" MaxLength="20" />
-          <Property Name="czasm" Type="timestamp" />
+          <Property Name="trace_producent" Type="int4" Nullable="false" />
+          <Property Name="trace_sdr" Type="int4" Nullable="false" />
+          <Property Name="trace_pe_m" Type="int4" Nullable="false" />
+          <Property Name="trace_material" Type="int4" Nullable="false" />
+          <Property Name="trace_pe_o" Type="int4" Nullable="false" />
+          <Property Name="trace_mfr" Type="int4" Nullable="false" />
+          <Property Name="opw" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="czasw" Type="timestamp" Nullable="false" />
+          <Property Name="opm" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="czasm" Type="timestamp" Nullable="false" />
         </EntityType>
         <EntityContainer Name="ecoplastolModelStoreContainer">
           <EntitySet Name="parametry" EntityType="Self.parametry" Schema="public" store:Type="Tables" />
@@ -112,7 +112,7 @@
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id" Type="Int32" Nullable="false" />
           <Property Name="kategoria" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="grupa" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="indeks" Type="Int32" Nullable="false" />
@@ -128,48 +128,48 @@
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="id" Type="Int32" Nullable="false" />
           <Property Name="wyrob_kod" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="wyrob_kod_indeks" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="wyrob_kod_opis" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="wyrob_typ" Type="Int32" />
+          <Property Name="wyrob_typ" Type="Int32" Nullable="false" />
           <Property Name="wyrob_il_w_op_zb" Type="Int32" />
           <Property Name="wyrob_waga_op" Type="Int32" />
           <Property Name="wyrob_waga_1szt" Type="Int32" />
           <Property Name="wyrob_zakres_sdr" Type="Int32" />
           <Property Name="wyrob_zast_zaworu" Type="Int32" />
           <Property Name="wyrob_rodzaj_drutu" Type="Int32" />
-          <Property Name="itf_kategoria" Type="Int32" />
-          <Property Name="itf_znak1" Type="Int32" />
-          <Property Name="itf_znak2" Type="Int32" />
-          <Property Name="itf_icc" Type="Int32" />
-          <Property Name="itf_cc1" Type="Int32" />
-          <Property Name="itf_cc2" Type="Int32" />
-          <Property Name="itf_smin" Type="Int32" />
-          <Property Name="itf_smax" Type="Int32" />
-          <Property Name="itf_trn" Type="Int32" />
+          <Property Name="itf_kategoria" Type="Int32" Nullable="false" />
+          <Property Name="itf_znak1" Type="Int32" Nullable="false" />
+          <Property Name="itf_znak2" Type="Int32" Nullable="false" />
+          <Property Name="itf_icc" Type="Int32" Nullable="false" />
+          <Property Name="itf_cc1" Type="Int32" Nullable="false" />
+          <Property Name="itf_cc2" Type="Int32" Nullable="false" />
+          <Property Name="itf_smin" Type="Int32" Nullable="false" />
+          <Property Name="itf_smax" Type="Int32" Nullable="false" />
+          <Property Name="itf_trn" Type="Int32" Nullable="false" />
           <Property Name="itf_prn" Type="String" MaxLength="2" FixedLength="false" Unicode="true" />
           <Property Name="itf_rez" Type="String" MaxLength="3" FixedLength="false" Unicode="true" />
-          <Property Name="itf_odch" Type="Int32" />
+          <Property Name="itf_odch" Type="Int32" Nullable="false" />
           <Property Name="itf_cz1" Type="String" MaxLength="3" FixedLength="false" Unicode="true" />
           <Property Name="itf_cz2" Type="String" MaxLength="3" FixedLength="false" Unicode="true" />
           <Property Name="itf_ke" Type="String" MaxLength="2" FixedLength="false" Unicode="true" />
-          <Property Name="trace_znak1" Type="Int32" />
-          <Property Name="trace_znak2" Type="Int32" />
-          <Property Name="trace_kategoria" Type="Int32" />
-          <Property Name="trace_smin" Type="Int32" />
-          <Property Name="trace_smax" Type="Int32" />
+          <Property Name="trace_znak1" Type="Int32" Nullable="false" />
+          <Property Name="trace_znak2" Type="Int32" Nullable="false" />
+          <Property Name="trace_kategoria" Type="Int32" Nullable="false" />
+          <Property Name="trace_smin" Type="Int32" Nullable="false" />
+          <Property Name="trace_smax" Type="Int32" Nullable="false" />
           <Property Name="trace_partia" Type="String" MaxLength="6" FixedLength="false" Unicode="true" />
-          <Property Name="trace_producent" Type="Int32" />
-          <Property Name="trace_sdr" Type="Int32" />
-          <Property Name="trace_pe_m" Type="Int32" />
-          <Property Name="trace_material" Type="Int32" />
-          <Property Name="trace_pe_o" Type="Int32" />
-          <Property Name="trace_mfr" Type="Int32" />
-          <Property Name="opw" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="czasw" Type="DateTime" Precision="6" />
-          <Property Name="opm" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="czasm" Type="DateTime" Precision="6" />
+          <Property Name="trace_producent" Type="Int32" Nullable="false" />
+          <Property Name="trace_sdr" Type="Int32" Nullable="false" />
+          <Property Name="trace_pe_m" Type="Int32" Nullable="false" />
+          <Property Name="trace_material" Type="Int32" Nullable="false" />
+          <Property Name="trace_pe_o" Type="Int32" Nullable="false" />
+          <Property Name="trace_mfr" Type="Int32" Nullable="false" />
+          <Property Name="opw" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="czasw" Type="DateTime" Nullable="false" Precision="6" />
+          <Property Name="opm" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="czasm" Type="DateTime" Nullable="false" Precision="6" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
