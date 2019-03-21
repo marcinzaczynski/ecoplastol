@@ -8,6 +8,7 @@ namespace ecoplastol
 {
     class frmUzytkownicy_db
     {
+        //lll
         public static users PobierzUzytkownika(string _user)
         {
             using (var db = new wannaEntities())
