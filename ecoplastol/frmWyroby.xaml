@@ -263,7 +263,7 @@
                         <ts:ComboBoxItemTemplateSelector.DropDownTemplate>
                             <DataTemplate>
                                 <StackPanel Orientation="Horizontal">
-                                    <TextBlock Text="{Binding parametr}" Width="20"/>
+                                    <TextBlock Text="{Binding indeks}" Width="20"/>
                                     <TextBlock Text="-  "/>
                                     <TextBlock Text="{Binding wartosc}" Width="120"/>
                                 </StackPanel>

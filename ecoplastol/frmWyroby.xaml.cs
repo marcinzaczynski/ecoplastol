@@ -28,33 +28,33 @@ namespace ecoplastol
         private int _id_upd;
         private int dgBookmark;
         private List<wyroby> listWyroby;
-        private List<parametry> listTypyWyrobow;
-        private List<parametry> listWyrobZakresSDR;
-        private List<parametry> listWyrobZastZaworu;
-        private List<parametry> listWyrobRodzajDrutu;
+        private List<wyroby_typ> listTypyWyrobow;
+        private List<wyroby_zakres_sdr> listWyrobZakresSDR;
+        private List<wyroby_zast_zaworu> listWyrobZastZaworu;
+        private List<wyroby_druty> listWyrobRodzajDrutu;
 
-        private List<parametry> listITFKategorie;
-        private List<parametry> listITFZnaki1;
-        private List<parametry> listITFZnaki2;
-        private List<parametry> listITFicc;
-        private List<parametry> listITFcc1;
-        private List<parametry> listITFcc2;
-        private List<parametry> listITFsmin;
-        private List<parametry> listITFsmax;
-        private List<parametry> listITFtrn;
-        private List<parametry> listITFodch;
+        private List<itf_kategoria> listITFKategorie;
+        private List<itf_znak> listITFZnaki1;
+        private List<itf_znak> listITFZnaki2;
+        private List<itf_icc> listITFicc;
+        private List<itf_cc> listITFcc1;
+        private List<itf_cc> listITFcc2;
+        private List<itf_sr> listITFsmin;
+        private List<itf_sr> listITFsmax;
+        private List<itf_trn> listITFtrn;
+        private List<itf_odch> listITFodch;
 
-        private List<parametry> listTraceZnaki1;
-        private List<parametry> listTraceZnaki2;
-        private List<parametry> listTraceKategorie;
-        private List<parametry> listTraceSmin;
-        private List<parametry> listTraceSmax;
-        private List<parametry> listTraceZaklad;
-        private List<parametry> listTraceSDR;
-        private List<parametry> listTracePEm;
-        private List<parametry> listTraceMaterial;
-        private List<parametry> listTracePEo;
-        private List<parametry> listTraceMFR;
+        private List<trace_znak> listTraceZnaki1;
+        private List<trace_znak> listTraceZnaki2;
+        private List<trace_kategoria> listTraceKategorie;
+        private List<trace_sr> listTraceSmin;
+        private List<trace_sr> listTraceSmax;
+        private List<trace_producent> listTraceProducent;
+        private List<trace_sdr> listTraceSDR;
+        private List<trace_pe_m> listTracePEm;
+        private List<trace_material> listTraceMaterial;
+        private List<trace_pe_o> listTracePEo;
+        private List<trace_mfr> listTraceMFR;
 
         public frmWyroby()
         {
@@ -205,19 +205,19 @@ namespace ecoplastol
 
         private void UstawWyrob()
         {
-            listTypyWyrobow = frmWyroby_db.GetParams("WYROB", "TYP_WYROBU");
+            listTypyWyrobow = frmWyroby_db.PobierzTypy();
             cbbWyrobTyp.ItemsSource = listTypyWyrobow;
             cbbWyrobTyp.SelectedValuePath = "indeks";
 
-            listWyrobZakresSDR = frmWyroby_db.GetParams("WYROB", "ZAKRES_SDR");
+            listWyrobZakresSDR = frmWyroby_db.PobierzZakresSDR();
             cbbWyrobZakresSDR.ItemsSource = listWyrobZakresSDR;
             cbbWyrobZakresSDR.SelectedValuePath = "indeks";
 
-            listWyrobZastZaworu = frmWyroby_db.GetParams("WYROB", "ZAST_ZAWORU");
+            listWyrobZastZaworu = frmWyroby_db.PobierzZastZaworu();
             cbbWyrobZastZaworu.ItemsSource = listWyrobZastZaworu;
             cbbWyrobZastZaworu.SelectedValuePath = "indeks";
 
-            listWyrobRodzajDrutu = frmWyroby_db.GetParams("WYROB", "DRUT");
+            listWyrobRodzajDrutu = frmWyroby_db.PobierzDruty();
             cbbWyrobRodzajDrutu.ItemsSource = listWyrobRodzajDrutu;
             cbbWyrobRodzajDrutu.SelectedValuePath = "indeks";
         }
@@ -225,43 +225,43 @@ namespace ecoplastol
         private void UstawITF()
         {
             // wczytuje parametry do cbb dla kodu ITF
-            listITFKategorie = frmWyroby_db.GetParams("ITF", "KATEGORIA");
+            listITFKategorie = frmWyroby_db.PobierzITFKategorie();
             cbbITFKategoria.ItemsSource = listITFKategorie;
             cbbITFKategoria.SelectedValuePath = "indeks";
 
-            listITFZnaki1 = frmWyroby_db.GetParams("ITF", "ZNAK");
+            listITFZnaki1 = frmWyroby_db.PobierzITFZnaki();
             cbbITFZnak1.ItemsSource = listITFZnaki1;
             cbbITFZnak1.SelectedValuePath = "indeks";
 
-            listITFZnaki2 = frmWyroby_db.GetParams("ITF", "ZNAK");
+            listITFZnaki2 = frmWyroby_db.PobierzITFZnaki();
             cbbITFZnak2.ItemsSource = listITFZnaki2;
             cbbITFZnak2.SelectedValuePath = "indeks";
 
-            listITFicc = frmWyroby_db.GetParams("ITF", "ICC");
+            listITFicc = frmWyroby_db.PobierzITFicc();
             cbbITFICC.ItemsSource = listITFicc;
             cbbITFICC.SelectedValuePath = "indeks";
 
-            listITFcc1 = frmWyroby_db.GetParams("ITF", "CC");
+            listITFcc1 = frmWyroby_db.PobierzITFcc();
             cbbITFCC1.ItemsSource = listITFcc1;
             cbbITFCC1.SelectedValuePath = "indeks";
 
-            listITFcc2 = frmWyroby_db.GetParams("ITF", "CC");
+            listITFcc2 = frmWyroby_db.PobierzITFcc();
             cbbITFCC2.ItemsSource = listITFcc2;
             cbbITFCC2.SelectedValuePath = "indeks";
 
-            listITFsmin = frmWyroby_db.GetParams("ITF", "SR");
+            listITFsmin = frmWyroby_db.PobierzITFsr();
             cbbITFsmin.ItemsSource = listITFsmin;
             cbbITFsmin.SelectedValuePath = "indeks";
 
-            listITFsmax = frmWyroby_db.GetParams("ITF", "SR");
+            listITFsmax = frmWyroby_db.PobierzITFsr();
             cbbITFsmax.ItemsSource = listITFsmax;
             cbbITFsmax.SelectedValuePath = "indeks";
 
-            listITFtrn = frmWyroby_db.GetParams("ITF", "TRN");
+            listITFtrn = frmWyroby_db.PobierzITFtrn();
             cbbITFtrn.ItemsSource = listITFtrn;
             cbbITFtrn.SelectedValuePath = "indeks";
 
-            listITFodch = frmWyroby_db.GetParams("ITF", "ODCH");
+            listITFodch = frmWyroby_db.PobierzITFodch();
             cbbITFodch.ItemsSource = listITFodch;
             cbbITFodch.SelectedValuePath = "indeks";
         }
@@ -269,47 +269,47 @@ namespace ecoplastol
         private void UstawTrace()
         {
             // wczytuje parametry do cbb dla kodu Traceability
-            listTraceZnaki1 = frmWyroby_db.GetParams("TRACEABILITY", "ZNAK");
+            listTraceZnaki1 = frmWyroby_db.PobierzTraceZnak();
             cbbTraceZnak1.ItemsSource = listTraceZnaki1;
             cbbTraceZnak1.SelectedValuePath = "indeks";
 
-            listTraceZnaki2 = frmWyroby_db.GetParams("TRACEABILITY", "ZNAK");
+            listTraceZnaki2 = frmWyroby_db.PobierzTraceZnak();
             cbbTraceZnak2.ItemsSource = listTraceZnaki2;
             cbbTraceZnak2.SelectedValuePath = "indeks";
 
-            listTraceKategorie = frmWyroby_db.GetParams("TRACEABILITY", "KATEGORIA");
+            listTraceKategorie = frmWyroby_db.PobierzTraceKategorie();
             cbbTraceKategoria.ItemsSource = listTraceKategorie;
             cbbTraceKategoria.SelectedValuePath = "indeks";
 
-            listTraceSmin = frmWyroby_db.GetParams("TRACEABILITY", "SR");
+            listTraceSmin = frmWyroby_db.PobierzTraceSr();
             cbbTraceSmin.ItemsSource = listTraceSmin;
             cbbTraceSmin.SelectedValuePath = "indeks";
 
-            listTraceSmax = frmWyroby_db.GetParams("TRACEABILITY", "SR");
+            listTraceSmax = frmWyroby_db.PobierzTraceSr();
             cbbTraceSmax.ItemsSource = listTraceSmax;
             cbbTraceSmax.SelectedValuePath = "indeks";
 
-            listTraceZaklad = frmWyroby_db.GetParams("TRACEABILITY", "PRODUCENT");
-            cbbTraceProducent.ItemsSource = listTraceZaklad;
+            listTraceProducent = frmWyroby_db.PobierzTraceProducent();
+            cbbTraceProducent.ItemsSource = listTraceProducent;
             cbbTraceProducent.SelectedValuePath = "indeks";
 
-            listTraceSDR = frmWyroby_db.GetParams("TRACEABILITY", "SDR");
+            listTraceSDR = frmWyroby_db.PobierzTraceSdr();
             cbbTraceSDR.ItemsSource = listTraceSDR;
             cbbTraceSDR.SelectedValuePath = "indeks";
 
-            listTracePEm = frmWyroby_db.GetParams("TRACEABILITY", "PE_MIESZANKA");
+            listTracePEm = frmWyroby_db.PobierzTracePem();
             cbbTracePEm.ItemsSource = listTracePEm;
             cbbTracePEm.SelectedValuePath = "indeks";
 
-            listTraceMaterial = frmWyroby_db.GetParams("TRACEABILITY", "MATERIAL");
+            listTraceMaterial = frmWyroby_db.PobierzTraceMaterial();
             cbbTraceMaterial.ItemsSource = listTraceMaterial;
             cbbTraceMaterial.SelectedValuePath = "indeks";
 
-            listTracePEo = frmWyroby_db.GetParams("TRACEABILITY", "PE_OZNACZENIE");
+            listTracePEo = frmWyroby_db.PobierzTracePeo();
             cbbTracePEo.ItemsSource = listTracePEo;
             cbbTracePEo.SelectedValuePath = "indeks";
 
-            listTraceMFR = frmWyroby_db.GetParams("TRACEABILITY", "MFR");
+            listTraceMFR = frmWyroby_db.PobierzTraceMfr();
             cbbTraceMFR.ItemsSource = listTraceMFR;
             cbbTraceMFR.SelectedValuePath = "indeks";
         }
@@ -596,7 +596,7 @@ namespace ecoplastol
         {
             //if (cbbITFKategoria.SelectedIndex > 0)
             {
-                var item = cbbITFKategoria.SelectedItem as parametry;
+                var item = cbbITFKategoria.SelectedItem as itf_kategoria;
 
                 //zabezpieczenie jak wybierze się pierwszą, pustą pozycję
                 if (item.wartosc != "") { kodITF.kategoria = item.wartosc; } else { kodITF.kategoria = "00"; }
@@ -608,7 +608,7 @@ namespace ecoplastol
 
         private void CbbITFZnak1_DropDownClosed(object sender, EventArgs e)
         {
-            var item = cbbITFZnak1.SelectedItem as parametry;
+            var item = cbbITFZnak1.SelectedItem as itf_znak;
             //zabezpieczenie jak wybierze się pierwszą, pustą pozycję
             if (item.parametr != "") { kodITF.znak1 = item.parametr; } else { kodITF.znak1 = "00"; }
             
@@ -618,7 +618,7 @@ namespace ecoplastol
 
         private void CbbITFZnak2_DropDownClosed(object sender, EventArgs e)
         {
-            var item = cbbITFZnak2.SelectedItem as parametry;
+            var item = cbbITFZnak2.SelectedItem as itf_znak;
             //zabezpieczenie jak wybierze się pierwszą, pustą pozycję
             if (item.parametr != "") { kodITF.znak2 = item.parametr; } else { kodITF.znak2 = "00"; }
             kodITF.GenerujKody();
@@ -737,7 +737,7 @@ namespace ecoplastol
 
         private void CbbITFICC_DropDownClosed(object sender, EventArgs e)
         {
-            var item = cbbITFICC.SelectedItem as parametry;
+            var item = cbbITFICC.SelectedItem as itf_icc;
             if (item.parametr == "3")
             {
                 cbbITFCC1.IsEnabled = true;
@@ -761,7 +761,7 @@ namespace ecoplastol
 
         private void CbbITFCC1_DropDownClosed(object sender, EventArgs e)
         {
-            var item = cbbITFCC1.SelectedItem as parametry;
+            var item = cbbITFCC1.SelectedItem as itf_cc;
 
             //zabezpieczenie jak wybierze się pierwszą, pustą pozycję
             if (item.parametr != "") { kodITF.cc1 = item.parametr; } else { kodITF.cc1 = "0"; }
@@ -772,7 +772,7 @@ namespace ecoplastol
 
         private void CbbITFCC2_DropDownClosed(object sender, EventArgs e)
         {
-            var item = cbbITFCC2.SelectedItem as parametry;
+            var item = cbbITFCC2.SelectedItem as itf_cc;
 
             //zabezpieczenie jak wybierze się pierwszą, pustą pozycję
             if (item.parametr != "") { kodITF.cc2 = item.parametr; } else { kodITF.cc2 = "0"; }
@@ -783,7 +783,7 @@ namespace ecoplastol
 
         private void CbbITFsmin_DropDownClosed(object sender, EventArgs e)
         {
-            var item = cbbITFsmin.SelectedItem as parametry;
+            var item = cbbITFsmin.SelectedItem as itf_sr;
 
             //zabezpieczenie jak wybierze się pierwszą, pustą pozycję
             if (item.parametr != "")
@@ -802,7 +802,7 @@ namespace ecoplastol
 
         private void CbbITFsmax_DropDownClosed(object sender, EventArgs e)
         {
-            var item = cbbITFsmax.SelectedItem as parametry;
+            var item = cbbITFsmax.SelectedItem as itf_sr;
 
             //zabezpieczenie jak wybierze się pierwszą, pustą pozycję
             if (item.parametr != "")
@@ -822,7 +822,7 @@ namespace ecoplastol
 
         private void CbbITFtrn_DropDownClosed(object sender, EventArgs e)
         {
-            var item = cbbITFtrn.SelectedItem as parametry;
+            var item = cbbITFtrn.SelectedItem as itf_trn;
             
             //zabezpieczenie jak wybierze się pierwszą, pustą pozycję
             if (item.parametr != "") { kodITF.trn = item.parametr; } else { kodITF.trn = "0"; }
@@ -833,7 +833,7 @@ namespace ecoplastol
 
         private void CbbITFodch_DropDownClosed(object sender, EventArgs e)
         {
-            var item = cbbITFodch.SelectedItem as parametry;
+            var item = cbbITFodch.SelectedItem as itf_odch;
 
             //zabezpieczenie jak wybierze się pierwszą, pustą pozycję
             if (item.parametr != "") { kodITF.odch = item.parametr; } else { kodITF.odch = "0"; }
@@ -980,7 +980,7 @@ namespace ecoplastol
 
         private void CbbTraceZnak1_DropDownClosed(object sender, EventArgs e)
         {
-            var item = cbbTraceZnak1.SelectedItem as parametry;
+            var item = cbbTraceZnak1.SelectedItem as trace_znak;
 
             //zabezpieczenie jak wybierze się pierwszą, pustą pozycję
             if (item.parametr != "") { kodTrace.znak1 = item.parametr; } else { kodTrace.znak1 = "00"; }
@@ -991,7 +991,7 @@ namespace ecoplastol
 
         private void CbbTraceZnak2_DropDownClosed(object sender, EventArgs e)
         {
-            var item = cbbTraceZnak2.SelectedItem as parametry;
+            var item = cbbTraceZnak2.SelectedItem as trace_znak;
 
             //zabezpieczenie jak wybierze się pierwszą, pustą pozycję
             if (item.parametr != "") { kodTrace.znak2 = item.parametr; } else { kodTrace.znak2 = "00"; }
@@ -1002,7 +1002,7 @@ namespace ecoplastol
 
         private void CbbTraceKategoria_DropDownClosed(object sender, EventArgs e)
         {
-            var item = cbbTraceKategoria.SelectedItem as parametry;
+            var item = cbbTraceKategoria.SelectedItem as trace_kategoria;
 
             //zabezpieczenie jak wybierze się pierwszą, pustą pozycję
             if (item.parametr != "") { kodTrace.kategoria = item.parametr; } else { kodTrace.kategoria = "00"; }
@@ -1013,7 +1013,7 @@ namespace ecoplastol
 
         private void CbbTraceSmin_DropDownClosed(object sender, EventArgs e)
         {
-            var item = cbbTraceSmin.SelectedItem as parametry;
+            var item = cbbTraceSmin.SelectedItem as trace_sr;
             
             //zabezpieczenie jak wybierze się pierwszą, pustą pozycję
             if (item.parametr != "")
@@ -1032,7 +1032,7 @@ namespace ecoplastol
 
         private void CbbTraceSmax_DropDownClosed(object sender, EventArgs e)
         {
-            var item = cbbTraceSmax.SelectedItem as parametry;
+            var item = cbbTraceSmax.SelectedItem as trace_sr;
 
             //zabezpieczenie jak wybierze się pierwszą, pustą pozycję
             if (item.parametr != "")
@@ -1052,7 +1052,7 @@ namespace ecoplastol
 
         private void CbbTraceProducent_DropDownClosed(object sender, EventArgs e)
         {
-            var item = cbbTraceProducent.SelectedItem as parametry;
+            var item = cbbTraceProducent.SelectedItem as trace_producent;
 
             //zabezpieczenie jak wybierze się pierwszą, pustą pozycję
             if (item.parametr != "") { kodTrace.producent = item.parametr; } else { kodTrace.producent = "00"; }
@@ -1063,7 +1063,7 @@ namespace ecoplastol
 
         private void CbbTraceSDR_DropDownClosed(object sender, EventArgs e)
         {
-            var item = cbbTraceSDR.SelectedItem as parametry;
+            var item = cbbTraceSDR.SelectedItem as trace_sdr;
 
             //zabezpieczenie jak wybierze się pierwszą, pustą pozycję
             if (item.parametr != "") { kodTrace.sdr = item.parametr; } else { kodTrace.sdr = "0"; }
@@ -1074,7 +1074,7 @@ namespace ecoplastol
 
         private void CbbTracePEm_DropDownClosed(object sender, EventArgs e)
         {
-            var item = cbbTracePEm.SelectedItem as parametry;
+            var item = cbbTracePEm.SelectedItem as trace_pe_m;
 
             //zabezpieczenie jak wybierze się pierwszą, pustą pozycję
             if (item.wartosc != "") { kodTrace.pem = item.wartosc; } else { kodTrace.pem = "0000"; }
@@ -1085,7 +1085,7 @@ namespace ecoplastol
 
         private void CbbTraceMaterial_DropDownClosed(object sender, EventArgs e)
         {
-            var item = cbbTraceMaterial.SelectedItem as parametry;
+            var item = cbbTraceMaterial.SelectedItem as trace_material;
 
             //zabezpieczenie jak wybierze się pierwszą, pustą pozycję
             if (item.parametr != "") { kodTrace.material = item.parametr; } else { kodTrace.material = "0"; }
@@ -1096,7 +1096,7 @@ namespace ecoplastol
 
         private void CbbTracePEo_DropDownClosed(object sender, EventArgs e)
         {
-            var item = cbbTracePEo.SelectedItem as parametry;
+            var item = cbbTracePEo.SelectedItem as trace_pe_o;
 
             //zabezpieczenie jak wybierze się pierwszą, pustą pozycję
             if (item.parametr != "") { kodTrace.peo = item.parametr; } else { kodTrace.peo = "0"; }
@@ -1107,7 +1107,7 @@ namespace ecoplastol
 
         private void CbbTraceMFR_DropDownClosed(object sender, EventArgs e)
         {
-            var item = cbbTraceMFR.SelectedItem as parametry;
+            var item = cbbTraceMFR.SelectedItem as trace_mfr;
 
             //zabezpieczenie jak wybierze się pierwszą, pustą pozycję
             if (item.parametr != "") { kodTrace.mfr = item.parametr; } else { kodTrace.mfr = "0"; }

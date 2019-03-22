@@ -40,15 +40,7 @@ namespace ecoplastol
                 case 1:
                     listP = frmParametry_db.GetParameters("SIEC");
                     break;
-                case 2:
-                    listP = frmParametry_db.GetParameters("ITF");
-                    break;
-                case 3:
-                    listP = frmParametry_db.GetParameters("TRACEABILITY");
-                    break;
-                case 4:
-                    listP = frmParametry_db.GetParameters("WYROB");
-                    break;
+
             }
             dgParametry.ItemsSource = listP;
 
@@ -147,15 +139,6 @@ namespace ecoplastol
                     break;
                 case 1:
                     txtKategoria.Text = "SIEC";
-                    break;
-                case 2:
-                    txtKategoria.Text = "ITF";
-                    break;
-                case 3:
-                    txtKategoria.Text = "TRACEABILITY";
-                    break;
-                case 4:
-                    txtKategoria.Text = "WYROB";
                     break;
             }
             txtGrupa.Text = "";

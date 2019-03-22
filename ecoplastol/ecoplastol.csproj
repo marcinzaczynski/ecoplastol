@@ -94,6 +94,30 @@
     <Compile Include="frmPlanowanie.xaml.cs">
       <DependentUpon>frmPlanowanie.xaml</DependentUpon>
     </Compile>
+    <Compile Include="itf_cc.cs">
+      <DependentUpon>PGEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="itf_icc.cs">
+      <DependentUpon>PGEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="itf_kategoria.cs">
+      <DependentUpon>PGEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="itf_odch.cs">
+      <DependentUpon>PGEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="itf_sr.cs">
+      <DependentUpon>PGEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="itf_trn.cs">
+      <DependentUpon>PGEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="itf_znak.cs">
+      <DependentUpon>PGEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="MaszynaZlecenie.xaml.cs">
+      <DependentUpon>MaszynaZlecenie.xaml</DependentUpon>
+    </Compile>
     <Compile Include="parametry.cs">
       <DependentUpon>PGEntity.tt</DependentUpon>
     </Compile>
@@ -102,10 +126,49 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>PGEntity.tt</DependentUpon>
     </Compile>
+    <Compile Include="trace_kategoria.cs">
+      <DependentUpon>PGEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="trace_material.cs">
+      <DependentUpon>PGEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="trace_mfr.cs">
+      <DependentUpon>PGEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="trace_pe_m.cs">
+      <DependentUpon>PGEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="trace_pe_o.cs">
+      <DependentUpon>PGEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="trace_producent.cs">
+      <DependentUpon>PGEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="trace_sdr.cs">
+      <DependentUpon>PGEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="trace_sr.cs">
+      <DependentUpon>PGEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="trace_znak.cs">
+      <DependentUpon>PGEntity.tt</DependentUpon>
+    </Compile>
     <Compile Include="uzytkownicy.cs">
       <DependentUpon>PGEntity.tt</DependentUpon>
     </Compile>
     <Compile Include="wyroby.cs">
+      <DependentUpon>PGEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="wyroby_druty.cs">
+      <DependentUpon>PGEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="wyroby_typ.cs">
+      <DependentUpon>PGEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="wyroby_zakres_sdr.cs">
+      <DependentUpon>PGEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="wyroby_zast_zaworu.cs">
       <DependentUpon>PGEntity.tt</DependentUpon>
     </Compile>
     <Page Include="frmLogin.xaml">
@@ -142,6 +205,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="frmWyroby.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MaszynaZlecenie.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

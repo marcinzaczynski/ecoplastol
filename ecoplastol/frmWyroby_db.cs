@@ -30,6 +30,229 @@ namespace ecoplastol
                 return listP;
             }
         }
+
+        public static List<wyroby_druty> PobierzDruty()
+        {
+            using (var db = new ecoplastolEntities())
+            {
+                var list = (from w in db.wyroby_druty
+                             orderby w.indeks ascending
+                             select w).ToList();
+                return list;
+            }
+        }
+
+        public static List<wyroby_zast_zaworu> PobierzZastZaworu()
+        {
+            using (var db = new ecoplastolEntities())
+            {
+                var list = (from w in db.wyroby_zast_zaworu
+                            orderby w.indeks ascending
+                            select w).ToList();
+                return list;
+            }
+        }
+
+        public static List<wyroby_zakres_sdr> PobierzZakresSDR()
+        {
+            using (var db = new ecoplastolEntities())
+            {
+                var list = (from w in db.wyroby_zakres_sdr
+                            orderby w.indeks ascending
+                            select w).ToList();
+                return list;
+            }
+        }
+
+        public static List<wyroby_typ> PobierzTypy()
+        {
+            using (var db = new ecoplastolEntities())
+            {
+                var list = (from w in db.wyroby_typ
+                            orderby w.indeks ascending
+                            select w).ToList();
+                return list;
+            }
+        }
+
+        public static List<itf_kategoria> PobierzITFKategorie()
+        {
+            using (var db = new ecoplastolEntities())
+            {
+                var list = (from w in db.itf_kategoria
+                            orderby w.indeks ascending
+                            select w).ToList();
+                return list;
+            }
+        }
+
+        public static List<itf_znak> PobierzITFZnaki()
+        {
+            using (var db = new ecoplastolEntities())
+            {
+                var list = (from w in db.itf_znak
+                            orderby w.indeks ascending
+                            select w).ToList();
+                return list;
+            }
+        }
+
+        public static List<itf_icc> PobierzITFicc()
+        {
+            using (var db = new ecoplastolEntities())
+            {
+                var list = (from w in db.itf_icc
+                            orderby w.indeks ascending
+                            select w).ToList();
+                return list;
+            }
+        }
+
+        public static List<itf_cc> PobierzITFcc()
+        {
+            using (var db = new ecoplastolEntities())
+            {
+                var list = (from w in db.itf_cc
+                            orderby w.indeks ascending
+                            select w).ToList();
+                return list;
+            }
+        }
+
+        public static List<itf_sr> PobierzITFsr()
+        {
+            using (var db = new ecoplastolEntities())
+            {
+                var list = (from w in db.itf_sr
+                            orderby w.indeks ascending
+                            select w).ToList();
+                return list;
+            }
+        }
+
+        public static List<itf_trn> PobierzITFtrn()
+        {
+            using (var db = new ecoplastolEntities())
+            {
+                var list = (from w in db.itf_trn
+                            orderby w.indeks ascending
+                            select w).ToList();
+                return list;
+            }
+        }
+
+        public static List<itf_odch> PobierzITFodch()
+        {
+            using (var db = new ecoplastolEntities())
+            {
+                var list = (from w in db.itf_odch
+                            orderby w.indeks ascending
+                            select w).ToList();
+                return list;
+            }
+        }
+
+        public static List<trace_znak> PobierzTraceZnak()
+        {
+            using (var db = new ecoplastolEntities())
+            {
+                var list = (from w in db.trace_znak
+                            orderby w.indeks ascending
+                            select w).ToList();
+                return list;
+            }
+        }
+
+        public static List<trace_kategoria> PobierzTraceKategorie()
+        {
+            using (var db = new ecoplastolEntities())
+            {
+                var list = (from w in db.trace_kategoria
+                            orderby w.indeks ascending
+                            select w).ToList();
+                return list;
+            }
+        }
+
+        public static List<trace_sr> PobierzTraceSr()
+        {
+            using (var db = new ecoplastolEntities())
+            {
+                var list = (from w in db.trace_sr
+                            orderby w.indeks ascending
+                            select w).ToList();
+                return list;
+            }
+        }
+
+        public static List<trace_producent> PobierzTraceProducent()
+        {
+            using (var db = new ecoplastolEntities())
+            {
+                var list = (from w in db.trace_producent
+                            orderby w.indeks ascending
+                            select w).ToList();
+                return list;
+            }
+        }
+
+        public static List<trace_sdr> PobierzTraceSdr()
+        {
+            using (var db = new ecoplastolEntities())
+            {
+                var list = (from w in db.trace_sdr
+                            orderby w.indeks ascending
+                            select w).ToList();
+                return list;
+            }
+        }
+
+        public static List<trace_pe_m> PobierzTracePem()
+        {
+            using (var db = new ecoplastolEntities())
+            {
+                var list = (from w in db.trace_pe_m
+                            orderby w.indeks ascending
+                            select w).ToList();
+                return list;
+            }
+        }
+
+
+
+        public static List<trace_material> PobierzTraceMaterial()
+        {
+            using (var db = new ecoplastolEntities())
+            {
+                var list = (from w in db.trace_material
+                            orderby w.indeks ascending
+                            select w).ToList();
+                return list;
+            }
+        }
+
+        public static List<trace_pe_o> PobierzTracePeo()
+        {
+            using (var db = new ecoplastolEntities())
+            {
+                var list = (from w in db.trace_pe_o
+                            orderby w.indeks ascending
+                            select w).ToList();
+                return list;
+            }
+        }
+
+        public static List<trace_mfr> PobierzTraceMfr()
+        {
+            using (var db = new ecoplastolEntities())
+            {
+                var list = (from w in db.trace_mfr
+                            orderby w.indeks ascending
+                            select w).ToList();
+                return list;
+            }
+        }
+
         public static void AddProduct(wyroby _nowyWyrob)
         {
             using (var db = new ecoplastolEntities())
