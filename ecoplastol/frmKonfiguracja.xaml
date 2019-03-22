@@ -1,0 +1,124 @@
+﻿<Window x:Class="ecoplastol.frmKonfiguracja"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ecoplastol"
+        mc:Ignorable="d"
+        Title="Konfiguracja" Height="680" Width="1024">
+    <Window.Resources>
+
+        <ResourceDictionary>
+
+            <Style TargetType="Button" x:Key="btnGradientOrange">
+                <Setter Property="Background">
+                    <Setter.Value>
+                        <LinearGradientBrush StartPoint="1,0" EndPoint="1,1">
+                            <GradientStop Color="Orange" Offset="1"/>
+                            <GradientStop Color="White" Offset="0.01"/>
+                        </LinearGradientBrush>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+            <Style TargetType="Button" x:Key="btnGradientLightGreen">
+                <Setter Property="Background">
+                    <Setter.Value>
+                        <LinearGradientBrush StartPoint="1,0" EndPoint="1,1">
+                            <GradientStop Color="LightGreen" Offset="1"/>
+                            <GradientStop Color="White" Offset="0.01"/>
+                        </LinearGradientBrush>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+            <Style TargetType="Button" x:Key="btnGradientRed">
+                <Setter Property="Background">
+                    <Setter.Value>
+                        <LinearGradientBrush StartPoint="1,0" EndPoint="1,1">
+                            <GradientStop Color="OrangeRed" Offset="1"/>
+                            <GradientStop Color="White" Offset="0.01"/>
+                        </LinearGradientBrush>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+        </ResourceDictionary>
+    </Window.Resources>
+    <Grid ShowGridLines="False">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="150"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="140"/>
+            <RowDefinition Height="50"/>
+        </Grid.RowDefinitions>
+        <TabControl Grid.Row="0" FontSize="18" Grid.ColumnSpan="2">
+            <TabItem Header="ITF">
+                <Grid Name="gridITF">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="40"/>
+                        <RowDefinition Height="40"/>
+                        <RowDefinition Height="40"/>
+                        <RowDefinition Height="40"/>
+                        <RowDefinition Height="40"/>
+                        <RowDefinition Height="40"/>
+                        <RowDefinition Height="40"/>
+                        <RowDefinition Height="*"/>
+
+
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="150"/>
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <Button Grid.Row="0" Grid.Column="0" FontSize="14" Padding="10,0,0,0" HorizontalContentAlignment="Left" Style="{StaticResource btnGradientOrange}" Name="btnITFkategoria" Content="Kategorie" />
+                    <Button Grid.Row="1" Grid.Column="0" FontSize="14" Padding="10,0,0,0" HorizontalContentAlignment="Left" Style="{StaticResource btnGradientOrange}" Name="btnITFznaki" Content="Litery" />
+                    <Button Grid.Row="2" Grid.Column="0" FontSize="14" Padding="10,0,0,0" HorizontalContentAlignment="Left" Style="{StaticResource btnGradientOrange}" Name="btnITFicc" Content="Indykacja &#xD;&#xA;czasu chłodzenia" />
+                    <Button Grid.Row="3" Grid.Column="0" FontSize="14" Padding="10,0,0,0" HorizontalContentAlignment="Left" Style="{StaticResource btnGradientOrange}" Name="btnITFcc" Content="Czasy chłodzenia" />
+                    <Button Grid.Row="4" Grid.Column="0" FontSize="14" Padding="10,0,0,0" HorizontalContentAlignment="Left" Style="{StaticResource btnGradientOrange}" Name="btnITFsr" Content="Średnice" />
+                    <Button Grid.Row="5" Grid.Column="0" FontSize="14" Padding="10,0,0,0" HorizontalContentAlignment="Left" Style="{StaticResource btnGradientOrange}" Name="btnITFtrn" Content="Typy regulacji&#xD;&#xA;napięcia" />
+                    <Button Grid.Row="6" Grid.Column="0" FontSize="14" Padding="10,0,0,0" HorizontalContentAlignment="Left" Style="{StaticResource btnGradientOrange}" Name="btnITFodch" Content="Odchylenia" />
+
+                </Grid>
+            </TabItem>
+            <TabItem Header="TRACEABILITY">
+                <Label Content="rrrr"/>
+            </TabItem>
+            <TabItem Header="WYROBY" />
+        </TabControl>
+        <Border Grid.Row="1" Grid.ColumnSpan="2" Background="LightSteelBlue"/>
+        <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal" Grid.ColumnSpan="2">
+            <Button FontSize="16" Style="{StaticResource btnGradientLightGreen}" Width="120" Name="btnDodaj" Content="DODAJ" />
+            <Button FontSize="16" Style="{StaticResource btnGradientLightGreen}" Width="120" Name="btnKlonuj" Content="KLONUJ" />
+            <Button FontSize="16" Style="{StaticResource btnGradientLightGreen}" Width="120" Name="btnPopraw" Content="POPRAW" />
+            <Button FontSize="16" Style="{StaticResource btnGradientRed}" Width="120" Name="btnUsun" Content="USUŃ" />
+            <Button FontSize="16" Style="{StaticResource btnGradientRed}" Width="120" Name="btnAnuluj" Content="ANULUJ" />
+            <Button FontSize="16" Style="{StaticResource btnGradientLightGreen}" Width="120" Name="btnZatwierdz" Content="ZATWIERDŹ" />
+        </StackPanel>
+        <Border Grid.Row="2" Grid.ColumnSpan="2" Background="LightSteelBlue"/>
+        <Grid Grid.Row="2" Grid.Column="1" Margin="2">
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="110"/>
+                <ColumnDefinition Width="600"/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Label Grid.Row="0" Grid.Column="0" FontSize="18" Content="Indeks :"/>
+            <Label Grid.Row="1" Grid.Column="0" FontSize="18" Content="Parametr :"/>
+            <Label Grid.Row="2" Grid.Column="0" FontSize="18" Content="Wartość :"/>
+            <Label Grid.Row="3" Grid.Column="0" FontSize="18" Content="Opis :"/>
+            <TextBox Grid.Row="0" Grid.Column="1" FontSize="18" VerticalContentAlignment="Center" Text="{Binding indeks, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Name="txtIndeks"/>
+            <TextBox Grid.Row="1" Grid.Column="1" FontSize="18" VerticalContentAlignment="Center" Text="{Binding parametr, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Name="txtParametr"/>
+            <TextBox Grid.Row="2" Grid.Column="1" FontSize="18" VerticalContentAlignment="Center" Text="{Binding wartosc, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Name="txtWartosc"/>
+            <TextBox Grid.Row="3" Grid.Column="1" FontSize="18" VerticalContentAlignment="Center" Text="{Binding opis, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Name="txtOpis"/>
+        </Grid>
+        
+        <Button Grid.Row="3" Grid.ColumnSpan="2" Content="Z A M K N I J" FontSize="20"/>
+    </Grid>
+</Window>

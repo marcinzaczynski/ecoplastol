@@ -5,8 +5,14 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:ecoplastol"
              mc:Ignorable="d" 
-             d:DesignHeight="30" d:DesignWidth="200">
+             Width="200" Height="22">
+    <Border BorderBrush="Red" BorderThickness="2">
     <Grid Background="White">
-
+            <StackPanel Orientation="Horizontal">
+                <Label FontSize="10" Padding="0" Content="Dupa" Name="label1"></Label>
+                <Button Width="70" Click="Button_Click">  Cos tam</Button>
+            </StackPanel>
+            
     </Grid>
+    </Border>
 </UserControl>

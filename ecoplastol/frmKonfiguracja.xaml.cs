@@ -10,26 +10,18 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace ecoplastol
 {
     /// <summary>
-    /// Interaction logic for MaszynaZlecenie.xaml
+    /// Interaction logic for frmParametry2.xaml
     /// </summary>
-    public partial class MaszynaZlecenie : UserControl
+    public partial class frmKonfiguracja : Window
     {
-        public MaszynaZlecenie(string labelText)
+        public frmKonfiguracja()
         {
             InitializeComponent();
-
-            label1.Content = labelText;
-        }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            MessageBox.Show(label1.Content.ToString());
         }
     }
 }

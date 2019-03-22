@@ -91,6 +91,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="frmKonfiguracja.xaml.cs">
+      <DependentUpon>frmKonfiguracja.xaml</DependentUpon>
+    </Compile>
     <Compile Include="frmPlanowanie.xaml.cs">
       <DependentUpon>frmPlanowanie.xaml</DependentUpon>
     </Compile>
@@ -193,6 +196,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="frmParametry.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="frmKonfiguracja.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

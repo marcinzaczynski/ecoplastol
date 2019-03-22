@@ -19,7 +19,8 @@ namespace ecoplastol
     /// </summary>
     public partial class frmPlanowanie : Window
     {
-        
+        int i = 0;
+
         public frmPlanowanie()
         {
             InitializeComponent();
@@ -27,7 +28,13 @@ namespace ecoplastol
 
         private void BtnDodajM1_Click(object sender, RoutedEventArgs e)
         {
-            gridMaszyny.RowDefinitions[0].Height = new GridLength(20);
+            //gridMaszyny.RowDefinitions[0].Height = new GridLength(200);
+
+            MaszynaZlecenie mz = new MaszynaZlecenie($"Komponent {i}");
+
+            ParentGrid.RowDefinitions.Add(new RowDefinition());
+            ParentGrid.Children.Add(mz);
+            Grid.SetRow(mz, i++);
         }
     }
 }

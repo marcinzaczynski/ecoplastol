@@ -41,5 +41,6 @@
                 Height="40"
                 Padding="10,0,0,0"
                 FontSize="24" Click="BtnPlanowanie_Click"/>
+        <Button Content="KONFIGURACJA" HorizontalAlignment="Left" Margin="257,38,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click"/>
     </Grid>
 </Window>

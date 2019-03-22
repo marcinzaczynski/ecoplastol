@@ -218,8 +218,6 @@ namespace ecoplastol
             }
         }
 
-
-
         public static List<trace_material> PobierzTraceMaterial()
         {
             using (var db = new ecoplastolEntities())
