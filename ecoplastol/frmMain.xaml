@@ -31,5 +31,15 @@
             Height="40" 
             Padding="10,0,0,0"
             FontSize="24"/>
+        <Button Name="btnPlanowanie" 
+                Content="PLANOWANIE" 
+                HorizontalContentAlignment="Left"
+                HorizontalAlignment="Left" 
+                Margin="27,128,0,0" 
+                VerticalAlignment="Top" 
+                Width="200"
+                Height="40"
+                Padding="10,0,0,0"
+                FontSize="24" Click="BtnPlanowanie_Click"/>
     </Grid>
 </Window>

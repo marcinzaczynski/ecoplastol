@@ -46,5 +46,11 @@ namespace ecoplastol
             ////DialogResult result = new DialogResult();
             frmParametry.ShowDialog();
         }
+
+        private void BtnPlanowanie_Click(object sender, RoutedEventArgs e)
+        {
+            frmPlanowanie frmPlanowanie = new frmPlanowanie();
+            frmPlanowanie.ShowDialog();
+        }
     }
 }
