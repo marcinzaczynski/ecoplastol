@@ -34,11 +34,9 @@ namespace ecoplastol
         public virtual DbSet<wyroby_zast_zaworu> wyroby_zast_zaworu { get; set; }
         public virtual DbSet<itf_cc> itf_cc { get; set; }
         public virtual DbSet<itf_icc> itf_icc { get; set; }
-        public virtual DbSet<itf_kategoria> itf_kategoria { get; set; }
         public virtual DbSet<itf_odch> itf_odch { get; set; }
         public virtual DbSet<itf_sr> itf_sr { get; set; }
         public virtual DbSet<itf_trn> itf_trn { get; set; }
-        public virtual DbSet<itf_znak> itf_znak { get; set; }
         public virtual DbSet<trace_kategoria> trace_kategoria { get; set; }
         public virtual DbSet<trace_material> trace_material { get; set; }
         public virtual DbSet<trace_mfr> trace_mfr { get; set; }
@@ -48,5 +46,7 @@ namespace ecoplastol
         public virtual DbSet<trace_sdr> trace_sdr { get; set; }
         public virtual DbSet<trace_sr> trace_sr { get; set; }
         public virtual DbSet<trace_znak> trace_znak { get; set; }
+        public virtual DbSet<itf_kategorie> itf_kategorie { get; set; }
+        public virtual DbSet<itf_litery> itf_litery { get; set; }
     }
 }

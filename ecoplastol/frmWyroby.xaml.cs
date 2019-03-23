@@ -33,9 +33,9 @@ namespace ecoplastol
         private List<wyroby_zast_zaworu> listWyrobZastZaworu;
         private List<wyroby_druty> listWyrobRodzajDrutu;
 
-        private List<itf_kategoria> listITFKategorie;
-        private List<itf_znak> listITFZnaki1;
-        private List<itf_znak> listITFZnaki2;
+        private List<itf_kategorie> listITFKategorie;
+        private List<itf_litery> listITFZnaki1;
+        private List<itf_litery> listITFZnaki2;
         private List<itf_icc> listITFicc;
         private List<itf_cc> listITFcc1;
         private List<itf_cc> listITFcc2;
@@ -596,7 +596,7 @@ namespace ecoplastol
         {
             //if (cbbITFKategoria.SelectedIndex > 0)
             {
-                var item = cbbITFKategoria.SelectedItem as itf_kategoria;
+                var item = cbbITFKategoria.SelectedItem as itf_kategorie;
 
                 //zabezpieczenie jak wybierze się pierwszą, pustą pozycję
                 if (item.wartosc != "") { kodITF.kategoria = item.wartosc; } else { kodITF.kategoria = "00"; }
@@ -608,7 +608,7 @@ namespace ecoplastol
 
         private void CbbITFZnak1_DropDownClosed(object sender, EventArgs e)
         {
-            var item = cbbITFZnak1.SelectedItem as itf_znak;
+            var item = cbbITFZnak1.SelectedItem as itf_litery;
             //zabezpieczenie jak wybierze się pierwszą, pustą pozycję
             if (item.parametr != "") { kodITF.znak1 = item.parametr; } else { kodITF.znak1 = "00"; }
             
@@ -618,7 +618,7 @@ namespace ecoplastol
 
         private void CbbITFZnak2_DropDownClosed(object sender, EventArgs e)
         {
-            var item = cbbITFZnak2.SelectedItem as itf_znak;
+            var item = cbbITFZnak2.SelectedItem as itf_litery;
             //zabezpieczenie jak wybierze się pierwszą, pustą pozycję
             if (item.parametr != "") { kodITF.znak2 = item.parametr; } else { kodITF.znak2 = "00"; }
             kodITF.GenerujKody();

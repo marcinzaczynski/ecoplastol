@@ -25,7 +25,7 @@
                 <Grid Background="#FFE5E5E5"/>
             </TabItem>
         </TabControl>
-        <DataGrid x:Name="dgParametry" Grid.Row="2" Padding="3" AutoGenerateColumns="False" Grid.ColumnSpan="2" EnableRowVirtualization="True" ItemsSource="{Binding}" Margin="0,35,0,0"  RowDetailsVisibilityMode="VisibleWhenSelected" SelectionChanged="DgParametry_SelectionChanged" IsSynchronizedWithCurrentItem="True" CanUserDeleteRows="False" CanUserAddRows="False" IsReadOnly="True">
+        <DataGrid Grid.Row="2" Padding="3" x:Name="dgParametry"  AutoGenerateColumns="False" Grid.ColumnSpan="2" EnableRowVirtualization="True" ItemsSource="{Binding}" Margin="0,35,0,0"  RowDetailsVisibilityMode="VisibleWhenSelected" SelectionChanged="DgParametry_SelectionChanged" IsSynchronizedWithCurrentItem="True" CanUserDeleteRows="False" CanUserAddRows="False" IsReadOnly="True">
             <DataGrid.Columns>
                 <DataGridTextColumn x:Name="idColumn" Binding="{Binding id}" Header="id" Width="SizeToHeader" Visibility="Hidden"/>
                 <DataGridTextColumn x:Name="kategoriaColumn" Binding="{Binding kategoria}" Header="Kategoria" Width="100"/>

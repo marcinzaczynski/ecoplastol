@@ -94,6 +94,7 @@
     <Compile Include="frmKonfiguracja.xaml.cs">
       <DependentUpon>frmKonfiguracja.xaml</DependentUpon>
     </Compile>
+    <Compile Include="frmKonfiguracja_db.cs" />
     <Compile Include="frmPlanowanie.xaml.cs">
       <DependentUpon>frmPlanowanie.xaml</DependentUpon>
     </Compile>
@@ -103,7 +104,10 @@
     <Compile Include="itf_icc.cs">
       <DependentUpon>PGEntity.tt</DependentUpon>
     </Compile>
-    <Compile Include="itf_kategoria.cs">
+    <Compile Include="itf_kategorie.cs">
+      <DependentUpon>PGEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="itf_litery.cs">
       <DependentUpon>PGEntity.tt</DependentUpon>
     </Compile>
     <Compile Include="itf_odch.cs">
@@ -113,9 +117,6 @@
       <DependentUpon>PGEntity.tt</DependentUpon>
     </Compile>
     <Compile Include="itf_trn.cs">
-      <DependentUpon>PGEntity.tt</DependentUpon>
-    </Compile>
-    <Compile Include="itf_znak.cs">
       <DependentUpon>PGEntity.tt</DependentUpon>
     </Compile>
     <Compile Include="MaszynaZlecenie.xaml.cs">

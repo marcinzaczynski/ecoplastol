@@ -75,22 +75,22 @@ namespace ecoplastol
             }
         }
 
-        public static List<itf_kategoria> PobierzITFKategorie()
+        public static List<itf_kategorie> PobierzITFKategorie()
         {
             using (var db = new ecoplastolEntities())
             {
-                var list = (from w in db.itf_kategoria
+                var list = (from w in db.itf_kategorie
                             orderby w.indeks ascending
                             select w).ToList();
                 return list;
             }
         }
 
-        public static List<itf_znak> PobierzITFZnaki()
+        public static List<itf_litery> PobierzITFZnaki()
         {
             using (var db = new ecoplastolEntities())
             {
-                var list = (from w in db.itf_znak
+                var list = (from w in db.itf_litery
                             orderby w.indeks ascending
                             select w).ToList();
                 return list;

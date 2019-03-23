@@ -34,7 +34,7 @@
                 <Setter Property="Background">
                     <Setter.Value>
                         <LinearGradientBrush StartPoint="1,0" EndPoint="1,1">
-                            <GradientStop Color="OrangeRed" Offset="1"/>
+                            <GradientStop Color="#FFFF8D8D" Offset="1"/>
                             <GradientStop Color="White" Offset="0.01"/>
                         </LinearGradientBrush>
                     </Setter.Value>
@@ -49,11 +49,12 @@
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition/>
-            <RowDefinition Height="40"/>
+            <RowDefinition Height="30"/>
             <RowDefinition Height="140"/>
             <RowDefinition Height="50"/>
         </Grid.RowDefinitions>
-        <TabControl Grid.Row="0" FontSize="18" Grid.ColumnSpan="2">
+        
+        <TabControl Grid.Row="0" FontSize="18" Grid.ColumnSpan="2" Name="tabcontrol1">
             <TabItem Header="ITF">
                 <Grid Name="gridITF">
                     <Grid.RowDefinitions>
@@ -72,14 +73,27 @@
                         <ColumnDefinition Width="150"/>
                         <ColumnDefinition />
                     </Grid.ColumnDefinitions>
-                    <Button Grid.Row="0" Grid.Column="0" FontSize="14" Padding="10,0,0,0" HorizontalContentAlignment="Left" Style="{StaticResource btnGradientOrange}" Name="btnITFkategoria" Content="Kategorie" />
-                    <Button Grid.Row="1" Grid.Column="0" FontSize="14" Padding="10,0,0,0" HorizontalContentAlignment="Left" Style="{StaticResource btnGradientOrange}" Name="btnITFznaki" Content="Litery" />
-                    <Button Grid.Row="2" Grid.Column="0" FontSize="14" Padding="10,0,0,0" HorizontalContentAlignment="Left" Style="{StaticResource btnGradientOrange}" Name="btnITFicc" Content="Indykacja &#xD;&#xA;czasu chłodzenia" />
-                    <Button Grid.Row="3" Grid.Column="0" FontSize="14" Padding="10,0,0,0" HorizontalContentAlignment="Left" Style="{StaticResource btnGradientOrange}" Name="btnITFcc" Content="Czasy chłodzenia" />
-                    <Button Grid.Row="4" Grid.Column="0" FontSize="14" Padding="10,0,0,0" HorizontalContentAlignment="Left" Style="{StaticResource btnGradientOrange}" Name="btnITFsr" Content="Średnice" />
-                    <Button Grid.Row="5" Grid.Column="0" FontSize="14" Padding="10,0,0,0" HorizontalContentAlignment="Left" Style="{StaticResource btnGradientOrange}" Name="btnITFtrn" Content="Typy regulacji&#xD;&#xA;napięcia" />
-                    <Button Grid.Row="6" Grid.Column="0" FontSize="14" Padding="10,0,0,0" HorizontalContentAlignment="Left" Style="{StaticResource btnGradientOrange}" Name="btnITFodch" Content="Odchylenia" />
-
+                    <Border Grid.RowSpan="8" Grid.ColumnSpan="2" Background="#FFF0F0F0"/>
+                    <Button Grid.Row="0" Grid.Column="0" FontSize="14" Padding="10,0,0,0" HorizontalContentAlignment="Left" Style="{StaticResource btnGradientOrange}" Name="btnITFkategoria" Content="Kategorie" Click="BtnITFkategoria_Click" />
+                    <Button Grid.Row="1" Grid.Column="0" FontSize="14" Padding="10,0,0,0" HorizontalContentAlignment="Left" Style="{StaticResource btnGradientOrange}" Name="btnITFlitery" Content="Litery" Click="BtnITFlitery_Click" />
+                    <Button Grid.Row="2" Grid.Column="0" FontSize="14" Padding="10,0,0,0" HorizontalContentAlignment="Left" Style="{StaticResource btnGradientOrange}" Name="btnITFicc" Content="Indykacja &#xD;&#xA;czasu chłodzenia" Click="BtnITFicc_Click" />
+                    <Button Grid.Row="3" Grid.Column="0" FontSize="14" Padding="10,0,0,0" HorizontalContentAlignment="Left" Style="{StaticResource btnGradientOrange}" Name="btnITFcc" Content="Czasy chłodzenia" Click="BtnITFcc_Click" />
+                    <Button Grid.Row="4" Grid.Column="0" FontSize="14" Padding="10,0,0,0" HorizontalContentAlignment="Left" Style="{StaticResource btnGradientOrange}" Name="btnITFsr" Content="Średnice" Click="BtnITFsr_Click" />
+                    <Button Grid.Row="5" Grid.Column="0" FontSize="14" Padding="10,0,0,0" HorizontalContentAlignment="Left" Style="{StaticResource btnGradientOrange}" Name="btnITFtrn" Content="Typy regulacji&#xD;&#xA;napięcia" Click="BtnITFtrn_Click" />
+                    <Button Grid.Row="6" Grid.Column="0" FontSize="14" Padding="10,0,0,0" HorizontalContentAlignment="Left" Style="{StaticResource btnGradientOrange}" Name="btnITFodch" Content="Odchylenia" Click="BtnITFodch_Click" />
+                    <Label Name="lblITFinfo" Grid.Row="0" Grid.Column="1" Content="_" />
+                    <DataGrid Grid.Row="1" Grid.RowSpan="7" Grid.Column="1" Name="dgParametry"  AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" RowDetailsVisibilityMode="VisibleWhenSelected" SelectionChanged="DgParametry_SelectionChanged" IsSynchronizedWithCurrentItem="True" CanUserDeleteRows="False" CanUserAddRows="False" IsReadOnly="True">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn x:Name="indeksColumn" Binding="{Binding indeks}" Header="Indeks" Width="SizeToHeader"/>
+                            <DataGridTextColumn x:Name="parametrColumn" Binding="{Binding parametr}" Header="Parametr" Width="100"/>
+                            <DataGridTextColumn x:Name="wartoscColumn" Binding="{Binding wartosc}" Header="Wartość" Width="100"/>
+                            <DataGridTextColumn  x:Name="opisColumn" Binding="{Binding opis, TargetNullValue=''}" Header="Opis" Width="*"/>
+                            <DataGridTextColumn x:Name="opwColumn" Binding="{Binding opw}" Header="opw" Width="100"/>
+                            <DataGridTextColumn x:Name="czaswColumn" Binding="{Binding czasw, StringFormat=\{0:yyyy-MM-dd HH:mm\}}" Header="czasw" Width="150"/>
+                            <DataGridTextColumn x:Name="opmColumn" Binding="{Binding opm}" Header="opm" Width="100"/>
+                            <DataGridTextColumn x:Name="czasmColumn" Binding="{Binding czasm, StringFormat=\{0:yyyy-MM-dd HH:mm\}}" Header="czasm" Width="150"/>
+                        </DataGrid.Columns>
+                    </DataGrid>
                 </Grid>
             </TabItem>
             <TabItem Header="TRACEABILITY">
@@ -89,12 +103,12 @@
         </TabControl>
         <Border Grid.Row="1" Grid.ColumnSpan="2" Background="LightSteelBlue"/>
         <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal" Grid.ColumnSpan="2">
-            <Button FontSize="16" Style="{StaticResource btnGradientLightGreen}" Width="120" Name="btnDodaj" Content="DODAJ" />
-            <Button FontSize="16" Style="{StaticResource btnGradientLightGreen}" Width="120" Name="btnKlonuj" Content="KLONUJ" />
-            <Button FontSize="16" Style="{StaticResource btnGradientLightGreen}" Width="120" Name="btnPopraw" Content="POPRAW" />
+            <Button FontSize="16" Style="{StaticResource btnGradientLightGreen}" Width="120" Name="btnDodaj" Content="DODAJ" Click="BtnDodaj_Click" />
+            <Button FontSize="16" Style="{StaticResource btnGradientLightGreen}" Width="120" Name="btnKlonuj" Content="KLONUJ" Click="BtnKlonuj_Click" />
+            <Button FontSize="16" Style="{StaticResource btnGradientLightGreen}" Width="120" Name="btnPopraw" Content="POPRAW" Click="BtnPopraw_Click" />
             <Button FontSize="16" Style="{StaticResource btnGradientRed}" Width="120" Name="btnUsun" Content="USUŃ" />
-            <Button FontSize="16" Style="{StaticResource btnGradientRed}" Width="120" Name="btnAnuluj" Content="ANULUJ" />
-            <Button FontSize="16" Style="{StaticResource btnGradientLightGreen}" Width="120" Name="btnZatwierdz" Content="ZATWIERDŹ" />
+            <Button FontSize="16" Style="{StaticResource btnGradientRed}" Width="120" Name="btnAnuluj" Content="ANULUJ" Click="BtnAnuluj_Click" />
+            <Button FontSize="16" Style="{StaticResource btnGradientLightGreen}" Width="120" Name="btnZatwierdz" Content="ZATWIERDŹ" Click="BtnZatwierdz_Click" />
         </StackPanel>
         <Border Grid.Row="2" Grid.ColumnSpan="2" Background="LightSteelBlue"/>
         <Grid Grid.Row="2" Grid.Column="1" Margin="2">
@@ -113,12 +127,12 @@
             <Label Grid.Row="1" Grid.Column="0" FontSize="18" Content="Parametr :"/>
             <Label Grid.Row="2" Grid.Column="0" FontSize="18" Content="Wartość :"/>
             <Label Grid.Row="3" Grid.Column="0" FontSize="18" Content="Opis :"/>
-            <TextBox Grid.Row="0" Grid.Column="1" FontSize="18" VerticalContentAlignment="Center" Text="{Binding indeks, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Name="txtIndeks"/>
-            <TextBox Grid.Row="1" Grid.Column="1" FontSize="18" VerticalContentAlignment="Center" Text="{Binding parametr, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Name="txtParametr"/>
-            <TextBox Grid.Row="2" Grid.Column="1" FontSize="18" VerticalContentAlignment="Center" Text="{Binding wartosc, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Name="txtWartosc"/>
-            <TextBox Grid.Row="3" Grid.Column="1" FontSize="18" VerticalContentAlignment="Center" Text="{Binding opis, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Name="txtOpis"/>
+            <TextBox Grid.Row="0" Grid.Column="1" FontSize="18" VerticalContentAlignment="Center" IsEnabled="False" Text="{Binding indeks, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Name="txtIndeks"/>
+            <TextBox Grid.Row="1" Grid.Column="1" FontSize="18" VerticalContentAlignment="Center" IsEnabled="False" Text="{Binding parametr, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Name="txtParametr"/>
+            <TextBox Grid.Row="2" Grid.Column="1" FontSize="18" VerticalContentAlignment="Center" IsEnabled="False" Text="{Binding wartosc, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Name="txtWartosc"/>
+            <TextBox Grid.Row="3" Grid.Column="1" FontSize="18" VerticalContentAlignment="Center" IsEnabled="False" Text="{Binding opis, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Name="txtOpis"/>
         </Grid>
         
-        <Button Grid.Row="3" Grid.ColumnSpan="2" Content="Z A M K N I J" FontSize="20"/>
+        <Button Grid.Row="3" Grid.ColumnSpan="2" Name="btnZamknij" Content="Z A M K N I J" FontSize="20"/>
     </Grid>
 </Window>

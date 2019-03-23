@@ -12,7 +12,7 @@ namespace ecoplastol
     using System;
     using System.Collections.Generic;
     
-    public partial class itf_kategoria
+    public partial class itf_litery
     {
         public int indeks { get; set; }
         public string parametr { get; set; }
