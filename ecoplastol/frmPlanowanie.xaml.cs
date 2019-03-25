@@ -36,5 +36,10 @@ namespace ecoplastol
             ParentGrid.Children.Add(mz);
             Grid.SetRow(mz, i++);
         }
+
+        private void BtnDodajM2_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

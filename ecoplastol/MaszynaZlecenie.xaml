@@ -4,15 +4,43 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:ecoplastol"
+             xmlns:ts="clr-namespace:ecoplastol"
              mc:Ignorable="d" 
-             Width="200" Height="22">
+             Width="400" Height="100">
     <Border BorderBrush="Red" BorderThickness="2">
-    <Grid Background="White">
-            <StackPanel Orientation="Horizontal">
-                <Label FontSize="10" Padding="0" Content="Dupa" Name="label1"></Label>
-                <Button Width="70" Click="Button_Click">  Cos tam</Button>
-            </StackPanel>
-            
-    </Grid>
+    <Grid Background="LightGreen">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="18"/>
+            <RowDefinition Height="20"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="100"/>
+            <ColumnDefinition Width="50"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+            <Label Grid.Row="0" Grid.Column="0" Content="Wyrób" Margin="0" Padding="2,0,0,0"/>
+            <Label Grid.Row="0" Grid.Column="1" Content="Ilość" Margin="0" Padding="2,0,0,0"/>
+            <ComboBox x:Name="cbbWyrobKod" Grid.Row="1" Grid.Column="0" FontSize="14">
+                <ComboBox.ItemTemplateSelector>
+                    <ts:ComboBoxItemTemplateSelector>
+                        <ts:ComboBoxItemTemplateSelector.SelectedTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding wartosc}" />
+                            </DataTemplate>
+                        </ts:ComboBoxItemTemplateSelector.SelectedTemplate>
+                        <ts:ComboBoxItemTemplateSelector.DropDownTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="{Binding parametr}" Width="13"/>
+                                    <TextBlock Text="-  "/>
+                                    <TextBlock Text="{Binding wartosc}" />
+                                </StackPanel>
+                            </DataTemplate>
+                        </ts:ComboBoxItemTemplateSelector.DropDownTemplate>
+                    </ts:ComboBoxItemTemplateSelector>
+                </ComboBox.ItemTemplateSelector>
+            </ComboBox>
+        </Grid>
     </Border>
 </UserControl>

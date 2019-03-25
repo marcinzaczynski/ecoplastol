@@ -20,10 +20,17 @@ namespace ecoplastol
     /// </summary>
     public partial class MaszynaPanel : UserControl
     {
+        public int numerMaszyny { get; set; }
+        public string nazwaMaszyny { get; set; }
+
         public MaszynaPanel(int _id,string _nazwa)
         {
             InitializeComponent();
             //btn.Name = "btnDodajM" + Convert.ToChar(_id);
+            numerMaszyny = _id;
+            nazwaMaszyny = _nazwa;
+
+            this.Tag = _id;
             btn.Tag = _id;
             lblNazwaMaszyny.Content = _nazwa;
         }
@@ -31,7 +38,26 @@ namespace ecoplastol
         private void Btn_Click(object sender, RoutedEventArgs e)
         {
             Button btn = sender as Button;
-            MessageBox.Show(btn.Tag.ToString());
+            int nr_panela = Convert.ToInt32(btn.Tag);
+            var mp = frmPlanowanie2.listaPaneli[nr_panela - 1];
+            // -- dodanie do stackpanela
+            //var mp = frmPlanowanie2.listaPaneli[nr_panela - 1];
+            //var gr = mp.spMaszynaZlecenia;
+            //MaszynaZlecenie mz = new MaszynaZlecenie("aaa");
+            //gr.Children.Add(mz);
+
+
+            // -- dodanie do datagrida
+            //gr.RowDefinitions.Add(new RowDefinition());
+            //var il_w = gr.RowDefinitions.Count;
+            //MaszynaZlecenie mz = new MaszynaZlecenie("aaa");
+            //Grid.SetRow(mz, il_w - 1);
+            //gr.Children.Add(mz);
+
+            frmZlecenieProdukcji frmZlecenieProdukcji = new frmZlecenieProdukcji(numerMaszyny, nazwaMaszyny);
+            frmZlecenieProdukcji.ShowDialog();
+            //MessageBox.Show(btn.Tag.ToString());
+
         }
     }
 }

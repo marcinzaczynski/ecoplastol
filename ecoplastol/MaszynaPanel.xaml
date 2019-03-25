@@ -6,8 +6,44 @@
              xmlns:local="clr-namespace:ecoplastol"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Border Margin="5" BorderThickness="1" BorderBrush="Black">
-        <Grid Background="White" Margin="5">
+    <UserControl.Resources>
+
+        <ResourceDictionary>
+
+            <Style TargetType="Button" x:Key="btnGradientOrange">
+                <Setter Property="Background">
+                    <Setter.Value>
+                        <LinearGradientBrush StartPoint="1,0" EndPoint="1,1">
+                            <GradientStop Color="Orange" Offset="1"/>
+                            <GradientStop Color="White" Offset="0.01"/>
+                        </LinearGradientBrush>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+            <Style TargetType="Button" x:Key="btnGradientLightGreen">
+                <Setter Property="Background">
+                    <Setter.Value>
+                        <LinearGradientBrush StartPoint="1,0" EndPoint="1,1">
+                            <GradientStop Color="LightGreen" Offset="1"/>
+                            <GradientStop Color="White" Offset="0.01"/>
+                        </LinearGradientBrush>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+            <Style TargetType="Button" x:Key="btnGradientRed">
+                <Setter Property="Background">
+                    <Setter.Value>
+                        <LinearGradientBrush StartPoint="1,0" EndPoint="1,1">
+                            <GradientStop Color="#FFFF8D8D" Offset="1"/>
+                            <GradientStop Color="White" Offset="0.01"/>
+                        </LinearGradientBrush>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <Border Margin="2" BorderThickness="1" BorderBrush="Black" Background="LightYellow">
+        <Grid  Margin="5" Name="grMaszynaPanel">
 
             <Grid.RowDefinitions>
                 <!-- pasek na menu górne dla maszyny-->
@@ -25,9 +61,13 @@
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="100"/>
                 </Grid.ColumnDefinitions>
-                <Label Grid.Column="0" Content="nazwa maszyny" Name="lblNazwaMaszyny" />
-                <Button Grid.Column="2" Content="DODAJ" Name="btn" Click="Btn_Click" ></Button>
+                <Label Grid.Column="0" Content="M" Name="lblNazwaMaszyny" FontSize="20" FontWeight="Bold" Padding="10,0" VerticalContentAlignment="Center"/>
+                <Button Grid.Column="2" Content="DODAJ" Name="btn" Click="Btn_Click" Style="{StaticResource btnGradientLightGreen}" FontSize="16" ></Button>
             </Grid>
+            
+            <StackPanel Grid.Row="2" Name="spMaszynaZlecenia" Orientation="Vertical">
+                
+            </StackPanel>
 
 
         </Grid>

@@ -102,6 +102,10 @@
       <DependentUpon>frmPlanowanie2.xaml</DependentUpon>
     </Compile>
     <Compile Include="frmPlanowanie2_db.cs" />
+    <Compile Include="frmZlecenieProdukcji.xaml.cs">
+      <DependentUpon>frmZlecenieProdukcji.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="frmZlecenieProdukcji_db.cs" />
     <Compile Include="itf_cc.cs">
       <DependentUpon>PGEntity.tt</DependentUpon>
     </Compile>
@@ -227,6 +231,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="frmWyroby.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="frmZlecenieProdukcji.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

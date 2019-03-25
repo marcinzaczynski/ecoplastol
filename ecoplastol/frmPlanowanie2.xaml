@@ -5,8 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ecoplastol"
         mc:Ignorable="d"
-        Title="frmPlanowanie2" Height="450" Width="800">
-    <Grid ShowGridLines="true">
+        Title="frmPlanowanie2" Height="450" Width="800" WindowState="Maximized" WindowStartupLocation="CenterScreen">
+    <Grid ShowGridLines="false" Name="grMaszyna">
         <Grid.RowDefinitions>
             <RowDefinition Height="40" />
             <RowDefinition Height="*" />
@@ -15,6 +15,7 @@
         <Grid Grid.Row="1" Name="grMaszyny">
             
         </Grid>
-        <Button Grid.Row="2" Name="btnZamknij" Content="Z A M K N I J" FontSize="20"/>
+        <Button Grid.Row="2" Name="btnZamknij" Content="Z A M K N I J" FontSize="20" Click="BtnZamknij_Click"/>
+        <Button Content="Button" HorizontalAlignment="Left" Margin="79,10,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click"/>
     </Grid>
 </Window>
