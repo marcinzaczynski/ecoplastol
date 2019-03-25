@@ -48,5 +48,6 @@ namespace ecoplastol
         public virtual DbSet<trace_znak> trace_znak { get; set; }
         public virtual DbSet<itf_kategorie> itf_kategorie { get; set; }
         public virtual DbSet<itf_litery> itf_litery { get; set; }
+        public virtual DbSet<maszyny> maszyny { get; set; }
     }
 }

@@ -98,6 +98,10 @@
     <Compile Include="frmPlanowanie.xaml.cs">
       <DependentUpon>frmPlanowanie.xaml</DependentUpon>
     </Compile>
+    <Compile Include="frmPlanowanie2.xaml.cs">
+      <DependentUpon>frmPlanowanie2.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="frmPlanowanie2_db.cs" />
     <Compile Include="itf_cc.cs">
       <DependentUpon>PGEntity.tt</DependentUpon>
     </Compile>
@@ -119,8 +123,14 @@
     <Compile Include="itf_trn.cs">
       <DependentUpon>PGEntity.tt</DependentUpon>
     </Compile>
+    <Compile Include="MaszynaPanel.xaml.cs">
+      <DependentUpon>MaszynaPanel.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MaszynaZlecenie.xaml.cs">
       <DependentUpon>MaszynaZlecenie.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="maszyny.cs">
+      <DependentUpon>PGEntity.tt</DependentUpon>
     </Compile>
     <Compile Include="parametry.cs">
       <DependentUpon>PGEntity.tt</DependentUpon>
@@ -208,11 +218,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="frmPlanowanie2.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="frmUzytkownicy.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="frmWyroby.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MaszynaPanel.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

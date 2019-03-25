@@ -28,6 +28,7 @@
         <EntityTypeShape EntityType="ecoplastolModel.trace_znak" Width="1.5" PointX="5.875" PointY="4.5" IsExpanded="false" />
         <EntityTypeShape EntityType="ecoplastolModel.itf_kategorie" Width="1.5" PointX="7.75" PointY="2.5" IsExpanded="false" />
         <EntityTypeShape EntityType="ecoplastolModel.itf_litery" Width="1.5" PointX="7.75" PointY="3.5" IsExpanded="false" />
+        <EntityTypeShape EntityType="ecoplastolModel.maszyny" Width="1.5" PointX="4" PointY="0.5" IsExpanded="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

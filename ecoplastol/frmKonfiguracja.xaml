@@ -65,6 +65,7 @@
                         <RowDefinition Height="40"/>
                         <RowDefinition Height="40"/>
                         <RowDefinition Height="40"/>
+                        <RowDefinition Height="40"/>
                         <RowDefinition Height="*"/>
 
 
@@ -74,15 +75,15 @@
                         <ColumnDefinition />
                     </Grid.ColumnDefinitions>
                     <Border Grid.RowSpan="8" Grid.ColumnSpan="2" Background="#FFF0F0F0"/>
-                    <Button Grid.Row="0" Grid.Column="0" FontSize="14" Padding="10,0,0,0" HorizontalContentAlignment="Left" Style="{StaticResource btnGradientOrange}" Name="btnITFkategoria" Content="Kategorie" Click="BtnITFkategoria_Click" />
-                    <Button Grid.Row="1" Grid.Column="0" FontSize="14" Padding="10,0,0,0" HorizontalContentAlignment="Left" Style="{StaticResource btnGradientOrange}" Name="btnITFlitery" Content="Litery" Click="BtnITFlitery_Click" />
-                    <Button Grid.Row="2" Grid.Column="0" FontSize="14" Padding="10,0,0,0" HorizontalContentAlignment="Left" Style="{StaticResource btnGradientOrange}" Name="btnITFicc" Content="Indykacja &#xD;&#xA;czasu chłodzenia" Click="BtnITFicc_Click" />
-                    <Button Grid.Row="3" Grid.Column="0" FontSize="14" Padding="10,0,0,0" HorizontalContentAlignment="Left" Style="{StaticResource btnGradientOrange}" Name="btnITFcc" Content="Czasy chłodzenia" Click="BtnITFcc_Click" />
-                    <Button Grid.Row="4" Grid.Column="0" FontSize="14" Padding="10,0,0,0" HorizontalContentAlignment="Left" Style="{StaticResource btnGradientOrange}" Name="btnITFsr" Content="Średnice" Click="BtnITFsr_Click" />
-                    <Button Grid.Row="5" Grid.Column="0" FontSize="14" Padding="10,0,0,0" HorizontalContentAlignment="Left" Style="{StaticResource btnGradientOrange}" Name="btnITFtrn" Content="Typy regulacji&#xD;&#xA;napięcia" Click="BtnITFtrn_Click" />
-                    <Button Grid.Row="6" Grid.Column="0" FontSize="14" Padding="10,0,0,0" HorizontalContentAlignment="Left" Style="{StaticResource btnGradientOrange}" Name="btnITFodch" Content="Odchylenia" Click="BtnITFodch_Click" />
+                    <Button Grid.Row="1" Grid.Column="0" FontSize="14" Padding="10,0,0,0" HorizontalContentAlignment="Left" Style="{StaticResource btnGradientOrange}" Name="btnITFkategoria" Content="Kategorie" Click="BtnITFkategoria_Click" />
+                    <Button Grid.Row="2" Grid.Column="0" FontSize="14" Padding="10,0,0,0" HorizontalContentAlignment="Left" Style="{StaticResource btnGradientOrange}" Name="btnITFlitery" Content="Litery" Click="BtnITFlitery_Click" />
+                    <Button Grid.Row="3" Grid.Column="0" FontSize="14" Padding="10,0,0,0" HorizontalContentAlignment="Left" Style="{StaticResource btnGradientOrange}" Name="btnITFicc" Content="Indykacja &#xD;&#xA;czasu chłodzenia" Click="BtnITFicc_Click" />
+                    <Button Grid.Row="4" Grid.Column="0" FontSize="14" Padding="10,0,0,0" HorizontalContentAlignment="Left" Style="{StaticResource btnGradientOrange}" Name="btnITFcc" Content="Czasy chłodzenia" Click="BtnITFcc_Click" />
+                    <Button Grid.Row="5" Grid.Column="0" FontSize="14" Padding="10,0,0,0" HorizontalContentAlignment="Left" Style="{StaticResource btnGradientOrange}" Name="btnITFsr" Content="Średnice" Click="BtnITFsr_Click" />
+                    <Button Grid.Row="6" Grid.Column="0" FontSize="14" Padding="10,0,0,0" HorizontalContentAlignment="Left" Style="{StaticResource btnGradientOrange}" Name="btnITFtrn" Content="Typy regulacji&#xD;&#xA;napięcia" Click="BtnITFtrn_Click" />
+                    <Button Grid.Row="7" Grid.Column="0" FontSize="14" Padding="10,0,0,0" HorizontalContentAlignment="Left" Style="{StaticResource btnGradientOrange}" Name="btnITFodch" Content="Odchylenia" Click="BtnITFodch_Click" />
                     <Label Name="lblITFinfo" Grid.Row="0" Grid.Column="1" Content="_" />
-                    <DataGrid Grid.Row="1" Grid.RowSpan="7" Grid.Column="1" Name="dgParametry"  AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" RowDetailsVisibilityMode="VisibleWhenSelected" SelectionChanged="DgParametry_SelectionChanged" IsSynchronizedWithCurrentItem="True" CanUserDeleteRows="False" CanUserAddRows="False" IsReadOnly="True">
+                    <DataGrid Grid.Row="1" Grid.RowSpan="8" Grid.Column="1" Name="dgParametry"  AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" RowDetailsVisibilityMode="VisibleWhenSelected" SelectionChanged="DgParametry_SelectionChanged" IsSynchronizedWithCurrentItem="True" CanUserDeleteRows="False" CanUserAddRows="False" IsReadOnly="True">
                         <DataGrid.Columns>
                             <DataGridTextColumn x:Name="indeksColumn" Binding="{Binding indeks}" Header="Indeks" Width="SizeToHeader"/>
                             <DataGridTextColumn x:Name="parametrColumn" Binding="{Binding parametr}" Header="Parametr" Width="100"/>

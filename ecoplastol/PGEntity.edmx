@@ -96,6 +96,13 @@
           <Property Name="opm" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="czasm" Type="timestamp" Nullable="false" />
         </EntityType>
+        <EntityType Name="maszyny">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int4" Nullable="false" />
+          <Property Name="numer" Type="varchar" MaxLength="10" Nullable="false" />
+        </EntityType>
         <EntityType Name="parametry">
           <Key>
             <PropertyRef Name="id" />
@@ -347,6 +354,7 @@
           <EntitySet Name="itf_odch" EntityType="Self.itf_odch" Schema="public" store:Type="Tables" />
           <EntitySet Name="itf_sr" EntityType="Self.itf_sr" Schema="public" store:Type="Tables" />
           <EntitySet Name="itf_trn" EntityType="Self.itf_trn" Schema="public" store:Type="Tables" />
+          <EntitySet Name="maszyny" EntityType="Self.maszyny" Schema="public" store:Type="Tables" />
           <EntitySet Name="parametry" EntityType="Self.parametry" Schema="public" store:Type="Tables" />
           <EntitySet Name="trace_kategoria" EntityType="Self.trace_kategoria" Schema="public" store:Type="Tables" />
           <EntitySet Name="trace_material" EntityType="Self.trace_material" Schema="public" store:Type="Tables" />
@@ -405,6 +413,7 @@
           <EntitySet Name="trace_znak" EntityType="ecoplastolModel.trace_znak" />
           <EntitySet Name="itf_kategorie" EntityType="ecoplastolModel.itf_kategorie" />
           <EntitySet Name="itf_litery" EntityType="ecoplastolModel.itf_litery" />
+          <EntitySet Name="maszyny" EntityType="ecoplastolModel.maszyny" />
         </EntityContainer>
         <EntityType Name="parametry">
           <Key>
@@ -726,6 +735,13 @@
           <Property Name="czasw" Type="DateTime" Nullable="false" Precision="6" />
           <Property Name="opm" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="czasm" Type="DateTime" Nullable="false" Precision="6" />
+        </EntityType>
+        <EntityType Name="maszyny">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="numer" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -1087,6 +1103,14 @@
                 <ScalarProperty Name="wartosc" ColumnName="wartosc" />
                 <ScalarProperty Name="parametr" ColumnName="parametr" />
                 <ScalarProperty Name="indeks" ColumnName="indeks" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="maszyny">
+            <EntityTypeMapping TypeName="ecoplastolModel.maszyny">
+              <MappingFragment StoreEntitySet="maszyny">
+                <ScalarProperty Name="numer" ColumnName="numer" />
+                <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
