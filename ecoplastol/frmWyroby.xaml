@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:ecoplastol"
         xmlns:ts="clr-namespace:ecoplastol"
         mc:Ignorable="d"
-        Title="frmWyroby" Height="665.812" Width="1241.142" WindowState="Maximized" Loaded="Window_Loaded">
+        Title="frmWyroby" Height="665" Width="1600" WindowState="Maximized" Loaded="Window_Loaded">
     <Window.Resources>
         <CollectionViewSource x:Key="wyrobyViewSource" d:DesignSource="{d:DesignInstance {x:Type local:wyroby}, CreateList=True}"/>
 
@@ -28,11 +28,11 @@
             <!-- panel górny -->
             <RowDefinition Height="40"/>
             <!-- datagrid -->
-            <RowDefinition/>
+            <RowDefinition Height="*"/>
             <!-- przyciski dodaj popraw itd -->
-            <RowDefinition Height="30"/>
+            <RowDefinition Height="40"/>
             <!-- textboxy comboboxy -->
-            <RowDefinition Height="291"/>
+            <RowDefinition Height="320"/>
             <!-- kody kreskowe -->
             <RowDefinition Height="109"/>
             <!-- panel dolny -->
@@ -139,173 +139,215 @@
                     Width="100"/>
             </DataGrid.Columns>
         </DataGrid>
-        <DockPanel Grid.Row="2" HorizontalAlignment="Left" Width="600" >
+        <DockPanel Grid.Row="2" HorizontalAlignment="Left" Width="600" Margin="0,5">
             <Button x:Name="btnDodaj" Content="DODAJ" Width="100" Height="30" FontSize="14" Click="BtnDodaj_Click" />
             <Button x:Name="btnKlonuj" Content="KLONUJ" Width="100" Height="30" FontSize="14" Click="BtnKlonuj_Click" />
             <Button x:Name="btnPopraw" Content="POPRAW" Width="100" Height="30" FontSize="14" Click="BtnPopraw_Click" />
             <Button x:Name="btnUsun" Content="USUŃ" Width="100" Height="30" FontSize="14" Foreground="Red"/>
             <Button x:Name="btnAnuluj" Content="ANULUJ" Width="100" Height="30" FontSize="14" Foreground="Red" Click="BtnAnuluj_Click"/>
-            <Button x:Name="btnZatwierdz" Content="ZATWIERDŹ" Width="100" Height="30" FontSize="14" Foreground="Green" Click="BtnZatwierdz_Click"/>
+            <Button x:Name="btnZatwierdz" Content="ZATWIERDŹ" Width="100" Height="30" FontSize="14" Foreground="Green" Click="BtnZatwierdz_Click" VerticalAlignment="Top"/>
         </DockPanel>
-        <Grid x:Name="gridWyrob" ShowGridLines="False"  Grid.Row="3" Margin="0,10,0,0" >
+        <Grid x:Name="gridWyrob" ShowGridLines="False"  Grid.Row="3" Margin="0,0,0,0" >
             <Grid.ColumnDefinitions>
-                <!-- Wyrób identyfikacja - opisy -->
-                <ColumnDefinition Width="180" />
-                <!-- Wyrób identyfikacja - właściwości -->
-                <ColumnDefinition Width="200"/>
-                <!-- ITF - opisy -->
-                <ColumnDefinition Width="180"/>
-                <!-- ITF - właściwości -->
-                <ColumnDefinition Width="200"/>
-                <!-- Traceability - opisy -->
-                <ColumnDefinition Width="180"/>
-                <!-- Traceability - właściwości -->
-                <ColumnDefinition Width="200"/>
+                <!-- Wyrób identyfikacja -->
+                <ColumnDefinition Width="380" />
+                <!-- ITF  -->
+                <ColumnDefinition Width="380"/>
+                <!-- Traceability -->
+                <ColumnDefinition Width="380"/>
+                <!-- inne -->
+                <ColumnDefinition Width="380"/>
+                <!-- puste miejsce -->
+                <ColumnDefinition Width="*"/>
+               
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
-                <RowDefinition Height="25"/>
-                <RowDefinition Height="25"/>
-                <RowDefinition Height="25"/>
-                <RowDefinition Height="25"/>
-                <RowDefinition Height="25"/>
-                <RowDefinition Height="25"/>
-                <RowDefinition Height="25"/>
-                <RowDefinition Height="25"/>
-                <RowDefinition Height="25"/>
-                <RowDefinition Height="25"/>
-                <RowDefinition Height="25"/>
+                <RowDefinition Height="*"/>
+          
             </Grid.RowDefinitions>
+            <!-- dwfinicja wyrobu -->
+            <Grid Grid.Row="0" Grid.Column="0" x:Name="grdWyrob">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="25"/>
+                    <RowDefinition Height="25"/>
+                    <RowDefinition Height="25"/>
+                    <RowDefinition Height="25"/>
+                    <RowDefinition Height="25"/>
+                    <RowDefinition Height="25"/>
+                    <RowDefinition Height="25"/>
+                    <RowDefinition Height="25"/>
+                    <RowDefinition Height="25"/>
+                    <RowDefinition Height="25"/>
+                    <RowDefinition Height="25"/>
+                    <RowDefinition Height="25"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <!-- Wyrób identyfikacja - opisy -->
+                    <ColumnDefinition Width="180" />
+                    <!-- Wyrób identyfikacja - właściwości -->
+                    <ColumnDefinition Width="200"/>
+                </Grid.ColumnDefinitions>
+                <Border Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" BorderThickness="1" BorderBrush="black" Background="LightGray"/>
+                <Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" FontSize="14" FontWeight="DemiBold" HorizontalContentAlignment="Center" Padding="0,3" Content="DEFINICJA WYROBU"/>
+                <Label VerticalAlignment="Center" FontSize="14" Grid.Row="1" Grid.Column="0" Padding="10,0,0,0" Content="Typ :" />
+                <Label VerticalAlignment="Center" FontSize="14" Grid.Row="2" Grid.Column="0" Padding="10,0,0,0" Content="Kod :" />
+                <Label VerticalAlignment="Center" FontSize="14" Grid.Row="3" Grid.Column="0" Padding="10,0,0,0" Content="Indeks :" />
+                <Label VerticalAlignment="Center" FontSize="14" Grid.Row="4" Grid.Column="0" Padding="10,0,0,0" Content="Opis :" />
+                <Label VerticalAlignment="Center" FontSize="14" Grid.Row="5" Grid.Column="0" Padding="10,0,0,0" Content="Ilość w opak. zb :" />
+                <Label VerticalAlignment="Center" FontSize="14" Grid.Row="6" Grid.Column="0" Padding="10,0,0,0" Content="Waga opakowania :" />
+                <Label VerticalAlignment="Center" FontSize="14" Grid.Row="7" Grid.Column="0" Padding="10,0,0,0" Content="Waga kształtki :" />
+                <Label VerticalAlignment="Center" FontSize="14" Grid.Row="8" Grid.Column="0" Padding="10,0,0,0" Content="Zakres SDR :" />
+                <Label VerticalAlignment="Center" FontSize="14" Grid.Row="9" Grid.Column="0" Padding="10,0,0,0" Content="Norma na 1 zmianę :" />
+                <Label VerticalAlignment="Center" FontSize="14" Grid.Row="10" Grid.Column="0" Padding="10,0,0,0" Content="Ilość w partii :" />
 
-            <Label VerticalAlignment="Center" FontSize="14" Grid.Row="0" Grid.Column="0" Padding="10,0,0,0" Content="Typ :" />
-            <Label VerticalAlignment="Center" FontSize="14" Grid.Row="1" Grid.Column="0" Padding="10,0,0,0" Content="Kod :" />
-            <Label VerticalAlignment="Center" FontSize="14" Grid.Row="2" Grid.Column="0" Padding="10,0,0,0" Content="Indeks :" />
-            <Label VerticalAlignment="Center" FontSize="14" Grid.Row="3" Grid.Column="0" Padding="10,0,0,0" Content="Opis :" />
-            <Label VerticalAlignment="Center" FontSize="14" Grid.Row="4" Grid.Column="0" Padding="10,0,0,0" Content="Ilość w opak. zb :" />
-            <Label VerticalAlignment="Center" FontSize="14" Grid.Row="5" Grid.Column="0" Padding="10,0,0,0" Content="Waga opakowania :" />
-            <Label VerticalAlignment="Center" FontSize="14" Grid.Row="6" Grid.Column="0" Padding="10,0,0,0" Content="Waga kształtki :" />
-            <Label VerticalAlignment="Center" FontSize="14" Grid.Row="7" Grid.Column="0" Padding="10,0,0,0" Content="Zakres SDR :" />
-            <Label VerticalAlignment="Center" FontSize="14" Grid.Row="8" Grid.Column="0" Padding="10,0,0,0" Content="Zastosowanie zaworu :" />
-            <Label VerticalAlignment="Center" FontSize="14" Grid.Row="9" Grid.Column="0" Padding="10,0,0,0" Content="Rodzaj drutu :" />
-            <ComboBox x:Name="cbbWyrobTyp" Grid.Row="0" Grid.Column="1"  Width="200" FontSize="14">
-                <ComboBox.ItemTemplateSelector>
-                    <ts:ComboBoxItemTemplateSelector>
-                        <ts:ComboBoxItemTemplateSelector.SelectedTemplate>
-                            <DataTemplate>
-                                <TextBlock Text="{Binding wartosc}" />
-                            </DataTemplate>
-                        </ts:ComboBoxItemTemplateSelector.SelectedTemplate>
-                        <ts:ComboBoxItemTemplateSelector.DropDownTemplate>
-                            <DataTemplate>
-                                <StackPanel Orientation="Horizontal">
-                                    <TextBlock Text="{Binding parametr}" Width="13"/>
-                                    <TextBlock Text="-  "/>
+
+                <ComboBox x:Name="cbbWyrobTyp" Grid.Row="1" Grid.Column="1"  Width="200" FontSize="14">
+                    <ComboBox.ItemTemplateSelector>
+                        <ts:ComboBoxItemTemplateSelector>
+                            <ts:ComboBoxItemTemplateSelector.SelectedTemplate>
+                                <DataTemplate>
                                     <TextBlock Text="{Binding wartosc}" />
-                                </StackPanel>
-                            </DataTemplate>
-                        </ts:ComboBoxItemTemplateSelector.DropDownTemplate>
-                    </ts:ComboBoxItemTemplateSelector>
-                </ComboBox.ItemTemplateSelector>
-            </ComboBox>
-            <TextBox x:Name="txtWyrobKod" Grid.Row="1" Grid.Column="1" Text="" FontSize="14"/>
-            <TextBox x:Name="txtWyrobIndeks" Grid.Row="2" Grid.Column="1" Text="" FontSize="14"/>
-            <TextBox x:Name="txtWyrobOpis" Grid.Row="3" Grid.Column="1" Text="" FontSize="14"/>
-            <TextBox x:Name="txtWyrobIwOpZ" Grid.Row="4" Grid.Column="1" Text="" FontSize="14" MaxLength="4" PreviewTextInput="TxtWyrobIwOpZ_PreviewTextInput"/>
-            <TextBox x:Name="txtWyrobWagaOp" Grid.Row="5" Grid.Column="1" Text="" FontSize="14" MaxLength="4" PreviewTextInput="TxtWyrobWagaOp_PreviewTextInput"/>
-            <TextBox x:Name="txtWyrobWaga1szt" Grid.Row="6" Grid.Column="1" Text="" FontSize="14" MaxLength="5" PreviewTextInput="TxtWyrobWaga1szt_PreviewTextInput"/>
-            <ComboBox x:Name="cbbWyrobZakresSDR" Grid.Row="7" Grid.Column="1" FontSize="14">
-                <ComboBox.ItemTemplateSelector>
-                    <ts:ComboBoxItemTemplateSelector>
-                        <ts:ComboBoxItemTemplateSelector.SelectedTemplate>
-                            <DataTemplate>
-                                <TextBlock Text="{Binding wartosc}" />
-                            </DataTemplate>
-                        </ts:ComboBoxItemTemplateSelector.SelectedTemplate>
-                        <ts:ComboBoxItemTemplateSelector.DropDownTemplate>
-                            <DataTemplate>
-                                <StackPanel Orientation="Horizontal">
-                                    <TextBlock Text="{Binding parametr}" Width="13"/>
-                                    <TextBlock Text="-  "/>
+                                </DataTemplate>
+                            </ts:ComboBoxItemTemplateSelector.SelectedTemplate>
+                            <ts:ComboBoxItemTemplateSelector.DropDownTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="{Binding parametr}" Width="13"/>
+                                        <TextBlock Text="-  "/>
+                                        <TextBlock Text="{Binding wartosc}" />
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ts:ComboBoxItemTemplateSelector.DropDownTemplate>
+                        </ts:ComboBoxItemTemplateSelector>
+                    </ComboBox.ItemTemplateSelector>
+                </ComboBox>
+                <TextBox x:Name="txtWyrobKod" Grid.Row="2" Grid.Column="1" Text="" FontSize="14"/>
+                <TextBox x:Name="txtWyrobIndeks" Grid.Row="3" Grid.Column="1" Text="" FontSize="14"/>
+                <TextBox x:Name="txtWyrobOpis" Grid.Row="4" Grid.Column="1" Text="" FontSize="14"/>
+                <TextBox x:Name="txtWyrobIwOpZ" Grid.Row="5" Grid.Column="1" Text="" FontSize="14" MaxLength="4" PreviewTextInput="TxtWyrobIwOpZ_PreviewTextInput"/>
+                <TextBox x:Name="txtWyrobWagaOp" Grid.Row="6" Grid.Column="1" Text="" FontSize="14" MaxLength="4" PreviewTextInput="TxtWyrobWagaOp_PreviewTextInput"/>
+                <TextBox x:Name="txtWyrobWaga1szt" Grid.Row="7" Grid.Column="1" Text="" FontSize="14" MaxLength="5" PreviewTextInput="TxtWyrobWaga1szt_PreviewTextInput"/>
+                <ComboBox x:Name="cbbWyrobZakresSDR" Grid.Row="8" Grid.Column="1" FontSize="14">
+                    <ComboBox.ItemTemplateSelector>
+                        <ts:ComboBoxItemTemplateSelector>
+                            <ts:ComboBoxItemTemplateSelector.SelectedTemplate>
+                                <DataTemplate>
                                     <TextBlock Text="{Binding wartosc}" />
-                                </StackPanel>
-                            </DataTemplate>
-                        </ts:ComboBoxItemTemplateSelector.DropDownTemplate>
-                    </ts:ComboBoxItemTemplateSelector>
-                </ComboBox.ItemTemplateSelector>
-            </ComboBox>
-            <ComboBox x:Name="cbbWyrobZastZaworu" Grid.Row="8" Grid.Column="1" FontSize="14">
-                <ComboBox.ItemTemplateSelector>
-                    <ts:ComboBoxItemTemplateSelector>
-                        <ts:ComboBoxItemTemplateSelector.SelectedTemplate>
-                            <DataTemplate>
-                                <TextBlock Text="{Binding wartosc}" />
-                            </DataTemplate>
-                        </ts:ComboBoxItemTemplateSelector.SelectedTemplate>
-                        <ts:ComboBoxItemTemplateSelector.DropDownTemplate>
-                            <DataTemplate>
-                                <StackPanel Orientation="Horizontal">
-                                    <TextBlock Text="{Binding parametr}" Width="13"/>
-                                    <TextBlock Text="-  "/>
-                                    <TextBlock Text="{Binding wartosc}" />
-                                </StackPanel>
-                            </DataTemplate>
-                        </ts:ComboBoxItemTemplateSelector.DropDownTemplate>
-                    </ts:ComboBoxItemTemplateSelector>
-                </ComboBox.ItemTemplateSelector>
-            </ComboBox>
-            <ComboBox x:Name="cbbWyrobRodzajDrutu" Grid.Row="9" Grid.Column="1" FontSize="14">
-                <ComboBox.ItemTemplateSelector>
-                    <ts:ComboBoxItemTemplateSelector>
-                        <ts:ComboBoxItemTemplateSelector.SelectedTemplate>
-                            <DataTemplate>
-                                <TextBlock Text="{Binding wartosc}" />
-                            </DataTemplate>
-                        </ts:ComboBoxItemTemplateSelector.SelectedTemplate>
-                        <ts:ComboBoxItemTemplateSelector.DropDownTemplate>
-                            <DataTemplate>
-                                <StackPanel Orientation="Horizontal">
-                                    <TextBlock Text="{Binding indeks}" Width="20"/>
-                                    <TextBlock Text="-  "/>
-                                    <TextBlock Text="{Binding wartosc}" Width="120"/>
-                                </StackPanel>
-                            </DataTemplate>
-                        </ts:ComboBoxItemTemplateSelector.DropDownTemplate>
-                    </ts:ComboBoxItemTemplateSelector>
-                </ComboBox.ItemTemplateSelector>
-            </ComboBox>
+                                </DataTemplate>
+                            </ts:ComboBoxItemTemplateSelector.SelectedTemplate>
+                            <ts:ComboBoxItemTemplateSelector.DropDownTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="{Binding parametr}" Width="13"/>
+                                        <TextBlock Text="-  "/>
+                                        <TextBlock Text="{Binding wartosc}" />
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ts:ComboBoxItemTemplateSelector.DropDownTemplate>
+                        </ts:ComboBoxItemTemplateSelector>
+                    </ComboBox.ItemTemplateSelector>
+                </ComboBox>
+                <TextBox x:Name="txtWyrobNorma" Grid.Row="9" Grid.Column="1" Text="" FontSize="14" MaxLength="4" PreviewTextInput="TxtWyrobNorma_PreviewTextInput"/>
+                <TextBox x:Name="txtWyrobIlwPartii" Grid.Row="10" Grid.Column="1" Text="" FontSize="14" MaxLength="5" PreviewTextInput="TxtWyrobIlwPartii_PreviewTextInput"/>
+            </Grid>
             <!-- ITF -->
-            <Label VerticalAlignment="Center" FontSize="14" Grid.Row="0" Grid.Column="2" Padding="10,0,0,0" Content="Kategoria :" />
-            <Label VerticalAlignment="Center" FontSize="14" Grid.Row="1" Grid.Column="2" Padding="10,0,0,0" Content="Znak 1 | 2 :" />
-            <Label VerticalAlignment="Center" FontSize="14" Grid.Row="2" Grid.Column="2" Padding="10,0,0,0" Content="Indykacja czasu chł. :" />
-            <Label VerticalAlignment="Center" FontSize="14" Grid.Row="3" Grid.Column="2" Padding="10,0,0,0" Content="Czas chłodzenia 1 | 2 :" />
-            <Label VerticalAlignment="Center" FontSize="14" Grid.Row="4" Grid.Column="2" Padding="10,0,0,0" Content="Średnica min | max :" />
-            <Label VerticalAlignment="Center" FontSize="14" Grid.Row="5" Grid.Column="2" Padding="10,0,0,0" Content="Typ regulacji napięcia :" />
-            <Label VerticalAlignment="Center" FontSize="14" Grid.Row="6" Grid.Column="2" Padding="10,0,0,0" Content="Poziom regulacji napięcia :" />
-            <Label VerticalAlignment="Center" FontSize="14" Grid.Row="7" Grid.Column="2" Padding="10,0,0,0" Content="Rezystancja :" />
-            <Label VerticalAlignment="Center" FontSize="14" Grid.Row="8" Grid.Column="2" Padding="10,0,0,0" Content="Odchylenia :" />
-            <Label VerticalAlignment="Center" FontSize="14" Grid.Row="9" Grid.Column="2" Padding="10,0,0,0" Content="Czas zgrzewania 1 | 2 :" />
-            <Label VerticalAlignment="Center" FontSize="14" Grid.Row="10" Grid.Column="2" Padding="10,0,0,0" Content="Korekcja energii :" />
-            <ComboBox x:Name="cbbITFKategoria" Grid.Row="0" Grid.Column="3" FontSize="14" DropDownClosed="CbbITFKategoria_DropDownClosed" GotFocus="CbbITFKategoria_GotFocus" LostFocus="CbbITFKategoria_LostFocus" Height="26" VerticalAlignment="Top">
-                <ComboBox.ItemTemplateSelector>
-                    <ts:ComboBoxItemTemplateSelector>
-                        <ts:ComboBoxItemTemplateSelector.SelectedTemplate>
-                            <DataTemplate>
-                                <TextBlock Text="{Binding opis}" />
-                            </DataTemplate>
-                        </ts:ComboBoxItemTemplateSelector.SelectedTemplate>
-                        <ts:ComboBoxItemTemplateSelector.DropDownTemplate>
-                            <DataTemplate>
-                                <StackPanel Orientation="Horizontal">
-                                    <TextBlock Text="{Binding wartosc}" Width="20"/>
-                                    <TextBlock Text="-  "/>
-                                    <TextBlock Text="{Binding opis}" Width="210"/>
-                                </StackPanel>
-                            </DataTemplate>
-                        </ts:ComboBoxItemTemplateSelector.DropDownTemplate>
-                    </ts:ComboBoxItemTemplateSelector>
-                </ComboBox.ItemTemplateSelector>
-            </ComboBox>
-            <DockPanel Grid.Row="1" Grid.Column="3">
-                <ComboBox x:Name="cbbITFZnak1" Width="100" FontSize="14" DropDownClosed="CbbITFZnak1_DropDownClosed" GotFocus="CbbITFZnak1_GotFocus" LostFocus="CbbITFZnak1_LostFocus">
+            <Grid Grid.Row="0" Grid.Column="1" x:Name="grdITF">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="25"/>
+                    <RowDefinition Height="25"/>
+                    <RowDefinition Height="25"/>
+                    <RowDefinition Height="25"/>
+                    <RowDefinition Height="25"/>
+                    <RowDefinition Height="25"/>
+                    <RowDefinition Height="25"/>
+                    <RowDefinition Height="25"/>
+                    <RowDefinition Height="25"/>
+                    <RowDefinition Height="25"/>
+                    <RowDefinition Height="25"/>
+                    <RowDefinition Height="25"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <!-- Wyrób identyfikacja - opisy -->
+                    <ColumnDefinition Width="180" />
+                    <!-- Wyrób identyfikacja - właściwości -->
+                    <ColumnDefinition Width="200"/>
+                </Grid.ColumnDefinitions>
+                <Border Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" BorderThickness="1" BorderBrush="black" Background="LightGray"/>
+                <Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" FontSize="14" FontWeight="DemiBold" HorizontalContentAlignment="Center" Padding="0,3" Content="PARAMETRY KODU ITF"/>
+                <Label VerticalAlignment="Center" FontSize="14" Grid.Row="1" Grid.Column="0" Padding="10,0,0,0" Content="Kategoria :" />
+                <Label VerticalAlignment="Center" FontSize="14" Grid.Row="2" Grid.Column="0" Padding="10,0,0,0" Content="Znak 1 | 2 :" />
+                <Label VerticalAlignment="Center" FontSize="14" Grid.Row="3" Grid.Column="0" Padding="10,0,0,0" Content="Indykacja czasu chł. :" />
+                <Label VerticalAlignment="Center" FontSize="14" Grid.Row="4" Grid.Column="0" Padding="10,0,0,0" Content="Czas chłodzenia 1 | 2 :" />
+                <Label VerticalAlignment="Center" FontSize="14" Grid.Row="5" Grid.Column="0" Padding="10,0,0,0" Content="Średnica min | max :" />
+                <Label VerticalAlignment="Center" FontSize="14" Grid.Row="6" Grid.Column="0" Padding="10,0,0,0" Content="Typ regulacji napięcia :" />
+                <Label VerticalAlignment="Center" FontSize="14" Grid.Row="7" Grid.Column="0" Padding="10,0,0,0" Content="Poziom regulacji napięcia :" />
+                <Label VerticalAlignment="Center" FontSize="14" Grid.Row="8" Grid.Column="0" Padding="10,0,0,0" Content="Rezystancja :" />
+                <Label VerticalAlignment="Center" FontSize="14" Grid.Row="9" Grid.Column="0" Padding="10,0,0,0" Content="Odchylenia :" />
+                <Label VerticalAlignment="Center" FontSize="14" Grid.Row="10" Grid.Column="0" Padding="10,0,0,0" Content="Czas zgrzewania 1 | 2 :" />
+                <Label VerticalAlignment="Center" FontSize="14" Grid.Row="11" Grid.Column="0" Padding="10,0,0,0" Content="Korekcja energii :" />
+                <ComboBox x:Name="cbbITFKategoria" Grid.Row="1" Grid.Column="1" FontSize="14" DropDownClosed="CbbITFKategoria_DropDownClosed" GotFocus="CbbITFKategoria_GotFocus" LostFocus="CbbITFKategoria_LostFocus" Height="26" VerticalAlignment="Top">
+                    <ComboBox.ItemTemplateSelector>
+                        <ts:ComboBoxItemTemplateSelector>
+                            <ts:ComboBoxItemTemplateSelector.SelectedTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding opis}" />
+                                </DataTemplate>
+                            </ts:ComboBoxItemTemplateSelector.SelectedTemplate>
+                            <ts:ComboBoxItemTemplateSelector.DropDownTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="{Binding wartosc}" Width="20"/>
+                                        <TextBlock Text="-  "/>
+                                        <TextBlock Text="{Binding opis}" Width="210"/>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ts:ComboBoxItemTemplateSelector.DropDownTemplate>
+                        </ts:ComboBoxItemTemplateSelector>
+                    </ComboBox.ItemTemplateSelector>
+                </ComboBox>
+                <DockPanel Grid.Row="2" Grid.Column="1">
+                    <ComboBox x:Name="cbbITFZnak1" Width="100" FontSize="14" DropDownClosed="CbbITFZnak1_DropDownClosed" GotFocus="CbbITFZnak1_GotFocus" LostFocus="CbbITFZnak1_LostFocus">
+                        <ComboBox.ItemTemplateSelector>
+                            <ts:ComboBoxItemTemplateSelector>
+                                <ts:ComboBoxItemTemplateSelector.SelectedTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding wartosc}" />
+                                    </DataTemplate>
+                                </ts:ComboBoxItemTemplateSelector.SelectedTemplate>
+                                <ts:ComboBoxItemTemplateSelector.DropDownTemplate>
+                                    <DataTemplate>
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="{Binding parametr}" Width="20"/>
+                                            <TextBlock Text="-  "/>
+                                            <TextBlock Text="{Binding wartosc}"/>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </ts:ComboBoxItemTemplateSelector.DropDownTemplate>
+                            </ts:ComboBoxItemTemplateSelector>
+                        </ComboBox.ItemTemplateSelector>
+                    </ComboBox>
+                    <ComboBox x:Name="cbbITFZnak2" Width="100" FontSize="14" DropDownClosed="CbbITFZnak2_DropDownClosed" GotFocus="CbbITFZnak2_GotFocus" LostFocus="CbbITFZnak2_LostFocus">
+                        <ComboBox.ItemTemplateSelector>
+                            <ts:ComboBoxItemTemplateSelector>
+                                <ts:ComboBoxItemTemplateSelector.SelectedTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding wartosc}" />
+                                    </DataTemplate>
+                                </ts:ComboBoxItemTemplateSelector.SelectedTemplate>
+                                <ts:ComboBoxItemTemplateSelector.DropDownTemplate>
+                                    <DataTemplate>
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="{Binding parametr}" Width="20"/>
+                                            <TextBlock Text="-  "/>
+                                            <TextBlock Text="{Binding wartosc}"/>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </ts:ComboBoxItemTemplateSelector.DropDownTemplate>
+                            </ts:ComboBoxItemTemplateSelector>
+                        </ComboBox.ItemTemplateSelector>
+                    </ComboBox>
+                </DockPanel>
+                <ComboBox x:Name="cbbITFICC" Grid.Row="3" Grid.Column="1" FontSize="14" DropDownClosed="CbbITFICC_DropDownClosed" GotFocus="CbbITFICC_GotFocus" LostFocus="CbbITFICC_LostFocus">
                     <ComboBox.ItemTemplateSelector>
                         <ts:ComboBoxItemTemplateSelector>
                             <ts:ComboBoxItemTemplateSelector.SelectedTemplate>
@@ -325,7 +367,91 @@
                         </ts:ComboBoxItemTemplateSelector>
                     </ComboBox.ItemTemplateSelector>
                 </ComboBox>
-                <ComboBox x:Name="cbbITFZnak2" Width="100" FontSize="14" DropDownClosed="CbbITFZnak2_DropDownClosed" GotFocus="CbbITFZnak2_GotFocus" LostFocus="CbbITFZnak2_LostFocus">
+                <DockPanel Grid.Row="4" Grid.Column="1">
+                    <ComboBox x:Name="cbbITFCC1" FontSize="14" Width="100" DropDownClosed="CbbITFCC1_DropDownClosed" GotFocus="CbbITFCC1_GotFocus" LostFocus="CbbITFCC1_LostFocus">
+                        <ComboBox.ItemTemplateSelector>
+                            <ts:ComboBoxItemTemplateSelector>
+                                <ts:ComboBoxItemTemplateSelector.SelectedTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding wartosc}" />
+                                    </DataTemplate>
+                                </ts:ComboBoxItemTemplateSelector.SelectedTemplate>
+                                <ts:ComboBoxItemTemplateSelector.DropDownTemplate>
+                                    <DataTemplate>
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="{Binding parametr}" Width="20"/>
+                                            <TextBlock Text="-  "/>
+                                            <TextBlock Text="{Binding wartosc}"/>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </ts:ComboBoxItemTemplateSelector.DropDownTemplate>
+                            </ts:ComboBoxItemTemplateSelector>
+                        </ComboBox.ItemTemplateSelector>
+                    </ComboBox>
+                    <ComboBox x:Name="cbbITFCC2" FontSize="14" DropDownClosed="CbbITFCC2_DropDownClosed" GotFocus="CbbITFCC2_GotFocus" LostFocus="CbbITFCC2_LostFocus">
+                        <ComboBox.ItemTemplateSelector>
+                            <ts:ComboBoxItemTemplateSelector>
+                                <ts:ComboBoxItemTemplateSelector.SelectedTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding wartosc}" />
+                                    </DataTemplate>
+                                </ts:ComboBoxItemTemplateSelector.SelectedTemplate>
+                                <ts:ComboBoxItemTemplateSelector.DropDownTemplate>
+                                    <DataTemplate>
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="{Binding parametr}" Width="20"/>
+                                            <TextBlock Text="-  "/>
+                                            <TextBlock Text="{Binding wartosc}"/>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </ts:ComboBoxItemTemplateSelector.DropDownTemplate>
+                            </ts:ComboBoxItemTemplateSelector>
+                        </ComboBox.ItemTemplateSelector>
+                    </ComboBox>
+                </DockPanel>
+                <DockPanel Grid.Row="5" Grid.Column="1">
+                    <ComboBox x:Name="cbbITFsmin" Width="100" FontSize="14" DropDownClosed="CbbITFsmin_DropDownClosed" GotFocus="CbbITFsmin_GotFocus" LostFocus="CbbITFsmin_LostFocus">
+                        <ComboBox.ItemTemplateSelector>
+                            <ts:ComboBoxItemTemplateSelector>
+                                <ts:ComboBoxItemTemplateSelector.SelectedTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding wartosc}" />
+                                    </DataTemplate>
+                                </ts:ComboBoxItemTemplateSelector.SelectedTemplate>
+                                <ts:ComboBoxItemTemplateSelector.DropDownTemplate>
+                                    <DataTemplate>
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="{Binding parametr}" Width="20"/>
+                                            <TextBlock Text="-  "/>
+                                            <TextBlock Text="{Binding wartosc}"/>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </ts:ComboBoxItemTemplateSelector.DropDownTemplate>
+                            </ts:ComboBoxItemTemplateSelector>
+                        </ComboBox.ItemTemplateSelector>
+                    </ComboBox>
+                    <ComboBox x:Name="cbbITFsmax" FontSize="14" DropDownClosed="CbbITFsmax_DropDownClosed" GotFocus="CbbITFsmax_GotFocus" LostFocus="CbbITFsmax_LostFocus">
+                        <ComboBox.ItemTemplateSelector>
+                            <ts:ComboBoxItemTemplateSelector>
+                                <ts:ComboBoxItemTemplateSelector.SelectedTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding wartosc}" />
+                                    </DataTemplate>
+                                </ts:ComboBoxItemTemplateSelector.SelectedTemplate>
+                                <ts:ComboBoxItemTemplateSelector.DropDownTemplate>
+                                    <DataTemplate>
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="{Binding parametr}" Width="20"/>
+                                            <TextBlock Text="-  "/>
+                                            <TextBlock Text="{Binding wartosc}"/>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </ts:ComboBoxItemTemplateSelector.DropDownTemplate>
+                            </ts:ComboBoxItemTemplateSelector>
+                        </ComboBox.ItemTemplateSelector>
+                    </ComboBox>
+                </DockPanel>
+                <ComboBox x:Name="cbbITFtrn" Grid.Row="6" Grid.Column="1"  FontSize="14" DropDownClosed="CbbITFtrn_DropDownClosed" GotFocus="CbbITFtrn_GotFocus" LostFocus="CbbITFtrn_LostFocus">
                     <ComboBox.ItemTemplateSelector>
                         <ts:ComboBoxItemTemplateSelector>
                             <ts:ComboBoxItemTemplateSelector.SelectedTemplate>
@@ -345,29 +471,9 @@
                         </ts:ComboBoxItemTemplateSelector>
                     </ComboBox.ItemTemplateSelector>
                 </ComboBox>
-            </DockPanel>
-            <ComboBox x:Name="cbbITFICC" Grid.Row="2" Grid.Column="3" FontSize="14" DropDownClosed="CbbITFICC_DropDownClosed" GotFocus="CbbITFICC_GotFocus" LostFocus="CbbITFICC_LostFocus">
-                <ComboBox.ItemTemplateSelector>
-                    <ts:ComboBoxItemTemplateSelector>
-                        <ts:ComboBoxItemTemplateSelector.SelectedTemplate>
-                            <DataTemplate>
-                                <TextBlock Text="{Binding wartosc}" />
-                            </DataTemplate>
-                        </ts:ComboBoxItemTemplateSelector.SelectedTemplate>
-                        <ts:ComboBoxItemTemplateSelector.DropDownTemplate>
-                            <DataTemplate>
-                                <StackPanel Orientation="Horizontal">
-                                    <TextBlock Text="{Binding parametr}" Width="20"/>
-                                    <TextBlock Text="-  "/>
-                                    <TextBlock Text="{Binding wartosc}"/>
-                                </StackPanel>
-                            </DataTemplate>
-                        </ts:ComboBoxItemTemplateSelector.DropDownTemplate>
-                    </ts:ComboBoxItemTemplateSelector>
-                </ComboBox.ItemTemplateSelector>
-            </ComboBox>
-            <DockPanel Grid.Row="3" Grid.Column="3">
-                <ComboBox x:Name="cbbITFCC1" FontSize="14" Width="100" DropDownClosed="CbbITFCC1_DropDownClosed" GotFocus="CbbITFCC1_GotFocus" LostFocus="CbbITFCC1_LostFocus">
+                <TextBox x:Name="txtITFprn" Grid.Row="7" Grid.Column="1" Text="" FontSize="14" PreviewTextInput="TxtITFprn_PreviewTextInput" MaxLength="2" KeyUp="TxtITFprn_KeyUp" GotFocus="TxtITFprn_GotFocus" LostFocus="TxtITFprn_LostFocus"/>
+                <TextBox x:Name="txtITFrez" Grid.Row="8" Grid.Column="1" Text="" FontSize="14" MaxLength="3" PreviewTextInput="TxtITFrez_PreviewTextInput" KeyUp="TxtITFrez_KeyUp" GotFocus="TxtITFrez_GotFocus" LostFocus="TxtITFrez_LostFocus"/>
+                <ComboBox x:Name="cbbITFodch" Grid.Row="9" Grid.Column="1" FontSize="14" DropDownClosed="CbbITFodch_DropDownClosed" GotFocus="CbbITFodch_GotFocus" LostFocus="CbbITFodch_LostFocus">
                     <ComboBox.ItemTemplateSelector>
                         <ts:ComboBoxItemTemplateSelector>
                             <ts:ComboBoxItemTemplateSelector.SelectedTemplate>
@@ -387,129 +493,155 @@
                         </ts:ComboBoxItemTemplateSelector>
                     </ComboBox.ItemTemplateSelector>
                 </ComboBox>
-                <ComboBox x:Name="cbbITFCC2" FontSize="14" DropDownClosed="CbbITFCC2_DropDownClosed" GotFocus="CbbITFCC2_GotFocus" LostFocus="CbbITFCC2_LostFocus">
-                    <ComboBox.ItemTemplateSelector>
-                        <ts:ComboBoxItemTemplateSelector>
-                            <ts:ComboBoxItemTemplateSelector.SelectedTemplate>
-                                <DataTemplate>
-                                    <TextBlock Text="{Binding wartosc}" />
-                                </DataTemplate>
-                            </ts:ComboBoxItemTemplateSelector.SelectedTemplate>
-                            <ts:ComboBoxItemTemplateSelector.DropDownTemplate>
-                                <DataTemplate>
-                                    <StackPanel Orientation="Horizontal">
-                                        <TextBlock Text="{Binding parametr}" Width="20"/>
-                                        <TextBlock Text="-  "/>
-                                        <TextBlock Text="{Binding wartosc}"/>
-                                    </StackPanel>
-                                </DataTemplate>
-                            </ts:ComboBoxItemTemplateSelector.DropDownTemplate>
-                        </ts:ComboBoxItemTemplateSelector>
-                    </ComboBox.ItemTemplateSelector>
-                </ComboBox>
-            </DockPanel>
-            <DockPanel Grid.Row="4" Grid.Column="3">
-                <ComboBox x:Name="cbbITFsmin" Width="100" FontSize="14" DropDownClosed="CbbITFsmin_DropDownClosed" GotFocus="CbbITFsmin_GotFocus" LostFocus="CbbITFsmin_LostFocus">
-                    <ComboBox.ItemTemplateSelector>
-                        <ts:ComboBoxItemTemplateSelector>
-                            <ts:ComboBoxItemTemplateSelector.SelectedTemplate>
-                                <DataTemplate>
-                                    <TextBlock Text="{Binding wartosc}" />
-                                </DataTemplate>
-                            </ts:ComboBoxItemTemplateSelector.SelectedTemplate>
-                            <ts:ComboBoxItemTemplateSelector.DropDownTemplate>
-                                <DataTemplate>
-                                    <StackPanel Orientation="Horizontal">
-                                        <TextBlock Text="{Binding parametr}" Width="20"/>
-                                        <TextBlock Text="-  "/>
-                                        <TextBlock Text="{Binding wartosc}"/>
-                                    </StackPanel>
-                                </DataTemplate>
-                            </ts:ComboBoxItemTemplateSelector.DropDownTemplate>
-                        </ts:ComboBoxItemTemplateSelector>
-                    </ComboBox.ItemTemplateSelector>
-                </ComboBox>
-                <ComboBox x:Name="cbbITFsmax" FontSize="14" DropDownClosed="CbbITFsmax_DropDownClosed" GotFocus="CbbITFsmax_GotFocus" LostFocus="CbbITFsmax_LostFocus">
-                    <ComboBox.ItemTemplateSelector>
-                        <ts:ComboBoxItemTemplateSelector>
-                            <ts:ComboBoxItemTemplateSelector.SelectedTemplate>
-                                <DataTemplate>
-                                    <TextBlock Text="{Binding wartosc}" />
-                                </DataTemplate>
-                            </ts:ComboBoxItemTemplateSelector.SelectedTemplate>
-                            <ts:ComboBoxItemTemplateSelector.DropDownTemplate>
-                                <DataTemplate>
-                                    <StackPanel Orientation="Horizontal">
-                                        <TextBlock Text="{Binding parametr}" Width="20"/>
-                                        <TextBlock Text="-  "/>
-                                        <TextBlock Text="{Binding wartosc}"/>
-                                    </StackPanel>
-                                </DataTemplate>
-                            </ts:ComboBoxItemTemplateSelector.DropDownTemplate>
-                        </ts:ComboBoxItemTemplateSelector>
-                    </ComboBox.ItemTemplateSelector>
-                </ComboBox>
-            </DockPanel>
-            <ComboBox x:Name="cbbITFtrn" Grid.Row="5" Grid.Column="3"  FontSize="14" DropDownClosed="CbbITFtrn_DropDownClosed" GotFocus="CbbITFtrn_GotFocus" LostFocus="CbbITFtrn_LostFocus">
-                <ComboBox.ItemTemplateSelector>
-                    <ts:ComboBoxItemTemplateSelector>
-                        <ts:ComboBoxItemTemplateSelector.SelectedTemplate>
-                            <DataTemplate>
-                                <TextBlock Text="{Binding wartosc}" />
-                            </DataTemplate>
-                        </ts:ComboBoxItemTemplateSelector.SelectedTemplate>
-                        <ts:ComboBoxItemTemplateSelector.DropDownTemplate>
-                            <DataTemplate>
-                                <StackPanel Orientation="Horizontal">
-                                    <TextBlock Text="{Binding parametr}" Width="20"/>
-                                    <TextBlock Text="-  "/>
-                                    <TextBlock Text="{Binding wartosc}"/>
-                                </StackPanel>
-                            </DataTemplate>
-                        </ts:ComboBoxItemTemplateSelector.DropDownTemplate>
-                    </ts:ComboBoxItemTemplateSelector>
-                </ComboBox.ItemTemplateSelector>
-            </ComboBox>
-            <TextBox x:Name="txtITFprn" Grid.Row="6" Grid.Column="3" Text="" FontSize="14" PreviewTextInput="TxtITFprn_PreviewTextInput" MaxLength="2" KeyUp="TxtITFprn_KeyUp" GotFocus="TxtITFprn_GotFocus" LostFocus="TxtITFprn_LostFocus"/>
-            <TextBox x:Name="txtITFrez" Grid.Row="7" Grid.Column="3" Text="" FontSize="14" MaxLength="3" PreviewTextInput="TxtITFrez_PreviewTextInput" KeyUp="TxtITFrez_KeyUp" GotFocus="TxtITFrez_GotFocus" LostFocus="TxtITFrez_LostFocus"/>
-            <ComboBox x:Name="cbbITFodch" Grid.Row="8" Grid.Column="3" FontSize="14" DropDownClosed="CbbITFodch_DropDownClosed" GotFocus="CbbITFodch_GotFocus" LostFocus="CbbITFodch_LostFocus">
-                <ComboBox.ItemTemplateSelector>
-                    <ts:ComboBoxItemTemplateSelector>
-                        <ts:ComboBoxItemTemplateSelector.SelectedTemplate>
-                            <DataTemplate>
-                                <TextBlock Text="{Binding wartosc}" />
-                            </DataTemplate>
-                        </ts:ComboBoxItemTemplateSelector.SelectedTemplate>
-                        <ts:ComboBoxItemTemplateSelector.DropDownTemplate>
-                            <DataTemplate>
-                                <StackPanel Orientation="Horizontal">
-                                    <TextBlock Text="{Binding parametr}" Width="20"/>
-                                    <TextBlock Text="-  "/>
-                                    <TextBlock Text="{Binding wartosc}"/>
-                                </StackPanel>
-                            </DataTemplate>
-                        </ts:ComboBoxItemTemplateSelector.DropDownTemplate>
-                    </ts:ComboBoxItemTemplateSelector>
-                </ComboBox.ItemTemplateSelector>
-            </ComboBox>
-            <DockPanel HorizontalAlignment="Stretch" Grid.Row="9" Grid.Column="3" >
-                <TextBox x:Name="txtITFcz1" Text="" Width="100" FontSize="14" MaxLength="3" PreviewTextInput="TxtITFcz1_PreviewTextInput" KeyUp="TxtITFcz1_KeyUp" GotFocus="TxtITFcz1_GotFocus" LostFocus="TxtITFcz1_LostFocus"/>
-                <TextBox x:Name="txtITFcz2" Text="" FontSize="14" MaxLength="3" PreviewTextInput="TxtITFcz2_PreviewTextInput" KeyUp="TxtITFcz2_KeyUp" GotFocus="TxtITFcz2_GotFocus" LostFocus="TxtITFcz2_LostFocus"/>
-            </DockPanel>
-            <TextBox x:Name="txtITFke" Grid.Row="10" Grid.Column="3" Text="" FontSize="14" MaxLength="2" PreviewTextInput="TxtITFke_PreviewTextInput" KeyUp="TxtITFke_KeyUp" GotFocus="TxtITFke_GotFocus" LostFocus="TxtITFke_LostFocus"/>
+                <DockPanel HorizontalAlignment="Stretch" Grid.Row="10" Grid.Column="1" >
+                    <TextBox x:Name="txtITFcz1" Text="" Width="100" FontSize="14" MaxLength="3" PreviewTextInput="TxtITFcz1_PreviewTextInput" KeyUp="TxtITFcz1_KeyUp" GotFocus="TxtITFcz1_GotFocus" LostFocus="TxtITFcz1_LostFocus"/>
+                    <TextBox x:Name="txtITFcz2" Text="" FontSize="14" MaxLength="3" PreviewTextInput="TxtITFcz2_PreviewTextInput" KeyUp="TxtITFcz2_KeyUp" GotFocus="TxtITFcz2_GotFocus" LostFocus="TxtITFcz2_LostFocus"/>
+                </DockPanel>
+                <TextBox x:Name="txtITFke" Grid.Row="11" Grid.Column="1" Text="" FontSize="14" MaxLength="2" PreviewTextInput="TxtITFke_PreviewTextInput" KeyUp="TxtITFke_KeyUp" GotFocus="TxtITFke_GotFocus" LostFocus="TxtITFke_LostFocus"/>
+            </Grid>
             <!-- TRACEABILITY -->
-            <Label VerticalAlignment="Center" FontSize="14" Grid.Row="0" Grid.Column="4" Padding="10,0,0,0" Content="Znak 1 | 2 :" />
-            <Label VerticalAlignment="Center" FontSize="14" Grid.Row="1" Grid.Column="4" Padding="10,0,0,0" Content="Kategoria :" />
-            <Label VerticalAlignment="Center" FontSize="14" Grid.Row="2" Grid.Column="4" Padding="10,0,0,0" Content="Średnica min | max :" />
-            <Label VerticalAlignment="Center" FontSize="14" Grid.Row="3" Grid.Column="4" Padding="10,0,0,0" Content="Nr partii produkcujnej :" />
-            <Label VerticalAlignment="Center" FontSize="14" Grid.Row="4" Grid.Column="4" Padding="10,0,0,0" Content="Zakład produkcyjny :" />
-            <Label VerticalAlignment="Center" FontSize="14" Grid.Row="5" Grid.Column="4" Padding="10,0,0,0" Content="SDR :" />
-            <Label VerticalAlignment="Center" FontSize="14" Grid.Row="6" Grid.Column="4" Padding="10,0,0,0" Content="Mieszanka PE :"/>
-            <Label VerticalAlignment="Center" FontSize="14" Grid.Row="7" Grid.Column="4" Padding="10,0,0,0" Content="Typ materiału :" />
-            <Label VerticalAlignment="Center" FontSize="14" Grid.Row="8" Grid.Column="4" Padding="10,0,0,0" Content="Oznaczenie PE :" />
-            <Label VerticalAlignment="Center" FontSize="14" Grid.Row="9" Grid.Column="4" Padding="10,0,0,0" Content="MFR :" />
-            <DockPanel Grid.Row="0" Grid.Column="5" >
-                <ComboBox x:Name="cbbTraceZnak1" FontSize="14" Width="100" DropDownClosed="CbbTraceZnak1_DropDownClosed" GotFocus="CbbTraceZnak1_GotFocus" LostFocus="CbbTraceZnak1_LostFocus">
+            <Grid Grid.Row="0" Grid.Column="2" x:Name="grdTrace">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="25"/>
+                    <RowDefinition Height="25"/>
+                    <RowDefinition Height="25"/>
+                    <RowDefinition Height="25"/>
+                    <RowDefinition Height="25"/>
+                    <RowDefinition Height="25"/>
+                    <RowDefinition Height="25"/>
+                    <RowDefinition Height="25"/>
+                    <RowDefinition Height="25"/>
+                    <RowDefinition Height="25"/>
+                    <RowDefinition Height="25"/>
+                    <RowDefinition Height="25"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <!-- Wyrób identyfikacja - opisy -->
+                    <ColumnDefinition Width="180" />
+                    <!-- Wyrób identyfikacja - właściwości -->
+                    <ColumnDefinition Width="200"/>
+                </Grid.ColumnDefinitions>
+                <Border Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" BorderThickness="1" BorderBrush="black" Background="LightGray"/>
+                <Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" FontSize="14" FontWeight="DemiBold" HorizontalContentAlignment="Center" Padding="0,3" Content="PARAMETRY KODU TRACEABILITY"/>
+                <Label VerticalAlignment="Center" FontSize="14" Grid.Row="1" Grid.Column="0" Padding="10,0,0,0" Content="Znak 1 | 2 :" />
+                <Label VerticalAlignment="Center" FontSize="14" Grid.Row="2" Grid.Column="0" Padding="10,0,0,0" Content="Kategoria :" />
+                <Label VerticalAlignment="Center" FontSize="14" Grid.Row="3" Grid.Column="0" Padding="10,0,0,0" Content="Średnica min | max :" />
+                <Label VerticalAlignment="Center" FontSize="14" Grid.Row="4" Grid.Column="0" Padding="10,0,0,0" Content="Nr partii produkcujnej :" />
+                <Label VerticalAlignment="Center" FontSize="14" Grid.Row="5" Grid.Column="0" Padding="10,0,0,0" Content="Zakład produkcyjny :" />
+                <Label VerticalAlignment="Center" FontSize="14" Grid.Row="6" Grid.Column="0" Padding="10,0,0,0" Content="SDR :" />
+                <Label VerticalAlignment="Center" FontSize="14" Grid.Row="7" Grid.Column="0" Padding="10,0,0,0" Content="Mieszanka PE :"/>
+                <Label VerticalAlignment="Center" FontSize="14" Grid.Row="8" Grid.Column="0" Padding="10,0,0,0" Content="Typ materiału :" />
+                <Label VerticalAlignment="Center" FontSize="14" Grid.Row="9" Grid.Column="0" Padding="10,0,0,0" Content="Oznaczenie PE :" />
+                <Label VerticalAlignment="Center" FontSize="14" Grid.Row="10" Grid.Column="0" Padding="10,0,0,0" Content="MFR :" />
+                <DockPanel Grid.Row="1" Grid.Column="1" >
+                    <ComboBox x:Name="cbbTraceZnak1" FontSize="14" Width="100" DropDownClosed="CbbTraceZnak1_DropDownClosed" GotFocus="CbbTraceZnak1_GotFocus" LostFocus="CbbTraceZnak1_LostFocus">
+                        <ComboBox.ItemTemplateSelector>
+                            <ts:ComboBoxItemTemplateSelector>
+                                <ts:ComboBoxItemTemplateSelector.SelectedTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding wartosc}" />
+                                    </DataTemplate>
+                                </ts:ComboBoxItemTemplateSelector.SelectedTemplate>
+                                <ts:ComboBoxItemTemplateSelector.DropDownTemplate>
+                                    <DataTemplate>
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="{Binding parametr}" Width="20"/>
+                                            <TextBlock Text="-  "/>
+                                            <TextBlock Text="{Binding wartosc}"/>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </ts:ComboBoxItemTemplateSelector.DropDownTemplate>
+                            </ts:ComboBoxItemTemplateSelector>
+                        </ComboBox.ItemTemplateSelector>
+                    </ComboBox>
+                    <ComboBox x:Name="cbbTraceZnak2" FontSize="14" Width="100" DropDownClosed="CbbTraceZnak2_DropDownClosed" GotFocus="CbbTraceZnak2_GotFocus" LostFocus="CbbTraceZnak2_LostFocus">
+                        <ComboBox.ItemTemplateSelector>
+                            <ts:ComboBoxItemTemplateSelector>
+                                <ts:ComboBoxItemTemplateSelector.SelectedTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding wartosc}" />
+                                    </DataTemplate>
+                                </ts:ComboBoxItemTemplateSelector.SelectedTemplate>
+                                <ts:ComboBoxItemTemplateSelector.DropDownTemplate>
+                                    <DataTemplate>
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="{Binding parametr}" Width="20"/>
+                                            <TextBlock Text="-  "/>
+                                            <TextBlock Text="{Binding wartosc}"/>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </ts:ComboBoxItemTemplateSelector.DropDownTemplate>
+                            </ts:ComboBoxItemTemplateSelector>
+                        </ComboBox.ItemTemplateSelector>
+                    </ComboBox>
+                </DockPanel>
+                <ComboBox x:Name="cbbTraceKategoria" Grid.Row="2" Grid.Column="1" FontSize="14" DropDownClosed="CbbTraceKategoria_DropDownClosed" GotFocus="CbbTraceKategoria_GotFocus" LostFocus="CbbTraceKategoria_LostFocus">
+                    <ComboBox.ItemTemplateSelector>
+                        <ts:ComboBoxItemTemplateSelector>
+                            <ts:ComboBoxItemTemplateSelector.SelectedTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding opis}" />
+                                </DataTemplate>
+                            </ts:ComboBoxItemTemplateSelector.SelectedTemplate>
+                            <ts:ComboBoxItemTemplateSelector.DropDownTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="{Binding parametr}" Width="20"/>
+                                        <TextBlock Text="-  "/>
+                                        <StackPanel Orientation="Vertical">
+                                            <TextBlock Text="{Binding opis}" />
+                                            <TextBlock Text="{Binding wartosc}" FontSize="10" />
+                                        </StackPanel>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ts:ComboBoxItemTemplateSelector.DropDownTemplate>
+                        </ts:ComboBoxItemTemplateSelector>
+                    </ComboBox.ItemTemplateSelector>
+                </ComboBox>
+                <DockPanel Grid.Row="3" Grid.Column="1">
+                    <ComboBox x:Name="cbbTraceSmin" Width="100" FontSize="14" DropDownClosed="CbbTraceSmin_DropDownClosed" GotFocus="CbbTraceSmin_GotFocus" LostFocus="CbbTraceSmin_LostFocus">
+                        <ComboBox.ItemTemplateSelector>
+                            <ts:ComboBoxItemTemplateSelector>
+                                <ts:ComboBoxItemTemplateSelector.SelectedTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding wartosc}" />
+                                    </DataTemplate>
+                                </ts:ComboBoxItemTemplateSelector.SelectedTemplate>
+                                <ts:ComboBoxItemTemplateSelector.DropDownTemplate>
+                                    <DataTemplate>
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="{Binding parametr}" Width="20"/>
+                                            <TextBlock Text="-  "/>
+                                            <TextBlock Text="{Binding wartosc}"/>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </ts:ComboBoxItemTemplateSelector.DropDownTemplate>
+                            </ts:ComboBoxItemTemplateSelector>
+                        </ComboBox.ItemTemplateSelector>
+                    </ComboBox>
+                    <ComboBox x:Name="cbbTraceSmax" Width="100" FontSize="14" DropDownClosed="CbbTraceSmax_DropDownClosed" GotFocus="CbbTraceSmax_GotFocus" LostFocus="CbbTraceSmax_LostFocus">
+                        <ComboBox.ItemTemplateSelector>
+                            <ts:ComboBoxItemTemplateSelector>
+                                <ts:ComboBoxItemTemplateSelector.SelectedTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding wartosc}" />
+                                    </DataTemplate>
+                                </ts:ComboBoxItemTemplateSelector.SelectedTemplate>
+                                <ts:ComboBoxItemTemplateSelector.DropDownTemplate>
+                                    <DataTemplate>
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="{Binding parametr}" Width="20"/>
+                                            <TextBlock Text="-  "/>
+                                            <TextBlock Text="{Binding wartosc}"/>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </ts:ComboBoxItemTemplateSelector.DropDownTemplate>
+                            </ts:ComboBoxItemTemplateSelector>
+                        </ComboBox.ItemTemplateSelector>
+                    </ComboBox>
+                </DockPanel>
+                <TextBox x:Name="txtTracePartia" Grid.Row="4" Grid.Column="1" Text="" FontSize="14" MaxLength="6" KeyUp="TxtTracePartia_KeyUp" PreviewTextInput="TxtTracePartia_PreviewTextInput" GotFocus="TxtTracePartia_GotFocus" LostFocus="TxtTracePartia_LostFocus"/>
+                <ComboBox x:Name="cbbTraceProducent" Grid.Row="5" Grid.Column="1" FontSize="14" DropDownClosed="CbbTraceProducent_DropDownClosed" GotFocus="CbbTraceProducent_GotFocus" LostFocus="CbbTraceProducent_LostFocus">
                     <ComboBox.ItemTemplateSelector>
                         <ts:ComboBoxItemTemplateSelector>
                             <ts:ComboBoxItemTemplateSelector.SelectedTemplate>
@@ -529,7 +661,7 @@
                         </ts:ComboBoxItemTemplateSelector>
                     </ComboBox.ItemTemplateSelector>
                 </ComboBox>
-                <ComboBox x:Name="cbbTraceZnak2" FontSize="14" Width="100" DropDownClosed="CbbTraceZnak2_DropDownClosed" GotFocus="CbbTraceZnak2_GotFocus" LostFocus="CbbTraceZnak2_LostFocus">
+                <ComboBox x:Name="cbbTraceSDR" Grid.Row="6" Grid.Column="1" FontSize="14" DropDownClosed="CbbTraceSDR_DropDownClosed" GotFocus="CbbTraceSDR_GotFocus" LostFocus="CbbTraceSDR_LostFocus">
                     <ComboBox.ItemTemplateSelector>
                         <ts:ComboBoxItemTemplateSelector>
                             <ts:ComboBoxItemTemplateSelector.SelectedTemplate>
@@ -549,32 +681,27 @@
                         </ts:ComboBoxItemTemplateSelector>
                     </ComboBox.ItemTemplateSelector>
                 </ComboBox>
-            </DockPanel>
-            <ComboBox x:Name="cbbTraceKategoria" Grid.Row="1" Grid.Column="5" FontSize="14" DropDownClosed="CbbTraceKategoria_DropDownClosed" GotFocus="CbbTraceKategoria_GotFocus" LostFocus="CbbTraceKategoria_LostFocus">
-                <ComboBox.ItemTemplateSelector>
-                    <ts:ComboBoxItemTemplateSelector>
-                        <ts:ComboBoxItemTemplateSelector.SelectedTemplate>
-                            <DataTemplate>
-                                <TextBlock Text="{Binding opis}" />
-                            </DataTemplate>
-                        </ts:ComboBoxItemTemplateSelector.SelectedTemplate>
-                        <ts:ComboBoxItemTemplateSelector.DropDownTemplate>
-                            <DataTemplate>
-                                <StackPanel Orientation="Horizontal">
-                                    <TextBlock Text="{Binding parametr}" Width="20"/>
-                                    <TextBlock Text="-  "/>
-                                    <StackPanel Orientation="Vertical">
-                                        <TextBlock Text="{Binding opis}" />
-                                        <TextBlock Text="{Binding wartosc}" FontSize="10" />
+                <ComboBox x:Name="cbbTracePEm" Grid.Row="7" Grid.Column="1" FontSize="14" DropDownClosed="CbbTracePEm_DropDownClosed" GotFocus="CbbTracePEm_GotFocus" LostFocus="CbbTracePEm_LostFocus">
+                    <ComboBox.ItemTemplateSelector>
+                        <ts:ComboBoxItemTemplateSelector>
+                            <ts:ComboBoxItemTemplateSelector.SelectedTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding opis}" />
+                                </DataTemplate>
+                            </ts:ComboBoxItemTemplateSelector.SelectedTemplate>
+                            <ts:ComboBoxItemTemplateSelector.DropDownTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="{Binding parametr}" Width="40"/>
+                                        <TextBlock Text="-  "/>
+                                        <TextBlock Text="{Binding opis}"/>
                                     </StackPanel>
-                                </StackPanel>
-                            </DataTemplate>
-                        </ts:ComboBoxItemTemplateSelector.DropDownTemplate>
-                    </ts:ComboBoxItemTemplateSelector>
-                </ComboBox.ItemTemplateSelector>
-            </ComboBox>
-            <DockPanel Grid.Row="2" Grid.Column="5">
-                <ComboBox x:Name="cbbTraceSmin" Width="100" FontSize="14" DropDownClosed="CbbTraceSmin_DropDownClosed" GotFocus="CbbTraceSmin_GotFocus" LostFocus="CbbTraceSmin_LostFocus">
+                                </DataTemplate>
+                            </ts:ComboBoxItemTemplateSelector.DropDownTemplate>
+                        </ts:ComboBoxItemTemplateSelector>
+                    </ComboBox.ItemTemplateSelector>
+                </ComboBox>
+                <ComboBox x:Name="cbbTraceMaterial" Grid.Row="8" Grid.Column="1" FontSize="14" DropDownClosed="CbbTraceMaterial_DropDownClosed" GotFocus="CbbTraceMaterial_GotFocus" LostFocus="CbbTraceMaterial_LostFocus">
                     <ComboBox.ItemTemplateSelector>
                         <ts:ComboBoxItemTemplateSelector>
                             <ts:ComboBoxItemTemplateSelector.SelectedTemplate>
@@ -594,7 +721,7 @@
                         </ts:ComboBoxItemTemplateSelector>
                     </ComboBox.ItemTemplateSelector>
                 </ComboBox>
-                <ComboBox x:Name="cbbTraceSmax" Width="100" FontSize="14" DropDownClosed="CbbTraceSmax_DropDownClosed" GotFocus="CbbTraceSmax_GotFocus" LostFocus="CbbTraceSmax_LostFocus">
+                <ComboBox x:Name="cbbTracePEo" Grid.Row="9" Grid.Column="1"  FontSize="14" DropDownClosed="CbbTracePEo_DropDownClosed" GotFocus="CbbTracePEo_GotFocus" LostFocus="CbbTracePEo_LostFocus">
                     <ComboBox.ItemTemplateSelector>
                         <ts:ComboBoxItemTemplateSelector>
                             <ts:ComboBoxItemTemplateSelector.SelectedTemplate>
@@ -614,128 +741,93 @@
                         </ts:ComboBoxItemTemplateSelector>
                     </ComboBox.ItemTemplateSelector>
                 </ComboBox>
-            </DockPanel>
-            <TextBox x:Name="txtTracePartia" Grid.Row="3" Grid.Column="5" Text="" FontSize="14" MaxLength="6" KeyUp="TxtTracePartia_KeyUp" PreviewTextInput="TxtTracePartia_PreviewTextInput" GotFocus="TxtTracePartia_GotFocus" LostFocus="TxtTracePartia_LostFocus"/>
-            <ComboBox x:Name="cbbTraceProducent" Grid.Row="4" Grid.Column="5" FontSize="14" DropDownClosed="CbbTraceProducent_DropDownClosed" GotFocus="CbbTraceProducent_GotFocus" LostFocus="CbbTraceProducent_LostFocus">
-                <ComboBox.ItemTemplateSelector>
-                    <ts:ComboBoxItemTemplateSelector>
-                        <ts:ComboBoxItemTemplateSelector.SelectedTemplate>
-                            <DataTemplate>
-                                <TextBlock Text="{Binding wartosc}" />
-                            </DataTemplate>
-                        </ts:ComboBoxItemTemplateSelector.SelectedTemplate>
-                        <ts:ComboBoxItemTemplateSelector.DropDownTemplate>
-                            <DataTemplate>
-                                <StackPanel Orientation="Horizontal">
-                                    <TextBlock Text="{Binding parametr}" Width="20"/>
-                                    <TextBlock Text="-  "/>
-                                    <TextBlock Text="{Binding wartosc}"/>
-                                </StackPanel>
-                            </DataTemplate>
-                        </ts:ComboBoxItemTemplateSelector.DropDownTemplate>
-                    </ts:ComboBoxItemTemplateSelector>
-                </ComboBox.ItemTemplateSelector>
-            </ComboBox>
-            <ComboBox x:Name="cbbTraceSDR" Grid.Row="5" Grid.Column="5" FontSize="14" DropDownClosed="CbbTraceSDR_DropDownClosed" GotFocus="CbbTraceSDR_GotFocus" LostFocus="CbbTraceSDR_LostFocus">
-                <ComboBox.ItemTemplateSelector>
-                    <ts:ComboBoxItemTemplateSelector>
-                        <ts:ComboBoxItemTemplateSelector.SelectedTemplate>
-                            <DataTemplate>
-                                <TextBlock Text="{Binding wartosc}" />
-                            </DataTemplate>
-                        </ts:ComboBoxItemTemplateSelector.SelectedTemplate>
-                        <ts:ComboBoxItemTemplateSelector.DropDownTemplate>
-                            <DataTemplate>
-                                <StackPanel Orientation="Horizontal">
-                                    <TextBlock Text="{Binding parametr}" Width="20"/>
-                                    <TextBlock Text="-  "/>
-                                    <TextBlock Text="{Binding wartosc}"/>
-                                </StackPanel>
-                            </DataTemplate>
-                        </ts:ComboBoxItemTemplateSelector.DropDownTemplate>
-                    </ts:ComboBoxItemTemplateSelector>
-                </ComboBox.ItemTemplateSelector>
-            </ComboBox>
-            <ComboBox x:Name="cbbTracePEm" Grid.Row="6" Grid.Column="5" FontSize="14" DropDownClosed="CbbTracePEm_DropDownClosed" GotFocus="CbbTracePEm_GotFocus" LostFocus="CbbTracePEm_LostFocus">
-                <ComboBox.ItemTemplateSelector>
-                    <ts:ComboBoxItemTemplateSelector>
-                        <ts:ComboBoxItemTemplateSelector.SelectedTemplate>
-                            <DataTemplate>
-                                <TextBlock Text="{Binding opis}" />
-                            </DataTemplate>
-                        </ts:ComboBoxItemTemplateSelector.SelectedTemplate>
-                        <ts:ComboBoxItemTemplateSelector.DropDownTemplate>
-                            <DataTemplate>
-                                <StackPanel Orientation="Horizontal">
-                                    <TextBlock Text="{Binding parametr}" Width="40"/>
-                                    <TextBlock Text="-  "/>
-                                    <TextBlock Text="{Binding opis}"/>
-                                </StackPanel>
-                            </DataTemplate>
-                        </ts:ComboBoxItemTemplateSelector.DropDownTemplate>
-                    </ts:ComboBoxItemTemplateSelector>
-                </ComboBox.ItemTemplateSelector>
-            </ComboBox>
-            <ComboBox x:Name="cbbTraceMaterial" Grid.Row="7" Grid.Column="5" FontSize="14" DropDownClosed="CbbTraceMaterial_DropDownClosed" GotFocus="CbbTraceMaterial_GotFocus" LostFocus="CbbTraceMaterial_LostFocus">
-                <ComboBox.ItemTemplateSelector>
-                    <ts:ComboBoxItemTemplateSelector>
-                        <ts:ComboBoxItemTemplateSelector.SelectedTemplate>
-                            <DataTemplate>
-                                <TextBlock Text="{Binding wartosc}" />
-                            </DataTemplate>
-                        </ts:ComboBoxItemTemplateSelector.SelectedTemplate>
-                        <ts:ComboBoxItemTemplateSelector.DropDownTemplate>
-                            <DataTemplate>
-                                <StackPanel Orientation="Horizontal">
-                                    <TextBlock Text="{Binding parametr}" Width="20"/>
-                                    <TextBlock Text="-  "/>
-                                    <TextBlock Text="{Binding wartosc}"/>
-                                </StackPanel>
-                            </DataTemplate>
-                        </ts:ComboBoxItemTemplateSelector.DropDownTemplate>
-                    </ts:ComboBoxItemTemplateSelector>
-                </ComboBox.ItemTemplateSelector>
-            </ComboBox>
-            <ComboBox x:Name="cbbTracePEo" Grid.Row="8" Grid.Column="5"  FontSize="14" DropDownClosed="CbbTracePEo_DropDownClosed" GotFocus="CbbTracePEo_GotFocus" LostFocus="CbbTracePEo_LostFocus">
-                <ComboBox.ItemTemplateSelector>
-                    <ts:ComboBoxItemTemplateSelector>
-                        <ts:ComboBoxItemTemplateSelector.SelectedTemplate>
-                            <DataTemplate>
-                                <TextBlock Text="{Binding wartosc}" />
-                            </DataTemplate>
-                        </ts:ComboBoxItemTemplateSelector.SelectedTemplate>
-                        <ts:ComboBoxItemTemplateSelector.DropDownTemplate>
-                            <DataTemplate>
-                                <StackPanel Orientation="Horizontal">
-                                    <TextBlock Text="{Binding parametr}" Width="20"/>
-                                    <TextBlock Text="-  "/>
-                                    <TextBlock Text="{Binding wartosc}"/>
-                                </StackPanel>
-                            </DataTemplate>
-                        </ts:ComboBoxItemTemplateSelector.DropDownTemplate>
-                    </ts:ComboBoxItemTemplateSelector>
-                </ComboBox.ItemTemplateSelector>
-            </ComboBox>
-            <ComboBox x:Name="cbbTraceMFR" Grid.Row="9" Grid.Column="5" FontSize="14" DropDownClosed="CbbTraceMFR_DropDownClosed" GotFocus="CbbTraceMFR_GotFocus" LostFocus="CbbTraceMFR_LostFocus">
-                <ComboBox.ItemTemplateSelector>
-                    <ts:ComboBoxItemTemplateSelector>
-                        <ts:ComboBoxItemTemplateSelector.SelectedTemplate>
-                            <DataTemplate>
-                                <TextBlock Text="{Binding wartosc}" />
-                            </DataTemplate>
-                        </ts:ComboBoxItemTemplateSelector.SelectedTemplate>
-                        <ts:ComboBoxItemTemplateSelector.DropDownTemplate>
-                            <DataTemplate>
-                                <StackPanel Orientation="Horizontal">
-                                    <TextBlock Text="{Binding parametr}" Width="20"/>
-                                    <TextBlock Text="-  "/>
-                                    <TextBlock Text="{Binding wartosc}"/>
-                                </StackPanel>
-                            </DataTemplate>
-                        </ts:ComboBoxItemTemplateSelector.DropDownTemplate>
-                    </ts:ComboBoxItemTemplateSelector>
-                </ComboBox.ItemTemplateSelector>
-            </ComboBox>
+                <ComboBox x:Name="cbbTraceMFR" Grid.Row="10" Grid.Column="1" FontSize="14" DropDownClosed="CbbTraceMFR_DropDownClosed" GotFocus="CbbTraceMFR_GotFocus" LostFocus="CbbTraceMFR_LostFocus">
+                    <ComboBox.ItemTemplateSelector>
+                        <ts:ComboBoxItemTemplateSelector>
+                            <ts:ComboBoxItemTemplateSelector.SelectedTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding wartosc}" />
+                                </DataTemplate>
+                            </ts:ComboBoxItemTemplateSelector.SelectedTemplate>
+                            <ts:ComboBoxItemTemplateSelector.DropDownTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="{Binding parametr}" Width="20"/>
+                                        <TextBlock Text="-  "/>
+                                        <TextBlock Text="{Binding wartosc}"/>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ts:ComboBoxItemTemplateSelector.DropDownTemplate>
+                        </ts:ComboBoxItemTemplateSelector>
+                    </ComboBox.ItemTemplateSelector>
+                </ComboBox>
+            </Grid>
+            <Grid Grid.Row="0" Grid.Column="3" x:Name="grdInne">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="25"/>
+                    <RowDefinition Height="25"/>
+                    <RowDefinition Height="25"/>
+                    <RowDefinition Height="25"/>
+                    <RowDefinition Height="25"/>
+                    <RowDefinition Height="25"/>
+                    <RowDefinition Height="25"/>
+                    <RowDefinition Height="25"/>
+                    <RowDefinition Height="25"/>
+                    <RowDefinition Height="25"/>
+                    <RowDefinition Height="25"/>
+                    <RowDefinition Height="25"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <!-- Wyrób identyfikacja - opisy -->
+                    <ColumnDefinition Width="180" />
+                    <!-- Wyrób identyfikacja - właściwości -->
+                    <ColumnDefinition Width="200"/>
+                </Grid.ColumnDefinitions>
+                <Border Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" BorderThickness="1" BorderBrush="black" Background="LightGray"/>
+                <Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" FontSize="14" FontWeight="DemiBold" HorizontalContentAlignment="Center" Padding="0,3" Content="INNE"/>
+                <Label VerticalAlignment="Center" FontSize="14" Grid.Row="1" Grid.Column="0" Padding="10,0,0,0" Content="Zastosowanie zaworu :" />
+                <Label VerticalAlignment="Center" FontSize="14" Grid.Row="2" Grid.Column="0" Padding="10,0,0,0" Content="Rodzaj drutu :" />
+                <ComboBox x:Name="cbbWyrobZastZaworu" Grid.Row="1" Grid.Column="1" FontSize="14">
+                    <ComboBox.ItemTemplateSelector>
+                        <ts:ComboBoxItemTemplateSelector>
+                            <ts:ComboBoxItemTemplateSelector.SelectedTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding wartosc}" />
+                                </DataTemplate>
+                            </ts:ComboBoxItemTemplateSelector.SelectedTemplate>
+                            <ts:ComboBoxItemTemplateSelector.DropDownTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="{Binding parametr}" Width="13"/>
+                                        <TextBlock Text="-  "/>
+                                        <TextBlock Text="{Binding wartosc}" />
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ts:ComboBoxItemTemplateSelector.DropDownTemplate>
+                        </ts:ComboBoxItemTemplateSelector>
+                    </ComboBox.ItemTemplateSelector>
+                </ComboBox>
+                <ComboBox x:Name="cbbWyrobRodzajDrutu" Grid.Row="2" Grid.Column="1" FontSize="14">
+                    <ComboBox.ItemTemplateSelector>
+                        <ts:ComboBoxItemTemplateSelector>
+                            <ts:ComboBoxItemTemplateSelector.SelectedTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding wartosc}" />
+                                </DataTemplate>
+                            </ts:ComboBoxItemTemplateSelector.SelectedTemplate>
+                            <ts:ComboBoxItemTemplateSelector.DropDownTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="{Binding indeks}" Width="20"/>
+                                        <TextBlock Text="-  "/>
+                                        <TextBlock Text="{Binding wartosc}" Width="120"/>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ts:ComboBoxItemTemplateSelector.DropDownTemplate>
+                        </ts:ComboBoxItemTemplateSelector>
+                    </ComboBox.ItemTemplateSelector>
+                </ComboBox>
+            </Grid>
         </Grid>
         <Grid x:Name="gridKody" ShowGridLines="False"  Grid.Row="4" Margin="0,10,0,0" >
             <Grid.ColumnDefinitions>

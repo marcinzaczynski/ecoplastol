@@ -328,8 +328,8 @@ namespace ecoplastol
                 txtWyrobWagaOp.Text = row.wyrob_waga_op.ToString();
                 txtWyrobWaga1szt.Text = row.wyrob_waga_1szt.ToString();
                 cbbWyrobZakresSDR.SelectedValue = row.wyrob_zakres_sdr;
-                cbbWyrobZastZaworu.SelectedValue = row.wyrob_zast_zaworu;
-                cbbWyrobRodzajDrutu.SelectedValue = row.wyrob_rodzaj_drutu;
+                txtWyrobNorma.Text = row.wyrob_norma.ToString();
+                txtWyrobIlwPartii.Text = row.wyrob_il_w_partii.ToString();
                 // ITF
                 cbbITFKategoria.SelectedValue = row.itf_kategoria;
                 cbbITFZnak1.SelectedValue = row.itf_znak1;
@@ -359,6 +359,9 @@ namespace ecoplastol
                 cbbTraceMaterial.SelectedValue = row.trace_material;
                 cbbTracePEo.SelectedValue = row.trace_pe_o;
                 cbbTraceMFR.SelectedValue = row.trace_mfr;
+                // INNE
+                cbbWyrobZastZaworu.SelectedValue = row.wyrob_zast_zaworu;
+                cbbWyrobRodzajDrutu.SelectedValue = row.wyrob_rodzaj_drutu;
 
                 WyczyscKontrolkiKodKr();
                 PrzygotujPodKodKrITF();
@@ -520,6 +523,11 @@ namespace ecoplastol
             nowyWyrob.wyrob_zakres_sdr = Int32.Parse(cbbWyrobZakresSDR.SelectedValue.ToString());
             nowyWyrob.wyrob_zast_zaworu = Int32.Parse(cbbWyrobZastZaworu.SelectedValue.ToString());
             nowyWyrob.wyrob_rodzaj_drutu = Int32.Parse(cbbWyrobRodzajDrutu.SelectedValue.ToString());
+            txtWyrobNorma.Text = (txtWyrobNorma.Text == "" ? txtWyrobNorma.Text = "0" : txtWyrobNorma.Text = txtWyrobNorma.Text);
+            nowyWyrob.wyrob_norma = Int32.Parse(txtWyrobNorma.Text == "" ? txtWyrobNorma.Text = "0" : txtWyrobNorma.Text = txtWyrobNorma.Text);
+
+             
+            nowyWyrob.wyrob_il_w_partii = Int32.Parse(txtWyrobIlwPartii.Text);
             nowyWyrob.itf_kategoria = Int32.Parse(cbbITFKategoria.SelectedValue.ToString()); // [itf_kategoria] [int] NULL,
             nowyWyrob.itf_znak1 = Int32.Parse(cbbITFZnak1.SelectedValue.ToString());         // [itf_znak1] [int] NULL,
             nowyWyrob.itf_znak2 = Int32.Parse(cbbITFZnak2.SelectedValue.ToString());         // [itf_znak2] [int] NULL,
@@ -1518,5 +1526,18 @@ namespace ecoplastol
             txtTracep25.Background = Brushes.White;
         }
 
+        private void TxtWyrobNorma_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            var str = e.Text;
+            Regex _regex = new Regex("[^0-9]+");
+            e.Handled = _regex.IsMatch(str);
+        }
+
+        private void TxtWyrobIlwPartii_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            var str = e.Text;
+            Regex _regex = new Regex("[^0-9]+");
+            e.Handled = _regex.IsMatch(str);
+        }
     }
 }

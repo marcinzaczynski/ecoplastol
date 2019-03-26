@@ -56,5 +56,7 @@ namespace ecoplastol
         public System.DateTime czasw { get; set; }
         public string opm { get; set; }
         public System.DateTime czasm { get; set; }
+        public Nullable<int> wyrob_norma { get; set; }
+        public Nullable<int> wyrob_il_w_partii { get; set; }
     }
 }

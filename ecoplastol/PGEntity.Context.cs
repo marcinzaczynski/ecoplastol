@@ -27,7 +27,6 @@ namespace ecoplastol
     
         public virtual DbSet<uzytkownicy> uzytkownicy { get; set; }
         public virtual DbSet<parametry> parametry { get; set; }
-        public virtual DbSet<wyroby> wyroby { get; set; }
         public virtual DbSet<wyroby_druty> wyroby_druty { get; set; }
         public virtual DbSet<wyroby_typ> wyroby_typ { get; set; }
         public virtual DbSet<wyroby_zakres_sdr> wyroby_zakres_sdr { get; set; }
@@ -49,5 +48,6 @@ namespace ecoplastol
         public virtual DbSet<itf_kategorie> itf_kategorie { get; set; }
         public virtual DbSet<itf_litery> itf_litery { get; set; }
         public virtual DbSet<maszyny> maszyny { get; set; }
+        public virtual DbSet<wyroby> wyroby { get; set; }
     }
 }
