@@ -7,9 +7,9 @@
     <Schema Namespace="ecoplastolModel.Store" Provider="Npgsql" ProviderManifestToken="11.2" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="itf_cc">
           <Key>
-            <PropertyRef Name="indeks" />
+            <PropertyRef Name="id" />
           </Key>
-          <Property Name="indeks" Type="int4" Nullable="false" />
+          <Property Name="id" Type="int4" Nullable="false" />
           <Property Name="parametr" Type="varchar" MaxLength="10" />
           <Property Name="wartosc" Type="varchar" MaxLength="50" />
           <Property Name="opis" Type="varchar" MaxLength="50" />
@@ -20,9 +20,9 @@
         </EntityType>
         <EntityType Name="itf_icc">
           <Key>
-            <PropertyRef Name="indeks" />
+            <PropertyRef Name="id" />
           </Key>
-          <Property Name="indeks" Type="int4" Nullable="false" />
+          <Property Name="id" Type="int4" Nullable="false" />
           <Property Name="parametr" Type="varchar" MaxLength="10" />
           <Property Name="wartosc" Type="varchar" MaxLength="50" />
           <Property Name="opis" Type="varchar" MaxLength="50" />
@@ -33,9 +33,9 @@
         </EntityType>
         <EntityType Name="itf_kategorie">
           <Key>
-            <PropertyRef Name="indeks" />
+            <PropertyRef Name="id" />
           </Key>
-          <Property Name="indeks" Type="int4" Nullable="false" />
+          <Property Name="id" Type="int4" Nullable="false" />
           <Property Name="parametr" Type="varchar" MaxLength="10" />
           <Property Name="wartosc" Type="varchar" MaxLength="50" />
           <Property Name="opis" Type="varchar" MaxLength="50" />
@@ -46,9 +46,9 @@
         </EntityType>
         <EntityType Name="itf_litery">
           <Key>
-            <PropertyRef Name="indeks" />
+            <PropertyRef Name="id" />
           </Key>
-          <Property Name="indeks" Type="int4" Nullable="false" />
+          <Property Name="id" Type="int4" Nullable="false" />
           <Property Name="parametr" Type="varchar" MaxLength="10" />
           <Property Name="wartosc" Type="varchar" MaxLength="50" />
           <Property Name="opis" Type="varchar" MaxLength="50" />
@@ -59,9 +59,9 @@
         </EntityType>
         <EntityType Name="itf_odch">
           <Key>
-            <PropertyRef Name="indeks" />
+            <PropertyRef Name="id" />
           </Key>
-          <Property Name="indeks" Type="int4" Nullable="false" />
+          <Property Name="id" Type="int4" Nullable="false" />
           <Property Name="parametr" Type="varchar" MaxLength="10" />
           <Property Name="wartosc" Type="varchar" MaxLength="50" />
           <Property Name="opis" Type="varchar" MaxLength="50" />
@@ -72,9 +72,9 @@
         </EntityType>
         <EntityType Name="itf_sr">
           <Key>
-            <PropertyRef Name="indeks" />
+            <PropertyRef Name="id" />
           </Key>
-          <Property Name="indeks" Type="int4" Nullable="false" />
+          <Property Name="id" Type="int4" Nullable="false" />
           <Property Name="parametr" Type="varchar" MaxLength="10" />
           <Property Name="wartosc" Type="varchar" MaxLength="50" />
           <Property Name="opis" Type="varchar" MaxLength="50" />
@@ -85,9 +85,9 @@
         </EntityType>
         <EntityType Name="itf_trn">
           <Key>
-            <PropertyRef Name="indeks" />
+            <PropertyRef Name="id" />
           </Key>
-          <Property Name="indeks" Type="int4" Nullable="false" />
+          <Property Name="id" Type="int4" Nullable="false" />
           <Property Name="parametr" Type="varchar" MaxLength="10" />
           <Property Name="wartosc" Type="varchar" MaxLength="50" />
           <Property Name="opis" Type="varchar" MaxLength="50" />
@@ -300,9 +300,10 @@
         </EntityType>
         <EntityType Name="wyroby_druty">
           <Key>
-            <PropertyRef Name="indeks" />
+            <PropertyRef Name="id" />
           </Key>
-          <Property Name="indeks" Type="int4" Nullable="false" />
+          <Property Name="id" Type="int4" Nullable="false" />
+          <Property Name="parametr" Type="int4" />
           <Property Name="wartosc" Type="varchar" MaxLength="50" />
           <Property Name="opis" Type="varchar" MaxLength="50" />
           <Property Name="opw" Type="varchar" MaxLength="50" Nullable="false" />
@@ -394,15 +395,9 @@
         <EntityContainer Name="ecoplastolEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="uzytkownicy" EntityType="Self.uzytkownicy" />
           <EntitySet Name="parametry" EntityType="ecoplastolModel.parametry" />
-          <EntitySet Name="wyroby_druty" EntityType="ecoplastolModel.wyroby_druty" />
           <EntitySet Name="wyroby_typ" EntityType="ecoplastolModel.wyroby_typ" />
           <EntitySet Name="wyroby_zakres_sdr" EntityType="ecoplastolModel.wyroby_zakres_sdr" />
           <EntitySet Name="wyroby_zast_zaworu" EntityType="ecoplastolModel.wyroby_zast_zaworu" />
-          <EntitySet Name="itf_cc" EntityType="ecoplastolModel.itf_cc" />
-          <EntitySet Name="itf_icc" EntityType="ecoplastolModel.itf_icc" />
-          <EntitySet Name="itf_odch" EntityType="ecoplastolModel.itf_odch" />
-          <EntitySet Name="itf_sr" EntityType="ecoplastolModel.itf_sr" />
-          <EntitySet Name="itf_trn" EntityType="ecoplastolModel.itf_trn" />
           <EntitySet Name="trace_kategoria" EntityType="ecoplastolModel.trace_kategoria" />
           <EntitySet Name="trace_material" EntityType="ecoplastolModel.trace_material" />
           <EntitySet Name="trace_mfr" EntityType="ecoplastolModel.trace_mfr" />
@@ -412,10 +407,16 @@
           <EntitySet Name="trace_sdr" EntityType="ecoplastolModel.trace_sdr" />
           <EntitySet Name="trace_sr" EntityType="ecoplastolModel.trace_sr" />
           <EntitySet Name="trace_znak" EntityType="ecoplastolModel.trace_znak" />
-          <EntitySet Name="itf_kategorie" EntityType="ecoplastolModel.itf_kategorie" />
-          <EntitySet Name="itf_litery" EntityType="ecoplastolModel.itf_litery" />
           <EntitySet Name="maszyny" EntityType="ecoplastolModel.maszyny" />
           <EntitySet Name="wyroby" EntityType="ecoplastolModel.wyroby" />
+          <EntitySet Name="wyroby_druty" EntityType="ecoplastolModel.wyroby_druty" />
+          <EntitySet Name="itf_cc" EntityType="ecoplastolModel.itf_cc" />
+          <EntitySet Name="itf_icc" EntityType="ecoplastolModel.itf_icc" />
+          <EntitySet Name="itf_kategorie" EntityType="ecoplastolModel.itf_kategorie" />
+          <EntitySet Name="itf_litery" EntityType="ecoplastolModel.itf_litery" />
+          <EntitySet Name="itf_odch" EntityType="ecoplastolModel.itf_odch" />
+          <EntitySet Name="itf_sr" EntityType="ecoplastolModel.itf_sr" />
+          <EntitySet Name="itf_trn" EntityType="ecoplastolModel.itf_trn" />
         </EntityContainer>
         <EntityType Name="parametry">
           <Key>
@@ -426,18 +427,6 @@
           <Property Name="grupa" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="indeks" Type="Int32" Nullable="false" />
           <Property Name="parametr" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="wartosc" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="opis" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="opw" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="czasw" Type="DateTime" Nullable="false" Precision="6" />
-          <Property Name="opm" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="czasm" Type="DateTime" Nullable="false" Precision="6" />
-        </EntityType>
-        <EntityType Name="wyroby_druty">
-          <Key>
-            <PropertyRef Name="indeks" />
-          </Key>
-          <Property Name="indeks" Type="Int32" Nullable="false" />
           <Property Name="wartosc" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="opis" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="opw" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
@@ -476,71 +465,6 @@
           </Key>
           <Property Name="indeks" Type="Int32" Nullable="false" />
           <Property Name="parametr" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="wartosc" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="opis" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="opw" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="czasw" Type="DateTime" Nullable="false" Precision="6" />
-          <Property Name="opm" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="czasm" Type="DateTime" Nullable="false" Precision="6" />
-        </EntityType>
-        <EntityType Name="itf_cc">
-          <Key>
-            <PropertyRef Name="indeks" />
-          </Key>
-          <Property Name="indeks" Type="Int32" Nullable="false" />
-          <Property Name="parametr" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
-          <Property Name="wartosc" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="opis" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="opw" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="czasw" Type="DateTime" Nullable="false" Precision="6" />
-          <Property Name="opm" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="czasm" Type="DateTime" Nullable="false" Precision="6" />
-        </EntityType>
-        <EntityType Name="itf_icc">
-          <Key>
-            <PropertyRef Name="indeks" />
-          </Key>
-          <Property Name="indeks" Type="Int32" Nullable="false" />
-          <Property Name="parametr" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
-          <Property Name="wartosc" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="opis" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="opw" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="czasw" Type="DateTime" Nullable="false" Precision="6" />
-          <Property Name="opm" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="czasm" Type="DateTime" Nullable="false" Precision="6" />
-        </EntityType>
-        <EntityType Name="itf_odch">
-          <Key>
-            <PropertyRef Name="indeks" />
-          </Key>
-          <Property Name="indeks" Type="Int32" Nullable="false" />
-          <Property Name="parametr" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
-          <Property Name="wartosc" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="opis" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="opw" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="czasw" Type="DateTime" Nullable="false" Precision="6" />
-          <Property Name="opm" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="czasm" Type="DateTime" Nullable="false" Precision="6" />
-        </EntityType>
-        <EntityType Name="itf_sr">
-          <Key>
-            <PropertyRef Name="indeks" />
-          </Key>
-          <Property Name="indeks" Type="Int32" Nullable="false" />
-          <Property Name="parametr" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
-          <Property Name="wartosc" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="opis" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="opw" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="czasw" Type="DateTime" Nullable="false" Precision="6" />
-          <Property Name="opm" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="czasm" Type="DateTime" Nullable="false" Precision="6" />
-        </EntityType>
-        <EntityType Name="itf_trn">
-          <Key>
-            <PropertyRef Name="indeks" />
-          </Key>
-          <Property Name="indeks" Type="Int32" Nullable="false" />
-          <Property Name="parametr" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
           <Property Name="wartosc" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="opis" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="opw" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
@@ -665,32 +589,6 @@
           <Property Name="opm" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="czasm" Type="DateTime" Nullable="false" Precision="6" />
         </EntityType>
-        <EntityType Name="itf_kategorie">
-          <Key>
-            <PropertyRef Name="indeks" />
-          </Key>
-          <Property Name="indeks" Type="Int32" Nullable="false" />
-          <Property Name="parametr" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
-          <Property Name="wartosc" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="opis" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="opw" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="czasw" Type="DateTime" Nullable="false" Precision="6" />
-          <Property Name="opm" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="czasm" Type="DateTime" Nullable="false" Precision="6" />
-        </EntityType>
-        <EntityType Name="itf_litery">
-          <Key>
-            <PropertyRef Name="indeks" />
-          </Key>
-          <Property Name="indeks" Type="Int32" Nullable="false" />
-          <Property Name="parametr" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
-          <Property Name="wartosc" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="opis" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="opw" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="czasw" Type="DateTime" Nullable="false" Precision="6" />
-          <Property Name="opm" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="czasm" Type="DateTime" Nullable="false" Precision="6" />
-        </EntityType>
         <EntityType Name="maszyny">
           <Key>
             <PropertyRef Name="id" />
@@ -747,6 +645,110 @@
           <Property Name="wyrob_norma" Type="Int32" />
           <Property Name="wyrob_il_w_partii" Type="Int32" />
         </EntityType>
+        <EntityType Name="wyroby_druty">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="parametr" Type="Int32" />
+          <Property Name="wartosc" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="opis" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="opw" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="czasw" Type="DateTime" Nullable="false" Precision="6" />
+          <Property Name="opm" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="czasm" Type="DateTime" Nullable="false" Precision="6" />
+        </EntityType>
+        <EntityType Name="itf_cc">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="parametr" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="wartosc" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="opis" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="opw" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="czasw" Type="DateTime" Nullable="false" Precision="6" />
+          <Property Name="opm" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="czasm" Type="DateTime" Nullable="false" Precision="6" />
+        </EntityType>
+        <EntityType Name="itf_icc">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="parametr" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="wartosc" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="opis" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="opw" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="czasw" Type="DateTime" Nullable="false" Precision="6" />
+          <Property Name="opm" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="czasm" Type="DateTime" Nullable="false" Precision="6" />
+        </EntityType>
+        <EntityType Name="itf_kategorie">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="parametr" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="wartosc" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="opis" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="opw" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="czasw" Type="DateTime" Nullable="false" Precision="6" />
+          <Property Name="opm" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="czasm" Type="DateTime" Nullable="false" Precision="6" />
+        </EntityType>
+        <EntityType Name="itf_litery">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="parametr" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="wartosc" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="opis" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="opw" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="czasw" Type="DateTime" Nullable="false" Precision="6" />
+          <Property Name="opm" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="czasm" Type="DateTime" Nullable="false" Precision="6" />
+        </EntityType>
+        <EntityType Name="itf_odch">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="parametr" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="wartosc" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="opis" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="opw" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="czasw" Type="DateTime" Nullable="false" Precision="6" />
+          <Property Name="opm" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="czasm" Type="DateTime" Nullable="false" Precision="6" />
+        </EntityType>
+        <EntityType Name="itf_sr">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="parametr" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="wartosc" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="opis" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="opw" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="czasw" Type="DateTime" Nullable="false" Precision="6" />
+          <Property Name="opm" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="czasm" Type="DateTime" Nullable="false" Precision="6" />
+        </EntityType>
+        <EntityType Name="itf_trn">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="parametr" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="wartosc" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="opis" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="opw" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="czasw" Type="DateTime" Nullable="false" Precision="6" />
+          <Property Name="opm" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="czasm" Type="DateTime" Nullable="false" Precision="6" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -784,19 +786,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="wyroby_druty">
-            <EntityTypeMapping TypeName="ecoplastolModel.wyroby_druty">
-              <MappingFragment StoreEntitySet="wyroby_druty">
-                <ScalarProperty Name="czasm" ColumnName="czasm" />
-                <ScalarProperty Name="opm" ColumnName="opm" />
-                <ScalarProperty Name="czasw" ColumnName="czasw" />
-                <ScalarProperty Name="opw" ColumnName="opw" />
-                <ScalarProperty Name="opis" ColumnName="opis" />
-                <ScalarProperty Name="wartosc" ColumnName="wartosc" />
-                <ScalarProperty Name="indeks" ColumnName="indeks" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="wyroby_typ">
             <EntityTypeMapping TypeName="ecoplastolModel.wyroby_typ">
               <MappingFragment StoreEntitySet="wyroby_typ">
@@ -827,76 +816,6 @@
           <EntitySetMapping Name="wyroby_zast_zaworu">
             <EntityTypeMapping TypeName="ecoplastolModel.wyroby_zast_zaworu">
               <MappingFragment StoreEntitySet="wyroby_zast_zaworu">
-                <ScalarProperty Name="czasm" ColumnName="czasm" />
-                <ScalarProperty Name="opm" ColumnName="opm" />
-                <ScalarProperty Name="czasw" ColumnName="czasw" />
-                <ScalarProperty Name="opw" ColumnName="opw" />
-                <ScalarProperty Name="opis" ColumnName="opis" />
-                <ScalarProperty Name="wartosc" ColumnName="wartosc" />
-                <ScalarProperty Name="parametr" ColumnName="parametr" />
-                <ScalarProperty Name="indeks" ColumnName="indeks" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="itf_cc">
-            <EntityTypeMapping TypeName="ecoplastolModel.itf_cc">
-              <MappingFragment StoreEntitySet="itf_cc">
-                <ScalarProperty Name="czasm" ColumnName="czasm" />
-                <ScalarProperty Name="opm" ColumnName="opm" />
-                <ScalarProperty Name="czasw" ColumnName="czasw" />
-                <ScalarProperty Name="opw" ColumnName="opw" />
-                <ScalarProperty Name="opis" ColumnName="opis" />
-                <ScalarProperty Name="wartosc" ColumnName="wartosc" />
-                <ScalarProperty Name="parametr" ColumnName="parametr" />
-                <ScalarProperty Name="indeks" ColumnName="indeks" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="itf_icc">
-            <EntityTypeMapping TypeName="ecoplastolModel.itf_icc">
-              <MappingFragment StoreEntitySet="itf_icc">
-                <ScalarProperty Name="czasm" ColumnName="czasm" />
-                <ScalarProperty Name="opm" ColumnName="opm" />
-                <ScalarProperty Name="czasw" ColumnName="czasw" />
-                <ScalarProperty Name="opw" ColumnName="opw" />
-                <ScalarProperty Name="opis" ColumnName="opis" />
-                <ScalarProperty Name="wartosc" ColumnName="wartosc" />
-                <ScalarProperty Name="parametr" ColumnName="parametr" />
-                <ScalarProperty Name="indeks" ColumnName="indeks" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="itf_odch">
-            <EntityTypeMapping TypeName="ecoplastolModel.itf_odch">
-              <MappingFragment StoreEntitySet="itf_odch">
-                <ScalarProperty Name="czasm" ColumnName="czasm" />
-                <ScalarProperty Name="opm" ColumnName="opm" />
-                <ScalarProperty Name="czasw" ColumnName="czasw" />
-                <ScalarProperty Name="opw" ColumnName="opw" />
-                <ScalarProperty Name="opis" ColumnName="opis" />
-                <ScalarProperty Name="wartosc" ColumnName="wartosc" />
-                <ScalarProperty Name="parametr" ColumnName="parametr" />
-                <ScalarProperty Name="indeks" ColumnName="indeks" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="itf_sr">
-            <EntityTypeMapping TypeName="ecoplastolModel.itf_sr">
-              <MappingFragment StoreEntitySet="itf_sr">
-                <ScalarProperty Name="czasm" ColumnName="czasm" />
-                <ScalarProperty Name="opm" ColumnName="opm" />
-                <ScalarProperty Name="czasw" ColumnName="czasw" />
-                <ScalarProperty Name="opw" ColumnName="opw" />
-                <ScalarProperty Name="opis" ColumnName="opis" />
-                <ScalarProperty Name="wartosc" ColumnName="wartosc" />
-                <ScalarProperty Name="parametr" ColumnName="parametr" />
-                <ScalarProperty Name="indeks" ColumnName="indeks" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="itf_trn">
-            <EntityTypeMapping TypeName="ecoplastolModel.itf_trn">
-              <MappingFragment StoreEntitySet="itf_trn">
                 <ScalarProperty Name="czasm" ColumnName="czasm" />
                 <ScalarProperty Name="opm" ColumnName="opm" />
                 <ScalarProperty Name="czasw" ColumnName="czasw" />
@@ -1034,34 +953,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="itf_kategorie">
-            <EntityTypeMapping TypeName="ecoplastolModel.itf_kategorie">
-              <MappingFragment StoreEntitySet="itf_kategorie">
-                <ScalarProperty Name="czasm" ColumnName="czasm" />
-                <ScalarProperty Name="opm" ColumnName="opm" />
-                <ScalarProperty Name="czasw" ColumnName="czasw" />
-                <ScalarProperty Name="opw" ColumnName="opw" />
-                <ScalarProperty Name="opis" ColumnName="opis" />
-                <ScalarProperty Name="wartosc" ColumnName="wartosc" />
-                <ScalarProperty Name="parametr" ColumnName="parametr" />
-                <ScalarProperty Name="indeks" ColumnName="indeks" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="itf_litery">
-            <EntityTypeMapping TypeName="ecoplastolModel.itf_litery">
-              <MappingFragment StoreEntitySet="itf_litery">
-                <ScalarProperty Name="czasm" ColumnName="czasm" />
-                <ScalarProperty Name="opm" ColumnName="opm" />
-                <ScalarProperty Name="czasw" ColumnName="czasw" />
-                <ScalarProperty Name="opw" ColumnName="opw" />
-                <ScalarProperty Name="opis" ColumnName="opis" />
-                <ScalarProperty Name="wartosc" ColumnName="wartosc" />
-                <ScalarProperty Name="parametr" ColumnName="parametr" />
-                <ScalarProperty Name="indeks" ColumnName="indeks" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="maszyny">
             <EntityTypeMapping TypeName="ecoplastolModel.maszyny">
               <MappingFragment StoreEntitySet="maszyny">
@@ -1116,6 +1007,118 @@
                 <ScalarProperty Name="wyrob_kod_opis" ColumnName="wyrob_kod_opis" />
                 <ScalarProperty Name="wyrob_kod_indeks" ColumnName="wyrob_kod_indeks" />
                 <ScalarProperty Name="wyrob_kod" ColumnName="wyrob_kod" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="wyroby_druty">
+            <EntityTypeMapping TypeName="ecoplastolModel.wyroby_druty">
+              <MappingFragment StoreEntitySet="wyroby_druty">
+                <ScalarProperty Name="czasm" ColumnName="czasm" />
+                <ScalarProperty Name="opm" ColumnName="opm" />
+                <ScalarProperty Name="czasw" ColumnName="czasw" />
+                <ScalarProperty Name="opw" ColumnName="opw" />
+                <ScalarProperty Name="opis" ColumnName="opis" />
+                <ScalarProperty Name="wartosc" ColumnName="wartosc" />
+                <ScalarProperty Name="parametr" ColumnName="parametr" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="itf_cc">
+            <EntityTypeMapping TypeName="ecoplastolModel.itf_cc">
+              <MappingFragment StoreEntitySet="itf_cc">
+                <ScalarProperty Name="czasm" ColumnName="czasm" />
+                <ScalarProperty Name="opm" ColumnName="opm" />
+                <ScalarProperty Name="czasw" ColumnName="czasw" />
+                <ScalarProperty Name="opw" ColumnName="opw" />
+                <ScalarProperty Name="opis" ColumnName="opis" />
+                <ScalarProperty Name="wartosc" ColumnName="wartosc" />
+                <ScalarProperty Name="parametr" ColumnName="parametr" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="itf_icc">
+            <EntityTypeMapping TypeName="ecoplastolModel.itf_icc">
+              <MappingFragment StoreEntitySet="itf_icc">
+                <ScalarProperty Name="czasm" ColumnName="czasm" />
+                <ScalarProperty Name="opm" ColumnName="opm" />
+                <ScalarProperty Name="czasw" ColumnName="czasw" />
+                <ScalarProperty Name="opw" ColumnName="opw" />
+                <ScalarProperty Name="opis" ColumnName="opis" />
+                <ScalarProperty Name="wartosc" ColumnName="wartosc" />
+                <ScalarProperty Name="parametr" ColumnName="parametr" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="itf_kategorie">
+            <EntityTypeMapping TypeName="ecoplastolModel.itf_kategorie">
+              <MappingFragment StoreEntitySet="itf_kategorie">
+                <ScalarProperty Name="czasm" ColumnName="czasm" />
+                <ScalarProperty Name="opm" ColumnName="opm" />
+                <ScalarProperty Name="czasw" ColumnName="czasw" />
+                <ScalarProperty Name="opw" ColumnName="opw" />
+                <ScalarProperty Name="opis" ColumnName="opis" />
+                <ScalarProperty Name="wartosc" ColumnName="wartosc" />
+                <ScalarProperty Name="parametr" ColumnName="parametr" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="itf_litery">
+            <EntityTypeMapping TypeName="ecoplastolModel.itf_litery">
+              <MappingFragment StoreEntitySet="itf_litery">
+                <ScalarProperty Name="czasm" ColumnName="czasm" />
+                <ScalarProperty Name="opm" ColumnName="opm" />
+                <ScalarProperty Name="czasw" ColumnName="czasw" />
+                <ScalarProperty Name="opw" ColumnName="opw" />
+                <ScalarProperty Name="opis" ColumnName="opis" />
+                <ScalarProperty Name="wartosc" ColumnName="wartosc" />
+                <ScalarProperty Name="parametr" ColumnName="parametr" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="itf_odch">
+            <EntityTypeMapping TypeName="ecoplastolModel.itf_odch">
+              <MappingFragment StoreEntitySet="itf_odch">
+                <ScalarProperty Name="czasm" ColumnName="czasm" />
+                <ScalarProperty Name="opm" ColumnName="opm" />
+                <ScalarProperty Name="czasw" ColumnName="czasw" />
+                <ScalarProperty Name="opw" ColumnName="opw" />
+                <ScalarProperty Name="opis" ColumnName="opis" />
+                <ScalarProperty Name="wartosc" ColumnName="wartosc" />
+                <ScalarProperty Name="parametr" ColumnName="parametr" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="itf_sr">
+            <EntityTypeMapping TypeName="ecoplastolModel.itf_sr">
+              <MappingFragment StoreEntitySet="itf_sr">
+                <ScalarProperty Name="czasm" ColumnName="czasm" />
+                <ScalarProperty Name="opm" ColumnName="opm" />
+                <ScalarProperty Name="czasw" ColumnName="czasw" />
+                <ScalarProperty Name="opw" ColumnName="opw" />
+                <ScalarProperty Name="opis" ColumnName="opis" />
+                <ScalarProperty Name="wartosc" ColumnName="wartosc" />
+                <ScalarProperty Name="parametr" ColumnName="parametr" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="itf_trn">
+            <EntityTypeMapping TypeName="ecoplastolModel.itf_trn">
+              <MappingFragment StoreEntitySet="itf_trn">
+                <ScalarProperty Name="czasm" ColumnName="czasm" />
+                <ScalarProperty Name="opm" ColumnName="opm" />
+                <ScalarProperty Name="czasw" ColumnName="czasw" />
+                <ScalarProperty Name="opw" ColumnName="opw" />
+                <ScalarProperty Name="opis" ColumnName="opis" />
+                <ScalarProperty Name="wartosc" ColumnName="wartosc" />
+                <ScalarProperty Name="parametr" ColumnName="parametr" />
                 <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>

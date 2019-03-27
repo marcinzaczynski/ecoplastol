@@ -13,7 +13,7 @@ namespace ecoplastol
             using (var db = new ecoplastolEntities())
             {
                 var list = (from w in db.itf_kategorie
-                            orderby w.indeks ascending
+                            orderby w.id ascending
                             select w).ToList();
                 return list;
             }
@@ -24,7 +24,7 @@ namespace ecoplastol
             using (var db = new ecoplastolEntities())
             {
                 var list = (from w in db.itf_litery
-                            orderby w.indeks ascending
+                            orderby w.id ascending
                             select w).ToList();
                 return list;
             }
@@ -35,7 +35,7 @@ namespace ecoplastol
             using (var db = new ecoplastolEntities())
             {
                 var list = (from w in db.itf_icc
-                            orderby w.indeks ascending
+                            orderby w.id ascending
                             select w).ToList();
                 return list;
             }
@@ -46,7 +46,7 @@ namespace ecoplastol
             using (var db = new ecoplastolEntities())
             {
                 var list = (from w in db.itf_cc
-                            orderby w.indeks ascending
+                            orderby w.id ascending
                             select w).ToList();
                 return list;
             }
@@ -57,7 +57,7 @@ namespace ecoplastol
             using (var db = new ecoplastolEntities())
             {
                 var list = (from w in db.itf_sr
-                            orderby w.indeks ascending
+                            orderby w.id ascending
                             select w).ToList();
                 return list;
             }
@@ -68,7 +68,7 @@ namespace ecoplastol
             using (var db = new ecoplastolEntities())
             {
                 var list = (from w in db.itf_trn
-                            orderby w.indeks ascending
+                            orderby w.id ascending
                             select w).ToList();
                 return list;
             }
@@ -79,7 +79,7 @@ namespace ecoplastol
             using (var db = new ecoplastolEntities())
             {
                 var list = (from w in db.itf_odch
-                            orderby w.indeks ascending
+                            orderby w.id ascending
                             select w).ToList();
                 return list;
             }

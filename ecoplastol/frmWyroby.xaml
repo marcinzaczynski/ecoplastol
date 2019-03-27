@@ -84,39 +84,39 @@
                     DisplayMemberPath="parametr"
                     ItemsSource="{Binding listTypyWyrobow}"
                     />
-                <!--<DataGridTextColumn x:Name="wyrob_il_w_op_zbColumn" Binding="{Binding wyrob_il_w_op_zb}" Header="wyrob il w op zb" Width="SizeToHeader"/>-->
-                <!--<DataGridTextColumn x:Name="wyrob_waga_opColumn" Binding="{Binding wyrob_waga_op}" Header="wyrob waga op" Width="SizeToHeader"/>-->
-                <!--<DataGridTextColumn x:Name="wyrob_waga_1sztColumn" Binding="{Binding wyrob_waga_1szt}" Header="wyrob waga 1 szt" Width="SizeToHeader"/>-->
-                <!--<DataGridTextColumn x:Name="wyrob_zakres_sdrColumn" Binding="{Binding wyrob_zakres_sdr}" Header="wyrob zakres sdr" Width="SizeToHeader"/>-->
-                <!--<DataGridTextColumn x:Name="wyrob_zast_zaworuColumn" Binding="{Binding wyrob_zast_zaworu}" Header="wyrob zast zaworu" Width="SizeToHeader"/>-->
-                <!--<DataGridTextColumn x:Name="wyrob_rodzaj_drutuColumn" Binding="{Binding wyrob_rodzaj_drutu}" Header="wyrob rodzaj drutu" Width="SizeToHeader"/>-->
-                <!--<DataGridTextColumn x:Name="itf_kategoriaColumn" Binding="{Binding itf_kategoria}" Header="itf kategoria" Width="SizeToHeader"/>-->
-                <!--<DataGridTextColumn x:Name="itf_znak1Column" Binding="{Binding itf_znak1}" Header="itf znak 1" Width="SizeToHeader"/>-->
-                <!--<DataGridTextColumn x:Name="itf_znak2Column" Binding="{Binding itf_znak2}" Header="itf znak 2" Width="SizeToHeader"/>-->
-                <!--<DataGridTextColumn x:Name="itf_iccColumn" Binding="{Binding itf_icc}" Header="itf icc" Width="SizeToHeader"/>-->
-                <!--<DataGridTextColumn x:Name="itf_cc1Column" Binding="{Binding itf_cc1}" Header="itf cc 1" Width="SizeToHeader"/>-->
-                <!--<DataGridTextColumn x:Name="itf_cc2Column" Binding="{Binding itf_cc2}" Header="itf cc 2" Width="SizeToHeader"/>-->
-                <!--<DataGridTextColumn x:Name="itf_sminColumn" Binding="{Binding itf_smin}" Header="itf smin" Width="SizeToHeader"/>-->
-                <!--<DataGridTextColumn x:Name="itf_smaxColumn" Binding="{Binding itf_smax}" Header="itf smax" Width="SizeToHeader"/>-->
-                <!--<DataGridTextColumn x:Name="itf_trnColumn" Binding="{Binding itf_trn}" Header="itf trn" Width="SizeToHeader"/>-->
-                <!--<DataGridTextColumn x:Name="itf_prnColumn" Binding="{Binding itf_prn}" Header="itf prn" Width="SizeToHeader"/>-->
+                <DataGridTextColumn x:Name="wyrob_il_w_op_zbColumn" Binding="{Binding wyrob_il_w_op_zb}" Header="wyrob il w op zb" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="wyrob_waga_opColumn" Binding="{Binding wyrob_waga_op}" Header="wyrob waga op" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="wyrob_waga_1sztColumn" Binding="{Binding wyrob_waga_1szt}" Header="wyrob waga 1 szt" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="wyrob_zakres_sdrColumn" Binding="{Binding wyrob_zakres_sdr}" Header="wyrob zakres sdr" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="wyrob_zast_zaworuColumn" Binding="{Binding wyrob_zast_zaworu}" Header="wyrob zast zaworu" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="wyrob_rodzaj_drutuColumn" Binding="{Binding wyrob_rodzaj_drutu}" Header="wyrob rodzaj drutu" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="itf_kategoriaColumn" Binding="{Binding itf_kategoria}" Header="itf kategoria" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="itf_znak1Column" Binding="{Binding itf_znak1}" Header="itf znak 1" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="itf_znak2Column" Binding="{Binding itf_znak2}" Header="itf znak 2" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="itf_iccColumn" Binding="{Binding itf_icc}" Header="itf icc" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="itf_cc1Column" Binding="{Binding itf_cc1}" Header="itf cc 1" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="itf_cc2Column" Binding="{Binding itf_cc2}" Header="itf cc 2" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="itf_sminColumn" Binding="{Binding itf_smin}" Header="itf smin" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="itf_smaxColumn" Binding="{Binding itf_smax}" Header="itf smax" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="itf_trnColumn" Binding="{Binding itf_trn}" Header="itf trn" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="itf_prnColumn" Binding="{Binding itf_prn}" Header="itf prn" Width="SizeToHeader"/>
                 <DataGridTextColumn x:Name="itf_rezColumn" Binding="{Binding itf_rez}" Header="Rezystancja" Width="SizeToHeader"/>
-                <!--<DataGridTextColumn x:Name="itf_odchColumn" Binding="{Binding itf_odch}" Header="itf odch" Width="SizeToHeader"/>-->
-                <!--<DataGridTextColumn x:Name="itf_cz1Column" Binding="{Binding itf_cz1}" Header="itf cz 1" Width="SizeToHeader"/>-->
-                <!--<DataGridTextColumn x:Name="itf_cz2Column" Binding="{Binding itf_cz2}" Header="itf cz 2" Width="SizeToHeader"/>-->
-                <!--<DataGridTextColumn x:Name="itf_keColumn" Binding="{Binding itf_ke}" Header="itf ke" Width="SizeToHeader"/>-->
-                <!--<DataGridTextColumn x:Name="trace_znak1Column" Binding="{Binding trace_znak1}" Header="trace znak 1" Width="SizeToHeader"/>-->
-                <!--<DataGridTextColumn x:Name="trace_znak2Column" Binding="{Binding trace_znak2}" Header="trace znak 2" Width="SizeToHeader"/>-->
-                <!--<DataGridTextColumn x:Name="trace_kategoriaColumn" Binding="{Binding trace_kategoria}" Header="trace kategoria" Width="SizeToHeader"/>-->
-                <!--<DataGridTextColumn x:Name="trace_sminColumn" Binding="{Binding trace_smin}" Header="trace smin" Width="SizeToHeader"/>-->
-                <!--<DataGridTextColumn x:Name="trace_smaxColumn" Binding="{Binding trace_smax}" Header="trace smax" Width="SizeToHeader"/>-->
-                <!--<DataGridTextColumn x:Name="trace_partiaColumn" Binding="{Binding trace_partia}" Header="trace partia" Width="SizeToHeader"/>-->
-                <!--<DataGridTextColumn x:Name="trace_producentColumn" Binding="{Binding trace_producent}" Header="trace producent" Width="SizeToHeader"/>-->
-                <!--<DataGridTextColumn x:Name="trace_sdrColumn" Binding="{Binding trace_sdr}" Header="trace sdr" Width="SizeToHeader"/>-->
-                <!--<DataGridTextColumn x:Name="trace_pe_mColumn" Binding="{Binding trace_pe_m}" Header="trace pe m" Width="SizeToHeader"/>-->
-                <!--<DataGridTextColumn x:Name="trace_materialColumn" Binding="{Binding trace_material}" Header="trace material" Width="SizeToHeader"/>-->
-                <!--<DataGridTextColumn x:Name="trace_pe_oColumn" Binding="{Binding trace_pe_o}" Header="trace pe o" Width="SizeToHeader"/>-->
-                <!--<DataGridTextColumn x:Name="trace_mfrColumn" Binding="{Binding trace_mfr}" Header="trace mfr" Width="SizeToHeader"/>-->
+                <DataGridTextColumn x:Name="itf_odchColumn" Binding="{Binding itf_odch}" Header="itf odch" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="itf_cz1Column" Binding="{Binding itf_cz1}" Header="itf cz 1" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="itf_cz2Column" Binding="{Binding itf_cz2}" Header="itf cz 2" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="itf_keColumn" Binding="{Binding itf_ke}" Header="itf ke" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="trace_znak1Column" Binding="{Binding trace_znak1}" Header="trace znak 1" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="trace_znak2Column" Binding="{Binding trace_znak2}" Header="trace znak 2" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="trace_kategoriaColumn" Binding="{Binding trace_kategoria}" Header="trace kategoria" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="trace_sminColumn" Binding="{Binding trace_smin}" Header="trace smin" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="trace_smaxColumn" Binding="{Binding trace_smax}" Header="trace smax" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="trace_partiaColumn" Binding="{Binding trace_partia}" Header="trace partia" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="trace_producentColumn" Binding="{Binding trace_producent}" Header="trace producent" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="trace_sdrColumn" Binding="{Binding trace_sdr}" Header="trace sdr" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="trace_pe_mColumn" Binding="{Binding trace_pe_m}" Header="trace pe m" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="trace_materialColumn" Binding="{Binding trace_material}" Header="trace material" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="trace_pe_oColumn" Binding="{Binding trace_pe_o}" Header="trace pe o" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="trace_mfrColumn" Binding="{Binding trace_mfr}" Header="trace mfr" Width="SizeToHeader"/>
                 <DataGridTextColumn 
                     x:Name="opwColumn" 
                     Binding="{Binding opw}" 
@@ -818,7 +818,7 @@
                             <ts:ComboBoxItemTemplateSelector.DropDownTemplate>
                                 <DataTemplate>
                                     <StackPanel Orientation="Horizontal">
-                                        <TextBlock Text="{Binding indeks}" Width="20"/>
+                                        <TextBlock Text="{Binding parametr}" Width="20"/>
                                         <TextBlock Text="-  "/>
                                         <TextBlock Text="{Binding wartosc}" Width="120"/>
                                     </StackPanel>
@@ -827,6 +827,7 @@
                         </ts:ComboBoxItemTemplateSelector>
                     </ComboBox.ItemTemplateSelector>
                 </ComboBox>
+                <!--<TextBox Grid.Row="3" Grid.Column="1" Text="{Binding wyrob_kod}"/>-->
             </Grid>
         </Grid>
         <Grid x:Name="gridKody" ShowGridLines="False"  Grid.Row="4" Margin="0,10,0,0" >

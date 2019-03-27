@@ -14,7 +14,8 @@ namespace ecoplastol
     
     public partial class wyroby_druty
     {
-        public int indeks { get; set; }
+        public int id { get; set; }
+        public Nullable<int> parametr { get; set; }
         public string wartosc { get; set; }
         public string opis { get; set; }
         public string opw { get; set; }

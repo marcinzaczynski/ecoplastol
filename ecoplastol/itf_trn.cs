@@ -14,7 +14,7 @@ namespace ecoplastol
     
     public partial class itf_trn
     {
-        public int indeks { get; set; }
+        public int id { get; set; }
         public string parametr { get; set; }
         public string wartosc { get; set; }
         public string opis { get; set; }

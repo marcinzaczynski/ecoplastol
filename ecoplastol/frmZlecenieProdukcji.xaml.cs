@@ -21,6 +21,16 @@ namespace ecoplastol
     {
         private List<wyroby> listaWyrobow;
 
+        private List<trace_pe_m> listTracePEm;
+        private List<wyroby_druty> listWyrobRodzajDrutu;
+        private List<trace_producent> listTraceProducent;
+        private List<wyroby_zakres_sdr> listWyrobZakresSDR;
+        private List<trace_sdr> listTraceSDR;
+        private List<itf_cc> listITFcc1;
+        private List<itf_cc> listITFcc2;
+
+        private wyroby Wyrob;
+
         public frmZlecenieProdukcji(int numerMaszyny, string nazwaMaszyny)
         {
             InitializeComponent();
@@ -28,13 +38,34 @@ namespace ecoplastol
             lblNazwaMaszyny.Content = nazwaMaszyny;
 
             listaWyrobow = frmZlecenieProdukcji_db.PobierzWyroby();
+            listTracePEm = frmWyroby_db.PobierzTracePem();
+            listWyrobRodzajDrutu = frmWyroby_db.PobierzDruty();
+            listTraceProducent = frmWyroby_db.PobierzTraceProducent();
+            listWyrobZakresSDR = frmWyroby_db.PobierzZakresSDR();
+            listTraceSDR = frmWyroby_db.PobierzTraceSdr();
+            listITFcc1 = frmWyroby_db.PobierzITFcc();
+            listITFcc2 = frmWyroby_db.PobierzITFcc();
+
             cbbWyrobKod.ItemsSource = listaWyrobow;
-            cbbWyrobKod.SelectedValuePath = "id";
+            //cbbWyrobKod.SelectedValuePath = "id";
+            cbbTracePEm.ItemsSource = listTracePEm;
+            cbbWyrobRodzajDrutu.ItemsSource = listWyrobRodzajDrutu;
+            cbbTraceProducent.ItemsSource = listTraceProducent;
+            cbbWyrobZakresSDR.ItemsSource = listWyrobZakresSDR;
+            cbbITFCC1.ItemsSource = listITFcc1;
+            cbbITFCC2.ItemsSource = listITFcc2;
+
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             Close();
+        }
+
+        private void CbbWyrobKod_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            Wyrob = cbbWyrobKod.SelectedItem as wyroby;
+            grdZlecenie.DataContext = Wyrob;
         }
     }
 }

@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ecoplastol"
         mc:Ignorable="d"
-        Title="Konfiguracja" Height="680" Width="1024">
+        Title="Konfiguracja" Height="827" Width="1150">
     <Window.Resources>
 
         <ResourceDictionary>
@@ -42,10 +42,10 @@
             </Style>
         </ResourceDictionary>
     </Window.Resources>
-    <Grid ShowGridLines="False">
+    <Grid ShowGridLines="false">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="150"/>
-            <ColumnDefinition Width="*"/>
+            <ColumnDefinition/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition/>
@@ -53,7 +53,7 @@
             <RowDefinition Height="140"/>
             <RowDefinition Height="50"/>
         </Grid.RowDefinitions>
-        
+
         <TabControl Grid.Row="0" FontSize="18" Grid.ColumnSpan="2" Name="tabcontrol1">
             <TabItem Header="ITF">
                 <Grid Name="gridITF">
@@ -103,7 +103,7 @@
             <TabItem Header="WYROBY" />
         </TabControl>
         <Border Grid.Row="1" Grid.ColumnSpan="2" Background="LightSteelBlue"/>
-        <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal" Grid.ColumnSpan="2">
+        <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal">
             <Button FontSize="16" Style="{StaticResource btnGradientLightGreen}" Width="120" Name="btnDodaj" Content="DODAJ" Click="BtnDodaj_Click" />
             <Button FontSize="16" Style="{StaticResource btnGradientLightGreen}" Width="120" Name="btnKlonuj" Content="KLONUJ" Click="BtnKlonuj_Click" />
             <Button FontSize="16" Style="{StaticResource btnGradientLightGreen}" Width="120" Name="btnPopraw" Content="POPRAW" Click="BtnPopraw_Click" />
@@ -133,7 +133,7 @@
             <TextBox Grid.Row="2" Grid.Column="1" FontSize="18" VerticalContentAlignment="Center" IsEnabled="False" Text="{Binding wartosc, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Name="txtWartosc"/>
             <TextBox Grid.Row="3" Grid.Column="1" FontSize="18" VerticalContentAlignment="Center" IsEnabled="False" Text="{Binding opis, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Name="txtOpis"/>
         </Grid>
-        
+
         <Button Grid.Row="3" Grid.ColumnSpan="2" Name="btnZamknij" Content="Z A M K N I J" FontSize="20"/>
     </Grid>
 </Window>

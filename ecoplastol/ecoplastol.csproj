@@ -54,6 +54,7 @@
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Memory, Version=4.0.1.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Memory.4.5.2\lib\netstandard2.0\System.Memory.dll</HintPath>
     </Reference>
@@ -73,6 +74,7 @@
     <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.ValueTuple.4.5.0\lib\net461\System.ValueTuple.dll</HintPath>
     </Reference>
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -93,6 +95,9 @@
     </ApplicationDefinition>
     <Compile Include="frmKonfiguracja.xaml.cs">
       <DependentUpon>frmKonfiguracja.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="frmKonfiguracja2.xaml.cs">
+      <DependentUpon>frmKonfiguracja2.xaml</DependentUpon>
     </Compile>
     <Compile Include="frmKonfiguracja_db.cs" />
     <Compile Include="frmPlanowanie.xaml.cs">
@@ -127,6 +132,10 @@
     <Compile Include="itf_trn.cs">
       <DependentUpon>PGEntity.tt</DependentUpon>
     </Compile>
+    <Compile Include="konfiguracja\PanelITF.xaml.cs">
+      <DependentUpon>PanelITF.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="konfiguracja\PanelITF_db.cs" />
     <Compile Include="MaszynaPanel.xaml.cs">
       <DependentUpon>MaszynaPanel.xaml</DependentUpon>
     </Compile>
@@ -189,6 +198,10 @@
     <Compile Include="wyroby_zast_zaworu.cs">
       <DependentUpon>PGEntity.tt</DependentUpon>
     </Compile>
+    <Page Include="frmKonfiguracja2.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="frmLogin.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -235,6 +248,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="frmZlecenieProdukcji.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="konfiguracja\PanelITF.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -322,5 +339,6 @@
       <LastGenOutput>PGEntity.cs</LastGenOutput>
     </Content>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

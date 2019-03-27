@@ -7,15 +7,9 @@
       <Diagram DiagramId="dbaf2b62894d479582209c328e875733" Name="Diagram1">
         <EntityTypeShape EntityType="ecoplastolModel.uzytkownicy" Width="1.5" PointX="2.125" PointY="0.5" IsExpanded="true" />
         <EntityTypeShape EntityType="ecoplastolModel.parametry" Width="1.5" PointX="0.5" PointY="0.5" />
-        <EntityTypeShape EntityType="ecoplastolModel.wyroby_druty" Width="2" PointX="9.625" PointY="1" IsExpanded="false" />
         <EntityTypeShape EntityType="ecoplastolModel.wyroby_typ" Width="2" PointX="9.625" PointY="2.5" IsExpanded="false" />
         <EntityTypeShape EntityType="ecoplastolModel.wyroby_zakres_sdr" Width="2" PointX="9.625" PointY="1.5" IsExpanded="false" />
         <EntityTypeShape EntityType="ecoplastolModel.wyroby_zast_zaworu" Width="2" PointX="9.625" PointY="2" IsExpanded="false" />
-        <EntityTypeShape EntityType="ecoplastolModel.itf_cc" Width="1.5" PointX="7.75" PointY="1" IsExpanded="false" />
-        <EntityTypeShape EntityType="ecoplastolModel.itf_icc" Width="1.5" PointX="7.75" PointY="3" IsExpanded="false" />
-        <EntityTypeShape EntityType="ecoplastolModel.itf_odch" Width="1.5" PointX="7.75" PointY="2" IsExpanded="false" />
-        <EntityTypeShape EntityType="ecoplastolModel.itf_sr" Width="1.5" PointX="7.75" PointY="0.5" IsExpanded="false" />
-        <EntityTypeShape EntityType="ecoplastolModel.itf_trn" Width="1.5" PointX="7.75" PointY="1.5" IsExpanded="false" />
         <EntityTypeShape EntityType="ecoplastolModel.trace_kategoria" Width="1.5" PointX="5.875" PointY="0.5" IsExpanded="false" />
         <EntityTypeShape EntityType="ecoplastolModel.trace_material" Width="1.5" PointX="5.875" PointY="1" IsExpanded="false" />
         <EntityTypeShape EntityType="ecoplastolModel.trace_mfr" Width="1.5" PointX="5.875" PointY="1.5" IsExpanded="false" />
@@ -25,10 +19,16 @@
         <EntityTypeShape EntityType="ecoplastolModel.trace_sdr" Width="1.5" PointX="5.875" PointY="3" IsExpanded="false" />
         <EntityTypeShape EntityType="ecoplastolModel.trace_sr" Width="1.5" PointX="5.875" PointY="4" IsExpanded="false" />
         <EntityTypeShape EntityType="ecoplastolModel.trace_znak" Width="1.5" PointX="5.875" PointY="4.5" IsExpanded="false" />
-        <EntityTypeShape EntityType="ecoplastolModel.itf_kategorie" Width="1.5" PointX="7.75" PointY="2.5" IsExpanded="false" />
-        <EntityTypeShape EntityType="ecoplastolModel.itf_litery" Width="1.5" PointX="7.75" PointY="3.5" IsExpanded="false" />
         <EntityTypeShape EntityType="ecoplastolModel.maszyny" Width="1.5" PointX="4" PointY="0.5" IsExpanded="false" />
         <EntityTypeShape EntityType="ecoplastolModel.wyroby" Width="1.5" PointX="9.625" PointY="0.5" IsExpanded="false" />
+        <EntityTypeShape EntityType="ecoplastolModel.wyroby_druty" Width="1.5" PointX="9.625" PointY="1" IsExpanded="false" />
+        <EntityTypeShape EntityType="ecoplastolModel.itf_cc" Width="1.5" PointX="7.75" PointY="0.5" IsExpanded="false" />
+        <EntityTypeShape EntityType="ecoplastolModel.itf_icc" Width="1.5" PointX="7.75" PointY="1" IsExpanded="false" />
+        <EntityTypeShape EntityType="ecoplastolModel.itf_kategorie" Width="1.5" PointX="7.75" PointY="1.5" IsExpanded="false" />
+        <EntityTypeShape EntityType="ecoplastolModel.itf_litery" Width="1.5" PointX="7.75" PointY="2" IsExpanded="false" />
+        <EntityTypeShape EntityType="ecoplastolModel.itf_odch" Width="1.5" PointX="7.75" PointY="3.5" IsExpanded="false" />
+        <EntityTypeShape EntityType="ecoplastolModel.itf_sr" Width="1.5" PointX="7.75" PointY="2.5" IsExpanded="false" />
+        <EntityTypeShape EntityType="ecoplastolModel.itf_trn" Width="1.5" PointX="7.75" PointY="3" IsExpanded="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

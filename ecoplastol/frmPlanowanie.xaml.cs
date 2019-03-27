@@ -39,7 +39,6 @@ namespace ecoplastol
 
         private void BtnDodajM2_Click(object sender, RoutedEventArgs e)
         {
-
         }
     }
 }

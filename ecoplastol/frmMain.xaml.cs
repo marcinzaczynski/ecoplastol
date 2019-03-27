@@ -55,8 +55,8 @@ namespace ecoplastol
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            frmKonfiguracja frmKonfiguracja = new frmKonfiguracja();
-            frmKonfiguracja.ShowDialog();
+            frmKonfiguracja2 frmKonfiguracja2 = new frmKonfiguracja2();
+            frmKonfiguracja2.ShowDialog();
         }
 
         private void BtnPlanowanie2_Click(object sender, RoutedEventArgs e)

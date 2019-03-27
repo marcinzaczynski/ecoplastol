@@ -77,8 +77,9 @@ namespace ecoplastol
             kodTrace = new kodTrace();
 
             if (listWyroby.Count == 0)
+            {
                 UstawPrzyciski(0);
-            else
+            } else
             {
                 dgWyroby.Focus();
                 dgWyroby.SelectedIndex = 0;
@@ -219,7 +220,7 @@ namespace ecoplastol
 
             listWyrobRodzajDrutu = frmWyroby_db.PobierzDruty();
             cbbWyrobRodzajDrutu.ItemsSource = listWyrobRodzajDrutu;
-            cbbWyrobRodzajDrutu.SelectedValuePath = "indeks";
+            cbbWyrobRodzajDrutu.SelectedValuePath = "id";
         }
 
         private void UstawITF()
@@ -227,43 +228,43 @@ namespace ecoplastol
             // wczytuje parametry do cbb dla kodu ITF
             listITFKategorie = frmWyroby_db.PobierzITFKategorie();
             cbbITFKategoria.ItemsSource = listITFKategorie;
-            cbbITFKategoria.SelectedValuePath = "indeks";
+            cbbITFKategoria.SelectedValuePath = "id";
 
             listITFZnaki1 = frmWyroby_db.PobierzITFZnaki();
             cbbITFZnak1.ItemsSource = listITFZnaki1;
-            cbbITFZnak1.SelectedValuePath = "indeks";
+            cbbITFZnak1.SelectedValuePath = "id";
 
             listITFZnaki2 = frmWyroby_db.PobierzITFZnaki();
             cbbITFZnak2.ItemsSource = listITFZnaki2;
-            cbbITFZnak2.SelectedValuePath = "indeks";
+            cbbITFZnak2.SelectedValuePath = "id";
 
             listITFicc = frmWyroby_db.PobierzITFicc();
             cbbITFICC.ItemsSource = listITFicc;
-            cbbITFICC.SelectedValuePath = "indeks";
+            cbbITFICC.SelectedValuePath = "id";
 
             listITFcc1 = frmWyroby_db.PobierzITFcc();
             cbbITFCC1.ItemsSource = listITFcc1;
-            cbbITFCC1.SelectedValuePath = "indeks";
+            cbbITFCC1.SelectedValuePath = "id";
 
             listITFcc2 = frmWyroby_db.PobierzITFcc();
             cbbITFCC2.ItemsSource = listITFcc2;
-            cbbITFCC2.SelectedValuePath = "indeks";
+            cbbITFCC2.SelectedValuePath = "id";
 
             listITFsmin = frmWyroby_db.PobierzITFsr();
             cbbITFsmin.ItemsSource = listITFsmin;
-            cbbITFsmin.SelectedValuePath = "indeks";
+            cbbITFsmin.SelectedValuePath = "id";
 
             listITFsmax = frmWyroby_db.PobierzITFsr();
             cbbITFsmax.ItemsSource = listITFsmax;
-            cbbITFsmax.SelectedValuePath = "indeks";
+            cbbITFsmax.SelectedValuePath = "id";
 
             listITFtrn = frmWyroby_db.PobierzITFtrn();
             cbbITFtrn.ItemsSource = listITFtrn;
-            cbbITFtrn.SelectedValuePath = "indeks";
+            cbbITFtrn.SelectedValuePath = "id";
 
             listITFodch = frmWyroby_db.PobierzITFodch();
             cbbITFodch.ItemsSource = listITFodch;
-            cbbITFodch.SelectedValuePath = "indeks";
+            cbbITFodch.SelectedValuePath = "id";
         }
 
         private void UstawTrace()
@@ -319,6 +320,7 @@ namespace ecoplastol
             try
             {
                 var row = dgWyroby.SelectedItem as wyroby;
+                //grdInne.DataContext = row;
                 _id_upd = row.id;
                 cbbWyrobTyp.SelectedValue = row.wyrob_typ;
                 txtWyrobKod.Text = row.wyrob_kod;
@@ -523,10 +525,9 @@ namespace ecoplastol
             nowyWyrob.wyrob_zakres_sdr = Int32.Parse(cbbWyrobZakresSDR.SelectedValue.ToString());
             nowyWyrob.wyrob_zast_zaworu = Int32.Parse(cbbWyrobZastZaworu.SelectedValue.ToString());
             nowyWyrob.wyrob_rodzaj_drutu = Int32.Parse(cbbWyrobRodzajDrutu.SelectedValue.ToString());
-            txtWyrobNorma.Text = (txtWyrobNorma.Text == "" ? txtWyrobNorma.Text = "0" : txtWyrobNorma.Text = txtWyrobNorma.Text);
-            nowyWyrob.wyrob_norma = Int32.Parse(txtWyrobNorma.Text == "" ? txtWyrobNorma.Text = "0" : txtWyrobNorma.Text = txtWyrobNorma.Text);
-
-             
+            if (txtWyrobNorma.Text == "") { txtWyrobNorma.Text = "0"; }
+            nowyWyrob.wyrob_norma = Int32.Parse(txtWyrobNorma.Text);
+            if (txtWyrobIlwPartii.Text == "") { txtWyrobIlwPartii.Text = "0"; }
             nowyWyrob.wyrob_il_w_partii = Int32.Parse(txtWyrobIlwPartii.Text);
             nowyWyrob.itf_kategoria = Int32.Parse(cbbITFKategoria.SelectedValue.ToString()); // [itf_kategoria] [int] NULL,
             nowyWyrob.itf_znak1 = Int32.Parse(cbbITFZnak1.SelectedValue.ToString());         // [itf_znak1] [int] NULL,
