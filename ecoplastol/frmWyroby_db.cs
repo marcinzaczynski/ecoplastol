@@ -152,12 +152,12 @@ namespace ecoplastol
             }
         }
 
-        public static List<trace_znak> PobierzTraceZnak()
+        public static List<trace_litery> PobierzTraceZnak()
         {
             using (var db = new ecoplastolEntities())
             {
-                var list = (from w in db.trace_znak
-                            orderby w.indeks ascending
+                var list = (from w in db.trace_litery
+                            orderby w.id ascending
                             select w).ToList();
                 return list;
             }
@@ -168,7 +168,7 @@ namespace ecoplastol
             using (var db = new ecoplastolEntities())
             {
                 var list = (from w in db.trace_kategoria
-                            orderby w.indeks ascending
+                            orderby w.id ascending
                             select w).ToList();
                 return list;
             }
@@ -179,7 +179,7 @@ namespace ecoplastol
             using (var db = new ecoplastolEntities())
             {
                 var list = (from w in db.trace_sr
-                            orderby w.indeks ascending
+                            orderby w.id ascending
                             select w).ToList();
                 return list;
             }
@@ -190,7 +190,7 @@ namespace ecoplastol
             using (var db = new ecoplastolEntities())
             {
                 var list = (from w in db.trace_producent
-                            orderby w.indeks ascending
+                            orderby w.id ascending
                             select w).ToList();
                 return list;
             }
@@ -201,7 +201,7 @@ namespace ecoplastol
             using (var db = new ecoplastolEntities())
             {
                 var list = (from w in db.trace_sdr
-                            orderby w.indeks ascending
+                            orderby w.id ascending
                             select w).ToList();
                 return list;
             }
@@ -212,7 +212,7 @@ namespace ecoplastol
             using (var db = new ecoplastolEntities())
             {
                 var list = (from w in db.trace_pe_m
-                            orderby w.indeks ascending
+                            orderby w.id ascending
                             select w).ToList();
                 return list;
             }
@@ -223,7 +223,7 @@ namespace ecoplastol
             using (var db = new ecoplastolEntities())
             {
                 var list = (from w in db.trace_material
-                            orderby w.indeks ascending
+                            orderby w.id ascending
                             select w).ToList();
                 return list;
             }
@@ -234,7 +234,7 @@ namespace ecoplastol
             using (var db = new ecoplastolEntities())
             {
                 var list = (from w in db.trace_pe_o
-                            orderby w.indeks ascending
+                            orderby w.id ascending
                             select w).ToList();
                 return list;
             }
@@ -245,7 +245,7 @@ namespace ecoplastol
             using (var db = new ecoplastolEntities())
             {
                 var list = (from w in db.trace_mfr
-                            orderby w.indeks ascending
+                            orderby w.id ascending
                             select w).ToList();
                 return list;
             }

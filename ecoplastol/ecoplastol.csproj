@@ -136,6 +136,33 @@
       <DependentUpon>PanelITF.xaml</DependentUpon>
     </Compile>
     <Compile Include="konfiguracja\PanelITF_db.cs" />
+    <Compile Include="konfiguracja\traceability\PanelTraceKategorie.xaml.cs">
+      <DependentUpon>PanelTraceKategorie.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="konfiguracja\traceability\PanelTraceLitery.xaml.cs">
+      <DependentUpon>PanelTraceLitery.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="konfiguracja\traceability\PanelTraceMaterial.xaml.cs">
+      <DependentUpon>PanelTraceMaterial.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="konfiguracja\traceability\PanelTraceMFR.xaml.cs">
+      <DependentUpon>PanelTraceMFR.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="konfiguracja\traceability\PanelTracePEm.xaml.cs">
+      <DependentUpon>PanelTracePEm.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="konfiguracja\traceability\PanelTracePEo.xaml.cs">
+      <DependentUpon>PanelTracePEo.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="konfiguracja\traceability\PanelTraceProducenci.xaml.cs">
+      <DependentUpon>PanelTraceProducenci.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="konfiguracja\traceability\PanelTraceSDR.xaml.cs">
+      <DependentUpon>PanelTraceSDR.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="konfiguracja\traceability\PanelTraceSrednice.xaml.cs">
+      <DependentUpon>PanelTraceSrednice.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MaszynaPanel.xaml.cs">
       <DependentUpon>MaszynaPanel.xaml</DependentUpon>
     </Compile>
@@ -154,6 +181,9 @@
       <DependentUpon>PGEntity.tt</DependentUpon>
     </Compile>
     <Compile Include="trace_kategoria.cs">
+      <DependentUpon>PGEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="trace_litery.cs">
       <DependentUpon>PGEntity.tt</DependentUpon>
     </Compile>
     <Compile Include="trace_material.cs">
@@ -175,9 +205,6 @@
       <DependentUpon>PGEntity.tt</DependentUpon>
     </Compile>
     <Compile Include="trace_sr.cs">
-      <DependentUpon>PGEntity.tt</DependentUpon>
-    </Compile>
-    <Compile Include="trace_znak.cs">
       <DependentUpon>PGEntity.tt</DependentUpon>
     </Compile>
     <Compile Include="uzytkownicy.cs">
@@ -252,6 +279,42 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="konfiguracja\PanelITF.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="konfiguracja\traceability\PanelTraceKategorie.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="konfiguracja\traceability\PanelTraceLitery.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="konfiguracja\traceability\PanelTraceMaterial.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="konfiguracja\traceability\PanelTraceMFR.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="konfiguracja\traceability\PanelTracePEm.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="konfiguracja\traceability\PanelTracePEo.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="konfiguracja\traceability\PanelTraceProducenci.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="konfiguracja\traceability\PanelTraceSDR.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="konfiguracja\traceability\PanelTraceSrednice.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

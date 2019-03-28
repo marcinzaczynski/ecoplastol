@@ -44,7 +44,7 @@
             <Button x:Name="btnDodaj" Content="DODAJ" HorizontalAlignment="Left" Margin="5,0,0,0" VerticalAlignment="Top" Width="100" Height="30" FontSize="14" Click="BtnDodaj_Click"/>
             <Button x:Name="btnKlonuj" Content="KLONUJ" HorizontalAlignment="Left" Margin="104,0,0,0" VerticalAlignment="Top" Width="100" Height="30" FontSize="14" Click="BtnKlonuj_Click"/>
             <Button x:Name="btnPopraw" Content="POPRAW" HorizontalAlignment="Left" Margin="203,0,0,0" VerticalAlignment="Top" Width="100" Height="30" FontSize="14" Click="BtnPopraw_Click"/>
-            <Button x:Name="btnUsun" Content="USUŃ" HorizontalAlignment="Left" Margin="302,0,0,0" VerticalAlignment="Top" Width="100" Height="30" FontSize="14" RenderTransformOrigin="1.09,0.567" Foreground="Red"/>
+            <Button x:Name="btnUsun" Content="USUŃ" HorizontalAlignment="Left" Margin="302,0,0,0" VerticalAlignment="Top" Width="100" Height="30" FontSize="14" RenderTransformOrigin="1.09,0.567" Foreground="Red" Click="BtnUsun_Click"/>
             <Button x:Name="btnAnuluj" Content="ANULUJ" HorizontalAlignment="Left" Margin="401,0,0,0" VerticalAlignment="Top" Width="100" Height="30" FontSize="14" RenderTransformOrigin="1.2,0.733" Foreground="Red" Click="BtnAnuluj_Click"/>
             <Button x:Name="btnZatwierdz" Content="ZATWIERDŹ" HorizontalAlignment="Left" Margin="500,0,0,0" VerticalAlignment="Top" Width="100" Height="30" FontSize="14" RenderTransformOrigin="1.77,0.867" Foreground="#FF00B000" Click="BtnZatwierdz_Click"/>
 

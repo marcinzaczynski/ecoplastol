@@ -37,82 +37,89 @@ namespace ecoplastol
 
         private void BtnITFkategoria_Click(object sender, RoutedEventArgs e)
         {
+            lblITFinfo.Content = btnITFkategoria.Content;
             listITFkategorie = frmWyroby_db.PobierzITFKategorie();
 
-            grdDane.Children.Clear();
+            grdITFDane.Children.Clear();
             panelITF = null;
             panelITF = new PanelITF(1, listITFkategorie);
 
 
-            
-            grdDane.Children.Add(panelITF);
+
+            grdITFDane.Children.Add(panelITF);
 
         }
 
         private void BtnITFlitery_Click(object sender, RoutedEventArgs e)
         {
+            lblITFinfo.Content = btnITFlitery.Content;
             listITFlitery = frmWyroby_db.PobierzITFZnaki();
 
-            grdDane.Children.Clear();
+            grdITFDane.Children.Clear();
             panelITF = null;
             panelITF = new PanelITF(2, listITFlitery);
 
-            grdDane.Children.Add(panelITF);
+            grdITFDane.Children.Add(panelITF);
         }
 
         private void BtnITFicc_Click(object sender, RoutedEventArgs e)
         {
+            lblITFinfo.Content = btnITFicc.Content;
             listITFicc = frmWyroby_db.PobierzITFicc();
 
-            grdDane.Children.Clear();
+            grdITFDane.Children.Clear();
             panelITF = null;
             panelITF = new PanelITF(3, listITFicc);
 
-            grdDane.Children.Add(panelITF);
+            grdITFDane.Children.Add(panelITF);
         }
 
         private void BtnITFcc_Click(object sender, RoutedEventArgs e)
         {
+            lblITFinfo.Content = btnITFcc.Content;
             listITFcc = frmWyroby_db.PobierzITFcc();
 
-            grdDane.Children.Clear();
+            grdITFDane.Children.Clear();
             panelITF = null;
             panelITF = new PanelITF(4, listITFcc);
 
-            grdDane.Children.Add(panelITF);
+            grdITFDane.Children.Add(panelITF);
         }
 
         private void BtnITFsr_Click(object sender, RoutedEventArgs e)
         {
+            lblITFinfo.Content = btnITFsr.Content;
             listITFsr = frmWyroby_db.PobierzITFsr();
 
-            grdDane.Children.Clear();
+            grdITFDane.Children.Clear();
             panelITF = null;
             panelITF = new PanelITF(5, listITFsr);
 
-            grdDane.Children.Add(panelITF);
+            grdITFDane.Children.Add(panelITF);
         }
 
         private void BtnITFtrn_Click(object sender, RoutedEventArgs e)
         {
+            lblITFinfo.Content = btnITFtrn.Content;
             listITFtrn = frmWyroby_db.PobierzITFtrn();
 
-            grdDane.Children.Clear();
+            grdITFDane.Children.Clear();
             panelITF = null;
             panelITF = new PanelITF(6, listITFtrn);
 
-            grdDane.Children.Add(panelITF);
+            grdITFDane.Children.Add(panelITF);
         }
 
         private void BtnITFodch_Click(object sender, RoutedEventArgs e)
         {
+            lblITFinfo.Content = btnITFodch.Content;
             listITFodch = frmWyroby_db.PobierzITFodch();
 
-            grdDane.Children.Clear();
+            grdITFDane.Children.Clear();
             panelITF = null;
             panelITF = new PanelITF(7, listITFodch);
 
-            grdDane.Children.Add(panelITF);
+            grdITFDane.Children.Add(panelITF);
         }
     }
 }

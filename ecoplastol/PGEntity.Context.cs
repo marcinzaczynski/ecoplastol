@@ -30,15 +30,6 @@ namespace ecoplastol
         public virtual DbSet<wyroby_typ> wyroby_typ { get; set; }
         public virtual DbSet<wyroby_zakres_sdr> wyroby_zakres_sdr { get; set; }
         public virtual DbSet<wyroby_zast_zaworu> wyroby_zast_zaworu { get; set; }
-        public virtual DbSet<trace_kategoria> trace_kategoria { get; set; }
-        public virtual DbSet<trace_material> trace_material { get; set; }
-        public virtual DbSet<trace_mfr> trace_mfr { get; set; }
-        public virtual DbSet<trace_pe_m> trace_pe_m { get; set; }
-        public virtual DbSet<trace_pe_o> trace_pe_o { get; set; }
-        public virtual DbSet<trace_producent> trace_producent { get; set; }
-        public virtual DbSet<trace_sdr> trace_sdr { get; set; }
-        public virtual DbSet<trace_sr> trace_sr { get; set; }
-        public virtual DbSet<trace_znak> trace_znak { get; set; }
         public virtual DbSet<maszyny> maszyny { get; set; }
         public virtual DbSet<wyroby> wyroby { get; set; }
         public virtual DbSet<wyroby_druty> wyroby_druty { get; set; }
@@ -49,5 +40,14 @@ namespace ecoplastol
         public virtual DbSet<itf_odch> itf_odch { get; set; }
         public virtual DbSet<itf_sr> itf_sr { get; set; }
         public virtual DbSet<itf_trn> itf_trn { get; set; }
+        public virtual DbSet<trace_kategoria> trace_kategoria { get; set; }
+        public virtual DbSet<trace_material> trace_material { get; set; }
+        public virtual DbSet<trace_mfr> trace_mfr { get; set; }
+        public virtual DbSet<trace_pe_m> trace_pe_m { get; set; }
+        public virtual DbSet<trace_pe_o> trace_pe_o { get; set; }
+        public virtual DbSet<trace_producent> trace_producent { get; set; }
+        public virtual DbSet<trace_sdr> trace_sdr { get; set; }
+        public virtual DbSet<trace_sr> trace_sr { get; set; }
+        public virtual DbSet<trace_litery> trace_litery { get; set; }
     }
 }

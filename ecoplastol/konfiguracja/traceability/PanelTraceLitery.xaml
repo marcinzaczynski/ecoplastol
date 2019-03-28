@@ -1,9 +1,9 @@
-﻿<UserControl x:Class="ecoplastol.konfiguracja.PanelITF"
+﻿<UserControl x:Class="ecoplastol.konfiguracja.traceability.PanelTraceLitery"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:ecoplastol.konfiguracja"
+             xmlns:local="clr-namespace:ecoplastol.konfiguracja.traceability"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
@@ -69,11 +69,11 @@
                 <ColumnDefinition Width="600"/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
-            
+
             <Label Grid.Row="0" Grid.Column="0" FontSize="18" Content="Parametr :"/>
             <Label Grid.Row="1" Grid.Column="0" FontSize="18" Content="Wartość :"/>
             <Label Grid.Row="2" Grid.Column="0" FontSize="18" Content="Opis :"/>
-          
+
             <TextBox Grid.Row="0" Grid.Column="1" FontSize="18" VerticalContentAlignment="Center" Text="{Binding parametr, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Name="txtParametr"/>
             <TextBox Grid.Row="1" Grid.Column="1" FontSize="18" VerticalContentAlignment="Center" Text="{Binding wartosc, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Name="txtWartosc"/>
             <TextBox Grid.Row="2" Grid.Column="1" FontSize="18" VerticalContentAlignment="Center" Text="{Binding opis, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Name="txtOpis"/>
@@ -81,10 +81,11 @@
         <StackPanel Grid.Row="2" Grid.Column="1" Orientation="Horizontal">
             <Button FontSize="16" Style="{StaticResource btnGradientLightGreen}" Width="120" Name="btnDodaj" Content="DODAJ" Click="BtnDodaj_Click" Height="30" VerticalAlignment="Bottom" />
             <Button FontSize="16" Style="{StaticResource btnGradientLightGreen}" Width="120" Name="btnKlonuj" Content="KLONUJ" Click="BtnKlonuj_Click" Height="30" VerticalAlignment="Top" />
-            <Button FontSize="16" Style="{StaticResource btnGradientLightGreen}" Width="120" Name="btnPopraw" Content="POPRAW" Height="30" VerticalAlignment="Bottom" Click="BtnPopraw_Click" />
+            <Button FontSize="16" Style="{StaticResource btnGradientLightGreen}" Width="120" Name="btnPopraw" Content="POPRAW" Click="BtnPopraw_Click" />
             <Button FontSize="16" Style="{StaticResource btnGradientRed}" Width="120" Name="btnUsun" Content="USUŃ" Click="BtnUsun_Click"/>
             <Button FontSize="16" Style="{StaticResource btnGradientRed}" Width="120" Name="btnAnuluj" Content="ANULUJ" Click="BtnAnuluj_Click" />
             <Button FontSize="16" Style="{StaticResource btnGradientLightGreen}" Width="120" Name="btnZatwierdz" Content="ZATWIERDŹ" Click="BtnZatwierdz_Click" />
         </StackPanel>
     </Grid>
 </UserControl>
+

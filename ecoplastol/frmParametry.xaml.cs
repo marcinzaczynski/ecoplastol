@@ -288,6 +288,9 @@ namespace ecoplastol
             txtOpis.IsEnabled = false;
         }
 
+        private void BtnUsun_Click(object sender, RoutedEventArgs e)
+        {
 
+        }
     }
 }

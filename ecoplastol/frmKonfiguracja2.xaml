@@ -67,7 +67,7 @@
                             <RowDefinition Height="40"/>
                             <RowDefinition Height="*"/>
                         </Grid.RowDefinitions>
-                        <Label  Grid.Row="0" Name="lblITFinfo" Content="_" />
+                        <Label  Grid.Row="0" FontSize="14" Padding="10,0,0,0" Name="lblITFinfo" Content="_" />
                         <Button Grid.Row="1" FontSize="14" Padding="10,0,0,0" HorizontalContentAlignment="Left" Style="{StaticResource btnGradientOrange}" Name="btnITFkategoria" Content="Kategorie" Click="BtnITFkategoria_Click"  />
                         <Button Grid.Row="2" FontSize="14" Padding="10,0,0,0" HorizontalContentAlignment="Left" Style="{StaticResource btnGradientOrange}" Name="btnITFlitery" Content="Litery" Click="BtnITFlitery_Click"/>
                         <Button Grid.Row="3" FontSize="14" Padding="10,0,0,0" HorizontalContentAlignment="Left" Style="{StaticResource btnGradientOrange}" Name="btnITFicc" Content="Indykacja &#xD;&#xA;czasu chłodzenia" Height="40" VerticalAlignment="Top" Click="BtnITFicc_Click"  />
@@ -76,8 +76,44 @@
                         <Button Grid.Row="6" FontSize="14" Padding="10,0,0,0" HorizontalContentAlignment="Left" Style="{StaticResource btnGradientOrange}" Name="btnITFtrn" Content="Typy regulacji&#xD;&#xA;napięcia" Click="BtnITFtrn_Click" />
                         <Button Grid.Row="7" FontSize="14" Padding="10,0,0,0" HorizontalContentAlignment="Left" Style="{StaticResource btnGradientOrange}" Name="btnITFodch" Content="Odchylenia" Click="BtnITFodch_Click" />
                     </Grid>
-                    <Grid x:Name="grdDane" Grid.Column="1">
+                    <Grid x:Name="grdITFDane" Grid.Column="1">
             
+                    </Grid>
+                </Grid>
+            </TabItem>
+            <TabItem Header="TRACEABILITY">
+                <Grid Name="gridTrace">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="150"/>
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <Grid Grid.Column="0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="40"/>
+                            <RowDefinition Height="40"/>
+                            <RowDefinition Height="40"/>
+                            <RowDefinition Height="40"/>
+                            <RowDefinition Height="40"/>
+                            <RowDefinition Height="40"/>
+                            <RowDefinition Height="40"/>
+                            <RowDefinition Height="40"/>
+                            <RowDefinition Height="40"/>
+                            <RowDefinition Height="40"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Label  Grid.Row="0" FontSize="14" Padding="10,0,0,0" Name="lblTraceinfo" Content="_" />
+                        <Button Grid.Row="1" FontSize="14" Padding="10,0,0,0" HorizontalContentAlignment="Left" Style="{StaticResource btnGradientOrange}" Name="btnTraceLitery" Content="Litery" />
+                        <Button Grid.Row="2" FontSize="14" Padding="10,0,0,0" HorizontalContentAlignment="Left" Style="{StaticResource btnGradientOrange}" Name="btnTraceKategoria" Content="Kategorie" />
+                        <Button Grid.Row="3" FontSize="14" Padding="10,0,0,0" HorizontalContentAlignment="Left" Style="{StaticResource btnGradientOrange}" Name="btnTraceSr" Content="Średnice"  />
+                        <Button Grid.Row="4" FontSize="14" Padding="10,0,0,0" HorizontalContentAlignment="Left" Style="{StaticResource btnGradientOrange}" Name="btnTraceProducenci" Content="Producenci"   />
+                        <Button Grid.Row="5" FontSize="14" Padding="10,0,0,0" HorizontalContentAlignment="Left" Style="{StaticResource btnGradientOrange}" Name="btnTraceSDR" Content="SDR" />
+                        <Button Grid.Row="6" FontSize="14" Padding="10,0,0,0" HorizontalContentAlignment="Left" Style="{StaticResource btnGradientOrange}" Name="btnTracePEm" Content="Mieszanka PE"  />
+                        <Button Grid.Row="7" FontSize="14" Padding="10,0,0,0" HorizontalContentAlignment="Left" Style="{StaticResource btnGradientOrange}" Name="btnTraceMaterial" Content="Typ materiału"  />
+                        <Button Grid.Row="8" FontSize="14" Padding="10,0,0,0" HorizontalContentAlignment="Left" Style="{StaticResource btnGradientOrange}" Name="btnTracePEo" Content="Oznaczenie PE"  />
+                        <Button Grid.Row="9" FontSize="14" Padding="10,0,0,0" HorizontalContentAlignment="Left" Style="{StaticResource btnGradientOrange}" Name="btnTraceMFR" Content="MFR"  />
+                    </Grid>
+                    <Grid x:Name="grdTraceDane" Grid.Column="1">
+
                     </Grid>
                 </Grid>
             </TabItem>

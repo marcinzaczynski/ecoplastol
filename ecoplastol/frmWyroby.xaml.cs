@@ -44,8 +44,8 @@ namespace ecoplastol
         private List<itf_trn> listITFtrn;
         private List<itf_odch> listITFodch;
 
-        private List<trace_znak> listTraceZnaki1;
-        private List<trace_znak> listTraceZnaki2;
+        private List<trace_litery> listTraceZnaki1;
+        private List<trace_litery> listTraceZnaki2;
         private List<trace_kategoria> listTraceKategorie;
         private List<trace_sr> listTraceSmin;
         private List<trace_sr> listTraceSmax;
@@ -989,7 +989,7 @@ namespace ecoplastol
 
         private void CbbTraceZnak1_DropDownClosed(object sender, EventArgs e)
         {
-            var item = cbbTraceZnak1.SelectedItem as trace_znak;
+            var item = cbbTraceZnak1.SelectedItem as trace_litery;
 
             //zabezpieczenie jak wybierze się pierwszą, pustą pozycję
             if (item.parametr != "") { kodTrace.znak1 = item.parametr; } else { kodTrace.znak1 = "00"; }
@@ -1000,7 +1000,7 @@ namespace ecoplastol
 
         private void CbbTraceZnak2_DropDownClosed(object sender, EventArgs e)
         {
-            var item = cbbTraceZnak2.SelectedItem as trace_znak;
+            var item = cbbTraceZnak2.SelectedItem as trace_litery;
 
             //zabezpieczenie jak wybierze się pierwszą, pustą pozycję
             if (item.parametr != "") { kodTrace.znak2 = item.parametr; } else { kodTrace.znak2 = "00"; }
