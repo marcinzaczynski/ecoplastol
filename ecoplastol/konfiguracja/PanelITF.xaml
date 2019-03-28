@@ -80,8 +80,8 @@
         </Grid>
         <StackPanel Grid.Row="2" Grid.Column="1" Orientation="Horizontal">
             <Button FontSize="16" Style="{StaticResource btnGradientLightGreen}" Width="120" Name="btnDodaj" Content="DODAJ" Click="BtnDodaj_Click" Height="30" VerticalAlignment="Bottom" />
-            <Button FontSize="16" Style="{StaticResource btnGradientLightGreen}" Width="120" Name="btnKlonuj" Content="KLONUJ" Click="BtnKlonuj_Click" Height="30" VerticalAlignment="Top" />
-            <Button FontSize="16" Style="{StaticResource btnGradientLightGreen}" Width="120" Name="btnPopraw" Content="POPRAW" Height="30" VerticalAlignment="Bottom" Click="BtnPopraw_Click" />
+            <Button FontSize="16" Style="{StaticResource btnGradientLightGreen}" Width="120" Name="btnKlonuj" Content="KLONUJ" Click="BtnKlonuj_Click" />
+            <Button FontSize="16" Style="{StaticResource btnGradientLightGreen}" Width="120" Name="btnPopraw" Content="POPRAW" Click="BtnPopraw_Click" />
             <Button FontSize="16" Style="{StaticResource btnGradientRed}" Width="120" Name="btnUsun" Content="USUŃ" Click="BtnUsun_Click"/>
             <Button FontSize="16" Style="{StaticResource btnGradientRed}" Width="120" Name="btnAnuluj" Content="ANULUJ" Click="BtnAnuluj_Click" />
             <Button FontSize="16" Style="{StaticResource btnGradientLightGreen}" Width="120" Name="btnZatwierdz" Content="ZATWIERDŹ" Click="BtnZatwierdz_Click" />

@@ -163,6 +163,7 @@
     <Compile Include="konfiguracja\traceability\PanelTraceSrednice.xaml.cs">
       <DependentUpon>PanelTraceSrednice.xaml</DependentUpon>
     </Compile>
+    <Compile Include="konfiguracja\traceability\PanelTrace_db.cs" />
     <Compile Include="MaszynaPanel.xaml.cs">
       <DependentUpon>MaszynaPanel.xaml</DependentUpon>
     </Compile>

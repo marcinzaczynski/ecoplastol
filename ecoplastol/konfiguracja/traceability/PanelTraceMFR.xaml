@@ -46,7 +46,7 @@
             <RowDefinition Height="125"/>
             <RowDefinition Height="30"/>
         </Grid.RowDefinitions>
-        <DataGrid Grid.Row="0" Name="grdLista" SelectionChanged="GrdLista_SelecionChanged" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" RowDetailsVisibilityMode="VisibleWhenSelected" IsSynchronizedWithCurrentItem="True" CanUserDeleteRows="False" CanUserAddRows="False" IsReadOnly="True">
+        <DataGrid Grid.Row="0" Name="grdLista" SelectionChanged="GrdLista_SelectionChanged" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" RowDetailsVisibilityMode="VisibleWhenSelected" IsSynchronizedWithCurrentItem="True" CanUserDeleteRows="False" CanUserAddRows="False" IsReadOnly="True">
             <DataGrid.Columns>
                 <DataGridTextColumn x:Name="idColumn" Binding="{Binding id}" Header="ID" Width="SizeToHeader"/>
                 <DataGridTextColumn x:Name="parametrColumn" Binding="{Binding parametr}" Header="Parametr" Width="100"/>

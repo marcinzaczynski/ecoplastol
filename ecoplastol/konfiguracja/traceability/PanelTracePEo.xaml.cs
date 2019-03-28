@@ -24,29 +24,80 @@ namespace ecoplastol.konfiguracja.traceability
         private string akcja;
         private trace_pe_o rowTracePEo;
         private List<trace_pe_o> listTracePEo;
-        public PanelTracePEo()
+
+        public PanelTracePEo(List<trace_pe_o> lista)
         {
             InitializeComponent();
+            listTracePEo = lista;
+            grdLista.ItemsSource = listTracePEo;
+            if (lista.Count == 0)
+            {
+                UstawPrzyciski(0);
+            }
+            else
+            {
+                grdLista.Focus();
+                grdLista.SelectedIndex = 0;
+
+                GrdLista_SelectionChanged(null, null);
+                UstawPrzyciski(1);
+            }
         }
 
         private void GrdLista_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-
+            rowTracePEo = grdLista.SelectedItem as trace_pe_o;
+            grdPozycje.DataContext = rowTracePEo;
         }
 
         private void BtnDodaj_Click(object sender, RoutedEventArgs e)
         {
+            akcja = "D";
+            grdBookmark = grdLista.SelectedIndex;
+            grdLista.IsEnabled = false;
+            grdPozycje.IsEnabled = true;
+            btnDodaj.IsEnabled = false;
+            btnKlonuj.IsEnabled = false;
+            btnPopraw.IsEnabled = false;
+            btnUsun.IsEnabled = false;
+            btnAnuluj.IsEnabled = true;
+            btnZatwierdz.IsEnabled = true;
 
+            trace_pe_o poz = new trace_pe_o();
+            grdPozycje.DataContext = poz;
         }
 
         private void BtnKlonuj_Click(object sender, RoutedEventArgs e)
         {
+            akcja = "K";
+            grdLista.IsEnabled = false;
+            grdPozycje.IsEnabled = true;
+            btnDodaj.IsEnabled = false;
+            btnKlonuj.IsEnabled = false;
+            btnPopraw.IsEnabled = false;
+            btnUsun.IsEnabled = false;
+            btnAnuluj.IsEnabled = true;
+            btnZatwierdz.IsEnabled = true;
 
+            trace_pe_o poz = new trace_pe_o();
+            poz.parametr = rowTracePEo.parametr;
+            poz.wartosc = rowTracePEo.wartosc;
+            poz.opis = rowTracePEo.opis;
+            grdPozycje.DataContext = poz;
         }
 
         private void BtnPopraw_Click(object sender, RoutedEventArgs e)
         {
-
+            akcja = "P";
+            grdBookmark = grdLista.SelectedIndex;
+            grdLista.IsEnabled = false;
+            grdPozycje.IsEnabled = true;
+            btnDodaj.IsEnabled = false;
+            btnKlonuj.IsEnabled = false;
+            btnPopraw.IsEnabled = false;
+            btnUsun.IsEnabled = false;
+            btnAnuluj.IsEnabled = true;
+            btnZatwierdz.IsEnabled = true;
         }
 
         private void BtnUsun_Click(object sender, RoutedEventArgs e)
@@ -62,6 +113,31 @@ namespace ecoplastol.konfiguracja.traceability
         private void BtnZatwierdz_Click(object sender, RoutedEventArgs e)
         {
 
+        }
+
+        private void UstawPrzyciski(int i)
+        {
+            // i == 0 - nie ma żadnego rekordu z tabeli
+            // i == 1 - jest co najmniej jeden rekord z tabeli
+            switch (i)
+            {
+                case 0:
+                    btnDodaj.IsEnabled = true;
+                    btnKlonuj.IsEnabled = false;
+                    btnPopraw.IsEnabled = false;
+                    btnUsun.IsEnabled = false;
+                    btnAnuluj.IsEnabled = false;
+                    btnZatwierdz.IsEnabled = false;
+                    break;
+                case 1:
+                    btnDodaj.IsEnabled = true;
+                    btnKlonuj.IsEnabled = true;
+                    btnPopraw.IsEnabled = true;
+                    btnUsun.IsEnabled = true;
+                    btnAnuluj.IsEnabled = false;
+                    btnZatwierdz.IsEnabled = false;
+                    break;
+            }
         }
     }
 }

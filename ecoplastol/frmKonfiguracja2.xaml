@@ -102,15 +102,15 @@
                             <RowDefinition Height="*"/>
                         </Grid.RowDefinitions>
                         <Label  Grid.Row="0" FontSize="14" Padding="10,0,0,0" Name="lblTraceinfo" Content="_" />
-                        <Button Grid.Row="1" FontSize="14" Padding="10,0,0,0" HorizontalContentAlignment="Left" Style="{StaticResource btnGradientOrange}" Name="btnTraceLitery" Content="Litery" />
-                        <Button Grid.Row="2" FontSize="14" Padding="10,0,0,0" HorizontalContentAlignment="Left" Style="{StaticResource btnGradientOrange}" Name="btnTraceKategoria" Content="Kategorie" />
-                        <Button Grid.Row="3" FontSize="14" Padding="10,0,0,0" HorizontalContentAlignment="Left" Style="{StaticResource btnGradientOrange}" Name="btnTraceSr" Content="Średnice"  />
-                        <Button Grid.Row="4" FontSize="14" Padding="10,0,0,0" HorizontalContentAlignment="Left" Style="{StaticResource btnGradientOrange}" Name="btnTraceProducenci" Content="Producenci"   />
-                        <Button Grid.Row="5" FontSize="14" Padding="10,0,0,0" HorizontalContentAlignment="Left" Style="{StaticResource btnGradientOrange}" Name="btnTraceSDR" Content="SDR" />
-                        <Button Grid.Row="6" FontSize="14" Padding="10,0,0,0" HorizontalContentAlignment="Left" Style="{StaticResource btnGradientOrange}" Name="btnTracePEm" Content="Mieszanka PE"  />
-                        <Button Grid.Row="7" FontSize="14" Padding="10,0,0,0" HorizontalContentAlignment="Left" Style="{StaticResource btnGradientOrange}" Name="btnTraceMaterial" Content="Typ materiału"  />
-                        <Button Grid.Row="8" FontSize="14" Padding="10,0,0,0" HorizontalContentAlignment="Left" Style="{StaticResource btnGradientOrange}" Name="btnTracePEo" Content="Oznaczenie PE"  />
-                        <Button Grid.Row="9" FontSize="14" Padding="10,0,0,0" HorizontalContentAlignment="Left" Style="{StaticResource btnGradientOrange}" Name="btnTraceMFR" Content="MFR"  />
+                        <Button Grid.Row="1" FontSize="14" Padding="10,0,0,0" HorizontalContentAlignment="Left" Style="{StaticResource btnGradientOrange}" Name="btnTraceLitery" Content="Litery" Click="BtnTraceLitery_Click" />
+                        <Button Grid.Row="2" FontSize="14" Padding="10,0,0,0" HorizontalContentAlignment="Left" Style="{StaticResource btnGradientOrange}" Name="btnTraceKategoria" Content="Kategorie" Click="BtnTraceKategoria_Click" />
+                        <Button Grid.Row="3" FontSize="14" Padding="10,0,0,0" HorizontalContentAlignment="Left" Style="{StaticResource btnGradientOrange}" Name="btnTraceSr" Content="Średnice" Click="BtnTraceSr_Click"  />
+                        <Button Grid.Row="4" FontSize="14" Padding="10,0,0,0" HorizontalContentAlignment="Left" Style="{StaticResource btnGradientOrange}" Name="btnTraceProducenci" Content="Producenci" Click="BtnTraceProducenci_Click"   />
+                        <Button Grid.Row="5" FontSize="14" Padding="10,0,0,0" HorizontalContentAlignment="Left" Style="{StaticResource btnGradientOrange}" Name="btnTraceSDR" Content="SDR" Click="BtnTraceSDR_Click" />
+                        <Button Grid.Row="6" FontSize="14" Padding="10,0,0,0" HorizontalContentAlignment="Left" Style="{StaticResource btnGradientOrange}" Name="btnTracePEm" Content="Mieszanka PE" Click="BtnTracePEm_Click"  />
+                        <Button Grid.Row="7" FontSize="14" Padding="10,0,0,0" HorizontalContentAlignment="Left" Style="{StaticResource btnGradientOrange}" Name="btnTraceMaterial" Content="Typ materiału" Click="BtnTraceMaterial_Click"  />
+                        <Button Grid.Row="8" FontSize="14" Padding="10,0,0,0" HorizontalContentAlignment="Left" Style="{StaticResource btnGradientOrange}" Name="btnTracePEo" Content="Oznaczenie PE" Click="BtnTracePEo_Click"  />
+                        <Button Grid.Row="9" FontSize="14" Padding="10,0,0,0" HorizontalContentAlignment="Left" Style="{StaticResource btnGradientOrange}" Name="btnTraceMFR" Content="MFR" Click="BtnTraceMFR_Click"  />
                     </Grid>
                     <Grid x:Name="grdTraceDane" Grid.Column="1">
 
