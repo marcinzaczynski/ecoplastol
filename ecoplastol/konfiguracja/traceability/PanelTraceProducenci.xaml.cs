@@ -102,7 +102,13 @@ namespace ecoplastol.konfiguracja.traceability
 
         private void BtnUsun_Click(object sender, RoutedEventArgs e)
         {
-
+            var Res = MessageBox.Show("Usunąć ?", "Usuwanie pozycji", MessageBoxButton.YesNo, MessageBoxImage.Exclamation);
+            if (Res == MessageBoxResult.Yes)
+            {
+                PanelTrace_db.UsunTraceProducent(rowTraceProducent);
+                listTraceProducent = frmWyroby_db.PobierzTraceProducent();
+                grdLista.ItemsSource = listTraceProducent;
+            }
         }
 
         private void BtnAnuluj_Click(object sender, RoutedEventArgs e)
@@ -112,7 +118,41 @@ namespace ecoplastol.konfiguracja.traceability
 
         private void BtnZatwierdz_Click(object sender, RoutedEventArgs e)
         {
+            grdLista.IsEnabled = true;
+            grdPozycje.IsEnabled = false;
+            btnDodaj.IsEnabled = true;
+            btnKlonuj.IsEnabled = true;
+            btnPopraw.IsEnabled = true;
+            btnUsun.IsEnabled = true;
+            btnAnuluj.IsEnabled = false;
+            btnZatwierdz.IsEnabled = false;
 
+            switch (akcja)
+            {
+                case "D":
+                case "K":
+                    if (grdPozycje.DataContext is trace_producent)
+                    {
+                        var row = new trace_producent();
+                        row = grdPozycje.DataContext as trace_producent;
+                        row.id = PanelTrace_db.IdTraceProducent();
+                        row.opw = frmLogin.LoggedUser.login;
+                        row.czasw = DateTime.Now;
+                        row.opm = frmLogin.LoggedUser.login;
+                        row.czasm = DateTime.Now;
+                        PanelTrace_db.DodajTraceProducent(row);
+                    }
+                    break;
+                case "P":
+                    rowTraceProducent.opm = frmLogin.LoggedUser.login;
+                    rowTraceProducent.czasm = DateTime.Now;
+                    PanelTrace_db.PoprawTraceProducent(rowTraceProducent);
+                    break;
+                default:
+                    break;
+            }
+            listTraceProducent = frmWyroby_db.PobierzTraceProducent();
+            grdLista.ItemsSource = listTraceProducent;
         }
 
         private void UstawPrzyciski(int i)

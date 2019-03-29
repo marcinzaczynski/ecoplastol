@@ -102,7 +102,13 @@ namespace ecoplastol.konfiguracja.traceability
 
         private void BtnUsun_Click(object sender, RoutedEventArgs e)
         {
-
+            var Res = MessageBox.Show("Usunąć ?", "Usuwanie pozycji", MessageBoxButton.YesNo, MessageBoxImage.Exclamation);
+            if (Res == MessageBoxResult.Yes)
+            {
+                PanelTrace_db.UsunTracePEm(rowTracePEm);
+                listTracePEm = frmWyroby_db.PobierzTracePem();
+                grdLista.ItemsSource = listTracePEm;
+            }
         }
 
         private void BtnAnuluj_Click(object sender, RoutedEventArgs e)
@@ -112,7 +118,41 @@ namespace ecoplastol.konfiguracja.traceability
 
         private void BtnZatwierdz_Click(object sender, RoutedEventArgs e)
         {
+            grdLista.IsEnabled = true;
+            grdPozycje.IsEnabled = false;
+            btnDodaj.IsEnabled = true;
+            btnKlonuj.IsEnabled = true;
+            btnPopraw.IsEnabled = true;
+            btnUsun.IsEnabled = true;
+            btnAnuluj.IsEnabled = false;
+            btnZatwierdz.IsEnabled = false;
 
+            switch (akcja)
+            {
+                case "D":
+                case "K":
+                    if (grdPozycje.DataContext is trace_pe_m)
+                    {
+                        var row = new trace_pe_m();
+                        row = grdPozycje.DataContext as trace_pe_m;
+                        row.id = PanelTrace_db.IdTracePEm();
+                        row.opw = frmLogin.LoggedUser.login;
+                        row.czasw = DateTime.Now;
+                        row.opm = frmLogin.LoggedUser.login;
+                        row.czasm = DateTime.Now;
+                        PanelTrace_db.DodajTracePEm(row);
+                    }
+                    break;
+                case "P":
+                    rowTracePEm.opm = frmLogin.LoggedUser.login;
+                    rowTracePEm.czasm = DateTime.Now;
+                    PanelTrace_db.PoprawTracePEm(rowTracePEm);
+                    break;
+                default:
+                    break;
+            }
+            listTracePEm = frmWyroby_db.PobierzTracePem();
+            grdLista.ItemsSource = listTracePEm;
         }
 
         private void UstawPrzyciski(int i)

@@ -102,7 +102,13 @@ namespace ecoplastol.konfiguracja.traceability
 
         private void BtnUsun_Click(object sender, RoutedEventArgs e)
         {
-
+            var Res = MessageBox.Show("Usunąć ?", "Usuwanie pozycji", MessageBoxButton.YesNo, MessageBoxImage.Exclamation);
+            if (Res == MessageBoxResult.Yes)
+            {
+                PanelTrace_db.UsunTraceMaterial(rowTraceMaterial);
+                listTraceMaterial = frmWyroby_db.PobierzTraceMaterial();
+                grdLista.ItemsSource = listTraceMaterial;
+            }
         }
 
         private void BtnAnuluj_Click(object sender, RoutedEventArgs e)
@@ -112,7 +118,41 @@ namespace ecoplastol.konfiguracja.traceability
 
         private void BtnZatwierdz_Click(object sender, RoutedEventArgs e)
         {
+            grdLista.IsEnabled = true;
+            grdPozycje.IsEnabled = false;
+            btnDodaj.IsEnabled = true;
+            btnKlonuj.IsEnabled = true;
+            btnPopraw.IsEnabled = true;
+            btnUsun.IsEnabled = true;
+            btnAnuluj.IsEnabled = false;
+            btnZatwierdz.IsEnabled = false;
 
+            switch (akcja)
+            {
+                case "D":
+                case "K":
+                    if (grdPozycje.DataContext is trace_material)
+                    {
+                        var row = new trace_material();
+                        row = grdPozycje.DataContext as trace_material;
+                        row.id = PanelTrace_db.IdTraceMaterial();
+                        row.opw = frmLogin.LoggedUser.login;
+                        row.czasw = DateTime.Now;
+                        row.opm = frmLogin.LoggedUser.login;
+                        row.czasm = DateTime.Now;
+                        PanelTrace_db.DodajTraceMaterial(row);
+                    }
+                    break;
+                case "P":
+                    rowTraceMaterial.opm = frmLogin.LoggedUser.login;
+                    rowTraceMaterial.czasm = DateTime.Now;
+                    PanelTrace_db.PoprawTraceMaterial(rowTraceMaterial);
+                    break;
+                default:
+                    break;
+            }
+            listTraceMaterial = frmWyroby_db.PobierzTraceMaterial();
+            grdLista.ItemsSource = listTraceMaterial;
         }
 
         private void UstawPrzyciski(int i)

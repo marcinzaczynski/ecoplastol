@@ -102,7 +102,13 @@ namespace ecoplastol.konfiguracja.traceability
 
         private void BtnUsun_Click(object sender, RoutedEventArgs e)
         {
-
+            var Res = MessageBox.Show("Usunąć ?", "Usuwanie pozycji", MessageBoxButton.YesNo, MessageBoxImage.Exclamation);
+            if (Res == MessageBoxResult.Yes)
+            {
+                PanelTrace_db.UsunTraceKategorie(rowTraceKategoria);
+                listTraceKategoria = frmWyroby_db.PobierzTraceKategorie();
+                grdLista.ItemsSource = listTraceKategoria;
+            }
         }
 
         private void BtnAnuluj_Click(object sender, RoutedEventArgs e)
@@ -112,7 +118,41 @@ namespace ecoplastol.konfiguracja.traceability
 
         private void BtnZatwierdz_Click(object sender, RoutedEventArgs e)
         {
+            grdLista.IsEnabled = true;
+            grdPozycje.IsEnabled = false;
+            btnDodaj.IsEnabled = true;
+            btnKlonuj.IsEnabled = true;
+            btnPopraw.IsEnabled = true;
+            btnUsun.IsEnabled = true;
+            btnAnuluj.IsEnabled = false;
+            btnZatwierdz.IsEnabled = false;
 
+            switch (akcja)
+            {
+                case "D":
+                case "K":
+                    if (grdPozycje.DataContext is trace_kategoria)
+                    {
+                        var row = new trace_kategoria();
+                        row = grdPozycje.DataContext as trace_kategoria;
+                        row.id = PanelTrace_db.IdTraceKategorie();
+                        row.opw = frmLogin.LoggedUser.login;
+                        row.czasw = DateTime.Now;
+                        row.opm = frmLogin.LoggedUser.login;
+                        row.czasm = DateTime.Now;
+                        PanelTrace_db.DodajTraceKategorie(row);
+                    }
+                    break;
+                case "P":
+                    rowTraceKategoria.opm = frmLogin.LoggedUser.login;
+                    rowTraceKategoria.czasm = DateTime.Now;
+                    PanelTrace_db.PoprawTraceKategorie(rowTraceKategoria);
+                    break;
+                default:
+                    break;
+            }
+            listTraceKategoria = frmWyroby_db.PobierzTraceKategorie();
+            grdLista.ItemsSource = listTraceKategoria;
         }
 
         private void UstawPrzyciski(int i)

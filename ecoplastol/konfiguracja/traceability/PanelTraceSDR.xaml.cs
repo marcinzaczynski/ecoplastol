@@ -102,7 +102,13 @@ namespace ecoplastol.konfiguracja.traceability
 
         private void BtnUsun_Click(object sender, RoutedEventArgs e)
         {
-
+            var Res = MessageBox.Show("Usunąć ?", "Usuwanie pozycji", MessageBoxButton.YesNo, MessageBoxImage.Exclamation);
+            if (Res == MessageBoxResult.Yes)
+            {
+                PanelTrace_db.UsunTraceSDR(rowTraceSDR);
+                listTraceSDR = frmWyroby_db.PobierzTraceSdr();
+                grdLista.ItemsSource = listTraceSDR;
+            }
         }
 
         private void BtnAnuluj_Click(object sender, RoutedEventArgs e)
@@ -112,7 +118,41 @@ namespace ecoplastol.konfiguracja.traceability
 
         private void BtnZatwierdz_Click(object sender, RoutedEventArgs e)
         {
+            grdLista.IsEnabled = true;
+            grdPozycje.IsEnabled = false;
+            btnDodaj.IsEnabled = true;
+            btnKlonuj.IsEnabled = true;
+            btnPopraw.IsEnabled = true;
+            btnUsun.IsEnabled = true;
+            btnAnuluj.IsEnabled = false;
+            btnZatwierdz.IsEnabled = false;
 
+            switch (akcja)
+            {
+                case "D":
+                case "K":
+                    if (grdPozycje.DataContext is trace_sdr)
+                    {
+                        var row = new trace_sdr();
+                        row = grdPozycje.DataContext as trace_sdr;
+                        row.id = PanelTrace_db.IdTraceSDR();
+                        row.opw = frmLogin.LoggedUser.login;
+                        row.czasw = DateTime.Now;
+                        row.opm = frmLogin.LoggedUser.login;
+                        row.czasm = DateTime.Now;
+                        PanelTrace_db.DodajTraceSDR(row);
+                    }
+                    break;
+                case "P":
+                    rowTraceSDR.opm = frmLogin.LoggedUser.login;
+                    rowTraceSDR.czasm = DateTime.Now;
+                    PanelTrace_db.PoprawTraceSDR(rowTraceSDR);
+                    break;
+                default:
+                    break;
+            }
+            listTraceSDR = frmWyroby_db.PobierzTraceSdr();
+            grdLista.ItemsSource = listTraceSDR;
         }
 
         private void UstawPrzyciski(int i)

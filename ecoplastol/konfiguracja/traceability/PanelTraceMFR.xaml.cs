@@ -96,7 +96,13 @@ namespace ecoplastol.konfiguracja.traceability
 
         private void BtnUsun_Click(object sender, RoutedEventArgs e)
         {
-
+            var Res = MessageBox.Show("Usunąć ?", "Usuwanie pozycji", MessageBoxButton.YesNo, MessageBoxImage.Exclamation);
+            if (Res == MessageBoxResult.Yes)
+            {
+                PanelTrace_db.UsunTraceMFR(rowTraceMFR);
+                listTraceMFR = frmWyroby_db.PobierzTraceMfr();
+                grdLista.ItemsSource = listTraceMFR;
+            }
         }
 
         private void BtnAnuluj_Click(object sender, RoutedEventArgs e)
@@ -106,7 +112,41 @@ namespace ecoplastol.konfiguracja.traceability
 
         private void BtnZatwierdz_Click(object sender, RoutedEventArgs e)
         {
+            grdLista.IsEnabled = true;
+            grdPozycje.IsEnabled = false;
+            btnDodaj.IsEnabled = true;
+            btnKlonuj.IsEnabled = true;
+            btnPopraw.IsEnabled = true;
+            btnUsun.IsEnabled = true;
+            btnAnuluj.IsEnabled = false;
+            btnZatwierdz.IsEnabled = false;
 
+            switch (akcja)
+            {
+                case "D":
+                case "K":
+                    if (grdPozycje.DataContext is trace_mfr)
+                    {
+                        var row = new trace_mfr();
+                        row = grdPozycje.DataContext as trace_mfr;
+                        row.id = PanelTrace_db.IdTraceMFR();
+                        row.opw = frmLogin.LoggedUser.login;
+                        row.czasw = DateTime.Now;
+                        row.opm = frmLogin.LoggedUser.login;
+                        row.czasm = DateTime.Now;
+                        PanelTrace_db.DodajTraceMFR(row);
+                    }
+                    break;
+                case "P":
+                    rowTraceMFR.opm = frmLogin.LoggedUser.login;
+                    rowTraceMFR.czasm = DateTime.Now;
+                    PanelTrace_db.PoprawTraceMFR(rowTraceMFR);
+                    break;
+                default:
+                    break;
+            }
+            listTraceMFR = frmWyroby_db.PobierzTraceMfr();
+            grdLista.ItemsSource = listTraceMFR;
         }
 
         private void GrdLista_SelectionChanged(object sender, SelectionChangedEventArgs e)

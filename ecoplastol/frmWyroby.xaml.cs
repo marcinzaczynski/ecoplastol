@@ -272,47 +272,47 @@ namespace ecoplastol
             // wczytuje parametry do cbb dla kodu Traceability
             listTraceZnaki1 = frmWyroby_db.PobierzTraceZnak();
             cbbTraceZnak1.ItemsSource = listTraceZnaki1;
-            cbbTraceZnak1.SelectedValuePath = "indeks";
+            cbbTraceZnak1.SelectedValuePath = "id";
 
             listTraceZnaki2 = frmWyroby_db.PobierzTraceZnak();
             cbbTraceZnak2.ItemsSource = listTraceZnaki2;
-            cbbTraceZnak2.SelectedValuePath = "indeks";
+            cbbTraceZnak2.SelectedValuePath = "id";
 
             listTraceKategorie = frmWyroby_db.PobierzTraceKategorie();
             cbbTraceKategoria.ItemsSource = listTraceKategorie;
-            cbbTraceKategoria.SelectedValuePath = "indeks";
+            cbbTraceKategoria.SelectedValuePath = "id";
 
             listTraceSmin = frmWyroby_db.PobierzTraceSr();
             cbbTraceSmin.ItemsSource = listTraceSmin;
-            cbbTraceSmin.SelectedValuePath = "indeks";
+            cbbTraceSmin.SelectedValuePath = "id";
 
             listTraceSmax = frmWyroby_db.PobierzTraceSr();
             cbbTraceSmax.ItemsSource = listTraceSmax;
-            cbbTraceSmax.SelectedValuePath = "indeks";
+            cbbTraceSmax.SelectedValuePath = "id";
 
             listTraceProducent = frmWyroby_db.PobierzTraceProducent();
             cbbTraceProducent.ItemsSource = listTraceProducent;
-            cbbTraceProducent.SelectedValuePath = "indeks";
+            cbbTraceProducent.SelectedValuePath = "id";
 
             listTraceSDR = frmWyroby_db.PobierzTraceSdr();
             cbbTraceSDR.ItemsSource = listTraceSDR;
-            cbbTraceSDR.SelectedValuePath = "indeks";
+            cbbTraceSDR.SelectedValuePath = "id";
 
             listTracePEm = frmWyroby_db.PobierzTracePem();
             cbbTracePEm.ItemsSource = listTracePEm;
-            cbbTracePEm.SelectedValuePath = "indeks";
+            cbbTracePEm.SelectedValuePath = "id";
 
             listTraceMaterial = frmWyroby_db.PobierzTraceMaterial();
             cbbTraceMaterial.ItemsSource = listTraceMaterial;
-            cbbTraceMaterial.SelectedValuePath = "indeks";
+            cbbTraceMaterial.SelectedValuePath = "id";
 
             listTracePEo = frmWyroby_db.PobierzTracePeo();
             cbbTracePEo.ItemsSource = listTracePEo;
-            cbbTracePEo.SelectedValuePath = "indeks";
+            cbbTracePEo.SelectedValuePath = "id";
 
             listTraceMFR = frmWyroby_db.PobierzTraceMfr();
             cbbTraceMFR.ItemsSource = listTraceMFR;
-            cbbTraceMFR.SelectedValuePath = "indeks";
+            cbbTraceMFR.SelectedValuePath = "id";
         }
 
         private void DgWyroby_SelectionChanged(object sender, SelectionChangedEventArgs e)

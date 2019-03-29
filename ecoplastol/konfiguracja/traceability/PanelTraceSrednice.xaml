@@ -84,7 +84,7 @@
             <Button FontSize="16" Style="{StaticResource btnGradientLightGreen}" Width="120" Name="btnPopraw" Content="POPRAW" Click="BtnPopraw_Click" />
             <Button FontSize="16" Style="{StaticResource btnGradientRed}" Width="120" Name="btnUsun" Content="USUŃ" Click="BtnUsun_Click"/>
             <Button FontSize="16" Style="{StaticResource btnGradientRed}" Width="120" Name="btnAnuluj" Content="ANULUJ" Click="BtnAnuluj_Click" />
-            <Button FontSize="16" Style="{StaticResource btnGradientLightGreen}" Width="120" Name="btnZatwierdz" Content="ZATWIERDŹ" Click="BtnZatwierdz_Click" />
+            <Button FontSize="16" Style="{StaticResource btnGradientLightGreen}" Width="120" Name="btnZatwierdz" Content="ZATWIERDŹ" Click="BtnZatwierdz_Click" Height="30" VerticalAlignment="Top" />
         </StackPanel>
     </Grid>
 </UserControl>
