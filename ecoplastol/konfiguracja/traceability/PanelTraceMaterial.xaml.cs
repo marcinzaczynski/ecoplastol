@@ -113,7 +113,19 @@ namespace ecoplastol.konfiguracja.traceability
 
         private void BtnAnuluj_Click(object sender, RoutedEventArgs e)
         {
-
+            grdBookmark = grdLista.SelectedIndex;
+            grdLista.IsEnabled = true;
+            grdPozycje.IsEnabled = false;
+            btnDodaj.IsEnabled = true;
+            btnKlonuj.IsEnabled = true;
+            btnPopraw.IsEnabled = true;
+            btnUsun.IsEnabled = true;
+            btnAnuluj.IsEnabled = false;
+            btnZatwierdz.IsEnabled = false;
+            listTraceMaterial = frmWyroby_db.PobierzTraceMaterial();
+            grdLista.ItemsSource = listTraceMaterial;
+            
+            grdLista.SelectedIndex = grdBookmark;
         }
 
         private void BtnZatwierdz_Click(object sender, RoutedEventArgs e)

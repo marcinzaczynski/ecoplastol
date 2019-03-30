@@ -455,6 +455,7 @@ namespace ecoplastol.konfiguracja
 
         private void BtnAnuluj_Click(object sender, RoutedEventArgs e)
         {
+            grdBookmark = grdLista.SelectedIndex;
             grdLista.IsEnabled = true;
             grdPozycje.IsEnabled = false;
             btnDodaj.IsEnabled = true;
@@ -463,6 +464,47 @@ namespace ecoplastol.konfiguracja
             btnUsun.IsEnabled = true;
             btnAnuluj.IsEnabled = false;
             btnZatwierdz.IsEnabled = false;
+            switch (co)
+            {
+                // 1 - ITF Kategorie
+                case 1:
+                    listITFkategoria = frmWyroby_db.PobierzITFKategorie();
+                    grdLista.ItemsSource = listITFkategoria;
+                    break;
+                // 2 - ITF znaki / litery
+                case 2:
+                    listITFlitery = frmWyroby_db.PobierzITFZnaki();
+                    grdLista.ItemsSource = listITFlitery;
+                    break;
+                // 3 - ITF Indykacja czasu chłodzenia
+                case 3:
+                    listITFicc = frmWyroby_db.PobierzITFicc();
+                    grdLista.ItemsSource = listITFicc;
+                    break;
+                // 4 - ITF Czas chłodzenia
+                case 4:
+                    listITFcc = frmWyroby_db.PobierzITFcc();
+                    grdLista.ItemsSource = listITFcc;
+                    break;
+                // 5 - ITF Średnice
+                case 5:
+                    listITFsr = frmWyroby_db.PobierzITFsr();
+                    grdLista.ItemsSource = listITFsr;
+                    break;
+                // 6 - ITF Typ regulacji napięcia
+                case 6:
+                    listITFtrn = frmWyroby_db.PobierzITFtrn();
+                    grdLista.ItemsSource = listITFtrn;
+                    break;
+                // 7 - ITF Odchylenia
+                case 7:
+                    listITFodch = frmWyroby_db.PobierzITFodch();
+                    grdLista.ItemsSource = listITFodch;
+                    break;
+                default:
+                    break;
+            }
+            grdLista.SelectedIndex = grdBookmark;
         }
 
         private void BtnZatwierdz_Click(object sender, RoutedEventArgs e)
