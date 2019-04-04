@@ -106,7 +106,7 @@ namespace ecoplastol.konfiguracja.traceability
             if (Res == MessageBoxResult.Yes)
             {
                 PanelTrace_db.UsunTraceSr(rowTraceSr);
-                listTraceSr = frmWyroby_db.PobierzTraceSr();
+                listTraceSr = PanelTrace_db.PobierzTraceSr();
                 grdLista.ItemsSource = listTraceSr;
             }
         }
@@ -123,7 +123,7 @@ namespace ecoplastol.konfiguracja.traceability
             btnAnuluj.IsEnabled = false;
             btnZatwierdz.IsEnabled = false;
 
-            listTraceSr = frmWyroby_db.PobierzTraceSr();
+            listTraceSr = PanelTrace_db.PobierzTraceSr();
             grdLista.ItemsSource = listTraceSr;
            
             grdLista.SelectedIndex = grdBookmark;
@@ -164,7 +164,7 @@ namespace ecoplastol.konfiguracja.traceability
                 default:
                     break;
             }
-            listTraceSr = frmWyroby_db.PobierzTraceSr();
+            listTraceSr = PanelTrace_db.PobierzTraceSr();
             grdLista.ItemsSource = listTraceSr;
         }
 

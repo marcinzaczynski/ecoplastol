@@ -11,6 +11,9 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using ecoplastol.konfiguracja;
+using ecoplastol.konfiguracja.traceability;
+using ecoplastol.konfiguracja.produkcja;
 
 namespace ecoplastol
 {
@@ -38,13 +41,13 @@ namespace ecoplastol
             lblNazwaMaszyny.Content = nazwaMaszyny;
 
             listaWyrobow = frmZlecenieProdukcji_db.PobierzWyroby();
-            listTracePEm = frmWyroby_db.PobierzTracePem();
-            listWyrobRodzajDrutu = frmWyroby_db.PobierzDruty();
-            listTraceProducent = frmWyroby_db.PobierzTraceProducent();
-            listWyrobZakresSDR = frmWyroby_db.PobierzZakresSDR();
-            listTraceSDR = frmWyroby_db.PobierzTraceSdr();
-            listITFcc1 = frmWyroby_db.PobierzITFcc();
-            listITFcc2 = frmWyroby_db.PobierzITFcc();
+            listTracePEm = PanelTrace_db.PobierzTracePem();
+            listWyrobRodzajDrutu = produkcja_db.PobierzDruty();
+            listTraceProducent = PanelTrace_db.PobierzTraceProducent();
+            listWyrobZakresSDR = produkcja_db.PobierzZakresSDR();
+            listTraceSDR = PanelTrace_db.PobierzTraceSdr();
+            listITFcc1 = PanelITF_db.PobierzITFcc();
+            listITFcc2 = PanelITF_db.PobierzITFcc();
 
             cbbWyrobKod.ItemsSource = listaWyrobow;
             //cbbWyrobKod.SelectedValuePath = "id";

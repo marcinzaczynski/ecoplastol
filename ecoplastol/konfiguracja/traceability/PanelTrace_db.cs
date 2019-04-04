@@ -11,6 +11,18 @@ namespace ecoplastol.konfiguracja.traceability
         /// --------------------------------------
         /// LITERY
         /// --------------------------------------
+        /// 
+        public static List<trace_litery> PobierzTraceZnak()
+        {
+            using (var db = new ecoplastolEntities())
+            {
+                var list = (from w in db.trace_litery
+                            orderby w.id ascending
+                            select w).ToList();
+                return list;
+            }
+        }
+
         public static void PoprawTraceLitery(trace_litery poz)
         {
             using (var db = new ecoplastolEntities())
@@ -49,6 +61,18 @@ namespace ecoplastol.konfiguracja.traceability
         /// --------------------------------------
         /// KATEGORIE
         /// --------------------------------------
+        /// 
+        public static List<trace_kategoria> PobierzTraceKategorie()
+        {
+            using (var db = new ecoplastolEntities())
+            {
+                var list = (from w in db.trace_kategoria
+                            orderby w.id ascending
+                            select w).ToList();
+                return list;
+            }
+        }
+
         public static void PoprawTraceKategorie(trace_kategoria poz)
         {
             using (var db = new ecoplastolEntities())
@@ -87,6 +111,18 @@ namespace ecoplastol.konfiguracja.traceability
         /// --------------------------------------
         /// ŚREDNICE
         /// --------------------------------------
+        /// 
+        public static List<trace_sr> PobierzTraceSr()
+        {
+            using (var db = new ecoplastolEntities())
+            {
+                var list = (from w in db.trace_sr
+                            orderby w.id ascending
+                            select w).ToList();
+                return list;
+            }
+        }
+
         public static void PoprawTraceSr(trace_sr poz)
         {
             using (var db = new ecoplastolEntities())
@@ -125,6 +161,18 @@ namespace ecoplastol.konfiguracja.traceability
         /// --------------------------------------
         /// PRODUCENCI
         /// --------------------------------------
+        /// 
+        public static List<trace_producent> PobierzTraceProducent()
+        {
+            using (var db = new ecoplastolEntities())
+            {
+                var list = (from w in db.trace_producent
+                            orderby w.id ascending
+                            select w).ToList();
+                return list;
+            }
+        }
+
         public static void PoprawTraceProducent(trace_producent poz)
         {
             using (var db = new ecoplastolEntities())
@@ -163,6 +211,18 @@ namespace ecoplastol.konfiguracja.traceability
         /// --------------------------------------
         /// SDR
         /// --------------------------------------
+        /// 
+        public static List<trace_sdr> PobierzTraceSdr()
+        {
+            using (var db = new ecoplastolEntities())
+            {
+                var list = (from w in db.trace_sdr
+                            orderby w.id ascending
+                            select w).ToList();
+                return list;
+            }
+        }
+
         public static void PoprawTraceSDR(trace_sdr poz)
         {
             using (var db = new ecoplastolEntities())
@@ -201,6 +261,18 @@ namespace ecoplastol.konfiguracja.traceability
         /// --------------------------------------
         /// PEm
         /// --------------------------------------
+        /// 
+        public static List<trace_pe_m> PobierzTracePem()
+        {
+            using (var db = new ecoplastolEntities())
+            {
+                var list = (from w in db.trace_pe_m
+                            orderby w.id ascending
+                            select w).ToList();
+                return list;
+            }
+        }
+
         public static void PoprawTracePEm(trace_pe_m poz)
         {
             using (var db = new ecoplastolEntities())
@@ -239,6 +311,18 @@ namespace ecoplastol.konfiguracja.traceability
         /// --------------------------------------
         /// MATERIAL
         /// --------------------------------------
+        /// 
+        public static List<trace_material> PobierzTraceMaterial()
+        {
+            using (var db = new ecoplastolEntities())
+            {
+                var list = (from w in db.trace_material
+                            orderby w.id ascending
+                            select w).ToList();
+                return list;
+            }
+        }
+
         public static void PoprawTraceMaterial(trace_material poz)
         {
             using (var db = new ecoplastolEntities())
@@ -277,6 +361,18 @@ namespace ecoplastol.konfiguracja.traceability
         /// --------------------------------------
         /// PEo
         /// --------------------------------------
+        /// 
+        public static List<trace_pe_o> PobierzTracePeo()
+        {
+            using (var db = new ecoplastolEntities())
+            {
+                var list = (from w in db.trace_pe_o
+                            orderby w.id ascending
+                            select w).ToList();
+                return list;
+            }
+        }
+
         public static void PoprawTracePEo(trace_pe_o poz)
         {
             using (var db = new ecoplastolEntities())
@@ -315,6 +411,18 @@ namespace ecoplastol.konfiguracja.traceability
         /// --------------------------------------
         /// MFR
         /// --------------------------------------
+        /// 
+        public static List<trace_mfr> PobierzTraceMfr()
+        {
+            using (var db = new ecoplastolEntities())
+            {
+                var list = (from w in db.trace_mfr
+                            orderby w.id ascending
+                            select w).ToList();
+                return list;
+            }
+        }
+
         public static void PoprawTraceMFR(trace_mfr poz)
         {
             using (var db = new ecoplastolEntities())

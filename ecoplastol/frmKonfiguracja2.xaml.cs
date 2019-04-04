@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using ecoplastol.konfiguracja;
 using ecoplastol.konfiguracja.traceability;
+using ecoplastol.konfiguracja.produkcja;
 
 namespace ecoplastol
 {
@@ -51,6 +52,11 @@ namespace ecoplastol
         private PanelTracePEo panelTracePEo;
         private PanelTraceMFR panelTraceMFR;
 
+        private List<maszyny> listProdMaszyny;
+        private List<wyroby> listProdWyroby;
+
+        private PanelProdMaszyny panelProdMaszyny;
+        private PanelProdWyroby panelProdWyroby;
 
 
         public frmKonfiguracja2()
@@ -61,7 +67,7 @@ namespace ecoplastol
         private void BtnITFkategoria_Click(object sender, RoutedEventArgs e)
         {
             lblITFinfo.Content = btnITFkategoria.Content;
-            listITFkategorie = frmWyroby_db.PobierzITFKategorie();
+            listITFkategorie = PanelITF_db.PobierzITFKategorie();
 
             grdITFDane.Children.Clear();
             panelITF = null;
@@ -76,7 +82,7 @@ namespace ecoplastol
         private void BtnITFlitery_Click(object sender, RoutedEventArgs e)
         {
             lblITFinfo.Content = btnITFlitery.Content;
-            listITFlitery = frmWyroby_db.PobierzITFZnaki();
+            listITFlitery = PanelITF_db.PobierzITFZnaki();
 
             grdITFDane.Children.Clear();
             panelITF = null;
@@ -88,7 +94,7 @@ namespace ecoplastol
         private void BtnITFicc_Click(object sender, RoutedEventArgs e)
         {
             lblITFinfo.Content = btnITFicc.Content;
-            listITFicc = frmWyroby_db.PobierzITFicc();
+            listITFicc = PanelITF_db.PobierzITFicc();
 
             grdITFDane.Children.Clear();
             panelITF = null;
@@ -100,7 +106,7 @@ namespace ecoplastol
         private void BtnITFcc_Click(object sender, RoutedEventArgs e)
         {
             lblITFinfo.Content = btnITFcc.Content;
-            listITFcc = frmWyroby_db.PobierzITFcc();
+            listITFcc = PanelITF_db.PobierzITFcc();
 
             grdITFDane.Children.Clear();
             panelITF = null;
@@ -112,7 +118,7 @@ namespace ecoplastol
         private void BtnITFsr_Click(object sender, RoutedEventArgs e)
         {
             lblITFinfo.Content = btnITFsr.Content;
-            listITFsr = frmWyroby_db.PobierzITFsr();
+            listITFsr = PanelITF_db.PobierzITFsr();
 
             grdITFDane.Children.Clear();
             panelITF = null;
@@ -124,7 +130,7 @@ namespace ecoplastol
         private void BtnITFtrn_Click(object sender, RoutedEventArgs e)
         {
             lblITFinfo.Content = btnITFtrn.Content;
-            listITFtrn = frmWyroby_db.PobierzITFtrn();
+            listITFtrn = PanelITF_db.PobierzITFtrn();
 
             grdITFDane.Children.Clear();
             panelITF = null;
@@ -136,7 +142,7 @@ namespace ecoplastol
         private void BtnITFodch_Click(object sender, RoutedEventArgs e)
         {
             lblITFinfo.Content = btnITFodch.Content;
-            listITFodch = frmWyroby_db.PobierzITFodch();
+            listITFodch = PanelITF_db.PobierzITFodch();
 
             grdITFDane.Children.Clear();
             panelITF = null;
@@ -148,7 +154,7 @@ namespace ecoplastol
         private void BtnTraceLitery_Click(object sender, RoutedEventArgs e)
         {
             lblTraceinfo.Content = btnTraceLitery.Content;
-            listTraceLitery = frmWyroby_db.PobierzTraceZnak();
+            listTraceLitery = PanelTrace_db.PobierzTraceZnak();
 
             grdTraceDane.Children.Clear();
             panelTraceLitery = null;
@@ -160,7 +166,7 @@ namespace ecoplastol
         private void BtnTraceKategoria_Click(object sender, RoutedEventArgs e)
         {
             lblTraceinfo.Content = btnTraceKategoria.Content;
-            listTraceKategoria = frmWyroby_db.PobierzTraceKategorie();
+            listTraceKategoria = PanelTrace_db.PobierzTraceKategorie();
 
             grdTraceDane.Children.Clear();
             panelTraceKategorie = null;
@@ -172,7 +178,7 @@ namespace ecoplastol
         private void BtnTraceSr_Click(object sender, RoutedEventArgs e)
         {
             lblTraceinfo.Content = btnTraceSr.Content;
-            listTraceSr = frmWyroby_db.PobierzTraceSr();
+            listTraceSr = PanelTrace_db.PobierzTraceSr();
 
             grdTraceDane.Children.Clear();
             panelTraceSrednice = null;
@@ -184,7 +190,7 @@ namespace ecoplastol
         private void BtnTraceProducenci_Click(object sender, RoutedEventArgs e)
         {
             lblTraceinfo.Content = btnTraceProducenci.Content;
-            listTraceProducent = frmWyroby_db.PobierzTraceProducent();
+            listTraceProducent = PanelTrace_db.PobierzTraceProducent();
 
             grdTraceDane.Children.Clear();
             panelTraceProducenci = null;
@@ -196,7 +202,7 @@ namespace ecoplastol
         private void BtnTraceSDR_Click(object sender, RoutedEventArgs e)
         {
             lblTraceinfo.Content = btnTraceSDR.Content;
-            listTraceSDR = frmWyroby_db.PobierzTraceSdr();
+            listTraceSDR = PanelTrace_db.PobierzTraceSdr();
 
             grdTraceDane.Children.Clear();
             panelTraceSDR = null;
@@ -208,7 +214,7 @@ namespace ecoplastol
         private void BtnTracePEm_Click(object sender, RoutedEventArgs e)
         {
             lblTraceinfo.Content = btnTracePEm.Content;
-            listTracePEm = frmWyroby_db.PobierzTracePem();
+            listTracePEm = PanelTrace_db.PobierzTracePem();
 
             grdTraceDane.Children.Clear();
             panelTracePEm = null;
@@ -220,7 +226,7 @@ namespace ecoplastol
         private void BtnTraceMaterial_Click(object sender, RoutedEventArgs e)
         {
             lblTraceinfo.Content = btnTraceMaterial.Content;
-            listTraceMaterial = frmWyroby_db.PobierzTraceMaterial();
+            listTraceMaterial = PanelTrace_db.PobierzTraceMaterial();
 
             grdTraceDane.Children.Clear();
             panelTraceMaterial = null;
@@ -232,7 +238,7 @@ namespace ecoplastol
         private void BtnTracePEo_Click(object sender, RoutedEventArgs e)
         {
             lblTraceinfo.Content = btnTracePEo.Content;
-            listTracePEo = frmWyroby_db.PobierzTracePeo();
+            listTracePEo = PanelTrace_db.PobierzTracePeo();
 
             grdTraceDane.Children.Clear();
             panelTracePEo = null;
@@ -244,13 +250,37 @@ namespace ecoplastol
         private void BtnTraceMFR_Click(object sender, RoutedEventArgs e)
         {
             lblTraceinfo.Content = btnTraceMFR.Content;
-            listTraceMFR = frmWyroby_db.PobierzTraceMfr();
+            listTraceMFR = PanelTrace_db.PobierzTraceMfr();
 
             grdTraceDane.Children.Clear();
             panelTraceMFR = null;
             panelTraceMFR = new PanelTraceMFR(listTraceMFR);
 
             grdTraceDane.Children.Add(panelTraceMFR);
+        }
+
+        private void BtnProdWyroby_Click(object sender, RoutedEventArgs e)
+        {
+            lblProdinfo.Content = btnProdWyroby.Content;
+            listProdWyroby = produkcja_db.PobierzWyroby();
+
+            grdTraceDane.Children.Clear();
+            panelProdWyroby = null;
+            panelProdWyroby = new PanelProdWyroby(listProdWyroby);
+
+            grdProdDane.Children.Add(panelProdWyroby);
+        }
+
+        private void BtnProdMaszyny_Click(object sender, RoutedEventArgs e)
+        {
+            lblProdinfo.Content = btnProdMaszyny.Content;
+            listProdMaszyny = produkcja_db.PobierzMaszyny();
+
+            grdProdDane.Children.Clear();
+            panelProdMaszyny = null;
+            panelProdMaszyny = new PanelProdMaszyny(listProdMaszyny);
+
+            grdProdDane.Children.Add(panelProdMaszyny);
         }
     }
 }

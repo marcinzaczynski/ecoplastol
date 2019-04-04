@@ -407,43 +407,43 @@ namespace ecoplastol.konfiguracja
                     // 1 - ITF Kategorie
                     case 1:
                         PanelITF_db.UsunITFkategoria(rowITFkategoria);
-                        listITFkategoria = frmWyroby_db.PobierzITFKategorie();
+                        listITFkategoria = PanelITF_db.PobierzITFKategorie();
                         grdLista.ItemsSource = listITFkategoria;
                         break;
                     // 2 - ITF znaki / litery
                     case 2:
                         PanelITF_db.UsunITFlitery(rowITFlitery);
-                        listITFlitery = frmWyroby_db.PobierzITFZnaki();
+                        listITFlitery = PanelITF_db.PobierzITFZnaki();
                         grdLista.ItemsSource = listITFlitery;
                         break;
                     // 3 - ITF Indykacja czasu chłodzenia
                     case 3:
                         PanelITF_db.UsunITFicc(rowITFicc);
-                        listITFicc = frmWyroby_db.PobierzITFicc();
+                        listITFicc = PanelITF_db.PobierzITFicc();
                         grdLista.ItemsSource = listITFicc;
                         break;
                     // 4 - ITF Czas chłodzenia
                     case 4:
                         PanelITF_db.UsunITFcc(rowITFcc);
-                        listITFcc = frmWyroby_db.PobierzITFcc();
+                        listITFcc = PanelITF_db.PobierzITFcc();
                         grdLista.ItemsSource = listITFcc;
                         break;
                     // 5 - ITF Średnice
                     case 5:
                         PanelITF_db.UsunITFsr(rowITFsr);
-                        listITFsr = frmWyroby_db.PobierzITFsr();
+                        listITFsr = PanelITF_db.PobierzITFsr();
                         grdLista.ItemsSource = listITFsr;
                         break;
                     // 6 - ITF Typ regulacji napięcia
                     case 6:
                         PanelITF_db.UsunITFtrn(rowITFtrn);
-                        listITFtrn = frmWyroby_db.PobierzITFtrn();
+                        listITFtrn = PanelITF_db.PobierzITFtrn();
                         grdLista.ItemsSource = listITFtrn;
                         break;
                     // 7 - ITF Odchylenia
                     case 7:
                         PanelITF_db.UsunITFodch(rowITFodch);
-                        listITFodch = frmWyroby_db.PobierzITFodch();
+                        listITFodch = PanelITF_db.PobierzITFodch();
                         grdLista.ItemsSource = listITFodch;
                         break;
                     default:
@@ -468,37 +468,37 @@ namespace ecoplastol.konfiguracja
             {
                 // 1 - ITF Kategorie
                 case 1:
-                    listITFkategoria = frmWyroby_db.PobierzITFKategorie();
+                    listITFkategoria = PanelITF_db.PobierzITFKategorie();
                     grdLista.ItemsSource = listITFkategoria;
                     break;
                 // 2 - ITF znaki / litery
                 case 2:
-                    listITFlitery = frmWyroby_db.PobierzITFZnaki();
+                    listITFlitery = PanelITF_db.PobierzITFZnaki();
                     grdLista.ItemsSource = listITFlitery;
                     break;
                 // 3 - ITF Indykacja czasu chłodzenia
                 case 3:
-                    listITFicc = frmWyroby_db.PobierzITFicc();
+                    listITFicc = PanelITF_db.PobierzITFicc();
                     grdLista.ItemsSource = listITFicc;
                     break;
                 // 4 - ITF Czas chłodzenia
                 case 4:
-                    listITFcc = frmWyroby_db.PobierzITFcc();
+                    listITFcc = PanelITF_db.PobierzITFcc();
                     grdLista.ItemsSource = listITFcc;
                     break;
                 // 5 - ITF Średnice
                 case 5:
-                    listITFsr = frmWyroby_db.PobierzITFsr();
+                    listITFsr = PanelITF_db.PobierzITFsr();
                     grdLista.ItemsSource = listITFsr;
                     break;
                 // 6 - ITF Typ regulacji napięcia
                 case 6:
-                    listITFtrn = frmWyroby_db.PobierzITFtrn();
+                    listITFtrn = PanelITF_db.PobierzITFtrn();
                     grdLista.ItemsSource = listITFtrn;
                     break;
                 // 7 - ITF Odchylenia
                 case 7:
-                    listITFodch = frmWyroby_db.PobierzITFodch();
+                    listITFodch = PanelITF_db.PobierzITFodch();
                     grdLista.ItemsSource = listITFodch;
                     break;
                 default:
@@ -523,43 +523,43 @@ namespace ecoplastol.konfiguracja
                 // 1 - ITF Kategorie
                 case 1:
                     ZatwierdzITFkategorie();
-                    listITFkategoria = frmWyroby_db.PobierzITFKategorie();
+                    listITFkategoria = PanelITF_db.PobierzITFKategorie();
                     grdLista.ItemsSource = listITFkategoria;
                     break;
                 // 2 - ITF znaki / litery
                 case 2:
                     ZatwierdzITFlitery();
-                    listITFlitery = frmWyroby_db.PobierzITFZnaki();
+                    listITFlitery = PanelITF_db.PobierzITFZnaki();
                     grdLista.ItemsSource = listITFlitery;
                     break;
                 // 3 - ITF Indykacja czasu chłodzenia
                 case 3:
                     ZatwierdzITFicc();
-                    listITFicc = frmWyroby_db.PobierzITFicc();
+                    listITFicc = PanelITF_db.PobierzITFicc();
                     grdLista.ItemsSource = listITFicc;
                     break;
                 // 4 - ITF Czas chłodzenia
                 case 4:
                     ZatwierdzITFcc();
-                    listITFcc = frmWyroby_db.PobierzITFcc();
+                    listITFcc = PanelITF_db.PobierzITFcc();
                     grdLista.ItemsSource = listITFcc;
                     break;
                 // 5 - ITF Średnice
                 case 5:
                     ZatwierdzITFsr();
-                    listITFsr = frmWyroby_db.PobierzITFsr();
+                    listITFsr = PanelITF_db.PobierzITFsr();
                     grdLista.ItemsSource = listITFsr;
                     break;
                 // 6 - ITF Typ regulacji napięcia
                 case 6:
                     ZatwierdzITFtrn();
-                    listITFtrn = frmWyroby_db.PobierzITFtrn();
+                    listITFtrn = PanelITF_db.PobierzITFtrn();
                     grdLista.ItemsSource = listITFtrn;
                     break;
                 // 7 - ITF Odchylenia
                 case 7:
                     ZatwierdzITFodch();
-                    listITFodch = frmWyroby_db.PobierzITFodch();
+                    listITFodch = PanelITF_db.PobierzITFodch();
                     grdLista.ItemsSource = listITFodch;
                     break;
                 default:

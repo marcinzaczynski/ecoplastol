@@ -11,6 +11,19 @@ namespace ecoplastol.konfiguracja
         /// --------------------------------------
         /// KATEGORIE
         /// --------------------------------------
+        /// 
+
+        public static List<itf_kategorie> PobierzITFKategorie()
+        {
+            using (var db = new ecoplastolEntities())
+            {
+                var list = (from w in db.itf_kategorie
+                            orderby w.id ascending
+                            select w).ToList();
+                return list;
+            }
+        }
+
         public static void PoprawITFkategoria(itf_kategorie poz)
         {
             using (var db = new ecoplastolEntities())
@@ -48,6 +61,18 @@ namespace ecoplastol.konfiguracja
         /// --------------------------------------
         /// LITERY
         /// --------------------------------------
+        /// 
+        public static List<itf_litery> PobierzITFZnaki()
+        {
+            using (var db = new ecoplastolEntities())
+            {
+                var list = (from w in db.itf_litery
+                            orderby w.id ascending
+                            select w).ToList();
+                return list;
+            }
+        }
+
         public static void PoprawITFlitery(itf_litery poz)
         {
             using (var db = new ecoplastolEntities())
@@ -85,6 +110,18 @@ namespace ecoplastol.konfiguracja
         /// --------------------------------------
         /// ICC
         /// --------------------------------------
+        /// 
+        public static List<itf_icc> PobierzITFicc()
+        {
+            using (var db = new ecoplastolEntities())
+            {
+                var list = (from w in db.itf_icc
+                            orderby w.id ascending
+                            select w).ToList();
+                return list;
+            }
+        }
+
         public static void PoprawITFicc(itf_icc poz)
         {
             using (var db = new ecoplastolEntities())
@@ -122,6 +159,18 @@ namespace ecoplastol.konfiguracja
         /// --------------------------------------
         /// CC
         /// --------------------------------------
+        /// 
+        public static List<itf_cc> PobierzITFcc()
+        {
+            using (var db = new ecoplastolEntities())
+            {
+                var list = (from w in db.itf_cc
+                            orderby w.id ascending
+                            select w).ToList();
+                return list;
+            }
+        }
+
         public static void PoprawITFcc(itf_cc poz)
         {
             using (var db = new ecoplastolEntities())
@@ -159,6 +208,18 @@ namespace ecoplastol.konfiguracja
         /// --------------------------------------
         /// SR
         /// --------------------------------------
+        /// 
+        public static List<itf_sr> PobierzITFsr()
+        {
+            using (var db = new ecoplastolEntities())
+            {
+                var list = (from w in db.itf_sr
+                            orderby w.id ascending
+                            select w).ToList();
+                return list;
+            }
+        }
+
         public static void PoprawITFsr(itf_sr poz)
         {
             using (var db = new ecoplastolEntities())
@@ -196,6 +257,18 @@ namespace ecoplastol.konfiguracja
         /// --------------------------------------
         /// TRN
         /// --------------------------------------
+        /// 
+        public static List<itf_trn> PobierzITFtrn()
+        {
+            using (var db = new ecoplastolEntities())
+            {
+                var list = (from w in db.itf_trn
+                            orderby w.id ascending
+                            select w).ToList();
+                return list;
+            }
+        }
+
         public static void PoprawITFtrn(itf_trn poz)
         {
             using (var db = new ecoplastolEntities())
@@ -233,6 +306,18 @@ namespace ecoplastol.konfiguracja
         /// --------------------------------------
         /// ODCH
         /// --------------------------------------
+        /// 
+        public static List<itf_odch> PobierzITFodch()
+        {
+            using (var db = new ecoplastolEntities())
+            {
+                var list = (from w in db.itf_odch
+                            orderby w.id ascending
+                            select w).ToList();
+                return list;
+            }
+        }
+
         public static void PoprawITFodch(itf_odch poz)
         {
             using (var db = new ecoplastolEntities())

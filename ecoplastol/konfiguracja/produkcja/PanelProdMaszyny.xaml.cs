@@ -13,23 +13,23 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace ecoplastol.konfiguracja.traceability
+namespace ecoplastol.konfiguracja.produkcja
 {
     /// <summary>
-    /// Interaction logic for PanelTraceKategorie.xaml
+    /// Interaction logic for PanelMaszyny.xaml
     /// </summary>
-    public partial class PanelTraceKategorie : UserControl
+    public partial class PanelProdMaszyny : UserControl
     {
         private int grdBookmark;
         private string akcja;
-        private trace_kategoria rowTraceKategoria;
-        private List<trace_kategoria> listTraceKategoria;
+        private maszyny rowMaszyny;
+        private List<maszyny> listMaszyny;
 
-        public PanelTraceKategorie(List<trace_kategoria> lista)
+        public PanelProdMaszyny(List<maszyny> lista)
         {
             InitializeComponent();
-            listTraceKategoria = lista;
-            grdLista.ItemsSource = listTraceKategoria;
+            listMaszyny = lista;
+            grdLista.ItemsSource = listMaszyny;
             if (lista.Count == 0)
             {
                 UstawPrzyciski(0);
@@ -46,8 +46,8 @@ namespace ecoplastol.konfiguracja.traceability
 
         private void GrdLista_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            rowTraceKategoria = grdLista.SelectedItem as trace_kategoria;
-            grdPozycje.DataContext = rowTraceKategoria;
+            rowMaszyny = grdLista.SelectedItem as maszyny;
+            grdPozycje.DataContext = rowMaszyny;
         }
 
         private void BtnDodaj_Click(object sender, RoutedEventArgs e)
@@ -63,7 +63,7 @@ namespace ecoplastol.konfiguracja.traceability
             btnAnuluj.IsEnabled = true;
             btnZatwierdz.IsEnabled = true;
 
-            trace_kategoria poz = new trace_kategoria();
+            maszyny poz = new maszyny();
             grdPozycje.DataContext = poz;
         }
 
@@ -79,10 +79,8 @@ namespace ecoplastol.konfiguracja.traceability
             btnAnuluj.IsEnabled = true;
             btnZatwierdz.IsEnabled = true;
 
-            trace_kategoria poz = new trace_kategoria();
-            poz.parametr = rowTraceKategoria.parametr;
-            poz.wartosc = rowTraceKategoria.wartosc;
-            poz.opis = rowTraceKategoria.opis;
+            maszyny poz = new maszyny();
+            poz.numer = rowMaszyny.numer;
             grdPozycje.DataContext = poz;
         }
 
@@ -105,15 +103,14 @@ namespace ecoplastol.konfiguracja.traceability
             var Res = MessageBox.Show("Usunąć ?", "Usuwanie pozycji", MessageBoxButton.YesNo, MessageBoxImage.Exclamation);
             if (Res == MessageBoxResult.Yes)
             {
-                PanelTrace_db.UsunTraceKategorie(rowTraceKategoria);
-                listTraceKategoria = PanelTrace_db.PobierzTraceKategorie();
-                grdLista.ItemsSource = listTraceKategoria;
+                produkcja_db.UsunMaszyne(rowMaszyny);
+                listMaszyny = produkcja_db.PobierzMaszyny();
+                grdLista.ItemsSource = listMaszyny;
             }
         }
 
         private void BtnAnuluj_Click(object sender, RoutedEventArgs e)
         {
-            grdBookmark = grdLista.SelectedIndex;
             grdLista.IsEnabled = true;
             grdPozycje.IsEnabled = false;
             btnDodaj.IsEnabled = true;
@@ -123,9 +120,9 @@ namespace ecoplastol.konfiguracja.traceability
             btnAnuluj.IsEnabled = false;
             btnZatwierdz.IsEnabled = false;
 
-            listTraceKategoria = PanelTrace_db.PobierzTraceKategorie();
-            grdLista.ItemsSource = listTraceKategoria;
-            
+            listMaszyny = produkcja_db.PobierzMaszyny();
+            grdLista.ItemsSource = listMaszyny;
+
             grdLista.SelectedIndex = grdBookmark;
         }
 
@@ -144,28 +141,28 @@ namespace ecoplastol.konfiguracja.traceability
             {
                 case "D":
                 case "K":
-                    if (grdPozycje.DataContext is trace_kategoria)
+                    if (grdPozycje.DataContext is maszyny)
                     {
-                        var row = new trace_kategoria();
-                        row = grdPozycje.DataContext as trace_kategoria;
-                        row.id = PanelTrace_db.IdTraceKategorie();
+                        var row = new maszyny();
+                        row = grdPozycje.DataContext as maszyny;
+                        row.id = produkcja_db.IdMaszyny();
                         row.opw = frmLogin.LoggedUser.login;
                         row.czasw = DateTime.Now;
                         row.opm = frmLogin.LoggedUser.login;
                         row.czasm = DateTime.Now;
-                        PanelTrace_db.DodajTraceKategorie(row);
+                        produkcja_db.DodajMaszyne(row);
                     }
                     break;
                 case "P":
-                    rowTraceKategoria.opm = frmLogin.LoggedUser.login;
-                    rowTraceKategoria.czasm = DateTime.Now;
-                    PanelTrace_db.PoprawTraceKategorie(rowTraceKategoria);
+                    rowMaszyny.opm = frmLogin.LoggedUser.login;
+                    rowMaszyny.czasm = DateTime.Now;
+                    produkcja_db.PoprawMaszyne(rowMaszyny);
                     break;
                 default:
                     break;
             }
-            listTraceKategoria = PanelTrace_db.PobierzTraceKategorie();
-            grdLista.ItemsSource = listTraceKategoria;
+            listMaszyny = produkcja_db.PobierzMaszyny();
+            grdLista.ItemsSource = listMaszyny;
         }
 
         private void UstawPrzyciski(int i)

@@ -132,6 +132,13 @@
       <DependentUpon>PanelITF.xaml</DependentUpon>
     </Compile>
     <Compile Include="konfiguracja\PanelITF_db.cs" />
+    <Compile Include="konfiguracja\produkcja\PanelProdMaszyny.xaml.cs">
+      <DependentUpon>PanelProdMaszyny.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="konfiguracja\produkcja\PanelProdWyroby.xaml.cs">
+      <DependentUpon>PanelProdWyroby.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="konfiguracja\produkcja\produkcja_db.cs" />
     <Compile Include="konfiguracja\traceability\PanelTraceKategorie.xaml.cs">
       <DependentUpon>PanelTraceKategorie.xaml</DependentUpon>
     </Compile>
@@ -272,6 +279,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="konfiguracja\PanelITF.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="konfiguracja\produkcja\PanelProdMaszyny.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="konfiguracja\produkcja\PanelProdWyroby.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

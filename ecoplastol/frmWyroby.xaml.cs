@@ -13,6 +13,9 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using ecoplastol.konfiguracja.produkcja;
+using ecoplastol.konfiguracja.traceability;
+using ecoplastol.konfiguracja;
 
 namespace ecoplastol
 {
@@ -59,9 +62,9 @@ namespace ecoplastol
         public frmWyroby()
         {
             InitializeComponent();
-            gridWyrob.IsEnabled = false;
+            grdPozycje.IsEnabled = false;
             listWyroby = frmWyroby_db.GetProducts();
-            dgWyroby.ItemsSource = listWyroby;
+            grdWyroby.ItemsSource = listWyroby;
 
 
             // var firsItem = dgWyroby.Items[0];
@@ -81,8 +84,8 @@ namespace ecoplastol
                 UstawPrzyciski(0);
             } else
             {
-                dgWyroby.Focus();
-                dgWyroby.SelectedIndex = 0;
+                grdWyroby.Focus();
+                grdWyroby.SelectedIndex = 0;
 
                 DgWyroby_SelectionChanged(null, null);
                 UstawPrzyciski(1);
@@ -131,7 +134,7 @@ namespace ecoplastol
         {
             _akcja = "D";
 
-            dgWyroby.IsEnabled = false;
+            grdWyroby.IsEnabled = false;
             btnDodaj.IsEnabled = false;
             btnKlonuj.IsEnabled = false;
             btnPopraw.IsEnabled = false;
@@ -140,7 +143,7 @@ namespace ecoplastol
             btnZatwierdz.IsEnabled = true;
             btnZamknij.IsEnabled = false;
 
-            gridWyrob.IsEnabled = true;
+            grdPozycje.IsEnabled = true;
             WyczyscKontrolkiWyrob();
             WyczyscKontrolkiKodKr();
         }
@@ -185,7 +188,7 @@ namespace ecoplastol
             txtITFke.Text = "";
             txtTracePartia.Text = "";
 
-            List<ComboBox> comboBoxes = GetLogicalChildCollection<ComboBox>(gridWyrob);
+            List<ComboBox> comboBoxes = GetLogicalChildCollection<ComboBox>(grdPozycje);
             foreach (var cmbBox in comboBoxes)
             {
                 cmbBox.SelectedValue = -1;
@@ -196,7 +199,7 @@ namespace ecoplastol
 
         private void WyczyscKontrolkiKodKr()
         {
-            List<TextBox> TextBoxes = GetLogicalChildCollection<TextBox>(gridKody);
+            List<TextBox> TextBoxes = GetLogicalChildCollection<TextBox>(grdKody);
             foreach (var txtBox in TextBoxes)
             {
                 txtBox.Text = "";
@@ -206,19 +209,19 @@ namespace ecoplastol
 
         private void UstawWyrob()
         {
-            listTypyWyrobow = frmWyroby_db.PobierzTypy();
+            listTypyWyrobow = produkcja_db.PobierzTypy();
             cbbWyrobTyp.ItemsSource = listTypyWyrobow;
             cbbWyrobTyp.SelectedValuePath = "indeks";
 
-            listWyrobZakresSDR = frmWyroby_db.PobierzZakresSDR();
+            listWyrobZakresSDR = produkcja_db.PobierzZakresSDR();
             cbbWyrobZakresSDR.ItemsSource = listWyrobZakresSDR;
             cbbWyrobZakresSDR.SelectedValuePath = "indeks";
 
-            listWyrobZastZaworu = frmWyroby_db.PobierzZastZaworu();
+            listWyrobZastZaworu = produkcja_db.PobierzZastZaworu();
             cbbWyrobZastZaworu.ItemsSource = listWyrobZastZaworu;
             cbbWyrobZastZaworu.SelectedValuePath = "indeks";
 
-            listWyrobRodzajDrutu = frmWyroby_db.PobierzDruty();
+            listWyrobRodzajDrutu = produkcja_db.PobierzDruty();
             cbbWyrobRodzajDrutu.ItemsSource = listWyrobRodzajDrutu;
             cbbWyrobRodzajDrutu.SelectedValuePath = "id";
         }
@@ -226,43 +229,43 @@ namespace ecoplastol
         private void UstawITF()
         {
             // wczytuje parametry do cbb dla kodu ITF
-            listITFKategorie = frmWyroby_db.PobierzITFKategorie();
+            listITFKategorie = PanelITF_db.PobierzITFKategorie();
             cbbITFKategoria.ItemsSource = listITFKategorie;
             cbbITFKategoria.SelectedValuePath = "id";
 
-            listITFZnaki1 = frmWyroby_db.PobierzITFZnaki();
+            listITFZnaki1 = PanelITF_db.PobierzITFZnaki();
             cbbITFZnak1.ItemsSource = listITFZnaki1;
             cbbITFZnak1.SelectedValuePath = "id";
 
-            listITFZnaki2 = frmWyroby_db.PobierzITFZnaki();
+            listITFZnaki2 = PanelITF_db.PobierzITFZnaki();
             cbbITFZnak2.ItemsSource = listITFZnaki2;
             cbbITFZnak2.SelectedValuePath = "id";
 
-            listITFicc = frmWyroby_db.PobierzITFicc();
+            listITFicc = PanelITF_db.PobierzITFicc();
             cbbITFICC.ItemsSource = listITFicc;
             cbbITFICC.SelectedValuePath = "id";
 
-            listITFcc1 = frmWyroby_db.PobierzITFcc();
+            listITFcc1 = PanelITF_db.PobierzITFcc();
             cbbITFCC1.ItemsSource = listITFcc1;
             cbbITFCC1.SelectedValuePath = "id";
 
-            listITFcc2 = frmWyroby_db.PobierzITFcc();
+            listITFcc2 = PanelITF_db.PobierzITFcc();
             cbbITFCC2.ItemsSource = listITFcc2;
             cbbITFCC2.SelectedValuePath = "id";
 
-            listITFsmin = frmWyroby_db.PobierzITFsr();
+            listITFsmin = PanelITF_db.PobierzITFsr();
             cbbITFsmin.ItemsSource = listITFsmin;
             cbbITFsmin.SelectedValuePath = "id";
 
-            listITFsmax = frmWyroby_db.PobierzITFsr();
+            listITFsmax = PanelITF_db.PobierzITFsr();
             cbbITFsmax.ItemsSource = listITFsmax;
             cbbITFsmax.SelectedValuePath = "id";
 
-            listITFtrn = frmWyroby_db.PobierzITFtrn();
+            listITFtrn = PanelITF_db.PobierzITFtrn();
             cbbITFtrn.ItemsSource = listITFtrn;
             cbbITFtrn.SelectedValuePath = "id";
 
-            listITFodch = frmWyroby_db.PobierzITFodch();
+            listITFodch = PanelITF_db.PobierzITFodch();
             cbbITFodch.ItemsSource = listITFodch;
             cbbITFodch.SelectedValuePath = "id";
         }
@@ -270,47 +273,47 @@ namespace ecoplastol
         private void UstawTrace()
         {
             // wczytuje parametry do cbb dla kodu Traceability
-            listTraceZnaki1 = frmWyroby_db.PobierzTraceZnak();
+            listTraceZnaki1 = PanelTrace_db.PobierzTraceZnak();
             cbbTraceZnak1.ItemsSource = listTraceZnaki1;
             cbbTraceZnak1.SelectedValuePath = "id";
 
-            listTraceZnaki2 = frmWyroby_db.PobierzTraceZnak();
+            listTraceZnaki2 = PanelTrace_db.PobierzTraceZnak();
             cbbTraceZnak2.ItemsSource = listTraceZnaki2;
             cbbTraceZnak2.SelectedValuePath = "id";
 
-            listTraceKategorie = frmWyroby_db.PobierzTraceKategorie();
+            listTraceKategorie = PanelTrace_db.PobierzTraceKategorie();
             cbbTraceKategoria.ItemsSource = listTraceKategorie;
             cbbTraceKategoria.SelectedValuePath = "id";
 
-            listTraceSmin = frmWyroby_db.PobierzTraceSr();
+            listTraceSmin = PanelTrace_db.PobierzTraceSr();
             cbbTraceSmin.ItemsSource = listTraceSmin;
             cbbTraceSmin.SelectedValuePath = "id";
 
-            listTraceSmax = frmWyroby_db.PobierzTraceSr();
+            listTraceSmax = PanelTrace_db.PobierzTraceSr();
             cbbTraceSmax.ItemsSource = listTraceSmax;
             cbbTraceSmax.SelectedValuePath = "id";
 
-            listTraceProducent = frmWyroby_db.PobierzTraceProducent();
+            listTraceProducent = PanelTrace_db.PobierzTraceProducent();
             cbbTraceProducent.ItemsSource = listTraceProducent;
             cbbTraceProducent.SelectedValuePath = "id";
 
-            listTraceSDR = frmWyroby_db.PobierzTraceSdr();
+            listTraceSDR = PanelTrace_db.PobierzTraceSdr();
             cbbTraceSDR.ItemsSource = listTraceSDR;
             cbbTraceSDR.SelectedValuePath = "id";
 
-            listTracePEm = frmWyroby_db.PobierzTracePem();
+            listTracePEm = PanelTrace_db.PobierzTracePem();
             cbbTracePEm.ItemsSource = listTracePEm;
             cbbTracePEm.SelectedValuePath = "id";
 
-            listTraceMaterial = frmWyroby_db.PobierzTraceMaterial();
+            listTraceMaterial = PanelTrace_db.PobierzTraceMaterial();
             cbbTraceMaterial.ItemsSource = listTraceMaterial;
             cbbTraceMaterial.SelectedValuePath = "id";
 
-            listTracePEo = frmWyroby_db.PobierzTracePeo();
+            listTracePEo = PanelTrace_db.PobierzTracePeo();
             cbbTracePEo.ItemsSource = listTracePEo;
             cbbTracePEo.SelectedValuePath = "id";
 
-            listTraceMFR = frmWyroby_db.PobierzTraceMfr();
+            listTraceMFR = PanelTrace_db.PobierzTraceMfr();
             cbbTraceMFR.ItemsSource = listTraceMFR;
             cbbTraceMFR.SelectedValuePath = "id";
         }
@@ -319,7 +322,7 @@ namespace ecoplastol
         {
             try
             {
-                var row = dgWyroby.SelectedItem as wyroby;
+                var row = grdWyroby.SelectedItem as wyroby;
                 //grdInne.DataContext = row;
                 _id_upd = row.id;
                 cbbWyrobTyp.SelectedValue = row.wyrob_typ;
@@ -460,7 +463,7 @@ namespace ecoplastol
         {
             _akcja = "K";
 
-            dgWyroby.IsEnabled = false;
+            grdWyroby.IsEnabled = false;
             btnDodaj.IsEnabled = false;
             btnKlonuj.IsEnabled = false;
             btnPopraw.IsEnabled = false;
@@ -469,15 +472,15 @@ namespace ecoplastol
             btnZatwierdz.IsEnabled = true;
             btnZamknij.IsEnabled = false;
 
-            gridWyrob.IsEnabled = true;
+            grdPozycje.IsEnabled = true;
         }
 
         private void BtnPopraw_Click(object sender, RoutedEventArgs e)
         {
             _akcja = "P";
-            dgBookmark = dgWyroby.SelectedIndex;
+            dgBookmark = grdWyroby.SelectedIndex;
 
-            dgWyroby.IsEnabled = false;
+            grdWyroby.IsEnabled = false;
             btnDodaj.IsEnabled = false;
             btnKlonuj.IsEnabled = false;
             btnPopraw.IsEnabled = false;
@@ -486,12 +489,12 @@ namespace ecoplastol
             btnZatwierdz.IsEnabled = true;
             btnZamknij.IsEnabled = false;
 
-            gridWyrob.IsEnabled = true;
+            grdPozycje.IsEnabled = true;
         }
 
         private void BtnAnuluj_Click(object sender, RoutedEventArgs e)
         {
-            dgWyroby.IsEnabled = true;
+            grdWyroby.IsEnabled = true;
             btnZamknij.IsEnabled = true;
             if (listWyroby.Count == 0)
             {
@@ -501,10 +504,10 @@ namespace ecoplastol
             {
                 UstawPrzyciski(1);
             }
-            gridWyrob.IsEnabled = false;
+            grdPozycje.IsEnabled = false;
             listWyroby = frmWyroby_db.GetProducts();
-            dgWyroby.ItemsSource = listWyroby;
-            dgWyroby.SelectedIndex = dgBookmark;
+            grdWyroby.ItemsSource = listWyroby;
+            grdWyroby.SelectedIndex = dgBookmark;
         }
 
         private void BtnZamknij_Click(object sender, RoutedEventArgs e)
@@ -575,7 +578,7 @@ namespace ecoplastol
             }
             else if (_akcja == "P")
             {
-                var row = dgWyroby.SelectedItem as wyroby;
+                var row = grdWyroby.SelectedItem as wyroby;
                 nowyWyrob.id = row.id;
                 nowyWyrob.opw = row.opw;            	                     // [opw] [varchar] (20) NULL,
                 nowyWyrob.czasw = row.czasw;                           	                     // [czasw] [datetime] NULL,
@@ -585,10 +588,10 @@ namespace ecoplastol
             };
 
             listWyroby = frmWyroby_db.GetProducts();
-            dgWyroby.ItemsSource = listWyroby;
-            dgWyroby.SelectedIndex = dgBookmark;
+            grdWyroby.ItemsSource = listWyroby;
+            grdWyroby.SelectedIndex = dgBookmark;
 
-            dgWyroby.IsEnabled = true;
+            grdWyroby.IsEnabled = true;
             btnZamknij.IsEnabled = true;
             if (listWyroby.Count == 0)
             {
@@ -598,7 +601,7 @@ namespace ecoplastol
             {
                 UstawPrzyciski(1);
             }
-            gridWyrob.IsEnabled = false;
+            grdPozycje.IsEnabled = false;
         }
 
         private void CbbITFKategoria_DropDownClosed(object sender, EventArgs e)

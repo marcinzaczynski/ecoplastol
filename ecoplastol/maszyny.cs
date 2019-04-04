@@ -16,5 +16,9 @@ namespace ecoplastol
     {
         public int id { get; set; }
         public string numer { get; set; }
+        public string opw { get; set; }
+        public System.DateTime czasw { get; set; }
+        public string opm { get; set; }
+        public System.DateTime czasm { get; set; }
     }
 }
