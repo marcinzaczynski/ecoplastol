@@ -282,5 +282,30 @@ namespace ecoplastol
 
             grdProdDane.Children.Add(panelProdMaszyny);
         }
+
+        private void BtnZamknij_Click(object sender, RoutedEventArgs e)
+        {
+            Close();
+        }
+
+        private void BtnProdTypWyrobu_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void BtnProdTypZaworu_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void BtnProdZakresSDR_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void BtnProdRodzajDrutu_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

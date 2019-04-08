@@ -35,7 +35,8 @@ namespace ecoplastol
         private void UstawPanele()
         {
             listaMaszyn = frmPlanowanie2_db.PobierzMaszyny();
-            double il_w = listaMaszyn.Count / _ilKolumn;
+            double ilMaszyn = listaMaszyn.Count;
+            double il_w = ilMaszyn / _ilKolumn;
             _ilWierszy = Convert.ToInt32(Math.Ceiling(il_w));
 
             for (int i = 0; i < _ilWierszy; i++)
@@ -55,6 +56,7 @@ namespace ecoplastol
             {
                 for (int j = 0; j < _ilKolumn; j++)
                 {
+                    if (licznik == ilMaszyn) { break; } // grid może mieć więcej komórek niż będzie maszyn
                     MaszynaPanel mp = new MaszynaPanel(listaMaszyn[licznik].id, listaMaszyn[licznik].numer);
                     //mp.Name = "panelM" + Convert.ToChar(listaMaszyn[licznik].id + 1);
                     //mp.Tag = licznik + 1;

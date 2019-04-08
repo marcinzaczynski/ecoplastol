@@ -229,6 +229,9 @@
     <Compile Include="wyroby_zast_zaworu.cs">
       <DependentUpon>PGEntity.tt</DependentUpon>
     </Compile>
+    <Compile Include="zlecenia_produkcyjne.cs">
+      <DependentUpon>PGEntity.tt</DependentUpon>
+    </Compile>
     <Page Include="frmKonfiguracja2.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

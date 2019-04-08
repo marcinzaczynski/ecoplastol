@@ -56,7 +56,11 @@ namespace ecoplastol
 
             frmZlecenieProdukcji frmZlecenieProdukcji = new frmZlecenieProdukcji(numerMaszyny, nazwaMaszyny);
             frmZlecenieProdukcji.ShowDialog();
-            //MessageBox.Show(btn.Tag.ToString());
+
+            if (frmZlecenieProdukcji.DialogResult.HasValue && frmZlecenieProdukcji.DialogResult.Value)
+                // odświeżenie panela maszyny - nr_panela
+                ;
+
 
         }
     }

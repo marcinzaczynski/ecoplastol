@@ -49,5 +49,6 @@ namespace ecoplastol
         public virtual DbSet<wyroby_zakres_sdr> wyroby_zakres_sdr { get; set; }
         public virtual DbSet<wyroby_typ> wyroby_typ { get; set; }
         public virtual DbSet<wyroby_zast_zaworu> wyroby_zast_zaworu { get; set; }
+        public virtual DbSet<zlecenia_produkcyjne> zlecenia_produkcyjne { get; set; }
     }
 }
