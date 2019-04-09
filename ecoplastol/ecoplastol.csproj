@@ -96,17 +96,17 @@
     <Compile Include="frmKonfiguracja2.xaml.cs">
       <DependentUpon>frmKonfiguracja2.xaml</DependentUpon>
     </Compile>
-    <Compile Include="frmPlanowanie.xaml.cs">
+    <Compile Include="planowanie\frmPlanowanie.xaml.cs">
       <DependentUpon>frmPlanowanie.xaml</DependentUpon>
     </Compile>
-    <Compile Include="frmPlanowanie2.xaml.cs">
+    <Compile Include="planowanie\frmPlanowanie2.xaml.cs">
       <DependentUpon>frmPlanowanie2.xaml</DependentUpon>
     </Compile>
-    <Compile Include="frmPlanowanie2_db.cs" />
-    <Compile Include="frmZlecenieProdukcji.xaml.cs">
+    <Compile Include="planowanie\frmPlanowanie2_db.cs" />
+    <Compile Include="planowanie\frmZlecenieProdukcji.xaml.cs">
       <DependentUpon>frmZlecenieProdukcji.xaml</DependentUpon>
     </Compile>
-    <Compile Include="frmZlecenieProdukcji_db.cs" />
+    <Compile Include="planowanie\frmZlecenieProdukcji_db.cs" />
     <Compile Include="itf_cc.cs">
       <DependentUpon>PGEntity.tt</DependentUpon>
     </Compile>
@@ -167,10 +167,10 @@
       <DependentUpon>PanelTraceSrednice.xaml</DependentUpon>
     </Compile>
     <Compile Include="konfiguracja\traceability\PanelTrace_db.cs" />
-    <Compile Include="MaszynaPanel.xaml.cs">
+    <Compile Include="planowanie\MaszynaPanel.xaml.cs">
       <DependentUpon>MaszynaPanel.xaml</DependentUpon>
     </Compile>
-    <Compile Include="MaszynaZlecenie.xaml.cs">
+    <Compile Include="planowanie\MaszynaZlecenie.xaml.cs">
       <DependentUpon>MaszynaZlecenie.xaml</DependentUpon>
     </Compile>
     <Compile Include="maszyny.cs">
@@ -261,11 +261,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="frmPlanowanie.xaml">
+    <Page Include="planowanie\frmPlanowanie.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="frmPlanowanie2.xaml">
+    <Page Include="planowanie\frmPlanowanie2.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -277,7 +277,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="frmZlecenieProdukcji.xaml">
+    <Page Include="planowanie\frmZlecenieProdukcji.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -329,11 +329,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="MaszynaPanel.xaml">
+    <Page Include="planowanie\MaszynaPanel.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="MaszynaZlecenie.xaml">
+    <Page Include="planowanie\MaszynaZlecenie.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

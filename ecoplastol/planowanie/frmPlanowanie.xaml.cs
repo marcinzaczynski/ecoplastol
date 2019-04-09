@@ -30,11 +30,11 @@ namespace ecoplastol
         {
             //gridMaszyny.RowDefinitions[0].Height = new GridLength(200);
 
-            MaszynaZlecenie mz = new MaszynaZlecenie($"Komponent {i}");
+            //MaszynaZlecenie mz = new MaszynaZlecenie($"Komponent {i}");
 
-            ParentGrid.RowDefinitions.Add(new RowDefinition());
-            ParentGrid.Children.Add(mz);
-            Grid.SetRow(mz, i++);
+            //ParentGrid.RowDefinitions.Add(new RowDefinition());
+            //ParentGrid.Children.Add(mz);
+            //Grid.SetRow(mz, i++);
         }
 
         private void BtnDodajM2_Click(object sender, RoutedEventArgs e)

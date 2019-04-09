@@ -371,9 +371,12 @@
           <Property Name="wyrob_rodzaj_drutu" Type="int4" />
           <Property Name="wyrob_norma" Type="int4" />
           <Property Name="wyrob_il_w_partii" Type="int4" />
+          <Property Name="zlecenie_nr_maszyny" Type="int4" Nullable="false" />
           <Property Name="zlecenie_ilosc" Type="int4" Nullable="false" />
-          <Property Name="zlecenie_data_rozp" Type="timestamp" Nullable="false" />
-          <Property Name="zlecenie_data_zak" Type="timestamp" Nullable="false" />
+          <Property Name="zlecenie_ilosc_wypr_ok" Type="int4" Nullable="false" />
+          <Property Name="zlecenie_ilosc_wypr_nn" Type="int4" Nullable="false" />
+          <Property Name="zlecenie_data_rozp" Type="date" Nullable="false" />
+          <Property Name="zlecenie_data_zak" Type="date" Nullable="false" />
           <Property Name="zlecenie_nr_partii_surowca" Type="varchar" MaxLength="20" />
           <Property Name="zlecenie_nr_partii_drutu" Type="varchar" MaxLength="20" />
           <Property Name="itf_kategoria" Type="int4" Nullable="false" />
@@ -832,9 +835,12 @@
           <Property Name="wyrob_rodzaj_drutu" Type="Int32" />
           <Property Name="wyrob_norma" Type="Int32" />
           <Property Name="wyrob_il_w_partii" Type="Int32" />
+          <Property Name="zlecenie_nr_maszyny" Type="Int32" Nullable="false" />
           <Property Name="zlecenie_ilosc" Type="Int32" Nullable="false" />
-          <Property Name="zlecenie_data_rozp" Type="DateTime" Nullable="false" Precision="6" />
-          <Property Name="zlecenie_data_zak" Type="DateTime" Nullable="false" Precision="6" />
+          <Property Name="zlecenie_ilosc_wypr_ok" Type="Int32" Nullable="false" />
+          <Property Name="zlecenie_ilosc_wypr_nn" Type="Int32" Nullable="false" />
+          <Property Name="zlecenie_data_rozp" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="zlecenie_data_zak" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="zlecenie_nr_partii_surowca" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="zlecenie_nr_partii_drutu" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="itf_kategoria" Type="Int32" Nullable="false" />
@@ -1286,7 +1292,10 @@
                 <ScalarProperty Name="zlecenie_nr_partii_surowca" ColumnName="zlecenie_nr_partii_surowca" />
                 <ScalarProperty Name="zlecenie_data_zak" ColumnName="zlecenie_data_zak" />
                 <ScalarProperty Name="zlecenie_data_rozp" ColumnName="zlecenie_data_rozp" />
+                <ScalarProperty Name="zlecenie_ilosc_wypr_nn" ColumnName="zlecenie_ilosc_wypr_nn" />
+                <ScalarProperty Name="zlecenie_ilosc_wypr_ok" ColumnName="zlecenie_ilosc_wypr_ok" />
                 <ScalarProperty Name="zlecenie_ilosc" ColumnName="zlecenie_ilosc" />
+                <ScalarProperty Name="zlecenie_nr_maszyny" ColumnName="zlecenie_nr_maszyny" />
                 <ScalarProperty Name="wyrob_il_w_partii" ColumnName="wyrob_il_w_partii" />
                 <ScalarProperty Name="wyrob_norma" ColumnName="wyrob_norma" />
                 <ScalarProperty Name="wyrob_rodzaj_drutu" ColumnName="wyrob_rodzaj_drutu" />

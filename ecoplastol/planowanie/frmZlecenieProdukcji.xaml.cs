@@ -37,10 +37,12 @@ namespace ecoplastol
         private wyroby Wyrob;
         private zlecenia_produkcyjne zlecenieProdukcyjne;
 
-        public frmZlecenieProdukcji(int numerMaszyny, string nazwaMaszyny)
+        private int numerMaszyny;
+
+        public frmZlecenieProdukcji(int nrMaszyny, string nazwaMaszyny)
         {
             InitializeComponent();
-
+            numerMaszyny = nrMaszyny;
             lblNazwaMaszyny.Content = nazwaMaszyny;
 
             listaWyrobow = produkcja_db.PobierzWyroby();
@@ -111,7 +113,10 @@ namespace ecoplastol
             zlecenieProdukcyjne.wyrob_rodzaj_drutu = Wyrob.wyrob_rodzaj_drutu;
             zlecenieProdukcyjne.wyrob_norma = Wyrob.wyrob_norma;
             zlecenieProdukcyjne.wyrob_il_w_partii = Wyrob.wyrob_il_w_partii;
+            zlecenieProdukcyjne.zlecenie_nr_maszyny = numerMaszyny;
             zlecenieProdukcyjne.zlecenie_ilosc = 0;
+            zlecenieProdukcyjne.zlecenie_ilosc_wypr_ok = 0;
+            zlecenieProdukcyjne.zlecenie_ilosc_wypr_nn = 0;
             zlecenieProdukcyjne.zlecenie_data_rozp = DateTime.Now;
             zlecenieProdukcyjne.zlecenie_data_zak = DateTime.Now;
             zlecenieProdukcyjne.zlecenie_nr_partii_surowca = "0";
@@ -167,16 +172,23 @@ namespace ecoplastol
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
             // dodanie wyrobu
-            var zp = new zlecenia_produkcyjne();
-            zp = grdZlecenie.DataContext as zlecenia_produkcyjne;
-            zp.id = frmZlecenieProdukcji_db.IdZlecenieProdukcji();
-            zp.opw = frmLogin.LoggedUser.login;
-            zp.czasw = DateTime.Now;
-            zp.opm = frmLogin.LoggedUser.login;
-            zp.czasm = DateTime.Now;
-            frmZlecenieProdukcji_db.DodajZlecenie(zp);
+            try
+            {
+                var zp = new zlecenia_produkcyjne();
+                zp = grdZlecenie.DataContext as zlecenia_produkcyjne;
+                zp.id = frmZlecenieProdukcji_db.IdZlecenieProdukcji();
+                zp.opw = frmLogin.LoggedUser.login;
+                zp.czasw = DateTime.Now;
+                zp.opm = frmLogin.LoggedUser.login;
+                zp.czasm = DateTime.Now;
+                frmZlecenieProdukcji_db.DodajZlecenie(zp);
 
-            DialogResult = true;
+
+                DialogResult = true;
+            } catch
+            {
+                MessageBox.Show("Wypełnij formularz.");
+            }
         }
     }
 }

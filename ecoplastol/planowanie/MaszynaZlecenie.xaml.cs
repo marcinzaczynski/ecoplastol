@@ -20,10 +20,10 @@ namespace ecoplastol
     /// </summary>
     public partial class MaszynaZlecenie : UserControl
     {
-        public MaszynaZlecenie(string labelText)
+        public MaszynaZlecenie(zlecenia_produkcyjne zp)
         {
             InitializeComponent();
-
+            grdZlecenie.DataContext = zp;
             //label1.Content = labelText;
         }
 
@@ -31,6 +31,13 @@ namespace ecoplastol
         {
             //MessageBox.Show(label1.Content.ToString());
             
+        }
+
+        private void BtnPopraw_Click(object sender, RoutedEventArgs e)
+        {
+            var btn = sender as Button;
+            
+            //this.grdZlecenie.DataContext;
         }
     }
 }

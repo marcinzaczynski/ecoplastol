@@ -27,7 +27,10 @@ namespace ecoplastol
         public Nullable<int> wyrob_rodzaj_drutu { get; set; }
         public Nullable<int> wyrob_norma { get; set; }
         public Nullable<int> wyrob_il_w_partii { get; set; }
+        public int zlecenie_nr_maszyny { get; set; }
         public int zlecenie_ilosc { get; set; }
+        public int zlecenie_ilosc_wypr_ok { get; set; }
+        public int zlecenie_ilosc_wypr_nn { get; set; }
         public System.DateTime zlecenie_data_rozp { get; set; }
         public System.DateTime zlecenie_data_zak { get; set; }
         public string zlecenie_nr_partii_surowca { get; set; }
