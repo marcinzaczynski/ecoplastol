@@ -14,12 +14,14 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 
 namespace ecoplastol
-{
+{    
     /// <summary>
     /// Interaction logic for MaszynaPanel.xaml
     /// </summary>
     public partial class MaszynaPanel : UserControl
     {
+        public static event RefreshDataDelegate RefresData;
+
         public int numerMaszyny { get; set; }
         public string nazwaMaszyny { get; set; }
 
@@ -58,10 +60,10 @@ namespace ecoplastol
             frmZlecenieProdukcji.ShowDialog();
 
             if (frmZlecenieProdukcji.DialogResult.HasValue && frmZlecenieProdukcji.DialogResult.Value)
-                // odświeżenie panela maszyny - nr_panela
-                ;
+                RefresData?.Invoke();
+            ;
 
-
+            
         }
     }
 }

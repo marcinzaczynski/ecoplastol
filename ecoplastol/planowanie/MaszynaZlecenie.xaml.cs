@@ -20,11 +20,33 @@ namespace ecoplastol
     /// </summary>
     public partial class MaszynaZlecenie : UserControl
     {
+        public static event RefreshDataDelegate RefreshData;
+
         public MaszynaZlecenie(zlecenia_produkcyjne zp)
         {
             InitializeComponent();
             grdZlecenie.DataContext = zp;
-            //label1.Content = labelText;
+
+            switch (zp.wyrob_typ)
+            {
+                //elektrooporowa
+                case 0:
+                    grdZlecenie.Background = (SolidColorBrush)FindResource("panelZlecenieE");
+                    break;
+                //doczołowa
+                case 1:
+                    grdZlecenie.Background = (SolidColorBrush)FindResource("panelZlecenieD");
+                    break;
+                //zawór
+                case 2:
+                    grdZlecenie.Background = (SolidColorBrush)FindResource("panelZlecenieZ");
+                    break;
+                //adapter
+                case 3:
+                    grdZlecenie.Background = (SolidColorBrush)FindResource("panelZlecenieA");
+                    break;
+            }
+           
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -35,9 +57,26 @@ namespace ecoplastol
 
         private void BtnPopraw_Click(object sender, RoutedEventArgs e)
         {
-            var btn = sender as Button;
-            
+            frmZlecenieProdukcji frmZlecenieProdukcji = new frmZlecenieProdukcji(this.grdZlecenie.DataContext as zlecenia_produkcyjne);
+            frmZlecenieProdukcji.ShowDialog();
+            //if (frmZlecenieProdukcji.DialogResult.HasValue && frmZlecenieProdukcji.DialogResult.Value)
+            //    RefreshData?.Invoke();
+            //;
+            RefreshData?.Invoke();
             //this.grdZlecenie.DataContext;
+        }
+
+        private void BtnUsun_Click(object sender, RoutedEventArgs e)
+        {
+            var Res = MessageBox.Show("Usunąć ?", "Usuwanie pozycji", MessageBoxButton.YesNo, MessageBoxImage.Exclamation);
+            if (Res == MessageBoxResult.Yes)
+            {
+                var zp = this.grdZlecenie.DataContext as zlecenia_produkcyjne;
+                frmZlecenieProdukcji_db.UsunZlecenie(zp);
+                RefreshData?.Invoke();
+            }
+
+            
         }
     }
 }

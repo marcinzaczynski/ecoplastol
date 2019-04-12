@@ -6,47 +6,68 @@
              xmlns:local="clr-namespace:ecoplastol"
              xmlns:ts="clr-namespace:ecoplastol"
              mc:Ignorable="d" 
-             Width="auto" Height="100" Margin="0,5,0,0">
-    <Border BorderBrush="Black" BorderThickness="2">
-        <Grid Background="LightGreen" x:Name="grdZlecenie" ShowGridLines="False">
+             Width="auto" Height="105" Margin="0,5,0,0">
+    <UserControl.Resources>
+
+        <ResourceDictionary>
+            <SolidColorBrush x:Key="panelZlecenieA" Color="#f7d9ff" />
+            <SolidColorBrush x:Key="panelZlecenieD" Color="#e6ffef" />
+            <SolidColorBrush x:Key="panelZlecenieE" Color="#ffd9d9" />
+            <SolidColorBrush x:Key="panelZlecenieZ" Color="#bffbff" />
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <Border BorderBrush="Black" BorderThickness="1">
+        <Grid Background="LightGreen" x:Name="grdZlecenie" >
             
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="340"/>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="70"/>
-                
             </Grid.ColumnDefinitions>
-            <Grid Grid.Column="0" x:Name="grdDane">
+            <Grid Grid.Column="0" x:Name="grdDane" ShowGridLines="false">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="15"/>
                     <RowDefinition Height="15"/>
                     <RowDefinition Height="15"/>
                     <RowDefinition Height="15"/>
-
+                    <RowDefinition Height="15"/>
+                    <RowDefinition Height="15"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="220"/>
+                    <ColumnDefinition Width="110"/>
+                    <ColumnDefinition Width="110"/>
                     <ColumnDefinition Width="60"/>
-                    <ColumnDefinition Width="60"/>
-                    <ColumnDefinition Width="62"/>
-                    <ColumnDefinition Width="0*"/>
+                    <ColumnDefinition Width="20"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="65"/>
+                    
                 </Grid.ColumnDefinitions>
                 <!--<Label Grid.Row="0" Grid.Column="0" FontSize="12" Content="WYRÓB" Margin="0,0,2,14.333" Padding="2,0,0,0" Grid.RowSpan="2"/>-->
                 <!--<Label Grid.Row="0" Grid.Column="1" FontSize="12" Content="ILOŚĆ" Margin="5,0,115,14.333" Padding="2,0,0,0" Grid.RowSpan="2" Grid.ColumnSpan="2"/>-->
-                <Label Grid.Row="1" Grid.Column="0" Grid.RowSpan="4" FontSize="24" Content="{Binding wyrob_kod}" Padding="2,0,0,0"/>
-                <Label Grid.Row="0" Grid.Column="1" Grid.RowSpan="2" Grid.ColumnSpan="2" FontSize="24" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Content="{Binding zlecenie_ilosc}" Padding="2,0,0,0"/>
+                <Label Grid.Row="0" Grid.Column="0" FontSize="12" Content="{Binding id}" Padding="2,0,0,0"/>
+                <Label Grid.Row="1" Grid.Column="0" Grid.RowSpan="4" Grid.ColumnSpan="2" FontSize="24" Content="{Binding wyrob_kod}" Padding="2,0,0,0"/>
+                <Label Grid.Row="0" Grid.Column="2" Grid.RowSpan="2" Grid.ColumnSpan="2" FontSize="24" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Content="{Binding zlecenie_ilosc}" Padding="2,0,0,0"/>
+                <Label Grid.Row="3" Grid.Column="0" FontSize="12" Content="trace-pe-m" Padding="2,0,0,0" x:Name="lblTracePeM"/>
+                <Label Grid.Row="3" Grid.Column="1" FontSize="12" Content="nr_partii_surowca" Padding="2,0,0,0" x:Name="lblZlecenieNrPartiiSurowca"/>
+                <Label Grid.Row="4" Grid.Column="0" FontSize="12" Content="trace-producent" Padding="2,0,0,0" x:Name="lblTraceProducent"/>
+                <Label Grid.Row="4" Grid.Column="1" FontSize="12" Content="trace-partia" Padding="2,0,0,0" x:Name="lblTracePartia"/>
+                <Label Grid.Row="5" Grid.Column="0" FontSize="12" Content="sdr" Padding="2,0,0,0" x:Name="lblSDR"/>
+                <Label Grid.Row="0" Grid.Column="6" FontSize="12" Content="{Binding zlecenie_data_rozp}" ContentStringFormat="yyyy-MM-dd" Padding="2,0,0,0"/>
+                <Label Grid.Row="1" Grid.Column="6" FontSize="12" Content="{Binding zlecenie_data_zak}" ContentStringFormat="yyyy-MM-dd" Padding="2,0,0,0"/>
+                <Label Grid.Row="2" Grid.Column="2" FontSize="12" Content="Zmiana 1" Padding="2,0,0,0"/>
+                <Label Grid.Row="3" Grid.Column="2" FontSize="12" Content="Zmiana 2" Padding="2,0,0,0"/>
+                <Label Grid.Row="4" Grid.Column="2" FontSize="12" Content="Zmiana 3" Padding="2,0,0,0"/>
             </Grid>
             <Grid Grid.Column="2" x:Name="grdPrzyciski">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="33"/>
-                    <RowDefinition Height="31"/>
-                    <RowDefinition Height="33"/>
+                    <RowDefinition Height="25"/>
+                    <RowDefinition Height="25"/>
+                    <RowDefinition Height="25"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
-                <Button Grid.Row="0" Padding="5,0,0,0" x:Name="btnPopraw" Content="POPRAW" HorizontalContentAlignment="Left" Click="BtnPopraw_Click"/>
-                <Button Grid.Row="1" Padding="5,0,0,0" x:Name="btnUsun" Content="USUŃ" HorizontalContentAlignment="Left"/>
-                <Button Grid.Row="2" Padding="5,0,0,0" x:Name="btnMeldunki" Content="MELDUNKI" HorizontalContentAlignment="Left"/>
+                <Button Grid.Row="0" Padding="0,0,5,0" x:Name="btnPopraw" Content="POPRAW" HorizontalContentAlignment="Right" Click="BtnPopraw_Click"/>
+                <Button Grid.Row="1" Padding="0,0,5,0" x:Name="btnUsun" Content="USUŃ" HorizontalContentAlignment="Right" Click="BtnUsun_Click"/>
+                <Button Grid.Row="2" Padding="0,0,5,0" x:Name="btnMeldunki" Content="MELDUNKI" HorizontalContentAlignment="Right"/>
             </Grid>
             
         </Grid>

@@ -14,6 +14,7 @@ using System.Windows.Shapes;
 
 namespace ecoplastol
 {
+    public delegate void RefreshDataDelegate();
     /// <summary>
     /// Interaction logic for frmPlanowanie2.xaml
     /// </summary>
@@ -30,9 +31,13 @@ namespace ecoplastol
         public frmPlanowanie2()
         {
             InitializeComponent();
-            dpZleceniaNaDzien.SelectedDate = DateTime.Now.Date;
             listaPaneli = new List<MaszynaPanel>();
             UstawPanele();
+            dpZleceniaNaDzien.SelectedDate = DateTime.Now.Date;
+            UzupelnijPaneleZleceniami();
+
+            MaszynaPanel.RefresData += new RefreshDataDelegate(UzupelnijPaneleZleceniami);
+            MaszynaZlecenie.RefreshData += new RefreshDataDelegate(UzupelnijPaneleZleceniami);
         }
 
         private void UstawPanele()
@@ -72,9 +77,9 @@ namespace ecoplastol
             }
         }
 
-        private void UzupełnijPaneleZleceniami()
+        public void UzupelnijPaneleZleceniami()
         {
-            var paneleMaszyn = this.grdMaszyny.Children.OfType<MaszynaPanel>();
+            var paneleMaszyn = grdMaszyny.Children.OfType<MaszynaPanel>();
             foreach (var item in paneleMaszyn)
             {
                 var mp = item as MaszynaPanel;
@@ -88,35 +93,28 @@ namespace ecoplastol
                 // teraz przelatuję przez zlecenia dla danej maszyny
                 foreach (var zp in listaZleceniaProdukcyjne)
                 {
-                    // ... utworzyć nowe MaszynZlecenie ...
+                    // ... trzeba utworzyć nowe MaszynZlecenie ...
                     MaszynaZlecenie mz = new MaszynaZlecenie(zp);
+                    mz.lblTracePeM.Content = konfiguracja.traceability.PanelTrace_db.PobierzTracePemOpis(zp.trace_pe_m);
+                    mz.lblZlecenieNrPartiiSurowca.Content = zp.zlecenie_nr_partii_surowca;
+                    mz.lblTraceProducent.Content = konfiguracja.traceability.PanelTrace_db.PobierzTraceProducentWartosc(zp.trace_producent);
+                    mz.lblTracePartia.Content = zp.trace_partia;
+                    mz.lblSDR.Content = String.Format("SDR : {0} ({1})",
+                        konfiguracja.traceability.PanelTrace_db.PobierzTraceSdrWartosc(zp.trace_sdr),
+                        konfiguracja.produkcja.produkcja_db.PobierzWyrobZakresSdrWartosc(zp.wyrob_zakres_sdr));
+
                     // ... i dodać je do MaszynaPanel w odpowiednim miejscu - panelZlecen
                     panelZlecen.Children.Add(mz);
                 }
+                if (listaZleceniaProdukcyjne.Count == 0)
+                {
+                    mp.border.Background = (SolidColorBrush)FindResource("panelMaszynaNieaktywny");
+                } else
+                {
 
+                    mp.border.Background = (SolidColorBrush)FindResource("panelMaszynaAktywny");
+                }
             }
-        }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            UzupełnijPaneleZleceniami();
-            
-            //MessageBox.Show(listaPaneli.Count.ToString());
-
-            //var paneleMaszyn = this.grdMaszyny.Children.OfType<MaszynaPanel>();
-            //foreach (var item in paneleMaszyn)
-            //{
-            //    var mp = item as MaszynaPanel;
-            //    if (Convert.ToInt32(mp.Tag) == 5)
-            //    {
-            //        mp.lblNazwaMaszyny.Content = "toto";
-            //        var aa = mp.grdMaszynaPanel;
-            //        aa.RowDefinitions.Add(new RowDefinition());
-            //        MaszynaZlecenie mz = new MaszynaZlecenie("aaa");
-            //        Grid.SetRow(mz, 2);
-            //        aa.Children.Add(mz);
-            //    }
-            //}
         }
 
         private void BtnZamknij_Click(object sender, RoutedEventArgs e)
@@ -126,38 +124,29 @@ namespace ecoplastol
 
         private void DpZleceniaNaDzien_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
         {
-            UzupełnijPaneleZleceniami();
-            //string msg;
-            //msg = dpZleceniaNaDzien.SelectedDate.ToString();
-            //MessageBox.Show(msg);
+            UzupelnijPaneleZleceniami();
+        }
 
-            //listaZleceniaProdukcyjne = new List<zlecenia_produkcyjne>();
-            //listaZleceniaProdukcyjne = frmPlanowanie2_db.PobierzZleceniaDlaMaszyny(2, dpZleceniaNaDzien.SelectedDate);
+        private void BtnDataWstecz_Click(object sender, RoutedEventArgs e)
+        {
+            if (dpZleceniaNaDzien.SelectedDate.HasValue)
+            {
+                var data = new DateTime();
+                data = dpZleceniaNaDzien.SelectedDate.Value;
+                data = data.AddDays(-1);
+                dpZleceniaNaDzien.SelectedDate = data;
+            }
+        }
 
-            // przelatuję przez wszystkie panele ....
-
-            //var paneleMaszyn = this.grdMaszyny.Children.OfType<MaszynaPanel>();
-            //foreach (var item in paneleMaszyn)
-            //{
-            //    var mp = item as MaszynaPanel;
-            //    // ... i dla każdego panela szukam w zleceń w bazie
-            //    var listaZleceniaProdukcyjne = new List<zlecenia_produkcyjne>();
-            //    listaZleceniaProdukcyjne = frmPlanowanie2_db.PobierzZleceniaDlaMaszyny(Convert.ToInt32(mp.Tag), dpZleceniaNaDzien.SelectedDate);
-
-            //    // teraz przelatuję przez zlecenia dla danej maszyny
-
-            //    foreach (var zp in listaZleceniaProdukcyjne)
-            //    {
-            //        // panelZleceń - miejsce w PanelMaszyna do którego lądują MaszynaZlecenie
-            //        var panelZlecen = mp.spMaszynaZlecenia;
-            //        MaszynaZlecenie mz = new MaszynaZlecenie(zp);
-            //        panelZlecen.Children.Add(mz);
-            //    }
-
-            //}
-
-
-
+        private void BtnDataNast_Click(object sender, RoutedEventArgs e)
+        {
+            if (dpZleceniaNaDzien.SelectedDate.HasValue)
+            {
+                var data = new DateTime();
+                data = dpZleceniaNaDzien.SelectedDate.Value;
+                data = data.AddDays(1);
+                dpZleceniaNaDzien.SelectedDate = data;
+            }
         }
     }
 }

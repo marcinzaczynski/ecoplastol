@@ -15,6 +15,7 @@ namespace ecoplastol
     public partial class zlecenia_produkcyjne
     {
         public int id { get; set; }
+        public int wyrob_kod_id { get; set; }
         public string wyrob_kod { get; set; }
         public string wyrob_kod_indeks { get; set; }
         public string wyrob_kod_opis { get; set; }
@@ -22,7 +23,7 @@ namespace ecoplastol
         public Nullable<int> wyrob_il_w_op_zb { get; set; }
         public Nullable<int> wyrob_waga_op { get; set; }
         public Nullable<int> wyrob_waga_1szt { get; set; }
-        public Nullable<int> wyrob_zakres_sdr { get; set; }
+        public int wyrob_zakres_sdr { get; set; }
         public Nullable<int> wyrob_zast_zaworu { get; set; }
         public Nullable<int> wyrob_rodzaj_drutu { get; set; }
         public Nullable<int> wyrob_norma { get; set; }

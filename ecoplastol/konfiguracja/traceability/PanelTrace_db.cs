@@ -208,6 +208,17 @@ namespace ecoplastol.konfiguracja.traceability
             }
         }
 
+        public static string PobierzTraceProducentWartosc(int id)
+        {
+            using (var db = new ecoplastolEntities())
+            {
+                var opis = (from w in db.trace_producent
+                            where w.id == id
+                            select w.wartosc).FirstOrDefault().ToString();
+                return opis;
+            }
+        }
+
         /// --------------------------------------
         /// SDR
         /// --------------------------------------
@@ -258,6 +269,17 @@ namespace ecoplastol.konfiguracja.traceability
             }
         }
 
+        public static string PobierzTraceSdrWartosc(int id)
+        {
+            using (var db = new ecoplastolEntities())
+            {
+                var opis = (from w in db.trace_sdr
+                            where w.id == id
+                            select w.wartosc).FirstOrDefault().ToString();
+                return opis;
+            }
+        }
+
         /// --------------------------------------
         /// PEm
         /// --------------------------------------
@@ -305,6 +327,17 @@ namespace ecoplastol.konfiguracja.traceability
                 db.trace_pe_m.Attach(poz);
                 db.trace_pe_m.Remove(poz);
                 db.SaveChanges();
+            }
+        }
+
+        public static string PobierzTracePemOpis(int id)
+        {
+            using (var db = new ecoplastolEntities())
+            {
+                var opis = (from w in db.trace_pe_m
+                            where w.id == id
+                            select w.opis).FirstOrDefault().ToString();
+                return opis;
             }
         }
 

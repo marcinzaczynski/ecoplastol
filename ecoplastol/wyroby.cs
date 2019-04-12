@@ -22,7 +22,7 @@ namespace ecoplastol
         public Nullable<int> wyrob_il_w_op_zb { get; set; }
         public Nullable<int> wyrob_waga_op { get; set; }
         public Nullable<int> wyrob_waga_1szt { get; set; }
-        public Nullable<int> wyrob_zakres_sdr { get; set; }
+        public int wyrob_zakres_sdr { get; set; }
         public Nullable<int> wyrob_zast_zaworu { get; set; }
         public Nullable<int> wyrob_rodzaj_drutu { get; set; }
         public int itf_kategoria { get; set; }

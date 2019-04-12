@@ -89,7 +89,7 @@
             <Border Grid.Row="0" Grid.RowSpan="2" Grid.Column="1" BorderThickness="1" BorderBrush="Black" Margin="-4"/>
             <Label Grid.Row="0" Grid.Column="1" FontSize="12" Padding="0" Content="FILTRUJ"/>
             <Label Grid.Row="1" Grid.Column="0" VerticalContentAlignment="Center" Padding="5,0,0,0" FontSize="18" Content="Wyrób :"/>
-            <ComboBox Grid.Row="1" x:Name="cbbWyrobKod" Grid.Column="1" FontSize="18" Padding="5,0,0,0" VerticalContentAlignment="Center" SelectionChanged="CbbWyrobKod_SelectionChanged">
+            <ComboBox Grid.Row="1" x:Name="cbbWyrobKod" Grid.Column="1" FontSize="18" Padding="5,0,0,0" VerticalContentAlignment="Center" SelectionChanged="CbbWyrobKod_SelectionChanged" SelectedValuePath="id" >
                 <ComboBox.ItemTemplateSelector>
                     <ts:ComboBoxItemTemplateSelector>
                         <ts:ComboBoxItemTemplateSelector.SelectedTemplate>
@@ -337,7 +337,7 @@
             </ComboBox>
         </Grid>
         <StackPanel Orientation="Horizontal" Grid.Row="100">
-            <Button Grid.Row="18" Grid.Column="0" Grid.ColumnSpan="2" Width="405" FontSize="22" Style="{StaticResource btnGradientLightGreen}" Content="D O D A J" IsDefault="True" Click="Button_Click_1"/>
+            <Button Grid.Row="18" Grid.Column="0" Grid.ColumnSpan="2" Width="405" FontSize="22" Style="{StaticResource btnGradientLightGreen}" Content="O K" IsDefault="True" Click="Button_Click_1"/>
             <Button Grid.Row="18" Grid.Column="2" Grid.ColumnSpan="2" Width="405" FontSize="22" Style="{StaticResource btnGradientRed}" Content="A N U L U J" Click="Button_Click" IsCancel="True"/>
         </StackPanel>
         

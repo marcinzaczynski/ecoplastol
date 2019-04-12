@@ -61,6 +61,17 @@ namespace ecoplastol.konfiguracja.produkcja
             }
         }
 
+        public static string PobierzNazweMaszyny(int nrMaszyny)
+        {
+            using (var db = new ecoplastolEntities())
+            {
+                var nazwa = (from w in db.maszyny
+                             where w.id == nrMaszyny
+                             select w.numer).FirstOrDefault().ToString();
+                return nazwa;
+            }
+        }
+
         /// <summary>
         /// WYROBY
         /// </summary>
@@ -148,7 +159,7 @@ namespace ecoplastol.konfiguracja.produkcja
         }
 
         /// <summary>
-        /// WYROBY
+        /// DRUTY
         /// </summary>
         public static List<wyroby_druty> PobierzDruty()
         {
@@ -161,7 +172,19 @@ namespace ecoplastol.konfiguracja.produkcja
             }
         }
 
-
+        /// <summary>
+        /// WYRÓB - ZAKRES SDR
+        /// </summary>
+        public static string PobierzWyrobZakresSdrWartosc(int id)
+        {
+            using (var db = new ecoplastolEntities())
+            {
+                var wartosc = (from w in db.wyroby_zakres_sdr
+                               where w.id == id
+                               select w.wartosc).FirstOrDefault().ToString();
+                return wartosc;
+            }
+        }
 
     }
 }

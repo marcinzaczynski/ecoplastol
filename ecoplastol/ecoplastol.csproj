@@ -96,6 +96,9 @@
     <Compile Include="frmKonfiguracja2.xaml.cs">
       <DependentUpon>frmKonfiguracja2.xaml</DependentUpon>
     </Compile>
+    <Compile Include="planowanie\frmMeldunki.xaml.cs">
+      <DependentUpon>frmMeldunki.xaml</DependentUpon>
+    </Compile>
     <Compile Include="planowanie\frmPlanowanie.xaml.cs">
       <DependentUpon>frmPlanowanie.xaml</DependentUpon>
     </Compile>
@@ -261,6 +264,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="planowanie\frmMeldunki.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="planowanie\frmPlanowanie.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -402,6 +409,8 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="ikony\icons8-chevron-left-32.png" />
+    <Resource Include="ikony\icons8-chevron-right-32.png" />
     <Content Include="PGEntity.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>PGEntity.edmx</DependentUpon>

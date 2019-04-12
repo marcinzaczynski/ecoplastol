@@ -9,7 +9,8 @@
     <UserControl.Resources>
 
         <ResourceDictionary>
-
+            <SolidColorBrush x:Key="panelMaszynaAktywny" Color="#fffff2" />
+            <SolidColorBrush x:Key="panelMaszynaNieaktywny" Color="#bfbfbf" />
             <Style TargetType="Button" x:Key="btnGradientOrange">
                 <Setter Property="Background">
                     <Setter.Value>
@@ -42,8 +43,8 @@
             </Style>
         </ResourceDictionary>
     </UserControl.Resources>
-    <Border Margin="2" BorderThickness="1" BorderBrush="Black" Background="LightYellow">
-        <Grid  Margin="5" Name="grdMaszynaPanel">
+    <Border Margin="2" BorderThickness="1" BorderBrush="Black" Background="{StaticResource panelMaszynaAktywny}" x:Name="border">
+        <Grid Margin="5" Name="grdMaszynaPanel" >
 
             <Grid.RowDefinitions>
                 <!-- pasek na menu górne dla maszyny-->

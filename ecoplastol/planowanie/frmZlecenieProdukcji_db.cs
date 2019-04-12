@@ -29,5 +29,24 @@ namespace ecoplastol
                 db.SaveChanges();
             }
         }
+
+        public static void PoprawZlecenie(zlecenia_produkcyjne poz)
+        {
+            using (var db = new ecoplastolEntities())
+            { 
+                db.Entry(poz).State = System.Data.Entity.EntityState.Modified;
+                db.SaveChanges();
+            }
+        }
+
+        public static void UsunZlecenie(zlecenia_produkcyjne poz)
+        {
+            using (var db = new ecoplastolEntities())
+            {
+                db.zlecenia_produkcyjne.Attach(poz);
+                db.zlecenia_produkcyjne.Remove(poz);
+                db.SaveChanges();
+            }
+        }
     }
 }

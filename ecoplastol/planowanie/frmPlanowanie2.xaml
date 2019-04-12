@@ -6,17 +6,60 @@
         xmlns:local="clr-namespace:ecoplastol"
         mc:Ignorable="d"
         Title="frmPlanowanie2" Height="450" Width="800" WindowState="Maximized" WindowStartupLocation="CenterScreen">
-    <Grid ShowGridLines="false" Name="grMaszyna">
+    <Window.Resources>
+
+        <ResourceDictionary>
+            <SolidColorBrush x:Key="panelMaszynaAktywny" Color="#fffff2" />
+            <SolidColorBrush x:Key="panelMaszynaNieaktywny" Color="#bfbfbf" />
+            
+            <Style x:Key="styleCalendar" TargetType="{x:Type Calendar}">
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type Calendar}">
+                            <!-- Wrapping in ViewBox will enlarge calendar of that size.-->
+                            <Viewbox Height="300" Width="300">
+                                <CalendarItem x:Name="PART_CalendarItem"
+                                  Background="{TemplateBinding Background}"
+                                  BorderBrush="{TemplateBinding BorderBrush}"
+                                  BorderThickness="{TemplateBinding BorderThickness}"/>
+                            </Viewbox>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+        </ResourceDictionary>
+    </Window.Resources>
+    <Grid ShowGridLines="false" Name="grdPlanowanie" Background="DarkGray">
         <Grid.RowDefinitions>
-            <RowDefinition Height="40" />
+            <RowDefinition Height="50" />
             <RowDefinition Height="*" />
             <RowDefinition Height="50" />
         </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="50"/>
+                <ColumnDefinition Width="260"/>
+                <ColumnDefinition Width="50"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Button Grid.Column="1" x:Name="btnDataWstecz" Click="BtnDataWstecz_Click" BorderThickness="0" Background="White">
+                <StackPanel>
+                    <Image Source="/ecoplastol;component/ikony/icons8-chevron-left-32.png" />
+                </StackPanel>
+            </Button>
+            <DatePicker Grid.Column="2" FontSize="28"  x:Name="dpZleceniaNaDzien" Background="White"  VerticalContentAlignment="Center" BorderThickness="0" SelectedDateChanged="DpZleceniaNaDzien_SelectedDateChanged" CalendarStyle="{StaticResource styleCalendar}"/>
+            <Button Grid.Column="3" x:Name="btnDataNast" Click="BtnDataNast_Click" BorderThickness="0" Background="White">
+                <StackPanel>
+                    <Image Source="/ecoplastol;component/ikony/icons8-chevron-right-32.png" />
+                </StackPanel>
+            </Button>
+        </Grid>
         <Grid Grid.Row="1" Name="grdMaszyny">
             
         </Grid>
+        
         <Button Grid.Row="2" Name="btnZamknij" Content="Z A M K N I J" FontSize="20" Click="BtnZamknij_Click"/>
-        <Button Content="Button" HorizontalAlignment="Left" Margin="79,10,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click"/>
-        <DatePicker HorizontalAlignment="Left" Margin="273,0,0,0" VerticalAlignment="Top" FontSize="24" Width="265" x:Name="dpZleceniaNaDzien" SelectedDateChanged="DpZleceniaNaDzien_SelectedDateChanged"/>
+        
     </Grid>
 </Window>

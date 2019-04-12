@@ -7,7 +7,6 @@
       <Diagram DiagramId="dbaf2b62894d479582209c328e875733" Name="Diagram1">
         <EntityTypeShape EntityType="ecoplastolModel.uzytkownicy" Width="1.5" PointX="2.125" PointY="0.5" IsExpanded="false" />
         <EntityTypeShape EntityType="ecoplastolModel.parametry" Width="1.5" PointX="0.5" PointY="0.5" IsExpanded="false" />
-        <EntityTypeShape EntityType="ecoplastolModel.wyroby" Width="1.5" PointX="8.625" PointY="0.5" IsExpanded="false" />
         <EntityTypeShape EntityType="ecoplastolModel.wyroby_druty" Width="1.5" PointX="8.625" PointY="1" IsExpanded="false" />
         <EntityTypeShape EntityType="ecoplastolModel.itf_cc" Width="1.5" PointX="7" PointY="0.5" IsExpanded="false" />
         <EntityTypeShape EntityType="ecoplastolModel.itf_icc" Width="1.5" PointX="7" PointY="1" IsExpanded="false" />
@@ -30,6 +29,7 @@
         <EntityTypeShape EntityType="ecoplastolModel.wyroby_typ" Width="1.5" PointX="8.625" PointY="2" IsExpanded="false" />
         <EntityTypeShape EntityType="ecoplastolModel.wyroby_zast_zaworu" Width="1.5" PointX="8.625" PointY="2.5" IsExpanded="false" />
         <EntityTypeShape EntityType="ecoplastolModel.zlecenia_produkcyjne" Width="1.5" PointX="0.75" PointY="1.75" IsExpanded="false" />
+        <EntityTypeShape EntityType="ecoplastolModel.wyroby" Width="1.5" PointX="8.625" PointY="0.5" IsExpanded="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
