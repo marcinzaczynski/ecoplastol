@@ -67,7 +67,7 @@
                 </Grid.RowDefinitions>
                 <Button Grid.Row="0" Padding="0,0,5,0" x:Name="btnPopraw" Content="POPRAW" HorizontalContentAlignment="Right" Click="BtnPopraw_Click"/>
                 <Button Grid.Row="1" Padding="0,0,5,0" x:Name="btnUsun" Content="USUŃ" HorizontalContentAlignment="Right" Click="BtnUsun_Click"/>
-                <Button Grid.Row="2" Padding="0,0,5,0" x:Name="btnMeldunki" Content="MELDUNKI" HorizontalContentAlignment="Right"/>
+                <Button Grid.Row="2" Padding="0,0,5,0" x:Name="btnMeldunki" Content="MELDUNKI" HorizontalContentAlignment="Right" Click="BtnMeldunki_Click"/>
             </Grid>
             
         </Grid>

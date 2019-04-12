@@ -19,9 +19,16 @@ namespace ecoplastol.planowanie
     /// </summary>
     public partial class frmMeldunki : Window
     {
-        public frmMeldunki()
+        public frmMeldunki(DateTime data, int maszyna)
         {
             InitializeComponent();
+            dpDataZleceniaOd.SelectedDate = data;
+            dpDataZleceniaDo.SelectedDate = data;
+        }
+
+        private void BtnZamknij_Click(object sender, RoutedEventArgs e)
+        {
+            Close();
         }
     }
 }

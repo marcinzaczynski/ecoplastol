@@ -15,6 +15,7 @@ using System.Windows.Shapes;
 namespace ecoplastol
 {
     public delegate void RefreshDataDelegate();
+    public delegate void UstawDateZleceniaDelegate();
     /// <summary>
     /// Interaction logic for frmPlanowanie2.xaml
     /// </summary>
@@ -28,6 +29,9 @@ namespace ecoplastol
         private int _ilKolumn = 3;
         private int _ilWierszy;
 
+        //dataZlecenia - ustawiana przez delegata po kliknięciu "Meldunki" na panelu zlecenia, żeby przekazać jako parametr do frmMeldunki
+        public static DateTime dataZlecenia;
+
         public frmPlanowanie2()
         {
             InitializeComponent();
@@ -38,6 +42,13 @@ namespace ecoplastol
 
             MaszynaPanel.RefresData += new RefreshDataDelegate(UzupelnijPaneleZleceniami);
             MaszynaZlecenie.RefreshData += new RefreshDataDelegate(UzupelnijPaneleZleceniami);
+            MaszynaZlecenie.UstawDateZlecenia += new UstawDateZleceniaDelegate(UstawDateZlecenia);
+        }
+
+        private void UstawDateZlecenia()
+        {
+            //dataZlecenia - ustawiana przez delegata po kliknięciu "Meldunki" na panelu zlecenia, żeby przekazać jako parametr do frmMeldunki
+            dataZlecenia = dpZleceniaNaDzien.SelectedDate.Value;
         }
 
         private void UstawPanele()
@@ -103,6 +114,7 @@ namespace ecoplastol
                         konfiguracja.traceability.PanelTrace_db.PobierzTraceSdrWartosc(zp.trace_sdr),
                         konfiguracja.produkcja.produkcja_db.PobierzWyrobZakresSdrWartosc(zp.wyrob_zakres_sdr));
 
+                    mz.btnMeldunki.Tag = mp.Tag;
                     // ... i dodać je do MaszynaPanel w odpowiednim miejscu - panelZlecen
                     panelZlecen.Children.Add(mz);
                 }

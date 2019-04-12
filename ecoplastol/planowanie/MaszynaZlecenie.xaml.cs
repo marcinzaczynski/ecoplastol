@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using ecoplastol.planowanie;
 
 namespace ecoplastol
 {
@@ -21,6 +22,7 @@ namespace ecoplastol
     public partial class MaszynaZlecenie : UserControl
     {
         public static event RefreshDataDelegate RefreshData;
+        public static event UstawDateZleceniaDelegate UstawDateZlecenia;
 
         public MaszynaZlecenie(zlecenia_produkcyjne zp)
         {
@@ -77,6 +79,14 @@ namespace ecoplastol
             }
 
             
+        }
+
+        private void BtnMeldunki_Click(object sender, RoutedEventArgs e)
+        {
+
+            UstawDateZlecenia?.Invoke();
+            frmMeldunki frmMeldunki = new frmMeldunki(frmPlanowanie2.dataZlecenia, Convert.ToInt32(btnMeldunki.Tag));
+            frmMeldunki.ShowDialog();
         }
     }
 }

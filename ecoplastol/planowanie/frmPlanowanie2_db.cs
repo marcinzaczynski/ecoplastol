@@ -13,6 +13,7 @@ namespace ecoplastol
             using (var db = new ecoplastolEntities())
             {
                 var list = (from w in db.maszyny
+                            where w.id > 0
                             orderby w.id ascending
                             select w).ToList();
                 return list;

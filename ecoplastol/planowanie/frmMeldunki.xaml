@@ -5,13 +5,40 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ecoplastol.planowanie"
         mc:Ignorable="d"
-        Title="frmMeldunki" Height="450" Width="800">
+        Title="frmMeldunki" Height="450" Width="800" WindowStartupLocation="CenterScreen" WindowState="Maximized">
     <Grid>
         <Grid.RowDefinitions>
+            <RowDefinition Height="40"/>
             <RowDefinition Height="50"/>
             <RowDefinition Height="*"/>
+            <RowDefinition Height="150"/>
             <RowDefinition Height="50"/>
         </Grid.RowDefinitions>
-        <Button Grid.Row="2" FontSize="20" Content="Z A M K N I J"/>
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="200"/>
+                <ColumnDefinition Width="200"/>
+                <ColumnDefinition Width="200"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Label Grid.Column="0" FontSize="20" Padding="5" Content="Od"/>
+            <Label Grid.Column="1" FontSize="20" Padding="5" Content="Do"/>
+            <Label Grid.Column="2" FontSize="20" Padding="5" Content="Maszyna"/>
+            <Label Grid.Column="3" FontSize="20" Padding="5" Content="Zmiana"/>
+        </Grid>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="200"/>
+                <ColumnDefinition Width="200"/>
+                <ColumnDefinition Width="200"/>
+                <ColumnDefinition Width="200"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <DatePicker Grid.Column="0" FontSize="24" VerticalContentAlignment="Center" x:Name="dpDataZleceniaOd"/>
+            <DatePicker Grid.Column="1" FontSize="24" VerticalContentAlignment="Center" x:Name="dpDataZleceniaDo"/>
+            <ComboBox Grid.Column="2" FontSize="24" VerticalContentAlignment="Center"/>
+            <ComboBox Grid.Column="3" FontSize="24" VerticalContentAlignment="Center"/>
+        </Grid>
+        <Button Grid.Row="4" FontSize="20" Content="Z A M K N I J" x:Name="btnZamknij" Click="BtnZamknij_Click"/>
     </Grid>
 </Window>
