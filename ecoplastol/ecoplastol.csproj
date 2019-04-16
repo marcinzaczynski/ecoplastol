@@ -96,6 +96,7 @@
     <Compile Include="frmKonfiguracja2.xaml.cs">
       <DependentUpon>frmKonfiguracja2.xaml</DependentUpon>
     </Compile>
+    <Compile Include="konfiguracja\constr.cs" />
     <Compile Include="meldunki.cs">
       <DependentUpon>PGEntity.tt</DependentUpon>
     </Compile>
