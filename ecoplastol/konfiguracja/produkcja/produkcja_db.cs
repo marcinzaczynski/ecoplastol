@@ -72,6 +72,21 @@ namespace ecoplastol.konfiguracja.produkcja
             }
         }
 
+        ///
+        /// ZMIANY
+        ///
+
+        public static List<zmiany> PobierzZmiany()
+        {
+            using (var db = new ecoplastolEntities())
+            {
+                var list = (from wyr in db.zmiany
+                            orderby wyr.id ascending
+                            select wyr).ToList();
+                return list;
+            }
+        }
+
         /// <summary>
         /// WYROBY
         /// </summary>

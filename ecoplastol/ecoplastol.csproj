@@ -96,12 +96,13 @@
     <Compile Include="frmKonfiguracja2.xaml.cs">
       <DependentUpon>frmKonfiguracja2.xaml</DependentUpon>
     </Compile>
+    <Compile Include="meldunki.cs">
+      <DependentUpon>PGEntity.tt</DependentUpon>
+    </Compile>
     <Compile Include="planowanie\frmMeldunki.xaml.cs">
       <DependentUpon>frmMeldunki.xaml</DependentUpon>
     </Compile>
-    <Compile Include="planowanie\frmPlanowanie.xaml.cs">
-      <DependentUpon>frmPlanowanie.xaml</DependentUpon>
-    </Compile>
+    <Compile Include="planowanie\frmMeldunki_db.cs" />
     <Compile Include="planowanie\frmPlanowanie2.xaml.cs">
       <DependentUpon>frmPlanowanie2.xaml</DependentUpon>
     </Compile>
@@ -235,6 +236,9 @@
     <Compile Include="zlecenia_produkcyjne.cs">
       <DependentUpon>PGEntity.tt</DependentUpon>
     </Compile>
+    <Compile Include="zmiany.cs">
+      <DependentUpon>PGEntity.tt</DependentUpon>
+    </Compile>
     <Page Include="frmKonfiguracja2.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -265,10 +269,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="planowanie\frmMeldunki.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="planowanie\frmPlanowanie.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

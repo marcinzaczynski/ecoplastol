@@ -107,6 +107,17 @@
           <Property Name="opm" Type="varchar" MaxLength="20" />
           <Property Name="czasm" Type="timestamp" Nullable="false" />
         </EntityType>
+        <EntityType Name="meldunki">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int4" Nullable="false" />
+          <Property Name="id_zlecenie" Type="int4" Nullable="false" />
+          <Property Name="zmiana" Type="int4" Nullable="false" />
+          <Property Name="ilosc" Type="int4" />
+          <Property Name="ilosc_n" Type="int4" />
+          <Property Name="ilosc_nn" Type="int4" />
+        </EntityType>
         <EntityType Name="parametry">
           <Key>
             <PropertyRef Name="id" />
@@ -412,6 +423,17 @@
           <Property Name="opm" Type="varchar" MaxLength="20" Nullable="false" />
           <Property Name="czasm" Type="timestamp" Nullable="false" />
         </EntityType>
+        <EntityType Name="zmiany">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int4" Nullable="false" />
+          <Property Name="nazwa" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="opw" Type="varchar" MaxLength="20" />
+          <Property Name="czasw" Type="timestamp" Nullable="false" />
+          <Property Name="opm" Type="varchar" MaxLength="20" />
+          <Property Name="czasm" Type="timestamp" Nullable="false" />
+        </EntityType>
         <EntityContainer Name="ecoplastolModelStoreContainer">
           <EntitySet Name="itf_cc" EntityType="Self.itf_cc" Schema="public" store:Type="Tables" />
           <EntitySet Name="itf_icc" EntityType="Self.itf_icc" Schema="public" store:Type="Tables" />
@@ -421,6 +443,7 @@
           <EntitySet Name="itf_sr" EntityType="Self.itf_sr" Schema="public" store:Type="Tables" />
           <EntitySet Name="itf_trn" EntityType="Self.itf_trn" Schema="public" store:Type="Tables" />
           <EntitySet Name="maszyny" EntityType="Self.maszyny" Schema="public" store:Type="Tables" />
+          <EntitySet Name="meldunki" EntityType="Self.meldunki" Schema="public" store:Type="Tables" />
           <EntitySet Name="parametry" EntityType="Self.parametry" Schema="public" store:Type="Tables" />
           <EntitySet Name="trace_kategoria" EntityType="Self.trace_kategoria" Schema="public" store:Type="Tables" />
           <EntitySet Name="trace_litery" EntityType="Self.trace_litery" Schema="public" store:Type="Tables" />
@@ -438,6 +461,7 @@
           <EntitySet Name="wyroby_zakres_sdr" EntityType="Self.wyroby_zakres_sdr" Schema="public" store:Type="Tables" />
           <EntitySet Name="wyroby_zast_zaworu" EntityType="Self.wyroby_zast_zaworu" Schema="public" store:Type="Tables" />
           <EntitySet Name="zlecenia_produkcyjne" EntityType="Self.zlecenia_produkcyjne" Schema="public" store:Type="Tables" />
+          <EntitySet Name="zmiany" EntityType="Self.zmiany" Schema="public" store:Type="Tables" />
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -482,6 +506,8 @@
           <EntitySet Name="wyroby_zast_zaworu" EntityType="ecoplastolModel.wyroby_zast_zaworu" />
           <EntitySet Name="zlecenia_produkcyjne" EntityType="ecoplastolModel.zlecenia_produkcyjne" />
           <EntitySet Name="wyroby" EntityType="ecoplastolModel.wyroby" />
+          <EntitySet Name="zmiany" EntityType="ecoplastolModel.zmiany" />
+          <EntitySet Name="meldunki" EntityType="ecoplastolModel.meldunki" />
         </EntityContainer>
         <EntityType Name="parametry">
           <Key>
@@ -876,6 +902,28 @@
           <Property Name="czasm" Type="DateTime" Nullable="false" Precision="6" />
           <Property Name="wyrob_norma" Type="Int32" />
           <Property Name="wyrob_il_w_partii" Type="Int32" />
+        </EntityType>
+        <EntityType Name="zmiany">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="nazwa" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="opw" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="czasw" Type="DateTime" Nullable="false" Precision="6" />
+          <Property Name="opm" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="czasm" Type="DateTime" Nullable="false" Precision="6" />
+        </EntityType>
+        <EntityType Name="meldunki">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="id_zlecenie" Type="Int32" Nullable="false" />
+          <Property Name="zmiana" Type="Int32" Nullable="false" />
+          <Property Name="ilosc" Type="Int32" />
+          <Property Name="ilosc_n" Type="Int32" />
+          <Property Name="ilosc_nn" Type="Int32" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -1311,6 +1359,30 @@
                 <ScalarProperty Name="wyrob_kod_opis" ColumnName="wyrob_kod_opis" />
                 <ScalarProperty Name="wyrob_kod_indeks" ColumnName="wyrob_kod_indeks" />
                 <ScalarProperty Name="wyrob_kod" ColumnName="wyrob_kod" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="zmiany">
+            <EntityTypeMapping TypeName="ecoplastolModel.zmiany">
+              <MappingFragment StoreEntitySet="zmiany">
+                <ScalarProperty Name="czasm" ColumnName="czasm" />
+                <ScalarProperty Name="opm" ColumnName="opm" />
+                <ScalarProperty Name="czasw" ColumnName="czasw" />
+                <ScalarProperty Name="opw" ColumnName="opw" />
+                <ScalarProperty Name="nazwa" ColumnName="nazwa" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="meldunki">
+            <EntityTypeMapping TypeName="ecoplastolModel.meldunki">
+              <MappingFragment StoreEntitySet="meldunki">
+                <ScalarProperty Name="ilosc_nn" ColumnName="ilosc_nn" />
+                <ScalarProperty Name="ilosc_n" ColumnName="ilosc_n" />
+                <ScalarProperty Name="ilosc" ColumnName="ilosc" />
+                <ScalarProperty Name="zmiana" ColumnName="zmiana" />
+                <ScalarProperty Name="id_zlecenie" ColumnName="id_zlecenie" />
                 <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>

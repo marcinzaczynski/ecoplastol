@@ -36,8 +36,8 @@
             </Grid.ColumnDefinitions>
             <DatePicker Grid.Column="0" FontSize="24" VerticalContentAlignment="Center" x:Name="dpDataZleceniaOd"/>
             <DatePicker Grid.Column="1" FontSize="24" VerticalContentAlignment="Center" x:Name="dpDataZleceniaDo"/>
-            <ComboBox Grid.Column="2" FontSize="24" VerticalContentAlignment="Center"/>
-            <ComboBox Grid.Column="3" FontSize="24" VerticalContentAlignment="Center"/>
+            <ComboBox Grid.Column="2" FontSize="24" VerticalContentAlignment="Center" x:Name="cbbMaszyna"/>
+            <ComboBox Grid.Column="3" FontSize="24" VerticalContentAlignment="Center" x:Name="cbbZmiana"/> 
         </Grid>
         <Button Grid.Row="4" FontSize="20" Content="Z A M K N I J" x:Name="btnZamknij" Click="BtnZamknij_Click"/>
     </Grid>
