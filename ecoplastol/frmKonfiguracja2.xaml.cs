@@ -54,9 +54,11 @@ namespace ecoplastol
 
         private List<maszyny> listProdMaszyny;
         private List<wyroby> listProdWyroby;
+        private List<operatorzy_maszyn> listProdOperatorzy;
 
         private PanelProdMaszyny panelProdMaszyny;
         private PanelProdWyroby panelProdWyroby;
+        private PanelProdOperatorzy panelProdOperatorzy;
 
 
         public frmKonfiguracja2()
@@ -306,6 +308,18 @@ namespace ecoplastol
         private void BtnProdRodzajDrutu_Click(object sender, RoutedEventArgs e)
         {
 
+        }
+
+        private void BtnProdOperatorzy_Click(object sender, RoutedEventArgs e)
+        {
+            lblProdinfo.Content = btnProdOperatorzy.Content;
+            listProdOperatorzy = produkcja_db.PobierzOperatorow();
+
+            grdProdDane.Children.Clear();
+            panelProdOperatorzy = null;
+            panelProdOperatorzy = new PanelProdOperatorzy(listProdOperatorzy);
+
+            grdProdDane.Children.Add(panelProdOperatorzy);
         }
     }
 }

@@ -201,5 +201,58 @@ namespace ecoplastol.konfiguracja.produkcja
             }
         }
 
+        /// <summary>
+        /// OPERATORZY
+        /// </summary>
+
+        public static List<operatorzy_maszyn> PobierzOperatorow()
+        {
+            using (var db = new ecoplastolEntities())
+            {
+                var list = (from w in db.operatorzy_maszyn
+                            orderby w.id ascending
+                            select w).ToList();
+                return list;
+            }
+        }
+
+        public static void UsunOperatora(operatorzy_maszyn poz)
+        {
+            using (var db = new ecoplastolEntities())
+            {
+                db.operatorzy_maszyn.Attach(poz);
+                db.operatorzy_maszyn.Remove(poz);
+                db.SaveChanges();
+            }
+        }
+
+        public static int IdOperatora()
+        {
+            using (var db = new ecoplastolEntities())
+            {
+                int newId = db.operatorzy_maszyn.Max(p => p.id) + 1;
+                return newId;
+            }
+        }
+
+        public static void DodajOperatora(operatorzy_maszyn poz)
+        {
+            using (var db = new ecoplastolEntities())
+            {
+
+                db.operatorzy_maszyn.Add(poz);
+                db.SaveChanges();
+            }
+        }
+
+        public static void PoprawOperatora(operatorzy_maszyn poz)
+        {
+            using (var db = new ecoplastolEntities())
+            {
+                db.Entry(poz).State = System.Data.Entity.EntityState.Modified;
+                db.SaveChanges();
+            }
+        }
+
     }
 }

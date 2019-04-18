@@ -44,8 +44,8 @@
     <Reference Include="EntityFramework6.Npgsql, Version=3.2.0.0, Culture=neutral, PublicKeyToken=5d8b90d52f46fda7, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework6.Npgsql.3.2.0\lib\net45\EntityFramework6.Npgsql.dll</HintPath>
     </Reference>
-    <Reference Include="Npgsql, Version=4.0.5.0, Culture=neutral, PublicKeyToken=5d8b90d52f46fda7, processorArchitecture=MSIL">
-      <HintPath>..\packages\Npgsql.4.0.5\lib\net451\Npgsql.dll</HintPath>
+    <Reference Include="Npgsql, Version=4.0.6.0, Culture=neutral, PublicKeyToken=5d8b90d52f46fda7, processorArchitecture=MSIL">
+      <HintPath>..\packages\Npgsql.4.0.6\lib\net451\Npgsql.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Buffers, Version=4.0.2.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
@@ -96,7 +96,13 @@
     <Compile Include="frmKonfiguracja2.xaml.cs">
       <DependentUpon>frmKonfiguracja2.xaml</DependentUpon>
     </Compile>
+    <Compile Include="konfiguracja\produkcja\PanelProdOperatorzy.xaml.cs">
+      <DependentUpon>PanelProdOperatorzy.xaml</DependentUpon>
+    </Compile>
     <Compile Include="meldunki.cs">
+      <DependentUpon>PGEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="operatorzy_maszyn.cs">
       <DependentUpon>PGEntity.tt</DependentUpon>
     </Compile>
     <Compile Include="planowanie\frmMeldunki.xaml.cs">
@@ -265,6 +271,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="frmParametry.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="konfiguracja\produkcja\PanelProdOperatorzy.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -158,6 +158,7 @@
                         <Button Grid.Row="4" Grid.Column="1" FontSize="14" Padding="10,0,0,0" HorizontalContentAlignment="Left" Style="{StaticResource btnGradientLightOrange}" Name="btnProdZakresSDR" Content="Zakresy SDR" Click="BtnProdZakresSDR_Click" />
                         <Button Grid.Row="5" Grid.Column="1" FontSize="14" Padding="10,0,0,0" HorizontalContentAlignment="Left" Style="{StaticResource btnGradientLightOrange}" Name="btnProdRodzajDrutu" Content="Rodzaje drutów" Click="BtnProdRodzajDrutu_Click" />
                         <Button Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="2" FontSize="14" Padding="10,0,0,0" HorizontalContentAlignment="Left" Style="{StaticResource btnGradientOrange}" Name="btnProdMaszyny" Content="Maszyny" Click="BtnProdMaszyny_Click"/>
+                        <Button Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="2" FontSize="14" Padding="10,0,0,0" HorizontalContentAlignment="Left" Style="{StaticResource btnGradientOrange}" Name="btnProdOperatorzy" Content="Operatorzy" Click="BtnProdOperatorzy_Click"/>
                     </Grid>
                     <Grid x:Name="grdProdDane" Grid.Column="1">
 

@@ -123,6 +123,18 @@
           <Property Name="opm" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="czasm" Type="timestamp" Nullable="false" />
         </EntityType>
+        <EntityType Name="operatorzy_maszyn">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int4" Nullable="false" />
+          <Property Name="imie" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="nazwisko" Type="varchar" MaxLength="70" Nullable="false" />
+          <Property Name="opw" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="czasw" Type="timestamp" Nullable="false" />
+          <Property Name="opm" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="czasm" Type="timestamp" Nullable="false" />
+        </EntityType>
         <EntityType Name="parametry">
           <Key>
             <PropertyRef Name="id" />
@@ -449,6 +461,7 @@
           <EntitySet Name="itf_trn" EntityType="Self.itf_trn" Schema="public" store:Type="Tables" />
           <EntitySet Name="maszyny" EntityType="Self.maszyny" Schema="public" store:Type="Tables" />
           <EntitySet Name="meldunki" EntityType="Self.meldunki" Schema="public" store:Type="Tables" />
+          <EntitySet Name="operatorzy_maszyn" EntityType="Self.operatorzy_maszyn" Schema="public" store:Type="Tables" />
           <EntitySet Name="parametry" EntityType="Self.parametry" Schema="public" store:Type="Tables" />
           <EntitySet Name="trace_kategoria" EntityType="Self.trace_kategoria" Schema="public" store:Type="Tables" />
           <EntitySet Name="trace_litery" EntityType="Self.trace_litery" Schema="public" store:Type="Tables" />
@@ -513,6 +526,7 @@
           <EntitySet Name="wyroby" EntityType="ecoplastolModel.wyroby" />
           <EntitySet Name="zmiany" EntityType="ecoplastolModel.zmiany" />
           <EntitySet Name="meldunki" EntityType="ecoplastolModel.meldunki" />
+          <EntitySet Name="operatorzy_maszyn" EntityType="ecoplastolModel.operatorzy_maszyn" />
         </EntityContainer>
         <EntityType Name="parametry">
           <Key>
@@ -930,6 +944,18 @@
           <Property Name="ilosc" Type="Int32" Nullable="false" />
           <Property Name="ilosc_n" Type="Int32" />
           <Property Name="ilosc_nn" Type="Int32" />
+          <Property Name="opw" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="czasw" Type="DateTime" Nullable="false" Precision="6" />
+          <Property Name="opm" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="czasm" Type="DateTime" Nullable="false" Precision="6" />
+        </EntityType>
+        <EntityType Name="operatorzy_maszyn">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="imie" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="nazwisko" Type="String" Nullable="false" MaxLength="70" FixedLength="false" Unicode="true" />
           <Property Name="opw" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="czasw" Type="DateTime" Nullable="false" Precision="6" />
           <Property Name="opm" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
@@ -1398,6 +1424,19 @@
                 <ScalarProperty Name="data_meldunku" ColumnName="data_meldunku" />
                 <ScalarProperty Name="zmiana" ColumnName="zmiana" />
                 <ScalarProperty Name="id_zlecenie" ColumnName="id_zlecenie" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="operatorzy_maszyn">
+            <EntityTypeMapping TypeName="ecoplastolModel.operatorzy_maszyn">
+              <MappingFragment StoreEntitySet="operatorzy_maszyn">
+                <ScalarProperty Name="czasm" ColumnName="czasm" />
+                <ScalarProperty Name="opm" ColumnName="opm" />
+                <ScalarProperty Name="czasw" ColumnName="czasw" />
+                <ScalarProperty Name="opw" ColumnName="opw" />
+                <ScalarProperty Name="nazwisko" ColumnName="nazwisko" />
+                <ScalarProperty Name="imie" ColumnName="imie" />
                 <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
