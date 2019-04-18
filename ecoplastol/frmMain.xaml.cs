@@ -58,5 +58,10 @@ namespace ecoplastol
             frmPlanowanie2 frmPlanowanie2 = new frmPlanowanie2();
             frmPlanowanie2.ShowDialog();
         }
+
+        private void BtnZamknij_Click(object sender, RoutedEventArgs e)
+        {
+            Close();
+        }
     }
 }

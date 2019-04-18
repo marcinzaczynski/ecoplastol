@@ -17,8 +17,13 @@ namespace ecoplastol
         public int id { get; set; }
         public int id_zlecenie { get; set; }
         public int zmiana { get; set; }
-        public Nullable<int> ilosc { get; set; }
+        public Nullable<System.DateTime> data_meldunku { get; set; }
+        public int ilosc { get; set; }
         public Nullable<int> ilosc_n { get; set; }
         public Nullable<int> ilosc_nn { get; set; }
+        public string opw { get; set; }
+        public System.DateTime czasw { get; set; }
+        public string opm { get; set; }
+        public System.DateTime czasm { get; set; }
     }
 }

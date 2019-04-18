@@ -4,8 +4,9 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ecoplastol.planowanie"
+        xmlns:ts="clr-namespace:ecoplastol"
         mc:Ignorable="d"
-        Title="frmMeldunki" Height="450" Width="800" WindowStartupLocation="CenterScreen" WindowState="Maximized">
+        Title="frmMeldunki" Height="450" Width="1100" WindowStartupLocation="CenterScreen" WindowState="Maximized">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="40"/>
@@ -19,26 +20,68 @@
                 <ColumnDefinition Width="200"/>
                 <ColumnDefinition Width="200"/>
                 <ColumnDefinition Width="200"/>
+                <ColumnDefinition Width="300"/>
+                <ColumnDefinition Width="200"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             <Label Grid.Column="0" FontSize="20" Padding="5" Content="Od"/>
             <Label Grid.Column="1" FontSize="20" Padding="5" Content="Do"/>
             <Label Grid.Column="2" FontSize="20" Padding="5" Content="Maszyna"/>
-            <Label Grid.Column="3" FontSize="20" Padding="5" Content="Zmiana"/>
+            <Label Grid.Column="3" FontSize="20" Padding="5" Content="Zlecenie"/>
+            <Label Grid.Column="4" FontSize="20" Padding="5" Content="Zmiana"/>
         </Grid>
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="200"/>
                 <ColumnDefinition Width="200"/>
                 <ColumnDefinition Width="200"/>
+                <ColumnDefinition Width="300"/>
                 <ColumnDefinition Width="200"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <DatePicker Grid.Column="0" FontSize="24" VerticalContentAlignment="Center" x:Name="dpDataZleceniaOd"/>
-            <DatePicker Grid.Column="1" FontSize="24" VerticalContentAlignment="Center" x:Name="dpDataZleceniaDo"/>
-            <ComboBox Grid.Column="2" FontSize="24" VerticalContentAlignment="Center" x:Name="cbbMaszyna"/>
-            <ComboBox Grid.Column="3" FontSize="24" VerticalContentAlignment="Center" x:Name="cbbZmiana"/> 
+            <DatePicker Grid.Column="0" FontSize="24" VerticalContentAlignment="Center" x:Name="dpDataZleceniaOd" SelectedDateChanged="DpDataZleceniaOd_SelectedDateChanged"/>
+            <DatePicker Grid.Column="1" FontSize="24" VerticalContentAlignment="Center" x:Name="dpDataZleceniaDo" SelectedDateChanged="DpDataZleceniaDo_SelectedDateChanged"/>
+            <ComboBox Grid.Column="2" FontSize="24" VerticalContentAlignment="Center" x:Name="cbbMaszyna" SelectionChanged="CbbMaszyna_SelectionChanged"/>
+            <ComboBox Grid.Column="3" FontSize="24" VerticalContentAlignment="Center" x:Name="cbbZlecenie">
+                <ComboBox.ItemTemplateSelector>
+                    <ts:ComboBoxItemTemplateSelector>
+                        <ts:ComboBoxItemTemplateSelector.SelectedTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding wyrob_kod}" />
+                            </DataTemplate>
+                        </ts:ComboBoxItemTemplateSelector.SelectedTemplate>
+                        <ts:ComboBoxItemTemplateSelector.DropDownTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Vertical">
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="{Binding id}" FontSize="20"/>
+                                        <TextBlock Text="  " FontSize="14"/>
+                                        <TextBlock Text="{Binding wyrob_kod}" FontSize="20" />
+                                    </StackPanel>                                    
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="{Binding wyrob_kod_indeks}" FontSize="12"/>
+                                        <TextBlock Text="  " FontSize="12"/>
+                                        <TextBlock Text="{Binding wyrob_kod_opis}" FontSize="12" />
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="M " FontSize="12"/>
+                                        <TextBlock Text="{Binding zlecenie_nr_maszyny}" FontSize="12"/>
+                                        <TextBlock Text="  " FontSize="12"/>
+                                        <TextBlock Text="{Binding zlecenie_data_rozp, StringFormat=\{0:yyyy-MM-dd\}}" FontSize="12" />
+                                        <TextBlock Text="  " FontSize="12"/>
+                                        <TextBlock Text="{Binding zlecenie_data_zak, StringFormat=\{0:yyyy-MM-dd\}}" FontSize="12" />
+                                    </StackPanel>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ts:ComboBoxItemTemplateSelector.DropDownTemplate>
+                    </ts:ComboBoxItemTemplateSelector>
+                </ComboBox.ItemTemplateSelector>
+            </ComboBox>
+            <ComboBox Grid.Column="4" FontSize="24" VerticalContentAlignment="Center" x:Name="cbbZmiana"/> 
         </Grid>
+        <DataGrid Grid.Row="2" Name="grdMeldunki">
+            
+        </DataGrid>
         <Button Grid.Row="4" FontSize="20" Content="Z A M K N I J" x:Name="btnZamknij" Click="BtnZamknij_Click"/>
     </Grid>
 </Window>

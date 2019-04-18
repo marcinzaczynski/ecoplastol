@@ -85,7 +85,8 @@ namespace ecoplastol
         {
 
             UstawDateZlecenia?.Invoke();
-            frmMeldunki frmMeldunki = new frmMeldunki(frmPlanowanie2.dataZlecenia, Convert.ToInt32(btnMeldunki.Tag));
+            int idZlecenia = (this.grdZlecenie.DataContext as zlecenia_produkcyjne).id;
+            frmMeldunki frmMeldunki = new frmMeldunki(frmPlanowanie2.dataZlecenia, Convert.ToInt32(btnMeldunki.Tag), idZlecenia);
             frmMeldunki.ShowDialog();
         }
     }

@@ -114,9 +114,14 @@
           <Property Name="id" Type="int4" Nullable="false" />
           <Property Name="id_zlecenie" Type="int4" Nullable="false" />
           <Property Name="zmiana" Type="int4" Nullable="false" />
-          <Property Name="ilosc" Type="int4" />
+          <Property Name="data_meldunku" Type="date" />
+          <Property Name="ilosc" Type="int4" Nullable="false" />
           <Property Name="ilosc_n" Type="int4" />
           <Property Name="ilosc_nn" Type="int4" />
+          <Property Name="opw" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="czasw" Type="timestamp" Nullable="false" />
+          <Property Name="opm" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="czasm" Type="timestamp" Nullable="false" />
         </EntityType>
         <EntityType Name="parametry">
           <Key>
@@ -921,9 +926,14 @@
           <Property Name="id" Type="Int32" Nullable="false" />
           <Property Name="id_zlecenie" Type="Int32" Nullable="false" />
           <Property Name="zmiana" Type="Int32" Nullable="false" />
-          <Property Name="ilosc" Type="Int32" />
+          <Property Name="data_meldunku" Type="DateTime" Precision="0" />
+          <Property Name="ilosc" Type="Int32" Nullable="false" />
           <Property Name="ilosc_n" Type="Int32" />
           <Property Name="ilosc_nn" Type="Int32" />
+          <Property Name="opw" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="czasw" Type="DateTime" Nullable="false" Precision="6" />
+          <Property Name="opm" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="czasm" Type="DateTime" Nullable="false" Precision="6" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -1378,9 +1388,14 @@
           <EntitySetMapping Name="meldunki">
             <EntityTypeMapping TypeName="ecoplastolModel.meldunki">
               <MappingFragment StoreEntitySet="meldunki">
+                <ScalarProperty Name="czasm" ColumnName="czasm" />
+                <ScalarProperty Name="opm" ColumnName="opm" />
+                <ScalarProperty Name="czasw" ColumnName="czasw" />
+                <ScalarProperty Name="opw" ColumnName="opw" />
                 <ScalarProperty Name="ilosc_nn" ColumnName="ilosc_nn" />
                 <ScalarProperty Name="ilosc_n" ColumnName="ilosc_n" />
                 <ScalarProperty Name="ilosc" ColumnName="ilosc" />
+                <ScalarProperty Name="data_meldunku" ColumnName="data_meldunku" />
                 <ScalarProperty Name="zmiana" ColumnName="zmiana" />
                 <ScalarProperty Name="id_zlecenie" ColumnName="id_zlecenie" />
                 <ScalarProperty Name="id" ColumnName="id" />
