@@ -56,7 +56,7 @@ namespace ecoplastol
             //Grid.SetRow(mz, il_w - 1);
             //gr.Children.Add(mz);
 
-            frmZlecenieProdukcji frmZlecenieProdukcji = new frmZlecenieProdukcji(numerMaszyny, nazwaMaszyny);
+            frmZlecenieProdukcji frmZlecenieProdukcji = new frmZlecenieProdukcji(numerMaszyny, nazwaMaszyny, frmPlanowanie2.dataZlecenia);
             frmZlecenieProdukcji.ShowDialog();
 
             if (frmZlecenieProdukcji.DialogResult.HasValue && frmZlecenieProdukcji.DialogResult.Value)

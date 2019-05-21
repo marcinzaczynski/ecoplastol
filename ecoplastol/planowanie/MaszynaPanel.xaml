@@ -66,9 +66,12 @@
                 <Button Grid.Column="2" Content="DODAJ" Name="btn" Click="Btn_Click" Style="{StaticResource btnGradientLightGreen}" FontSize="16" ></Button>
             </Grid>
             
-            <StackPanel Grid.Row="2" Name="spMaszynaZlecenia" Orientation="Vertical">
+            <!--<StackPanel Grid.Row="2" Name="spMaszynaZlecenia" Orientation="Vertical">
                 
-            </StackPanel>
+            </StackPanel >-->
+            <Grid Grid.Row="2" Name="grdMaszynaZlecenia" ShowGridLines="True">
+                
+            </Grid>
 
 
         </Grid>

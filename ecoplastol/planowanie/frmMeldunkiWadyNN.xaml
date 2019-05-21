@@ -1,0 +1,93 @@
+﻿<Window x:Class="ecoplastol.planowanie.frmMeldunkiWadyNN"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ecoplastol.planowanie"
+        mc:Ignorable="d"
+        Title="Przyczyny braków" Height="600" Width="900"
+        ResizeMode="NoResize" WindowStartupLocation="CenterScreen">
+    <Window.CommandBindings>
+        <CommandBinding Command="ApplicationCommands.Help" CanExecute="CzyMoznaZatwierdzic" Executed="Zatwierdz"/>
+    </Window.CommandBindings>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="120"/>
+            <RowDefinition Height="5"/>
+            <RowDefinition Height="40"/>
+            <RowDefinition Height="5"/>
+            <RowDefinition Height="50"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="150"/>
+                <ColumnDefinition Width="150"/>
+                <ColumnDefinition Width="200"/>
+                <ColumnDefinition Width="150"/>
+                <ColumnDefinition Width="200"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Label Grid.Column="0" FontSize="20" Padding="5" Content="Data"/>
+            <Label Grid.Column="1" FontSize="20" Padding="5" Content="Maszyna"/>
+            <Label Grid.Column="2" FontSize="20" Padding="5" Content="Zlecenie"/>
+            <Label Grid.Column="3" FontSize="20" Padding="5" Content="Zmiana"/>
+            <Label Grid.Column="4" FontSize="20" Padding="5" Content="Operator"/>
+        </Grid>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="150"/>
+                <ColumnDefinition Width="150"/>
+                <ColumnDefinition Width="200"/>
+                <ColumnDefinition Width="150"/>
+                <ColumnDefinition Width="200"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Label Grid.Column="0" FontSize="20" Padding="5" VerticalContentAlignment="Center" Content="Data" Name="lblData" />
+            <Label Grid.Column="1" FontSize="20" Padding="5" VerticalContentAlignment="Center" Content="Maszyna" Name="lblMaszyna"/>
+            <Label Grid.Column="2" FontSize="20" Padding="5" VerticalContentAlignment="Center" Content="Zlecenie" Name="lblZlecenie"/>
+            <Label Grid.Column="3" FontSize="20" Padding="5" VerticalContentAlignment="Center" Content="Zmiana" Name="lblZmiana"/>
+            <Label Grid.Column="4" FontSize="20" Padding="5" VerticalContentAlignment="Center" Content="Operator" Name="lblOperator"/>
+        </Grid>
+        <DataGrid Grid.Row="2" Margin="0,5,0,0" ItemsSource="{Binding}" AutoGenerateColumns="False" Name="dgrdLista" SelectionChanged="DgrdLista_SelectionChanged">
+            <DataGrid.Columns>
+                <DataGridTextColumn IsReadOnly="True" Binding="{Binding ilosc}" Header="Ilość" />
+                <DataGridTextColumn IsReadOnly="True" Binding="{Binding nazwa_wady_nn}" Width="*" Header="Przyczyna braku"/>
+                <DataGridTextColumn IsReadOnly="True" Binding="{Binding opw}" Header="opw" />
+                <DataGridTextColumn IsReadOnly="True" Binding="{Binding czasw, StringFormat=\{0:yyyy-MM-dd HH:mm\}}" Header="czasw" />
+                <DataGridTextColumn IsReadOnly="True" Binding="{Binding opm}" Header="opm"/>
+                <DataGridTextColumn IsReadOnly="True" Binding="{Binding czasm, StringFormat=\{0:yyyy-MM-dd HH:mm\}}" Header="czasm" />
+            </DataGrid.Columns>
+        </DataGrid>
+        <Grid Grid.Row="3" Name="grdDane">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="5"/>
+                <RowDefinition Height="50"/>
+                <RowDefinition Height="50"/>
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="200"/>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="4"/>
+                <ColumnDefinition Width="5"/>
+            </Grid.ColumnDefinitions>
+            <Label Grid.Row="1" Grid.Column="0" FontSize="24" Padding="10,0,0,0" VerticalContentAlignment="Center" Content="Ilość :"/>
+            <Label Grid.Row="2" Grid.Column="0" FontSize="24" Padding="10,0,0,0" VerticalContentAlignment="Center" Content="Przyczyna :"/>
+            <TextBox Grid.Row="1" Grid.Column="1" FontSize="24" Padding="10,0,0,0" VerticalContentAlignment="Center" PreviewTextInput="TxtIlosc_PreviewTextInput" Name="txtIlosc" Text="{Binding ilosc}"/>
+            <Border Grid.Row="1" Grid.Column="2" BorderThickness="2" BorderBrush="Red" Visibility="Visible" Name="brdIlosc"/>
+            <ComboBox Grid.Row="2" Grid.Column="1" FontSize="24" Padding="10,0,0,0" VerticalContentAlignment="Center" Name="cbbPrzyczyna" SelectedValuePath="id" SelectedValue="{Binding id_wada_nn}"/>
+            <Border Grid.Row="2" Grid.Column="2" BorderThickness="2" BorderBrush="Red" Visibility="Visible" Name="brdPrzyczyna"/>
+        </Grid>
+        <StackPanel Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="5" Orientation="Horizontal">
+            <Button Width="170" FontSize="20" Content="DODAJ" Name="btnDodaj" Click="BtnDodaj_Click"/>
+            <Button Width="170" FontSize="20" Content="POPRAW" Name="btnPopraw" Click="BtnPopraw_Click"/>
+            <Button Width="170" FontSize="20" Content="USUŃ" Name="btnUsun" Click="BtnUsun_Click"/>
+            <Button Width="170" FontSize="20" Content="ANULUJ" Name="btnAnuluj" Click="BtnAnuluj_Click"/>
+            <Button Width="170" FontSize="20" Content="ZATWIERDŹ" Name="btnZatwierdz" Command="ApplicationCommands.Help"/>
+        </StackPanel>
+        <Button Grid.Row="7" FontSize="22" Content="Z A M K N I J" x:Name="btnZamknij" Click="BtnZamknij_Click"/>
+    </Grid>
+</Window>

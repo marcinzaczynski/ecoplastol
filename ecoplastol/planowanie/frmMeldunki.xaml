@@ -6,13 +6,20 @@
         xmlns:local="clr-namespace:ecoplastol.planowanie"
         xmlns:ts="clr-namespace:ecoplastol"
         mc:Ignorable="d"
-        Title="frmMeldunki" Height="450" Width="1100" WindowStartupLocation="CenterScreen" WindowState="Maximized">
+        Title="frmMeldunki" Height="450" Width="1100" WindowStartupLocation="CenterScreen" WindowState="Maximized"
+        Closing="Window_Closing">
+    <Window.CommandBindings>
+        <CommandBinding Command="ApplicationCommands.Help" CanExecute="CzyMoznaZatwierdzic" Executed="Zatwierdz"/>
+    </Window.CommandBindings>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="40"/>
             <RowDefinition Height="50"/>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="150"/>
+            <RowDefinition Height="210"/>
+            <RowDefinition Height="5"/>
+            <RowDefinition Height="30"/>
+            <RowDefinition Height="5"/>
             <RowDefinition Height="50"/>
         </Grid.RowDefinitions>
         <Grid Grid.Row="0">
@@ -42,7 +49,7 @@
             <DatePicker Grid.Column="0" FontSize="24" VerticalContentAlignment="Center" x:Name="dpDataZleceniaOd" SelectedDateChanged="DpDataZleceniaOd_SelectedDateChanged"/>
             <DatePicker Grid.Column="1" FontSize="24" VerticalContentAlignment="Center" x:Name="dpDataZleceniaDo" SelectedDateChanged="DpDataZleceniaDo_SelectedDateChanged"/>
             <ComboBox Grid.Column="2" FontSize="24" VerticalContentAlignment="Center" x:Name="cbbMaszyna" SelectionChanged="CbbMaszyna_SelectionChanged"/>
-            <ComboBox Grid.Column="3" FontSize="24" VerticalContentAlignment="Center" x:Name="cbbZlecenie">
+            <ComboBox Grid.Column="3" FontSize="24" VerticalContentAlignment="Center" x:Name="cbbZlecenie" SelectionChanged="CbbZlecenie_SelectionChanged">
                 <ComboBox.ItemTemplateSelector>
                     <ts:ComboBoxItemTemplateSelector>
                         <ts:ComboBoxItemTemplateSelector.SelectedTemplate>
@@ -77,11 +84,191 @@
                     </ts:ComboBoxItemTemplateSelector>
                 </ComboBox.ItemTemplateSelector>
             </ComboBox>
-            <ComboBox Grid.Column="4" FontSize="24" VerticalContentAlignment="Center" x:Name="cbbZmiana"/> 
+            <ComboBox Grid.Column="4" FontSize="24" VerticalContentAlignment="Center" x:Name="cbbZmiana" SelectionChanged="CbbZmiana_SelectionChanged"/> 
         </Grid>
-        <DataGrid Grid.Row="2" Name="grdMeldunki">
-            
+        <DataGrid Grid.Row="2" Name="dgrdMeldunki" ItemsSource="{Binding}" AutoGenerateColumns="False" SelectionChanged="DgrdMeldunki_SelectionChanged" CanUserDeleteRows="False" CanUserAddRows="False" IsReadOnly="True">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="ID" Binding="{Binding id}"/>
+                <DataGridTextColumn Header="Data meldunku" Binding="{Binding data_meldunku, StringFormat=\{0:yyyy-MM-dd\}}"/>
+                <DataGridTextColumn Header="Maszyna" Binding="{Binding nazwa_maszyny}"/>
+                <DataGridTextColumn Header="Zlecenie" Binding="{Binding kod_zlecenia}"/>
+                <DataGridTextColumn Header="Zmiana" Binding="{Binding zmiana}"/>
+                <DataGridTextColumn Header="Operator" IsReadOnly="True" Binding="{Binding nazwa_operatora}"/>
+                <DataGridTextColumn Header="Ilość poz." Binding="{Binding ilosc}"/>
+                <DataGridTextColumn Header="Ilość neg." Binding="{Binding ilosc_neg}"/>
+                <DataGridTextColumn Header="Ilość techn." Binding="{Binding ilosc_techn}"/>
+                <DataGridTextColumn Header="Spr. wtryskarki" IsReadOnly="True" Binding="{Binding opis_wynik_spr_wtr}"/>
+                <DataGridTextColumn Header="Wygląd zewnętrzny" IsReadOnly="True" Binding="{Binding opis_wyglad_zew}"/>
+                <DataGridTextColumn Header="Wygląd grzejnika" IsReadOnly="True" Binding="{Binding opis_wyglad_grzejnika}"/>
+                <DataGridTextColumn Header="opw" IsReadOnly="True" Binding="{Binding opw}"/>
+                <DataGridTextColumn Header="czasw" IsReadOnly="True" Binding="{Binding czasw, StringFormat=\{0:yyyy-MM-dd HH:mm\}}"/>
+                <DataGridTextColumn Header="opm" IsReadOnly="True" Binding="{Binding opm}"/>
+                <DataGridTextColumn Header="czasm" IsReadOnly="True" Binding="{Binding czasm, StringFormat=\{0:yyyy-MM-dd HH:mm\}}"/>
+            </DataGrid.Columns>
         </DataGrid>
-        <Button Grid.Row="4" FontSize="20" Content="Z A M K N I J" x:Name="btnZamknij" Click="BtnZamknij_Click"/>
+        <Grid Grid.Row="3" Name="grdDane">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="5"/>
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="5"/>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="10"/>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="10"/>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="5"/>
+            </Grid.ColumnDefinitions>
+            <Grid Grid.Row="1" Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="20"/>
+                    <RowDefinition Height="3"/>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="3"/>
+                    <RowDefinition Height="20"/>
+                    <RowDefinition Height="3"/>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="200"/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="4"/>
+                </Grid.ColumnDefinitions>
+                <Border Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Background="LightBlue"/>
+                
+                <Label Grid.Row="2" Grid.Column="0" FontSize="18" Padding="10,0,0,0" VerticalContentAlignment="Center" Content="Data produkcji :"/>
+                <DatePicker Grid.Row="2" Grid.Column="1" FontSize="16" Padding="10,0,0,0" VerticalContentAlignment="Center" Name="dpMeldunekData" SelectedDate="{Binding data_meldunku}"/>
+                <Border Grid.Row="2" Grid.Column="2" BorderThickness="2" BorderBrush="Red" Visibility="Visible" Name="brdMeldunekData"/>
+                
+                <Label Grid.Row="3" Grid.Column="0" FontSize="18" Padding="10,0,0,0" VerticalContentAlignment="Center" Content="Zmiana :"/>
+                <ComboBox Grid.Row="3" Grid.Column="1" FontSize="18" Padding="10,0,0,0" VerticalContentAlignment="Center" Name="cbbMeldunekZmiana" SelectedValuePath="id" SelectedValue="{Binding zmiana}"/>
+                <Border Grid.Row="3" Grid.Column="2" BorderThickness="2" BorderBrush="Red" Visibility="Visible" Name="brdMeldunekZmiana"/>
+                
+                <Label Grid.Row="4" Grid.Column="0" FontSize="18" Padding="10,0,0,0" VerticalContentAlignment="Center" Content="Operator :"/>
+                <ComboBox Grid.Row="4" Grid.Column="1" FontSize="18" Padding="10,0,0,0" VerticalContentAlignment="Center" Name="cbbMeldunekOperator" SelectedValuePath="id" SelectedValue="{Binding id_operator}">
+                    <ComboBox.ItemTemplateSelector>
+                        <ts:ComboBoxItemTemplateSelector>
+                            <ts:ComboBoxItemTemplateSelector.SelectedTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="{Binding imie}" />
+                                        <TextBlock Text=" "/>
+                                        <TextBlock Text="{Binding nazwisko}" />
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ts:ComboBoxItemTemplateSelector.SelectedTemplate>
+                            <ts:ComboBoxItemTemplateSelector.DropDownTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="{Binding imie}" />
+                                        <TextBlock Text=" "/>
+                                        <TextBlock Text="{Binding nazwisko}" />
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ts:ComboBoxItemTemplateSelector.DropDownTemplate>
+                        </ts:ComboBoxItemTemplateSelector>
+                    </ComboBox.ItemTemplateSelector>
+                </ComboBox>
+                <Border Grid.Row="4" Grid.Column="2" BorderThickness="2" BorderBrush="Red" Visibility="Visible" Name="brdMeldunekOperator"/>
+
+                <Border Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="2" Background="LightBlue"/>
+                <Label Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="3" Padding="10,0,0,0" VerticalContentAlignment="Center" Content="PRZEGLĄD CODZIENNY MASZYNY"/>
+
+                <Label Grid.Row="8" Grid.Column="0" FontSize="18" Padding="10,0,0,0" VerticalContentAlignment="Center" Content="Operator :"/>
+                <ComboBox Grid.Row="8" Grid.Column="1" FontSize="18" Padding="10,0,0,0" VerticalContentAlignment="Center" Name="cbbMeldunekPrzCodzMasz" SelectedValuePath="id" SelectedValue="{Binding przeglad_codz_masz}"/>
+                <Border Grid.Row="8" Grid.Column="2" BorderThickness="2" BorderBrush="Red" Visibility="Visible" Name="brdMeldunekPrzCodzMasz"/>
+            </Grid>
+            <Grid Grid.Row="1" Grid.Column="3">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="20"/>
+                    <RowDefinition Height="3"/>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="3"/>
+                    <RowDefinition Height="20"/>
+                    <RowDefinition Height="3"/>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="40"/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="4"/>
+                </Grid.ColumnDefinitions>
+                <Border Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" Background="LightBlue"/>
+                <Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" Padding="10,0,0,0" VerticalContentAlignment="Center" Content="OCENA"/>
+                
+                <Label Grid.Row="2" Grid.Column="0" FontSize="18" Padding="10,0,0,0" VerticalContentAlignment="Center" Content="Ilość (ocena pozytywna) :"/>
+                <TextBox Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" FontSize="18" Padding="10,0,0,0" VerticalContentAlignment="Center" Text="{Binding ilosc}" Name="txtMeldunekIloscPoz" PreviewTextInput="TxtMeldunekIloscPoz_PreviewTextInput"/>
+                <Border Grid.Row="2" Grid.Column="3" BorderThickness="2" BorderBrush="Red" Visibility="Visible" Name="brdMeldunekIloscPoz"/>
+                
+                <Label Grid.Row="3" Grid.Column="0" FontSize="18" Padding="10,0,0,0" VerticalContentAlignment="Center" Content="Ilość (ocena negatywna) :"/>
+                <TextBox Grid.Row="3" Grid.Column="1" FontSize="18" Padding="10,0,0,0" VerticalContentAlignment="Center" IsReadOnly="True" Name="txtMeldunekIloscNeg"/>
+                <Button Grid.Row="3" Grid.Column="2" FontSize="18" Padding="0" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Content="EDYTUJ" Name="btnWadyNN" Click="BtnWadyNN_Click"/>
+                
+                <Label Grid.Row="4" Grid.Column="0" FontSize="18" Padding="10,0,0,0" VerticalContentAlignment="Center" Content="Wady technologiczne :"/>
+                <TextBox Grid.Row="4" Grid.Column="1" Grid.ColumnSpan="2" FontSize="18" Padding="10,0,0,0" VerticalContentAlignment="Center" Text="{Binding ilosc_techn}" Name="txtMeldunekIloscTechn" PreviewTextInput="TxtMeldunekIloscTechn_PreviewTextInput"/>
+                <Border Grid.Row="4" Grid.Column="3" BorderThickness="2" BorderBrush="Red" Visibility="Visible" Name="brdMeldunekIloscTechn"/>
+                
+                <Border Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="3" Background="LightBlue"/>
+                <Label Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="3" Padding="10,0,0,0" VerticalContentAlignment="Center" Content="NADZOROWANE PARAMETRY WTRYSKARKI"/>
+                
+                <Label Grid.Row="8" Grid.Column="0" FontSize="18" Padding="10,0,0,0" VerticalContentAlignment="Center" Content="Godzina sprawdzenia :"/>
+                <TextBox Grid.Row="8" Grid.Column="1" Grid.ColumnSpan="2" FontSize="18" Padding="10,0,0,0" Text="{Binding godz_spr_wtr, StringFormat={}{0:hh}:{0:mm}}" VerticalContentAlignment="Center" />
+                
+                <Label Grid.Row="9" Grid.Column="0" FontSize="18" Padding="10,0,0,0" VerticalContentAlignment="Center" Content="Wynik sprawdzenia :"/>
+                <ComboBox Grid.Row="9" Grid.Column="1" Grid.ColumnSpan="2" FontSize="18" Padding="10,0,0,0" VerticalContentAlignment="Center" Name="cbbMeldunekWynikSprWtr" SelectedValuePath="id" SelectedValue="{Binding wynik_spr_wtr}"/>
+                <Border Grid.Row="9" Grid.Column="3" BorderThickness="2" BorderBrush="Red" Visibility="Visible" Name="brdMeldunekWynikSprWtr"/>
+            </Grid>
+            <Grid Grid.Row="1" Grid.Column="5">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="20"/>
+                    <RowDefinition Height="3"/>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="3"/>
+                    <RowDefinition Height="20"/>
+                    <RowDefinition Height="3"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="4"/>
+                </Grid.ColumnDefinitions>
+                <Border Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Background="LightBlue"/>
+                <Label Grid.Row="0" Grid.Column="0" Padding="10,0,0,0" VerticalContentAlignment="Center" Content="WSTĘPNE ZWOLNIENIE PARTII PO ZMIANIE ROBOCZEJ"/>
+                
+                <Label Grid.Row="2" Grid.Column="0" FontSize="18" Padding="10,0,0,0" VerticalContentAlignment="Center" Content="Wygląd zewnętrzny :"/>
+                <ComboBox Grid.Row="2" Grid.Column="1" FontSize="18" Padding="10,0,0,0" VerticalContentAlignment="Center" Name="cbbMeldunekWygladZewnetrzny" SelectedValuePath="id" SelectedValue="{Binding wyglad_zew}"/>
+                <Border Grid.Row="2" Grid.Column="2" BorderThickness="2" BorderBrush="Red" Visibility="Visible" Name="brdMeldunekWygladZewnetrzny"/>
+                
+                <Label Grid.Row="3" Grid.Column="0" FontSize="18" Padding="10,0,0,0" VerticalContentAlignment="Center" Content="Wygląd grzejnika :"/>
+                <ComboBox Grid.Row="3" Grid.Column="1" FontSize="18" Padding="10,0,0,0" VerticalContentAlignment="Center" Name="cbbMeldunekWygladGrzejnika" SelectedValuePath="id" SelectedValue="{Binding wyglad_grzejnika}"/>
+                <Border Grid.Row="3" Grid.Column="2" BorderThickness="2" BorderBrush="Red" Visibility="Visible" Name="brdMeldunekWygladGrzejnika"/>
+
+                <Border Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="3" Background="LightBlue"/>
+                <Label Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="3" Padding="10,0,0,0" VerticalContentAlignment="Center" Content="UWAGI"/>
+
+                <TextBlock Grid.Row="7" Grid.Column="1" Grid.ColumnSpan="2" Text="{Binding uwagi}"/>
+            </Grid>
+            
+        </Grid>
+        <StackPanel Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="5" Orientation="Horizontal">
+            <Button Width="150" FontSize="18" Content="DODAJ" Name="btnDodaj" Click="BtnDodaj_Click"/>
+            <Button Width="150" FontSize="18" Content="POPRAW" Name="btnPopraw" Click="BtnPopraw_Click"/>
+            <Button Width="150" FontSize="18" Content="USUŃ" Name="btnUsun" Click="BtnUsun_Click"/>
+            <Button Width="150" FontSize="18" Content="ANULUJ" Name="btnAnuluj" Click="BtnAnuluj_Click"/>
+            <Button Width="150" FontSize="18" Content="ZATWIERDŹ" Name="btnZatwierdz" Command="ApplicationCommands.Help"/>
+        </StackPanel>
+
+        <Button Grid.Row="7" FontSize="20" Content="Z A M K N I J" x:Name="btnZamknij" Click="BtnZamknij_Click"/>
     </Grid>
 </Window>

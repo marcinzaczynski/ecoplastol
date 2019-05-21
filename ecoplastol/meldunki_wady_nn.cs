@@ -12,24 +12,15 @@ namespace ecoplastol
     using System;
     using System.Collections.Generic;
     
-    public partial class meldunki
+    public partial class meldunki_wady_nn
     {
         public int id { get; set; }
-        public int id_zlecenie { get; set; }
-        public int id_operator { get; set; }
-        public int zmiana { get; set; }
-        public System.DateTime data_meldunku { get; set; }
+        public int id_meldunek { get; set; }
+        public int id_wada_nn { get; set; }
         public int ilosc { get; set; }
-        public int ilosc_techn { get; set; }
-        public int id_wady_nn { get; set; }
-        public System.TimeSpan godz_spr_wtr { get; set; }
-        public int wynik_spr_wtr { get; set; }
-        public int wyglad_zew { get; set; }
-        public int wyglad_grzejnika { get; set; }
         public string opw { get; set; }
         public System.DateTime czasw { get; set; }
         public string opm { get; set; }
         public System.DateTime czasm { get; set; }
-        public int przeglad_codz_masz { get; set; }
     }
 }

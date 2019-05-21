@@ -28,11 +28,15 @@
         <EntityTypeShape EntityType="ecoplastolModel.wyroby_zakres_sdr" Width="1.5" PointX="8.625" PointY="1.5" IsExpanded="false" />
         <EntityTypeShape EntityType="ecoplastolModel.wyroby_typ" Width="1.5" PointX="8.625" PointY="2" IsExpanded="false" />
         <EntityTypeShape EntityType="ecoplastolModel.wyroby_zast_zaworu" Width="1.5" PointX="8.625" PointY="2.5" IsExpanded="false" />
-        <EntityTypeShape EntityType="ecoplastolModel.zlecenia_produkcyjne" Width="1.5" PointX="10.25" PointY="0.5" IsExpanded="false" />
         <EntityTypeShape EntityType="ecoplastolModel.wyroby" Width="1.5" PointX="8.625" PointY="0.5" IsExpanded="false" />
         <EntityTypeShape EntityType="ecoplastolModel.zmiany" Width="1.5" PointX="10.25" PointY="1" IsExpanded="false" />
+        <EntityTypeShape EntityType="ecoplastolModel.operatorzy_maszyn" Width="1.5" PointX="10.25" PointY="3.5" IsExpanded="false" />
+        <EntityTypeShape EntityType="ecoplastolModel.wady_nn" Width="1.5" PointX="8.625" PointY="3" IsExpanded="false" />
+        <EntityTypeShape EntityType="ecoplastolModel.meldunki_wynik" Width="1.5" PointX="10.25" PointY="2.5" IsExpanded="false" />
+        <EntityTypeShape EntityType="ecoplastolModel.meldunki_wynik_prz_maszyny" Width="1.5" PointX="10.25" PointY="3" IsExpanded="false" />
         <EntityTypeShape EntityType="ecoplastolModel.meldunki" Width="1.5" PointX="10.25" PointY="1.5" IsExpanded="false" />
-        <EntityTypeShape EntityType="ecoplastolModel.operatorzy_maszyn" Width="1.5" PointX="10.25" PointY="2" IsExpanded="false" />
+        <EntityTypeShape EntityType="ecoplastolModel.zlecenia_produkcyjne" Width="1.5" PointX="10.25" PointY="0.5" IsExpanded="false" />
+        <EntityTypeShape EntityType="ecoplastolModel.meldunki_wady_nn" Width="1.5" PointX="10.25" PointY="2" IsExpanded="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

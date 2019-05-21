@@ -979,7 +979,7 @@
         <DockPanel Grid.Row="5" HorizontalAlignment="Right" Width="100">
             <Button x:Name="btnZamknij" Content="ZAMKNIJ" FontSize="14" Width="100" Click="BtnZamknij_Click"/>
         </DockPanel>
-        <Button Content="command test" Command="ApplicationCommands.Help" HorizontalAlignment="Left" Margin="899,25,0,0" Grid.Row="4" VerticalAlignment="Top" Width="75"/>
+        <Button Content="command test" Command="ApplicationCommands.Help" HorizontalAlignment="Left" Margin="899,25,0,0" Grid.Row="4" VerticalAlignment="Top" Width="75" Click="Button_Click"/>
 
     </Grid>
 </Window>

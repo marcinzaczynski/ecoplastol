@@ -1543,5 +1543,10 @@ namespace ecoplastol
             Regex _regex = new Regex("[^0-9]+");
             e.Handled = _regex.IsMatch(str);
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

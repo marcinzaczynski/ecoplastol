@@ -55,10 +55,11 @@
                 </StackPanel>
             </Button>
         </Grid>
-        <Grid Grid.Row="1" Name="grdMaszyny">
+        <ScrollViewer Grid.Row="1">
+            <Grid  Name="grdMaszyny">
             
-        </Grid>
-        
+            </Grid>
+        </ScrollViewer>
         <Button Grid.Row="2" Name="btnZamknij" Content="Z A M K N I J" FontSize="20" Click="BtnZamknij_Click"/>
         
     </Grid>

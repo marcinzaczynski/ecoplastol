@@ -87,6 +87,21 @@
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
+    <Reference Include="Xceed.Wpf.AvalonDock, Version=3.5.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.3.5.0\lib\net40\Xceed.Wpf.AvalonDock.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.AvalonDock.Themes.Aero, Version=3.5.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.3.5.0\lib\net40\Xceed.Wpf.AvalonDock.Themes.Aero.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.AvalonDock.Themes.Metro, Version=3.5.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.3.5.0\lib\net40\Xceed.Wpf.AvalonDock.Themes.Metro.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.AvalonDock.Themes.VS2010, Version=3.5.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.3.5.0\lib\net40\Xceed.Wpf.AvalonDock.Themes.VS2010.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.Toolkit, Version=3.5.0.0, Culture=neutral, PublicKeyToken=3e4669d2f30244f4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.3.5.0\lib\net40\Xceed.Wpf.Toolkit.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
@@ -102,11 +117,23 @@
     <Compile Include="meldunki.cs">
       <DependentUpon>PGEntity.tt</DependentUpon>
     </Compile>
+    <Compile Include="meldunki_wady_nn.cs">
+      <DependentUpon>PGEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="meldunki_wynik.cs">
+      <DependentUpon>PGEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="meldunki_wynik_prz_maszyny.cs">
+      <DependentUpon>PGEntity.tt</DependentUpon>
+    </Compile>
     <Compile Include="operatorzy_maszyn.cs">
       <DependentUpon>PGEntity.tt</DependentUpon>
     </Compile>
     <Compile Include="planowanie\frmMeldunki.xaml.cs">
       <DependentUpon>frmMeldunki.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="planowanie\frmMeldunkiWadyNN.xaml.cs">
+      <DependentUpon>frmMeldunkiWadyNN.xaml</DependentUpon>
     </Compile>
     <Compile Include="planowanie\frmMeldunki_db.cs" />
     <Compile Include="planowanie\frmPlanowanie2.xaml.cs">
@@ -224,6 +251,9 @@
     <Compile Include="uzytkownicy.cs">
       <DependentUpon>PGEntity.tt</DependentUpon>
     </Compile>
+    <Compile Include="wady_nn.cs">
+      <DependentUpon>PGEntity.tt</DependentUpon>
+    </Compile>
     <Compile Include="wyroby.cs">
       <DependentUpon>PGEntity.tt</DependentUpon>
     </Compile>
@@ -279,6 +309,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="planowanie\frmMeldunki.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="planowanie\frmMeldunkiWadyNN.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

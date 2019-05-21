@@ -87,6 +87,17 @@ namespace ecoplastol.konfiguracja.produkcja
             }
         }
 
+        public static string PobierzNazweZmiany(int nrZmiany)
+        {
+            using (var db = new ecoplastolEntities())
+            {
+                var nazwa = (from w in db.zmiany
+                             where w.id == nrZmiany
+                             select w.nazwa).FirstOrDefault().ToString();
+                return nazwa;
+            }
+        }
+
         /// <summary>
         /// WYROBY
         /// </summary>
@@ -210,7 +221,7 @@ namespace ecoplastol.konfiguracja.produkcja
             using (var db = new ecoplastolEntities())
             {
                 var list = (from w in db.operatorzy_maszyn
-                            orderby w.id ascending
+                            orderby w.imie ascending
                             select w).ToList();
                 return list;
             }
@@ -254,5 +265,30 @@ namespace ecoplastol.konfiguracja.produkcja
             }
         }
 
+        public static string PobierzImieNazwiskoOperatora(int nrOperatora)
+        {
+            using (var db = new ecoplastolEntities())
+            {
+                var nazwa = (from w in db.operatorzy_maszyn
+                             where w.id == nrOperatora
+                             select w.imie + " " + w.nazwisko).FirstOrDefault().ToString();
+                return nazwa;
+            }
+        }
+
+        /// <summary>
+        /// WADY NN
+        /// </summary>
+
+        public static List<wady_nn> PobierzWadyNN()
+        {
+            using (var db = new ecoplastolEntities())
+            {
+                var list = (from w in db.wady_nn
+                            orderby w.id ascending
+                            select w).ToList();
+                return list;
+            }
+        }
     }
 }

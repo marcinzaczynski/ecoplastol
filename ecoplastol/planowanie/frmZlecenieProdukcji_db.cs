@@ -48,5 +48,16 @@ namespace ecoplastol
                 db.SaveChanges();
             }
         }
+
+        public static string PobierzKodZlecenia(int nrZlecenia)
+        {
+            using (var db = new ecoplastolEntities())
+            {
+                var nazwa = (from w in db.zlecenia_produkcyjne
+                             where w.id == nrZlecenia
+                             select w.wyrob_kod).FirstOrDefault().ToString();
+                return nazwa;
+            }
+        }
     }
 }

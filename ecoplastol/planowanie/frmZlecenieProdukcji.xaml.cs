@@ -37,17 +37,19 @@ namespace ecoplastol
         private wyroby Wyrob;
         private zlecenia_produkcyjne poprawianeZP;
         private string _akcja;
+        private DateTime dataZlecenia;
 
         //private zlecenia_produkcyjne zlecenieProdukcyjne;
 
         private int numerMaszyny;
 
-        public frmZlecenieProdukcji(int nrMaszyny, string nazwaMaszyny)
+        public frmZlecenieProdukcji(int nrMaszyny, string nazwaMaszyny, DateTime data)
         {
             _akcja = "D";
             InitializeComponent();
             numerMaszyny = nrMaszyny;
             lblNazwaMaszyny.Content = nazwaMaszyny;
+            dataZlecenia = data;
 
             UstawKontrolki();
 
@@ -134,8 +136,8 @@ namespace ecoplastol
                     zlecenieProdukcyjne.zlecenie_ilosc = 0;
                     zlecenieProdukcyjne.zlecenie_ilosc_wypr_ok = 0;
                     zlecenieProdukcyjne.zlecenie_ilosc_wypr_nn = 0;
-                    zlecenieProdukcyjne.zlecenie_data_rozp = DateTime.Now;
-                    zlecenieProdukcyjne.zlecenie_data_zak = DateTime.Now;
+                    zlecenieProdukcyjne.zlecenie_data_rozp = dataZlecenia;
+                    zlecenieProdukcyjne.zlecenie_data_zak = dataZlecenia;
                     zlecenieProdukcyjne.zlecenie_nr_partii_surowca = "0";
                     zlecenieProdukcyjne.zlecenie_nr_partii_drutu = "0";
                     break;
@@ -230,9 +232,10 @@ namespace ecoplastol
                         frmZlecenieProdukcji_db.DodajZlecenie(zp);
                         DialogResult = true;
                     }
-                    catch
+                    catch (Exception ex)
                     {
-                        MessageBox.Show("Wypełnij formularz.");
+                        //MessageBox.Show("Wypełnij formularz.");
+                        MessageBox.Show(ex.ToString());
                     }
                     break;
                 case "P":

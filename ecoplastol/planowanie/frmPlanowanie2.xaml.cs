@@ -98,8 +98,9 @@ namespace ecoplastol
                 var listaZleceniaProdukcyjne = new List<zlecenia_produkcyjne>();
                 listaZleceniaProdukcyjne = frmPlanowanie2_db.PobierzZleceniaDlaMaszyny(Convert.ToInt32(mp.Tag), dpZleceniaNaDzien.SelectedDate);
                 // panelZlecen - miejsce w PanelMaszyna do którego lądują MaszynaZlecenie
-                var panelZlecen = mp.spMaszynaZlecenia;
+                var panelZlecen = mp.grdMaszynaZlecenia;
                 // najpierw trzeba wyczyścić MaszynaPanel ...
+                panelZlecen.RowDefinitions.Clear();
                 panelZlecen.Children.Clear();
                 // teraz przelatuję przez zlecenia dla danej maszyny
                 foreach (var zp in listaZleceniaProdukcyjne)
@@ -116,6 +117,11 @@ namespace ecoplastol
 
                     mz.btnMeldunki.Tag = mp.Tag;
                     // ... i dodać je do MaszynaPanel w odpowiednim miejscu - panelZlecen
+                    RowDefinition rowek = new RowDefinition();
+                    rowek.Height = new GridLength(110);
+                    panelZlecen.RowDefinitions.Add(rowek);
+                    Grid.SetRow(mz, panelZlecen.RowDefinitions.Count -1);
+                    Grid.SetColumn(mz, 0);
                     panelZlecen.Children.Add(mz);
                 }
                 if (listaZleceniaProdukcyjne.Count == 0)
@@ -137,6 +143,7 @@ namespace ecoplastol
         private void DpZleceniaNaDzien_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
         {
             UzupelnijPaneleZleceniami();
+            dataZlecenia = dpZleceniaNaDzien.SelectedDate.Value;
         }
 
         private void BtnDataWstecz_Click(object sender, RoutedEventArgs e)
