@@ -34,9 +34,9 @@
         <EntityTypeShape EntityType="ecoplastolModel.wady_nn" Width="1.5" PointX="8.625" PointY="3" IsExpanded="false" />
         <EntityTypeShape EntityType="ecoplastolModel.meldunki_wynik" Width="1.5" PointX="10.25" PointY="2.5" IsExpanded="false" />
         <EntityTypeShape EntityType="ecoplastolModel.meldunki_wynik_prz_maszyny" Width="1.5" PointX="10.25" PointY="3" IsExpanded="false" />
-        <EntityTypeShape EntityType="ecoplastolModel.meldunki" Width="1.5" PointX="10.25" PointY="1.5" IsExpanded="false" />
         <EntityTypeShape EntityType="ecoplastolModel.zlecenia_produkcyjne" Width="1.5" PointX="10.25" PointY="0.5" IsExpanded="false" />
         <EntityTypeShape EntityType="ecoplastolModel.meldunki_wady_nn" Width="1.5" PointX="10.25" PointY="2" IsExpanded="false" />
+        <EntityTypeShape EntityType="ecoplastolModel.meldunki" Width="1.5" PointX="10.25" PointY="1.5" IsExpanded="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

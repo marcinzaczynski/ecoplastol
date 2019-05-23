@@ -155,18 +155,18 @@
                             <ts:ComboBoxItemTemplateSelector.SelectedTemplate>
                                 <DataTemplate>
                                     <StackPanel Orientation="Horizontal">
-                                        <TextBlock Text="{Binding imie}" />
-                                        <TextBlock Text=" "/>
                                         <TextBlock Text="{Binding nazwisko}" />
+                                        <TextBlock Text=" "/>
+                                        <TextBlock Text="{Binding imie}" />
                                     </StackPanel>
                                 </DataTemplate>
                             </ts:ComboBoxItemTemplateSelector.SelectedTemplate>
                             <ts:ComboBoxItemTemplateSelector.DropDownTemplate>
                                 <DataTemplate>
                                     <StackPanel Orientation="Horizontal">
-                                        <TextBlock Text="{Binding imie}" />
-                                        <TextBlock Text=" "/>
                                         <TextBlock Text="{Binding nazwisko}" />
+                                        <TextBlock Text=" "/>
+                                        <TextBlock Text="{Binding imie}" />
                                     </StackPanel>
                                 </DataTemplate>
                             </ts:ComboBoxItemTemplateSelector.DropDownTemplate>
@@ -178,7 +178,6 @@
                 <Border Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="2" Background="LightBlue"/>
                 <Label Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="3" Padding="10,0,0,0" VerticalContentAlignment="Center" Content="PRZEGLĄD CODZIENNY MASZYNY"/>
 
-                <Label Grid.Row="8" Grid.Column="0" FontSize="18" Padding="10,0,0,0" VerticalContentAlignment="Center" Content="Operator :"/>
                 <ComboBox Grid.Row="8" Grid.Column="1" FontSize="18" Padding="10,0,0,0" VerticalContentAlignment="Center" Name="cbbMeldunekPrzCodzMasz" SelectedValuePath="id" SelectedValue="{Binding przeglad_codz_masz}"/>
                 <Border Grid.Row="8" Grid.Column="2" BorderThickness="2" BorderBrush="Red" Visibility="Visible" Name="brdMeldunekPrzCodzMasz"/>
             </Grid>
@@ -244,7 +243,7 @@
                     <ColumnDefinition Width="4"/>
                 </Grid.ColumnDefinitions>
                 <Border Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" Background="LightBlue"/>
-                <Label Grid.Row="0" Grid.Column="0" Padding="10,0,0,0" VerticalContentAlignment="Center" Content="WSTĘPNE ZWOLNIENIE PARTII PO ZMIANIE ROBOCZEJ"/>
+                <Label Grid.Row="0" Grid.Column="0" Padding="10,0,0,0" VerticalContentAlignment="Center" Content="WSTĘPNE ZWOLNIENIE PARTII NA ZMIANIE ROBOCZEJ"/>
                 
                 <Label Grid.Row="2" Grid.Column="0" FontSize="18" Padding="10,0,0,0" VerticalContentAlignment="Center" Content="Wygląd zewnętrzny :"/>
                 <ComboBox Grid.Row="2" Grid.Column="1" FontSize="18" Padding="10,0,0,0" VerticalContentAlignment="Center" Name="cbbMeldunekWygladZewnetrzny" SelectedValuePath="id" SelectedValue="{Binding wyglad_zew}"/>
@@ -257,7 +256,7 @@
                 <Border Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="3" Background="LightBlue"/>
                 <Label Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="3" Padding="10,0,0,0" VerticalContentAlignment="Center" Content="UWAGI"/>
 
-                <TextBlock Grid.Row="7" Grid.Column="1" Grid.ColumnSpan="2" Text="{Binding uwagi}"/>
+                <TextBox Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="2" Text="{Binding uwagi}" TextWrapping="Wrap" AcceptsReturn="True"/>
             </Grid>
             
         </Grid>

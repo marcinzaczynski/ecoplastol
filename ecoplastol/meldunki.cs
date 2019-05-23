@@ -31,5 +31,6 @@ namespace ecoplastol
         public string opm { get; set; }
         public System.DateTime czasm { get; set; }
         public int przeglad_codz_masz { get; set; }
+        public string uwagi { get; set; }
     }
 }

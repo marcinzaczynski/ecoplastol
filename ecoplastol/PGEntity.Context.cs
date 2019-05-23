@@ -54,8 +54,8 @@ namespace ecoplastol
         public virtual DbSet<wady_nn> wady_nn { get; set; }
         public virtual DbSet<meldunki_wynik> meldunki_wynik { get; set; }
         public virtual DbSet<meldunki_wynik_prz_maszyny> meldunki_wynik_prz_maszyny { get; set; }
-        public virtual DbSet<meldunki> meldunki { get; set; }
         public virtual DbSet<zlecenia_produkcyjne> zlecenia_produkcyjne { get; set; }
         public virtual DbSet<meldunki_wady_nn> meldunki_wady_nn { get; set; }
+        public virtual DbSet<meldunki> meldunki { get; set; }
     }
 }

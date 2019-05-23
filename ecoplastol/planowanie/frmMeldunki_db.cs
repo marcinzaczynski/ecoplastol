@@ -26,6 +26,7 @@ namespace ecoplastol.planowanie
         public string opm { get; set; }
         public DateTime czasm { get; set; }
         public int przeglad_codz_masz { get; set; }
+        public string uwagi { get; set; }
 
         //dodatkowe pola na potrzeby wyświetlania listy - opisy wartości int z tabeli meldunki
         public string nazwa_operatora { get; set; }
@@ -84,7 +85,7 @@ namespace ecoplastol.planowanie
             using (var db = new ecoplastolEntities())
             {
                 var list = (from w in db.meldunki
-                            //where
+                                //where
                             orderby w.id ascending
                             select w).ToList();
                 return list;
@@ -128,14 +129,16 @@ namespace ecoplastol.planowanie
                             from zlecenia in db.zlecenia_produkcyjne
                             where
                                     m.id_zlecenie == nrZlecenia &&
+                                    //(nrZlecenia > 0) ? m.id_zlecenie == nrZlecenia : m.id_zlecenie.ToString().Contains("*") &&
                                     mw1.id == m.wynik_spr_wtr &&
                                     mw2.id == m.wyglad_zew &&
                                     mw3.id == m.wyglad_grzejnika &&
                                     o.id == m.id_operator &&
                                     m.id_zlecenie == zlecenia.id &&
                                     zlecenia.zlecenie_nr_maszyny == maszyny.id
-                            orderby m.id ascending
-                            select new MeldunekView {
+                            orderby m.data_meldunku descending, m.zmiana ascending
+                            select new MeldunekView
+                            {
                                 // pola z tabeli meldunki
                                 id = m.id,
                                 id_zlecenie = m.id_zlecenie,
@@ -160,7 +163,7 @@ namespace ecoplastol.planowanie
                                 opm = m.opm,
                                 czasm = m.czasm,
                                 przeglad_codz_masz = m.przeglad_codz_masz,
-                                
+                                uwagi = m.uwagi,
                                 //dodatkowe pola na potrzeby wyświetlania listy - opisy wartości int z tabeli meldunki
                                 nazwa_operatora = o.imie + " " + o.nazwisko,
                                 opis_wynik_spr_wtr = mw1.wynik,
@@ -171,6 +174,12 @@ namespace ecoplastol.planowanie
                                 nazwa_maszyny = maszyny.numer,
                                 kod_zlecenia = zlecenia.wyrob_kod
                             }).ToList();
+
+                //if(nrZlecenia > 0)
+                //{
+                //    list.Where(r=>r.id_zlecenie == nrZlecenia)
+                //}
+
                 return list;
             }
         }
@@ -209,6 +218,21 @@ namespace ecoplastol.planowanie
             using (var db = new ecoplastolEntities())
             {
                 db.Entry(poz).State = System.Data.Entity.EntityState.Modified;
+                db.SaveChanges();
+            }
+        }
+
+        public static void UsunMeldunek(MeldunekView poz)
+        {
+            using (var db = new ecoplastolEntities())
+            {
+                var list = (from w in db.meldunki
+                            where w.id == poz.id
+                            select w).ToList();
+                foreach (var detail in list)
+                {
+                    db.meldunki.Remove(detail);
+                }
                 db.SaveChanges();
             }
         }
@@ -301,6 +325,38 @@ namespace ecoplastol.planowanie
             }
         }
 
+        public static void UsunPrzyczynyBrakow(int idMeldunku)
+        {
+            // przy dodawaniu przyczyn braków, zawdze jako id_meldunku podaje 0
+            // przy zatwierdzaniu poprwiam na prawidłowy numer meldunku a przy anulowaniu usuwam te z 0
+            using (var db = new ecoplastolEntities())
+            {
+                var list = (from w in db.meldunki_wady_nn
+                            where w.id_meldunek == idMeldunku
+                            select w).ToList();
+                foreach (var detail in list)
+                {
+                    db.meldunki_wady_nn.Remove(detail);
+                }
+                db.SaveChanges();
+            }
+        }
+
+        public static void UsunPrzyczyneBrakow(PrzyczynyBrakowView poz)
+        {
+            using (var db = new ecoplastolEntities())
+            {
+                var list = (from w in db.meldunki_wady_nn
+                            where w.id == poz.id
+                            select w).ToList();
+                foreach (var detail in list)
+                {
+                    db.meldunki_wady_nn.Remove(detail);
+                }
+                db.SaveChanges();
+            }
+        }
+
         public static void PoprawIDPrzyczynyBrakow(int idMeldunku)
         {
             // przy dodawaniu przyczyn braków, zawdze jako id_meldunku podaje 0
@@ -310,7 +366,7 @@ namespace ecoplastol.planowanie
                 (from w in db.meldunki_wady_nn
                  where w.id_meldunek == 0
                  select w).ToList().ForEach(x => x.id_meldunek = idMeldunku);
-                
+
                 db.SaveChanges();
             }
         }

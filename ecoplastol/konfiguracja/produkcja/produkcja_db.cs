@@ -221,7 +221,7 @@ namespace ecoplastol.konfiguracja.produkcja
             using (var db = new ecoplastolEntities())
             {
                 var list = (from w in db.operatorzy_maszyn
-                            orderby w.imie ascending
+                            orderby w.nazwisko ascending
                             select w).ToList();
                 return list;
             }

@@ -138,7 +138,28 @@ namespace ecoplastol.planowanie
 
         private void BtnUsun_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Usuwamy");
+            var Res = MessageBox.Show("Usunąć ?", "Usuwanie pozycji", MessageBoxButton.YesNo, MessageBoxImage.Exclamation);
+            if (Res == MessageBoxResult.Yes)
+            {
+                var poz = this.grdDane.DataContext as PrzyczynyBrakowView;
+                frmMeldunki_db.UsunPrzyczyneBrakow(poz);
+            }
+
+            listaPrzyczynBrakow = frmMeldunki_db.PobierzPrzyczynyBrakow(idMeldunku);
+            dgrdLista.ItemsSource = listaPrzyczynBrakow;
+
+            if (listaPrzyczynBrakow.Count == 0)
+            {
+                UstawPrzyciski(0);
+            }
+            else
+            {
+                dgrdLista.Focus();
+                dgrdLista.SelectedIndex = 0;
+
+                UstawPrzyciski(1);
+            }
+
         }
 
         private void BtnAnuluj_Click(object sender, RoutedEventArgs e)
