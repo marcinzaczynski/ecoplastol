@@ -21,7 +21,6 @@ namespace ecoplastol
         public System.DateTime data_meldunku { get; set; }
         public int ilosc { get; set; }
         public int ilosc_techn { get; set; }
-        public int id_wady_nn { get; set; }
         public System.TimeSpan godz_spr_wtr { get; set; }
         public int wynik_spr_wtr { get; set; }
         public int wyglad_zew { get; set; }

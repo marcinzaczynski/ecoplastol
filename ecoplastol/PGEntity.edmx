@@ -118,7 +118,6 @@
           <Property Name="data_meldunku" Type="date" Nullable="false" />
           <Property Name="ilosc" Type="int4" Nullable="false" />
           <Property Name="ilosc_techn" Type="int4" Nullable="false" />
-          <Property Name="id_wady_nn" Type="int4" Nullable="false" />
           <Property Name="godz_spr_wtr" Type="time" Precision="6" Nullable="false" />
           <Property Name="wynik_spr_wtr" Type="int4" Nullable="false" />
           <Property Name="wyglad_zew" Type="int4" Nullable="false" />
@@ -991,7 +990,7 @@
           <Property Name="zlecenie_ilosc" Type="Int32" Nullable="false" />
           <Property Name="zlecenie_ilosc_wypr_ok" Type="Int32" Nullable="false" />
           <Property Name="zlecenie_ilosc_wypr_nn" Type="Int32" Nullable="false" />
-          <Property Name="zlecenie_data_rozp" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="zlecenie_data_rozp" Type="DateTime" Precision="0" Nullable="false" />
           <Property Name="zlecenie_data_zak" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="zlecenie_nr_partii_surowca" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="zlecenie_nr_partii_drutu" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
@@ -1051,7 +1050,6 @@
           <Property Name="data_meldunku" Type="DateTime" Nullable="false" Precision="0" />
           <Property Name="ilosc" Type="Int32" Nullable="false" />
           <Property Name="ilosc_techn" Type="Int32" Nullable="false" />
-          <Property Name="id_wady_nn" Type="Int32" Nullable="false" />
           <Property Name="godz_spr_wtr" Type="Time" Nullable="false" Precision="6" />
           <Property Name="wynik_spr_wtr" Type="Int32" Nullable="false" />
           <Property Name="wyglad_zew" Type="Int32" Nullable="false" />
@@ -1583,7 +1581,6 @@
                 <ScalarProperty Name="wyglad_zew" ColumnName="wyglad_zew" />
                 <ScalarProperty Name="wynik_spr_wtr" ColumnName="wynik_spr_wtr" />
                 <ScalarProperty Name="godz_spr_wtr" ColumnName="godz_spr_wtr" />
-                <ScalarProperty Name="id_wady_nn" ColumnName="id_wady_nn" />
                 <ScalarProperty Name="ilosc_techn" ColumnName="ilosc_techn" />
                 <ScalarProperty Name="ilosc" ColumnName="ilosc" />
                 <ScalarProperty Name="data_meldunku" ColumnName="data_meldunku" />

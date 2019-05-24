@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="dbaf2b62894d479582209c328e875733" Name="Diagram1">
+      <Diagram DiagramId="dbaf2b62894d479582209c328e875733" Name="Diagram1" ZoomLevel="82">
         <EntityTypeShape EntityType="ecoplastolModel.uzytkownicy" Width="1.5" PointX="2.125" PointY="0.5" IsExpanded="false" />
         <EntityTypeShape EntityType="ecoplastolModel.parametry" Width="1.5" PointX="0.5" PointY="0.5" IsExpanded="false" />
         <EntityTypeShape EntityType="ecoplastolModel.wyroby_druty" Width="1.5" PointX="8.625" PointY="1" IsExpanded="false" />

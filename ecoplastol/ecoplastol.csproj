@@ -111,6 +111,7 @@
     <Compile Include="frmKonfiguracja2.xaml.cs">
       <DependentUpon>frmKonfiguracja2.xaml</DependentUpon>
     </Compile>
+    <Compile Include="globals\converters.cs" />
     <Compile Include="konfiguracja\produkcja\PanelProdOperatorzy.xaml.cs">
       <DependentUpon>PanelProdOperatorzy.xaml</DependentUpon>
     </Compile>

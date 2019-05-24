@@ -4,10 +4,14 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ecoplastol.planowanie"
+        xmlns:globals="clr-namespace:ecoplastol.globals"
         xmlns:ts="clr-namespace:ecoplastol"
         mc:Ignorable="d"
-        Title="frmMeldunki" Height="450" Width="1100" WindowStartupLocation="CenterScreen" WindowState="Maximized"
-        Closing="Window_Closing">
+        Title="frmMeldunki" Height="450" Width="1400" WindowStartupLocation="CenterScreen" WindowState="Maximized"
+        Closing="Window_Closing" Loaded="Window_Loaded">
+    <Window.Resources>
+        <globals:BackgroundColor x:Key="valueToBackground"/>
+    </Window.Resources>
     <Window.CommandBindings>
         <CommandBinding Command="ApplicationCommands.Help" CanExecute="CzyMoznaZatwierdzic" Executed="Zatwierdz"/>
     </Window.CommandBindings>
@@ -29,6 +33,7 @@
                 <ColumnDefinition Width="200"/>
                 <ColumnDefinition Width="300"/>
                 <ColumnDefinition Width="200"/>
+                <ColumnDefinition Width="200"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             <Label Grid.Column="0" FontSize="20" Padding="5" Content="Od"/>
@@ -36,6 +41,7 @@
             <Label Grid.Column="2" FontSize="20" Padding="5" Content="Maszyna"/>
             <Label Grid.Column="3" FontSize="20" Padding="5" Content="Zlecenie"/>
             <Label Grid.Column="4" FontSize="20" Padding="5" Content="Zmiana"/>
+            <Label Grid.Column="5" FontSize="20" Padding="5" Content="Operator"/>
         </Grid>
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
@@ -43,6 +49,7 @@
                 <ColumnDefinition Width="200"/>
                 <ColumnDefinition Width="200"/>
                 <ColumnDefinition Width="300"/>
+                <ColumnDefinition Width="200"/>
                 <ColumnDefinition Width="200"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
@@ -84,18 +91,48 @@
                     </ts:ComboBoxItemTemplateSelector>
                 </ComboBox.ItemTemplateSelector>
             </ComboBox>
-            <ComboBox Grid.Column="4" FontSize="24" VerticalContentAlignment="Center" x:Name="cbbZmiana" SelectionChanged="CbbZmiana_SelectionChanged"/> 
+            <ComboBox Grid.Column="4" FontSize="24" VerticalContentAlignment="Center" x:Name="cbbZmiana" SelectionChanged="CbbZmiana_SelectionChanged"/>
+            <ComboBox Grid.Column="5" FontSize="24" VerticalContentAlignment="Center" x:Name="cbbOperator" SelectionChanged="CbbOperator_SelectionChanged">
+                <ComboBox.ItemTemplateSelector>
+                    <ts:ComboBoxItemTemplateSelector>
+                        <ts:ComboBoxItemTemplateSelector.SelectedTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="{Binding nazwisko}" FontSize="20"/>
+                                    <TextBlock Text=" " FontSize="20"/>
+                                    <TextBlock Text="{Binding imie}" FontSize="20"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ts:ComboBoxItemTemplateSelector.SelectedTemplate>
+                        <ts:ComboBoxItemTemplateSelector.DropDownTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="{Binding nazwisko}" FontSize="20"/>
+                                    <TextBlock Text=" " FontSize="20"/>
+                                    <TextBlock Text="{Binding imie}" FontSize="20"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ts:ComboBoxItemTemplateSelector.DropDownTemplate>
+                    </ts:ComboBoxItemTemplateSelector>
+                </ComboBox.ItemTemplateSelector>
+            </ComboBox>
         </Grid>
         <DataGrid Grid.Row="2" Name="dgrdMeldunki" ItemsSource="{Binding}" AutoGenerateColumns="False" SelectionChanged="DgrdMeldunki_SelectionChanged" CanUserDeleteRows="False" CanUserAddRows="False" IsReadOnly="True">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="ID" Binding="{Binding id}"/>
+                <DataGridTextColumn Header="ID" Binding="{Binding id}">
+                    <DataGridTextColumn.ElementStyle>
+                        <Style TargetType="{x:Type TextBlock}">
+                            <Setter Property="Background" Value="{Binding ilosc, Converter={StaticResource valueToBackground}}"/>
+                        </Style>
+                    </DataGridTextColumn.ElementStyle>
+                </DataGridTextColumn>
                 <DataGridTextColumn Header="Data meldunku" Binding="{Binding data_meldunku, StringFormat=\{0:yyyy-MM-dd\}}"/>
                 <DataGridTextColumn Header="Maszyna" Binding="{Binding nazwa_maszyny}"/>
                 <DataGridTextColumn Header="Zlecenie" Binding="{Binding kod_zlecenia}"/>
                 <DataGridTextColumn Header="Zmiana" Binding="{Binding zmiana}"/>
                 <DataGridTextColumn Header="Operator" IsReadOnly="True" Binding="{Binding nazwa_operatora}"/>
                 <DataGridTextColumn Header="Ilość poz." Binding="{Binding ilosc}"/>
-                <DataGridTextColumn Header="Ilość neg." Binding="{Binding ilosc_neg}"/>
+                <DataGridTextColumn Header="Ilość neg." Binding="{Binding ilosc_wad_nn}"/>
                 <DataGridTextColumn Header="Ilość techn." Binding="{Binding ilosc_techn}"/>
                 <DataGridTextColumn Header="Spr. wtryskarki" IsReadOnly="True" Binding="{Binding opis_wynik_spr_wtr}"/>
                 <DataGridTextColumn Header="Wygląd zewnętrzny" IsReadOnly="True" Binding="{Binding opis_wyglad_zew}"/>
@@ -209,7 +246,7 @@
                 <Border Grid.Row="2" Grid.Column="3" BorderThickness="2" BorderBrush="Red" Visibility="Visible" Name="brdMeldunekIloscPoz"/>
                 
                 <Label Grid.Row="3" Grid.Column="0" FontSize="18" Padding="10,0,0,0" VerticalContentAlignment="Center" Content="Ilość (ocena negatywna) :"/>
-                <TextBox Grid.Row="3" Grid.Column="1" FontSize="18" Padding="10,0,0,0" VerticalContentAlignment="Center" IsReadOnly="True" Name="txtMeldunekIloscNeg"/>
+                <TextBox Grid.Row="3" Grid.Column="1" FontSize="18" Padding="10,0,0,0" VerticalContentAlignment="Center" IsReadOnly="True" Text="{Binding ilosc_wad_nn}" Name="txtMeldunekIloscNeg"/>
                 <Button Grid.Row="3" Grid.Column="2" FontSize="18" Padding="0" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Content="EDYTUJ" Name="btnWadyNN" Click="BtnWadyNN_Click"/>
                 
                 <Label Grid.Row="4" Grid.Column="0" FontSize="18" Padding="10,0,0,0" VerticalContentAlignment="Center" Content="Wady technologiczne :"/>

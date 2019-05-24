@@ -16,7 +16,6 @@ namespace ecoplastol.planowanie
         public DateTime data_meldunku { get; set; }
         public int ilosc { get; set; }
         public int ilosc_techn { get; set; }
-        public int id_wady_nn { get; set; }
         public TimeSpan godz_spr_wtr { get; set; }
         public int wynik_spr_wtr { get; set; }
         public int wyglad_zew { get; set; }
@@ -27,7 +26,10 @@ namespace ecoplastol.planowanie
         public DateTime czasm { get; set; }
         public int przeglad_codz_masz { get; set; }
         public string uwagi { get; set; }
-
+        
+        // ilość wad nn
+        public int ilosc_wad_nn { get; set; }
+        
         //dodatkowe pola na potrzeby wyświetlania listy - opisy wartości int z tabeli meldunki
         public string nazwa_operatora { get; set; }
         public string opis_wynik_spr_wtr { get; set; }
@@ -116,7 +118,7 @@ namespace ecoplastol.planowanie
             }
         }
 
-        public static List<MeldunekView> PobierzMeldunki2(int nrZlecenia)
+        public static List<MeldunekView> PobierzMeldunki2(DateTime dataOd, DateTime dataDo, int idMaszyny, int idZlecenia, int idZmiany, int idOperatora)
         {
             using (var db = new ecoplastolEntities())
             {
@@ -128,8 +130,10 @@ namespace ecoplastol.planowanie
                             from maszyny in db.maszyny
                             from zlecenia in db.zlecenia_produkcyjne
                             where
-                                    m.id_zlecenie == nrZlecenia &&
+                                    //m.id_zlecenie == nrZlecenia &&
                                     //(nrZlecenia > 0) ? m.id_zlecenie == nrZlecenia : m.id_zlecenie.ToString().Contains("*") &&
+                                    m.data_meldunku >= dataOd &&
+                                    m.data_meldunku <= dataDo &&
                                     mw1.id == m.wynik_spr_wtr &&
                                     mw2.id == m.wyglad_zew &&
                                     mw3.id == m.wyglad_grzejnika &&
@@ -147,13 +151,17 @@ namespace ecoplastol.planowanie
                                 data_meldunku = m.data_meldunku,
                                 ilosc = m.ilosc,
                                 ilosc_techn = m.ilosc_techn,
-                                id_wady_nn = m.id_wady_nn,
+                                //id_wady_nn = from s in (from wnn in db.meldunki_wady_nn where wnn.id_meldunek == m.id select wnn.ilosc).ToList()
+                                //             where s.
+                                //               ?
+                                //               ((from wnn in db.meldunki_wady_nn
+                                //                 where (wnn.id_meldunek == m.id)
+                                //                 select wnn.ilosc).ToList()).Sum()
+                                //               :
+                                //               0,
 
-                                //id_wady_nn = ((from wnn in db.meldunki_wady_nn
-                                //              where (wnn.id_meldunek == m.id)
-                                //              select wnn.ilosc).ToList()).Sum(),
+                                
 
-                                //id_wady_nn = SumaWad(1),
                                 godz_spr_wtr = m.godz_spr_wtr,
                                 wynik_spr_wtr = m.wynik_spr_wtr,
                                 wyglad_zew = m.wyglad_zew,
@@ -164,6 +172,17 @@ namespace ecoplastol.planowanie
                                 czasm = m.czasm,
                                 przeglad_codz_masz = m.przeglad_codz_masz,
                                 uwagi = m.uwagi,
+                                // ilosc wad nn
+                                ilosc_wad_nn = (
+                                             ((from wnn in db.meldunki_wady_nn
+                                               where (wnn.id_meldunek == m.id)
+                                               select wnn.ilosc).ToList()).Count > 0)
+                                               ?
+                                               ((from wnn in db.meldunki_wady_nn
+                                                 where (wnn.id_meldunek == m.id)
+                                                 select wnn.ilosc).ToList()).Sum()
+                                               :
+                                               0,
                                 //dodatkowe pola na potrzeby wyświetlania listy - opisy wartości int z tabeli meldunki
                                 nazwa_operatora = o.imie + " " + o.nazwisko,
                                 opis_wynik_spr_wtr = mw1.wynik,
@@ -173,14 +192,24 @@ namespace ecoplastol.planowanie
                                 // kilka dodatkowych żeby fajnie było widać filtrowanie za pomocą górnych comboboxów
                                 nazwa_maszyny = maszyny.numer,
                                 kod_zlecenia = zlecenia.wyrob_kod
-                            }).ToList();
+                            });
 
-                //if(nrZlecenia > 0)
-                //{
-                //    list.Where(r=>r.id_zlecenie == nrZlecenia)
-                //}
 
-                return list;
+                if (idZlecenia > 0)
+                {
+                    list = list.Where(r => r.id_zlecenie == idZlecenia);
+                }
+
+                if (idZmiany > 0)
+                {
+                    list = list.Where(r => r.zmiana == idZmiany);
+                }
+
+                if (idOperatora > 0)
+                {
+                    list = list.Where(r => r.id_operator == idOperatora);
+                }
+                return list.ToList();
             }
         }
 
