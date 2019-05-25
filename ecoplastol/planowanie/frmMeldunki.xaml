@@ -33,7 +33,7 @@
                 <ColumnDefinition Width="200"/>
                 <ColumnDefinition Width="300"/>
                 <ColumnDefinition Width="200"/>
-                <ColumnDefinition Width="200"/>
+                <ColumnDefinition Width="230"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             <Label Grid.Column="0" FontSize="20" Padding="5" Content="Od"/>
@@ -50,7 +50,7 @@
                 <ColumnDefinition Width="200"/>
                 <ColumnDefinition Width="300"/>
                 <ColumnDefinition Width="200"/>
-                <ColumnDefinition Width="200"/>
+                <ColumnDefinition Width="230"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             <DatePicker Grid.Column="0" FontSize="24" VerticalContentAlignment="Center" x:Name="dpDataZleceniaOd" SelectedDateChanged="DpDataZleceniaOd_SelectedDateChanged"/>
@@ -78,8 +78,7 @@
                                         <TextBlock Text="{Binding wyrob_kod_opis}" FontSize="12" />
                                     </StackPanel>
                                     <StackPanel Orientation="Horizontal">
-                                        <TextBlock Text="M " FontSize="12"/>
-                                        <TextBlock Text="{Binding zlecenie_nr_maszyny}" FontSize="12"/>
+                                        <TextBlock Text="{Binding nazwa_maszyny}" FontSize="12"/>
                                         <TextBlock Text="  " FontSize="12"/>
                                         <TextBlock Text="{Binding zlecenie_data_rozp, StringFormat=\{0:yyyy-MM-dd\}}" FontSize="12" />
                                         <TextBlock Text="  " FontSize="12"/>

@@ -67,7 +67,7 @@ namespace ecoplastol.konfiguracja.produkcja
             {
                 var nazwa = (from w in db.maszyny
                              where w.id == nrMaszyny
-                             select w.numer).FirstOrDefault().ToString();
+                             select w.nazwa).FirstOrDefault().ToString();
                 return nazwa;
             }
         }

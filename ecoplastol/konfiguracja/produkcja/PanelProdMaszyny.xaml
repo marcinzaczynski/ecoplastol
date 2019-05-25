@@ -49,7 +49,7 @@
         <DataGrid Grid.Row="0" Name="grdLista" SelectionChanged="GrdLista_SelectionChanged" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" RowDetailsVisibilityMode="VisibleWhenSelected" IsSynchronizedWithCurrentItem="True" CanUserDeleteRows="False" CanUserAddRows="False" IsReadOnly="True">
             <DataGrid.Columns>
                 <DataGridTextColumn x:Name="idColumn" Binding="{Binding id}" Header="ID" Width="SizeToHeader"/>
-                <DataGridTextColumn x:Name="numerColumn" Binding="{Binding numer}" Header="Numer" Width="*"/>
+                <DataGridTextColumn x:Name="numerColumn" Binding="{Binding nazwa}" Header="Nazwa" Width="*"/>
                 <DataGridTextColumn x:Name="opwColumn" Binding="{Binding opw}" Header="opw" Width="100"/>
                 <DataGridTextColumn x:Name="czaswColumn" Binding="{Binding czasw, StringFormat=\{0:yyyy-MM-dd HH:mm\}}" Header="czasw" Width="150"/>
                 <DataGridTextColumn x:Name="opmColumn" Binding="{Binding opm}" Header="opm" Width="100"/>
@@ -68,11 +68,11 @@
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
 
-            <Label Grid.Row="0" Grid.Column="0" FontSize="18" Content="Numer :"/>
+            <Label Grid.Row="0" Grid.Column="0" FontSize="18" Content="Nazwa :"/>
             <!--<Label Grid.Row="1" Grid.Column="0" FontSize="18" Content="Wartość :"/>-->
             <!--<Label Grid.Row="2" Grid.Column="0" FontSize="18" Content="Opis :"/>-->
 
-            <TextBox Grid.Row="0" Grid.Column="1" FontSize="18" VerticalContentAlignment="Center" Text="{Binding numer, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Name="txtNumer"/>
+            <TextBox Grid.Row="0" Grid.Column="1" FontSize="18" VerticalContentAlignment="Center" Text="{Binding nazwa, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Name="txtNumer"/>
             <!--<TextBox Grid.Row="1" Grid.Column="1" FontSize="18" VerticalContentAlignment="Center" Text="{Binding wartosc, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Name="txtWartosc"/>-->
             <!--<TextBox Grid.Row="2" Grid.Column="1" FontSize="18" VerticalContentAlignment="Center" Text="{Binding opis, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Name="txtOpis"/>-->
         </Grid>

@@ -38,6 +38,7 @@ namespace ecoplastol.planowanie
 
         // kilka dodatkowych żeby fajnie było widać filtrowanie za pomocą górnych comboboxów
         public string nazwa_maszyny { get; set; }
+        public int id_maszyny { get; set; }
         public string kod_zlecenia { get; set; }
     }
 
@@ -57,26 +58,66 @@ namespace ecoplastol.planowanie
         public string nazwa_wady_nn { get; set; }
     }
 
+    public class ZlecenieView
+    {
+        // pola z tabeli zlecenia_produkcyjne, potrzebne do wyświetlenia listy zleceń w comboboxie na górze
+        public int? id { get; set; }
+        public string wyrob_kod { get; set; }
+        public string wyrob_kod_indeks { get; set; }
+        public string wyrob_kod_opis { get; set; }
+        public DateTime? zlecenie_data_rozp { get; set; }
+        public DateTime? zlecenie_data_zak { get; set; }
+
+        // pola z tabeli maszyny, potrzebne do wyświetlenia listy zleceń w comboboxie na górze
+        public string nazwa_maszyny { get; set; }
+    }
+
     class frmMeldunki_db
     {
-        public static List<zlecenia_produkcyjne> PobierzZleceniaDlaMaszynyOdDo(int nr_maszyny, DateTime? data_zlecenia_od, DateTime? data_zlecenia_do)
+        public static List<ZlecenieView> PobierzZleceniaDlaMaszynyOdDo(int id_maszyny, DateTime? data_zlecenia_od, DateTime? data_zlecenia_do)
         {
             using (var db = new ecoplastolEntities())
             {
-                if (nr_maszyny == 0)
+                if (id_maszyny == 0)
                 {
-                    var list = (from w in db.zlecenia_produkcyjne
-                                where w.zlecenie_data_rozp <= data_zlecenia_do && w.zlecenie_data_zak >= data_zlecenia_od
-                                orderby w.id ascending
-                                select w).ToList();
+                    var list = (from zp in db.zlecenia_produkcyjne
+                                from m in db.maszyny
+                                where zp.zlecenie_data_rozp <= data_zlecenia_do && zp.zlecenie_data_zak >= data_zlecenia_od && zp.zlecenie_nr_maszyny == m.id
+                                orderby zp.id ascending
+                                select new ZlecenieView
+                                {
+                                    id = zp.id, 
+                                    wyrob_kod = zp.wyrob_kod,
+                                    wyrob_kod_indeks = zp.wyrob_kod_indeks,
+                                    wyrob_kod_opis = zp.wyrob_kod_opis,
+                                    zlecenie_data_rozp = zp.zlecenie_data_rozp,
+                                    zlecenie_data_zak = zp.zlecenie_data_zak,
+
+                                    // pola z tabeli maszyny, potrzebne do wyświetlenia listy zleceń w comboboxie na górze
+                                    nazwa_maszyny =  m.nazwa
+                                }
+                                ).ToList();
                     return list;
                 }
                 else
                 {
-                    var list = (from w in db.zlecenia_produkcyjne
-                                where w.zlecenie_nr_maszyny == nr_maszyny && w.zlecenie_data_rozp <= data_zlecenia_do && w.zlecenie_data_zak >= data_zlecenia_od
-                                orderby w.id ascending
-                                select w).ToList();
+                    var list = (from zp in db.zlecenia_produkcyjne
+                                from m in db.maszyny
+                                where zp.zlecenie_nr_maszyny == id_maszyny && zp.zlecenie_data_rozp <= data_zlecenia_do && zp.zlecenie_data_zak >= data_zlecenia_od && zp.zlecenie_nr_maszyny == m.id
+                                orderby zp.id ascending
+                                select new ZlecenieView
+                                {
+                                    id = zp.id,
+                                    wyrob_kod = zp.wyrob_kod,
+                                    wyrob_kod_indeks = zp.wyrob_kod_indeks,
+                                    wyrob_kod_opis = zp.wyrob_kod_opis,
+                                    zlecenie_data_rozp = zp.zlecenie_data_rozp,
+                                    zlecenie_data_zak = zp.zlecenie_data_zak,
+
+                                    // pola z tabeli maszyny, potrzebne do wyświetlenia listy zleceń w comboboxie na górze
+                                    nazwa_maszyny = m.nazwa
+                                }
+                                ).ToList();
                     return list;
                 }
             }
@@ -184,16 +225,21 @@ namespace ecoplastol.planowanie
                                                :
                                                0,
                                 //dodatkowe pola na potrzeby wyświetlania listy - opisy wartości int z tabeli meldunki
-                                nazwa_operatora = o.imie + " " + o.nazwisko,
+                                nazwa_operatora = o.nazwisko + " " + o.imie,
                                 opis_wynik_spr_wtr = mw1.wynik,
                                 opis_wyglad_zew = mw2.wynik,
                                 opis_wyglad_grzejnika = mw3.wynik,
 
                                 // kilka dodatkowych żeby fajnie było widać filtrowanie za pomocą górnych comboboxów
-                                nazwa_maszyny = maszyny.numer,
+                                nazwa_maszyny = maszyny.nazwa,
+                                 id_maszyny = maszyny.id,
                                 kod_zlecenia = zlecenia.wyrob_kod
                             });
 
+                if (idMaszyny > 0)
+                {
+                    list = list.Where(r => r.id_maszyny == idMaszyny);
+                }
 
                 if (idZlecenia > 0)
                 {

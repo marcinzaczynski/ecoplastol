@@ -44,7 +44,6 @@ namespace ecoplastol
         public virtual DbSet<trace_sdr> trace_sdr { get; set; }
         public virtual DbSet<trace_sr> trace_sr { get; set; }
         public virtual DbSet<trace_litery> trace_litery { get; set; }
-        public virtual DbSet<maszyny> maszyny { get; set; }
         public virtual DbSet<wyroby_zakres_sdr> wyroby_zakres_sdr { get; set; }
         public virtual DbSet<wyroby_typ> wyroby_typ { get; set; }
         public virtual DbSet<wyroby_zast_zaworu> wyroby_zast_zaworu { get; set; }
@@ -57,5 +56,6 @@ namespace ecoplastol
         public virtual DbSet<zlecenia_produkcyjne> zlecenia_produkcyjne { get; set; }
         public virtual DbSet<meldunki_wady_nn> meldunki_wady_nn { get; set; }
         public virtual DbSet<meldunki> meldunki { get; set; }
+        public virtual DbSet<maszyny> maszyny { get; set; }
     }
 }

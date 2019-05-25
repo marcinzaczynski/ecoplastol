@@ -101,7 +101,7 @@
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="int4" Nullable="false" />
-          <Property Name="numer" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="nazwa" Type="varchar" MaxLength="10" Nullable="false" />
           <Property Name="opw" Type="varchar" MaxLength="20" />
           <Property Name="czasw" Type="timestamp" Nullable="false" />
           <Property Name="opm" Type="varchar" MaxLength="20" />
@@ -568,7 +568,6 @@
           <EntitySet Name="trace_sdr" EntityType="ecoplastolModel.trace_sdr" />
           <EntitySet Name="trace_sr" EntityType="ecoplastolModel.trace_sr" />
           <EntitySet Name="trace_litery" EntityType="ecoplastolModel.trace_litery" />
-          <EntitySet Name="maszyny" EntityType="ecoplastolModel.maszyny" />
           <EntitySet Name="wyroby_zakres_sdr" EntityType="ecoplastolModel.wyroby_zakres_sdr" />
           <EntitySet Name="wyroby_typ" EntityType="ecoplastolModel.wyroby_typ" />
           <EntitySet Name="wyroby_zast_zaworu" EntityType="ecoplastolModel.wyroby_zast_zaworu" />
@@ -581,6 +580,7 @@
           <EntitySet Name="zlecenia_produkcyjne" EntityType="ecoplastolModel.zlecenia_produkcyjne" />
           <EntitySet Name="meldunki_wady_nn" EntityType="ecoplastolModel.meldunki_wady_nn" />
           <EntitySet Name="meldunki" EntityType="ecoplastolModel.meldunki" />
+          <EntitySet Name="maszyny" EntityType="ecoplastolModel.maszyny" />
         </EntityContainer>
         <EntityType Name="parametry">
           <Key>
@@ -819,17 +819,6 @@
           <Property Name="opm" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="czasm" Type="DateTime" Nullable="false" Precision="6" />
         </EntityType>
-        <EntityType Name="maszyny">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" />
-          <Property Name="numer" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
-          <Property Name="opw" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="czasw" Type="DateTime" Nullable="false" Precision="6" />
-          <Property Name="opm" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="czasm" Type="DateTime" Nullable="false" Precision="6" />
-        </EntityType>
         <EntityType Name="wyroby_zakres_sdr">
           <Key>
             <PropertyRef Name="id" />
@@ -1060,6 +1049,17 @@
           <Property Name="czasm" Type="DateTime" Nullable="false" Precision="6" />
           <Property Name="przeglad_codz_masz" Type="Int32" Nullable="false" />
           <Property Name="uwagi" Type="String" MaxLength="8000" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="maszyny">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="nazwa" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="opw" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="czasw" Type="DateTime" Nullable="false" Precision="6" />
+          <Property Name="opm" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="czasm" Type="DateTime" Nullable="false" Precision="6" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -1336,18 +1336,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="maszyny">
-            <EntityTypeMapping TypeName="ecoplastolModel.maszyny">
-              <MappingFragment StoreEntitySet="maszyny">
-                <ScalarProperty Name="czasm" ColumnName="czasm" />
-                <ScalarProperty Name="opm" ColumnName="opm" />
-                <ScalarProperty Name="czasw" ColumnName="czasw" />
-                <ScalarProperty Name="opw" ColumnName="opw" />
-                <ScalarProperty Name="numer" ColumnName="numer" />
-                <ScalarProperty Name="id" ColumnName="id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="wyroby_zakres_sdr">
             <EntityTypeMapping TypeName="ecoplastolModel.wyroby_zakres_sdr">
               <MappingFragment StoreEntitySet="wyroby_zakres_sdr">
@@ -1587,6 +1575,18 @@
                 <ScalarProperty Name="zmiana" ColumnName="zmiana" />
                 <ScalarProperty Name="id_operator" ColumnName="id_operator" />
                 <ScalarProperty Name="id_zlecenie" ColumnName="id_zlecenie" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="maszyny">
+            <EntityTypeMapping TypeName="ecoplastolModel.maszyny">
+              <MappingFragment StoreEntitySet="maszyny">
+                <ScalarProperty Name="czasm" ColumnName="czasm" />
+                <ScalarProperty Name="opm" ColumnName="opm" />
+                <ScalarProperty Name="czasw" ColumnName="czasw" />
+                <ScalarProperty Name="opw" ColumnName="opw" />
+                <ScalarProperty Name="nazwa" ColumnName="nazwa" />
                 <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>

@@ -24,7 +24,7 @@ namespace ecoplastol.planowanie
     {
         private List<maszyny> listaMaszyn;
         private List<zmiany> listaZmian;
-        private List<zlecenia_produkcyjne> listaZlecen;
+        private List<ZlecenieView> listaZlecen;
         private List<operatorzy_maszyn> listaOperatorzy;
         private List<operatorzy_maszyn> listaMeldunekOperatorzy;
         private List<meldunki_wynik> listaWynikSprWtr;
@@ -83,7 +83,7 @@ namespace ecoplastol.planowanie
             listaMaszyn = produkcja_db.PobierzMaszyny();
             cbbMaszyna.ItemsSource = listaMaszyn;
             cbbMaszyna.SelectedValuePath = "id";
-            cbbMaszyna.DisplayMemberPath = "numer";
+            cbbMaszyna.DisplayMemberPath = "nazwa";
             cbbMaszyna.SelectedValue = idMaszyna;
 
             listaZmian = produkcja_db.PobierzZmiany();
@@ -181,14 +181,16 @@ namespace ecoplastol.planowanie
 
         private void WyszukajZlecenia()
         {
-            zlecenia_produkcyjne zp = new zlecenia_produkcyjne();
+            ZlecenieView zp = new ZlecenieView();
 
             //zp.zlecenie_data_rozp = null;
 
-            List<zlecenia_produkcyjne> lzp = new List<zlecenia_produkcyjne>();
+            List<ZlecenieView> lzp = new List<ZlecenieView>();
 
             // kombinacja żeby mieć "puste" pierwsze pole w liście co ma oznaczać wszystkie
             lzp.Add(zp);
+            var item = cbbMaszyna.SelectedItem as maszyny;
+            if (item == null) { idMaszyna = 0; } else { idMaszyna = item.id; }
             listaZlecen = frmMeldunki_db.PobierzZleceniaDlaMaszynyOdDo(idMaszyna, dataZleceniaOd, dataZleceniaDo);
             listaZlecen.InsertRange(0, lzp);
             cbbZlecenie.ItemsSource = listaZlecen;
@@ -277,17 +279,17 @@ namespace ecoplastol.planowanie
 
         private void BtnWadyNN_Click(object sender, RoutedEventArgs e)
         {
+            MeldunekView meldunek = (MeldunekView)grdDane.DataContext;
             int idMeld;
             switch (akcja)
             {
                 case "D":
-                case "K":
                     // przy dodawaniu i otwieraniu otwieram z indeksem meldunku 0, a potem przy zatwierdzaniu poprawię na poprawny
                     idMeld = 0;
                     break;
                 case "P":
                     // przy poprawianiu otwieram z aktualnym numerem meldunku
-                    idMeld = ((MeldunekView)grdDane.DataContext).id;
+                    idMeld = meldunek.id;
                     break;
                 default:
                     idMeld = 0;
@@ -295,10 +297,10 @@ namespace ecoplastol.planowanie
             }
 
             frmMeldunkiWadyNN frmMeldunkiWadyNN = new frmMeldunkiWadyNN(dpMeldunekData.SelectedDate.Value,
-                                                                        cbbMaszyna.SelectedIndex,
-                                                                        ((zlecenia_produkcyjne)cbbZlecenie.SelectedItem).id,
-                                                                        ((zmiany)cbbMeldunekZmiana.SelectedItem).id,
-                                                                        ((operatorzy_maszyn)cbbMeldunekOperator.SelectedItem).id,
+                                                                        meldunek.id_maszyny,
+                                                                        meldunek.id_zlecenie,
+                                                                        meldunek.zmiana,
+                                                                        meldunek.id_operator,
                                                                         idMeld);
             frmMeldunkiWadyNN.ShowDialog();
         }

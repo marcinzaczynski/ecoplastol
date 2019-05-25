@@ -80,7 +80,7 @@ namespace ecoplastol.konfiguracja.produkcja
             btnZatwierdz.IsEnabled = true;
 
             maszyny poz = new maszyny();
-            poz.numer = rowMaszyny.numer;
+            poz.nazwa = rowMaszyny.nazwa;
             grdPozycje.DataContext = poz;
         }
 

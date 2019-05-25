@@ -76,7 +76,7 @@ namespace ecoplastol
                 for (int j = 0; j < _ilKolumn; j++)
                 {
                     if (licznik == ilMaszyn) { break; } // grid może mieć więcej komórek niż jest maszyn
-                    MaszynaPanel mp = new MaszynaPanel(listaMaszyn[licznik].id, listaMaszyn[licznik].numer);
+                    MaszynaPanel mp = new MaszynaPanel(listaMaszyn[licznik].id, listaMaszyn[licznik].nazwa);
                     //mp.Name = "panelM" + Convert.ToChar(listaMaszyn[licznik].id + 1);
                     //mp.Tag = licznik + 1;
                     listaPaneli.Add(mp);
