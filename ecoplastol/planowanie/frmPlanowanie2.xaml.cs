@@ -113,7 +113,7 @@ namespace ecoplastol
                     mz.lblTracePartia.Content = zp.trace_partia;
                     mz.lblSDR.Content = String.Format("SDR : {0} ({1})",
                         konfiguracja.traceability.PanelTrace_db.PobierzTraceSdrWartosc(zp.trace_sdr),
-                        konfiguracja.produkcja.produkcja_db.PobierzWyrobZakresSdrWartosc(zp.wyrob_zakres_sdr));
+                        konfiguracja.produkcja.konf_produkcja_db.PobierzWyrobZakresSdrWartosc(zp.wyrob_zakres_sdr));
 
                     mz.btnMeldunki.Tag = mp.Tag;
                     // ... i dodać je do MaszynaPanel w odpowiednim miejscu - panelZlecen

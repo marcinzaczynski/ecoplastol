@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ecoplastol.konfiguracja.produkcja
 {
-    class produkcja_db
+    class konf_produkcja_db
     {
         /// <summary>
         /// MASZYNY
@@ -102,13 +102,35 @@ namespace ecoplastol.konfiguracja.produkcja
         /// WYROBY
         /// </summary>
 
-        public static List<wyroby> PobierzWyroby()
+        public static List<wyroby> PobierzWyroby(bool aktywne)
         {
             using (var db = new ecoplastolEntities())
             {
-                var list = (from wyr in db.wyroby
-                            orderby wyr.wyrob_kod ascending
-                            select wyr).ToList();
+                List<wyroby> list = new List<wyroby>();
+                switch (aktywne)
+                {
+                    case (true):
+                        list = (from wyr in db.wyroby
+                                    where wyr.aktywny == aktywne
+                                    orderby wyr.wyrob_kod ascending, wyr.wyrob_kod_indeks ascending
+                                    select wyr).ToList();
+                        break;
+                    case (false):
+                        list = (from wyr in db.wyroby
+                                orderby wyr.wyrob_kod ascending, wyr.wyrob_kod_indeks ascending
+                                select wyr).ToList();
+                        break;
+                    default:
+                        list = (from wyr in db.wyroby
+                                    where wyr.aktywny == aktywne
+                                    orderby wyr.wyrob_kod ascending, wyr.wyrob_kod_indeks ascending
+                                    select wyr).ToList();
+                        break;
+
+                }
+
+
+                
                 return list;
             }
         }

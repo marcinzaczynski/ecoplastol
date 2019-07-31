@@ -21,9 +21,11 @@ namespace ecoplastol
     /// 
     public partial class frmMain : Window
     {
+        
         frmLogin frmL;
         public frmMain(frmLogin ptrF)
         {
+            
             InitializeComponent();
             frmL = ptrF;
         }
@@ -62,6 +64,12 @@ namespace ecoplastol
         private void BtnZamknij_Click(object sender, RoutedEventArgs e)
         {
             Close();
+        }
+
+        private void BtnZlecenia_Click(object sender, RoutedEventArgs e)
+        {
+            frmZleceniaProdukcyjne frmZleceniaProdukcyjne = new frmZleceniaProdukcyjne();
+            frmZleceniaProdukcyjne.ShowDialog();
         }
     }
 }

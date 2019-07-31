@@ -123,8 +123,8 @@ namespace ecoplastol.konfiguracja.produkcja
             var Res = MessageBox.Show("Usunąć ?", "Usuwanie pozycji", MessageBoxButton.YesNo, MessageBoxImage.Exclamation);
             if (Res == MessageBoxResult.Yes)
             {
-                produkcja_db.UsunOperatora(rowOperatorzy);
-                listOperatorzy = produkcja_db.PobierzOperatorow();
+                konf_produkcja_db.UsunOperatora(rowOperatorzy);
+                listOperatorzy = konf_produkcja_db.PobierzOperatorow();
                 grdLista.ItemsSource = listOperatorzy;
             }
         }
@@ -140,7 +140,7 @@ namespace ecoplastol.konfiguracja.produkcja
             btnAnuluj.IsEnabled = false;
             btnZatwierdz.IsEnabled = false;
 
-            listOperatorzy = produkcja_db.PobierzOperatorow();
+            listOperatorzy = konf_produkcja_db.PobierzOperatorow();
             grdLista.ItemsSource = listOperatorzy;
 
             grdLista.SelectedIndex = grdBookmark;
@@ -165,23 +165,23 @@ namespace ecoplastol.konfiguracja.produkcja
                     {
                         var row = new operatorzy_maszyn();
                         row = grdPozycje.DataContext as operatorzy_maszyn;
-                        row.id = produkcja_db.IdOperatora();
+                        row.id = konf_produkcja_db.IdOperatora();
                         row.opw = frmLogin.LoggedUser.login;
                         row.czasw = DateTime.Now;
                         row.opm = frmLogin.LoggedUser.login;
                         row.czasm = DateTime.Now;
-                        produkcja_db.DodajOperatora(row);
+                        konf_produkcja_db.DodajOperatora(row);
                     }
                     break;
                 case "P":
                     rowOperatorzy.opm = frmLogin.LoggedUser.login;
                     rowOperatorzy.czasm = DateTime.Now;
-                    produkcja_db.PoprawOperatora(rowOperatorzy);
+                    konf_produkcja_db.PoprawOperatora(rowOperatorzy);
                     break;
                 default:
                     break;
             }
-            listOperatorzy = produkcja_db.PobierzOperatorow();
+            listOperatorzy = konf_produkcja_db.PobierzOperatorow();
             grdLista.ItemsSource = listOperatorzy;
         }
 

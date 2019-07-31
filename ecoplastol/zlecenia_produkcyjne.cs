@@ -20,18 +20,16 @@ namespace ecoplastol
         public string wyrob_kod_indeks { get; set; }
         public string wyrob_kod_opis { get; set; }
         public int wyrob_typ { get; set; }
-        public Nullable<int> wyrob_il_w_op_zb { get; set; }
-        public Nullable<int> wyrob_waga_op { get; set; }
-        public Nullable<int> wyrob_waga_1szt { get; set; }
+        public int wyrob_il_w_op_zb { get; set; }
+        public int wyrob_waga_op { get; set; }
+        public int wyrob_waga_1szt { get; set; }
         public int wyrob_zakres_sdr { get; set; }
         public Nullable<int> wyrob_zast_zaworu { get; set; }
         public Nullable<int> wyrob_rodzaj_drutu { get; set; }
-        public Nullable<int> wyrob_norma { get; set; }
-        public Nullable<int> wyrob_il_w_partii { get; set; }
+        public int wyrob_norma { get; set; }
+        public int wyrob_il_w_partii { get; set; }
         public int zlecenie_nr_maszyny { get; set; }
         public int zlecenie_ilosc { get; set; }
-        public int zlecenie_ilosc_wypr_ok { get; set; }
-        public int zlecenie_ilosc_wypr_nn { get; set; }
         public System.DateTime zlecenie_data_rozp { get; set; }
         public System.DateTime zlecenie_data_zak { get; set; }
         public string zlecenie_nr_partii_surowca { get; set; }

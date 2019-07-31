@@ -7,7 +7,7 @@
         xmlns:globals="clr-namespace:ecoplastol.globals"
         xmlns:ts="clr-namespace:ecoplastol"
         mc:Ignorable="d"
-        Title="frmMeldunki" Height="450" Width="1400" WindowStartupLocation="CenterScreen" WindowState="Maximized"
+        Title="frmMeldunki" Height="600" Width="1400" WindowStartupLocation="CenterScreen" WindowState="Maximized"
         Closing="Window_Closing" Loaded="Window_Loaded">
     <Window.Resources>
         <globals:BackgroundColor x:Key="valueToBackground"/>
@@ -20,6 +20,7 @@
             <RowDefinition Height="40"/>
             <RowDefinition Height="50"/>
             <RowDefinition Height="*"/>
+            <RowDefinition Height="50"/>
             <RowDefinition Height="210"/>
             <RowDefinition Height="5"/>
             <RowDefinition Height="30"/>
@@ -142,7 +143,15 @@
                 <DataGridTextColumn Header="czasm" IsReadOnly="True" Binding="{Binding czasm, StringFormat=\{0:yyyy-MM-dd HH:mm\}}"/>
             </DataGrid.Columns>
         </DataGrid>
-        <Grid Grid.Row="3" Name="grdDane">
+        <StackPanel Grid.Row="3" Orientation="Horizontal">
+            <Label FontSize="20" Padding="10,0,0,0" VerticalContentAlignment="Center" Content="Pozytywne :"/>
+            <Label FontSize="32" Padding="10,0,0,0" VerticalContentAlignment="Center" Width="200" Name="lblPozytywne" Content=""/>
+            <Label FontSize="20" Padding="10,0,0,0" VerticalContentAlignment="Center" Content="Negatywne :"/>
+            <Label FontSize="32" Padding="10,0,0,0" VerticalContentAlignment="Center" Width="200" Name="lblNegatywne"/>
+            <Label FontSize="20" Padding="10,0,0,0" VerticalContentAlignment="Center" Content="Technologiczne :"/>
+            <Label FontSize="32" Padding="10,0,0,0" VerticalContentAlignment="Center" Width="200" Name="lblTechnologiczne"/>
+        </StackPanel>
+        <Grid Grid.Row="4" Name="grdDane">
             <Grid.RowDefinitions>
                 <RowDefinition Height="5"/>
                 <RowDefinition />
@@ -296,7 +305,7 @@
             </Grid>
             
         </Grid>
-        <StackPanel Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="5" Orientation="Horizontal">
+        <StackPanel Grid.Row="6" Orientation="Horizontal">
             <Button Width="150" FontSize="18" Content="DODAJ" Name="btnDodaj" Click="BtnDodaj_Click"/>
             <Button Width="150" FontSize="18" Content="POPRAW" Name="btnPopraw" Click="BtnPopraw_Click"/>
             <Button Width="150" FontSize="18" Content="USUŃ" Name="btnUsun" Click="BtnUsun_Click"/>
@@ -304,6 +313,6 @@
             <Button Width="150" FontSize="18" Content="ZATWIERDŹ" Name="btnZatwierdz" Command="ApplicationCommands.Help"/>
         </StackPanel>
 
-        <Button Grid.Row="7" FontSize="20" Content="Z A M K N I J" x:Name="btnZamknij" Click="BtnZamknij_Click"/>
+        <Button Grid.Row="8" FontSize="20" Content="Z A M K N I J" x:Name="btnZamknij" Click="BtnZamknij_Click"/>
     </Grid>
 </Window>

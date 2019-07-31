@@ -103,8 +103,8 @@ namespace ecoplastol.konfiguracja.produkcja
             var Res = MessageBox.Show("Usunąć ?", "Usuwanie pozycji", MessageBoxButton.YesNo, MessageBoxImage.Exclamation);
             if (Res == MessageBoxResult.Yes)
             {
-                produkcja_db.UsunMaszyne(rowMaszyny);
-                listMaszyny = produkcja_db.PobierzMaszyny();
+                konf_produkcja_db.UsunMaszyne(rowMaszyny);
+                listMaszyny = konf_produkcja_db.PobierzMaszyny();
                 grdLista.ItemsSource = listMaszyny;
             }
         }
@@ -120,7 +120,7 @@ namespace ecoplastol.konfiguracja.produkcja
             btnAnuluj.IsEnabled = false;
             btnZatwierdz.IsEnabled = false;
 
-            listMaszyny = produkcja_db.PobierzMaszyny();
+            listMaszyny = konf_produkcja_db.PobierzMaszyny();
             grdLista.ItemsSource = listMaszyny;
 
             grdLista.SelectedIndex = grdBookmark;
@@ -145,23 +145,23 @@ namespace ecoplastol.konfiguracja.produkcja
                     {
                         var row = new maszyny();
                         row = grdPozycje.DataContext as maszyny;
-                        row.id = produkcja_db.IdMaszyny();
+                        row.id = konf_produkcja_db.IdMaszyny();
                         row.opw = frmLogin.LoggedUser.login;
                         row.czasw = DateTime.Now;
                         row.opm = frmLogin.LoggedUser.login;
                         row.czasm = DateTime.Now;
-                        produkcja_db.DodajMaszyne(row);
+                        konf_produkcja_db.DodajMaszyne(row);
                     }
                     break;
                 case "P":
                     rowMaszyny.opm = frmLogin.LoggedUser.login;
                     rowMaszyny.czasm = DateTime.Now;
-                    produkcja_db.PoprawMaszyne(rowMaszyny);
+                    konf_produkcja_db.PoprawMaszyne(rowMaszyny);
                     break;
                 default:
                     break;
             }
-            listMaszyny = produkcja_db.PobierzMaszyny();
+            listMaszyny = konf_produkcja_db.PobierzMaszyny();
             grdLista.ItemsSource = listMaszyny;
         }
 

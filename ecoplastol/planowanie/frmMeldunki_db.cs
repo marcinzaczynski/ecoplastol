@@ -200,9 +200,6 @@ namespace ecoplastol.planowanie
                                 //                 select wnn.ilosc).ToList()).Sum()
                                 //               :
                                 //               0,
-
-                                
-
                                 godz_spr_wtr = m.godz_spr_wtr,
                                 wynik_spr_wtr = m.wynik_spr_wtr,
                                 wyglad_zew = m.wyglad_zew,

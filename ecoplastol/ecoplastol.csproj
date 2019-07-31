@@ -111,6 +111,9 @@
     <Compile Include="frmKonfiguracja2.xaml.cs">
       <DependentUpon>frmKonfiguracja2.xaml</DependentUpon>
     </Compile>
+    <Compile Include="produkcja\frmZleceniaProdukcyjne.xaml.cs">
+      <DependentUpon>frmZleceniaProdukcyjne.xaml</DependentUpon>
+    </Compile>
     <Compile Include="globals\converters.cs" />
     <Compile Include="konfiguracja\produkcja\PanelProdOperatorzy.xaml.cs">
       <DependentUpon>PanelProdOperatorzy.xaml</DependentUpon>
@@ -176,7 +179,7 @@
     <Compile Include="konfiguracja\produkcja\PanelProdWyroby.xaml.cs">
       <DependentUpon>PanelProdWyroby.xaml</DependentUpon>
     </Compile>
-    <Compile Include="konfiguracja\produkcja\produkcja_db.cs" />
+    <Compile Include="konfiguracja\produkcja\konf_produkcja_db.cs" />
     <Compile Include="konfiguracja\traceability\PanelTraceKategorie.xaml.cs">
       <DependentUpon>PanelTraceKategorie.xaml</DependentUpon>
     </Compile>
@@ -222,6 +225,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>PGEntity.tt</DependentUpon>
     </Compile>
+    <Compile Include="produkcja\produkcja_db.cs" />
     <Compile Include="trace_kategoria.cs">
       <DependentUpon>PGEntity.tt</DependentUpon>
     </Compile>
@@ -302,6 +306,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="frmParametry.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="produkcja\frmZleceniaProdukcyjne.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

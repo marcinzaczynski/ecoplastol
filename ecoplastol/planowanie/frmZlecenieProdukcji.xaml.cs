@@ -63,7 +63,7 @@ namespace ecoplastol
             //cbbWyrobKod.IsEnabled = false;
             poprawianeZP = zp;
             numerMaszyny = poprawianeZP.zlecenie_nr_maszyny;
-            lblNazwaMaszyny.Content = konfiguracja.produkcja.produkcja_db.PobierzNazweMaszyny(poprawianeZP.zlecenie_nr_maszyny);
+            lblNazwaMaszyny.Content = konfiguracja.produkcja.konf_produkcja_db.PobierzNazweMaszyny(poprawianeZP.zlecenie_nr_maszyny);
 
             UstawKontrolki();
             cbbWyrobKod.SelectedValue = zp.wyrob_kod_id;
@@ -74,12 +74,12 @@ namespace ecoplastol
 
         private void UstawKontrolki()
         {
-            listaWyrobow = produkcja_db.PobierzWyroby();
+            listaWyrobow = konf_produkcja_db.PobierzWyroby(true);
 
             listTracePEm = PanelTrace_db.PobierzTracePem();
-            listWyrobRodzajDrutu = produkcja_db.PobierzDruty();
+            listWyrobRodzajDrutu = konf_produkcja_db.PobierzDruty();
             listTraceProducent = PanelTrace_db.PobierzTraceProducent();
-            listWyrobZakresSDR = produkcja_db.PobierzZakresSDR();
+            listWyrobZakresSDR = konf_produkcja_db.PobierzZakresSDR();
             listTraceSDR = PanelTrace_db.PobierzTraceSdr();
             listITFtrn = PanelITF_db.PobierzITFtrn();
             listITFcc1 = PanelITF_db.PobierzITFcc();
@@ -134,8 +134,6 @@ namespace ecoplastol
                 case "D":
                     
                     zlecenieProdukcyjne.zlecenie_ilosc = 0;
-                    zlecenieProdukcyjne.zlecenie_ilosc_wypr_ok = 0;
-                    zlecenieProdukcyjne.zlecenie_ilosc_wypr_nn = 0;
                     zlecenieProdukcyjne.zlecenie_data_rozp = dataZlecenia;
                     zlecenieProdukcyjne.zlecenie_data_zak = dataZlecenia;
                     zlecenieProdukcyjne.zlecenie_nr_partii_surowca = "0";
@@ -143,8 +141,6 @@ namespace ecoplastol
                     break;
                 case "P":
                     zlecenieProdukcyjne.zlecenie_ilosc = poprawianeZP.zlecenie_ilosc;
-                    zlecenieProdukcyjne.zlecenie_ilosc_wypr_ok = poprawianeZP.zlecenie_ilosc_wypr_ok;
-                    zlecenieProdukcyjne.zlecenie_ilosc_wypr_nn = poprawianeZP.zlecenie_ilosc_wypr_nn; 
                     zlecenieProdukcyjne.zlecenie_data_rozp = poprawianeZP.zlecenie_data_rozp; 
                     zlecenieProdukcyjne.zlecenie_data_zak = poprawianeZP.zlecenie_data_zak; 
                     zlecenieProdukcyjne.zlecenie_nr_partii_surowca = poprawianeZP.zlecenie_nr_partii_surowca;

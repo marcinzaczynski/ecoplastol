@@ -28,11 +28,13 @@ namespace ecoplastol.konfiguracja.produkcja
         private int grdBookmark;
         private string akcja;
         private wyroby rowWyrob;
-        private List<wyroby> listWyroby;
+
+        private bool widoczneWyroby; // True - aktywne , False - wszystkie
 
         private kodITF kodITF;
         private kodTrace kodTrace;
 
+        private List<wyroby> listWyroby;
         private List<wyroby_typ> listTypyWyrobow;
         private List<wyroby_zakres_sdr> listWyrobZakresSDR;
         private List<wyroby_zast_zaworu> listWyrobZastZaworu;
@@ -61,11 +63,13 @@ namespace ecoplastol.konfiguracja.produkcja
         private List<trace_pe_o> listTracePEo;
         private List<trace_mfr> listTraceMFR;
 
-        public PanelProdWyroby(List<wyroby> lista)
+        public PanelProdWyroby(bool czyAktywne)
         {
             InitializeComponent();
-            listWyroby = lista;
+            widoczneWyroby = czyAktywne;
+            listWyroby = konf_produkcja_db.PobierzWyroby(widoczneWyroby);
             grdLista.ItemsSource = listWyroby;
+            lblIloscPozycji.Content = listWyroby.Count().ToString();
             grdPozycje.IsEnabled = false;
 
             UstawWyrob();
@@ -75,7 +79,7 @@ namespace ecoplastol.konfiguracja.produkcja
             kodITF = new kodITF();
             kodTrace = new kodTrace();
 
-            if (lista.Count == 0)
+            if (listWyroby.Count == 0)
             {
                 UstawPrzyciski(0);
             }
@@ -91,16 +95,16 @@ namespace ecoplastol.konfiguracja.produkcja
 
         private void UstawWyrob()
         {
-            listTypyWyrobow = produkcja_db.PobierzTypy();
+            listTypyWyrobow = konf_produkcja_db.PobierzTypy();
             cbbWyrobTyp.ItemsSource = listTypyWyrobow;
 
-            listWyrobZakresSDR = produkcja_db.PobierzZakresSDR();
+            listWyrobZakresSDR = konf_produkcja_db.PobierzZakresSDR();
             cbbWyrobZakresSDR.ItemsSource = listWyrobZakresSDR;
 
-            listWyrobZastZaworu = produkcja_db.PobierzZastZaworu();
+            listWyrobZastZaworu = konf_produkcja_db.PobierzZastZaworu();
             cbbWyrobZastZaworu.ItemsSource = listWyrobZastZaworu;
 
-            listWyrobRodzajDrutu = produkcja_db.PobierzDruty();
+            listWyrobRodzajDrutu = konf_produkcja_db.PobierzDruty();
             cbbWyrobRodzajDrutu.ItemsSource = listWyrobRodzajDrutu;
         }
 
@@ -240,8 +244,8 @@ namespace ecoplastol.konfiguracja.produkcja
             var Res = MessageBox.Show("Usunąć ?", "Usuwanie pozycji", MessageBoxButton.YesNo, MessageBoxImage.Exclamation);
             if (Res == MessageBoxResult.Yes)
             {
-                produkcja_db.UsunWyrob(rowWyrob);
-                listWyroby = produkcja_db.PobierzWyroby();
+                konf_produkcja_db.UsunWyrob(rowWyrob);
+                listWyroby = konf_produkcja_db.PobierzWyroby(widoczneWyroby);
                 grdLista.ItemsSource = listWyroby;
             }
         }
@@ -257,7 +261,7 @@ namespace ecoplastol.konfiguracja.produkcja
             btnAnuluj.IsEnabled = false;
             btnZatwierdz.IsEnabled = false;
 
-            listWyroby = produkcja_db.PobierzWyroby();
+            listWyroby = konf_produkcja_db.PobierzWyroby(widoczneWyroby);
             grdLista.ItemsSource = listWyroby;
 
             grdLista.SelectedIndex = grdBookmark;
@@ -282,23 +286,23 @@ namespace ecoplastol.konfiguracja.produkcja
                     {
                         var row = new wyroby();
                         row = grdPozycje.DataContext as wyroby;
-                        row.id = produkcja_db.IdWyroby();
+                        row.id = konf_produkcja_db.IdWyroby();
                         row.opw = frmLogin.LoggedUser.login;
                         row.czasw = DateTime.Now;
                         row.opm = frmLogin.LoggedUser.login;
                         row.czasm = DateTime.Now;
-                        produkcja_db.DodajWyrob(row);
+                        konf_produkcja_db.DodajWyrob(row);
                     }
                     break;
                 case "P":
                     rowWyrob.opm = frmLogin.LoggedUser.login;
                     rowWyrob.czasm = DateTime.Now;
-                    produkcja_db.PoprawWyrob(rowWyrob);
+                    konf_produkcja_db.PoprawWyrob(rowWyrob);
                     break;
                 default:
                     break;
             }
-            listWyroby = produkcja_db.PobierzWyroby();
+            listWyroby = konf_produkcja_db.PobierzWyroby(widoczneWyroby);
             grdLista.ItemsSource = listWyroby;
             grdLista.SelectedIndex = grdBookmark;
             grdLista.Focus();
@@ -374,8 +378,19 @@ namespace ecoplastol.konfiguracja.produkcja
         private void TxtITFrez_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
             var str = e.Text;
-            Regex _regex = new Regex("[^0-9]+");
-            e.Handled = _regex.IsMatch(str);
+            string aa = txtITFrez.Text;
+            int count = aa.Count(f => f == ',');
+            //if (count == 0 )
+            if (str == "," && count > 0)
+            {
+                e.Handled = true;
+            }
+            else
+            {
+                Regex _regex = new Regex("[^0-9,]+");
+                bool result = _regex.IsMatch(str);
+                e.Handled = result;
+            }
         }
 
         private void TxtITFcz1_PreviewTextInput(object sender, TextCompositionEventArgs e)
@@ -797,7 +812,8 @@ namespace ecoplastol.konfiguracja.produkcja
                 if (item == null || item.wartosc == "")
                 {
                     kodITF.kategoria = "00";
-                } else
+                }
+                else
                 {
                     kodITF.kategoria = item.wartosc;
                 }
@@ -960,7 +976,8 @@ namespace ecoplastol.konfiguracja.produkcja
             if (item == null || item.parametr == "")
             {
                 kodITF.icc = "0";
-            } else
+            }
+            else
             {
                 kodITF.icc = item.parametr;
                 if (item.parametr == "3")
@@ -999,7 +1016,7 @@ namespace ecoplastol.konfiguracja.produkcja
             {
                 kodITF.cc1 = item.parametr;
             }
-            
+
             kodITF.GenerujKody();
             UzupelnijKodITF();
         }
@@ -1535,6 +1552,22 @@ namespace ecoplastol.konfiguracja.produkcja
             CbbTracePEo_DropDownClosed(null, null);
             // mfr
             CbbTraceMFR_DropDownClosed(null, null);
+        }
+
+        private void BtnPokazWszystkie_Click(object sender, RoutedEventArgs e)
+        {
+            widoczneWyroby = false;
+            listWyroby = konf_produkcja_db.PobierzWyroby(widoczneWyroby);
+            grdLista.ItemsSource = listWyroby;
+            lblIloscPozycji.Content = listWyroby.Count().ToString();
+        }
+
+        private void BtnPokazAktywne_Click(object sender, RoutedEventArgs e)
+        {
+            widoczneWyroby = true;
+            listWyroby = konf_produkcja_db.PobierzWyroby(widoczneWyroby);
+            grdLista.ItemsSource = listWyroby;
+            lblIloscPozycji.Content = listWyroby.Count().ToString();
         }
     }
 }

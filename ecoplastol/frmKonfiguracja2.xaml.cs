@@ -53,7 +53,7 @@ namespace ecoplastol
         private PanelTraceMFR panelTraceMFR;
 
         private List<maszyny> listProdMaszyny;
-        private List<wyroby> listProdWyroby;
+        
         private List<operatorzy_maszyn> listProdOperatorzy;
 
         private PanelProdMaszyny panelProdMaszyny;
@@ -264,11 +264,11 @@ namespace ecoplastol
         private void BtnProdWyroby_Click(object sender, RoutedEventArgs e)
         {
             lblProdinfo.Content = btnProdWyroby.Content;
-            listProdWyroby = produkcja_db.PobierzWyroby();
+            
 
             grdTraceDane.Children.Clear();
             panelProdWyroby = null;
-            panelProdWyroby = new PanelProdWyroby(listProdWyroby);
+            panelProdWyroby = new PanelProdWyroby(true);
 
             grdProdDane.Children.Add(panelProdWyroby);
         }
@@ -276,7 +276,7 @@ namespace ecoplastol
         private void BtnProdMaszyny_Click(object sender, RoutedEventArgs e)
         {
             lblProdinfo.Content = btnProdMaszyny.Content;
-            listProdMaszyny = produkcja_db.PobierzMaszyny();
+            listProdMaszyny = konf_produkcja_db.PobierzMaszyny();
 
             grdProdDane.Children.Clear();
             panelProdMaszyny = null;
@@ -313,7 +313,7 @@ namespace ecoplastol
         private void BtnProdOperatorzy_Click(object sender, RoutedEventArgs e)
         {
             lblProdinfo.Content = btnProdOperatorzy.Content;
-            listProdOperatorzy = produkcja_db.PobierzOperatorow();
+            listProdOperatorzy = konf_produkcja_db.PobierzOperatorow();
 
             grdProdDane.Children.Clear();
             panelProdOperatorzy = null;

@@ -209,19 +209,19 @@ namespace ecoplastol
 
         private void UstawWyrob()
         {
-            listTypyWyrobow = produkcja_db.PobierzTypy();
+            listTypyWyrobow = konf_produkcja_db.PobierzTypy();
             cbbWyrobTyp.ItemsSource = listTypyWyrobow;
             cbbWyrobTyp.SelectedValuePath = "indeks";
 
-            listWyrobZakresSDR = produkcja_db.PobierzZakresSDR();
+            listWyrobZakresSDR = konf_produkcja_db.PobierzZakresSDR();
             cbbWyrobZakresSDR.ItemsSource = listWyrobZakresSDR;
             cbbWyrobZakresSDR.SelectedValuePath = "indeks";
 
-            listWyrobZastZaworu = produkcja_db.PobierzZastZaworu();
+            listWyrobZastZaworu = konf_produkcja_db.PobierzZastZaworu();
             cbbWyrobZastZaworu.ItemsSource = listWyrobZastZaworu;
             cbbWyrobZastZaworu.SelectedValuePath = "indeks";
 
-            listWyrobRodzajDrutu = produkcja_db.PobierzDruty();
+            listWyrobRodzajDrutu = konf_produkcja_db.PobierzDruty();
             cbbWyrobRodzajDrutu.ItemsSource = listWyrobRodzajDrutu;
             cbbWyrobRodzajDrutu.SelectedValuePath = "id";
         }

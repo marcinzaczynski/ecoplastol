@@ -34,7 +34,7 @@ namespace ecoplastol.planowanie
 
         private List<MeldunekView> listaMeldunkow;
         private MeldunekView rowMeldunek;
-        
+
         private DateTime? dataZleceniaOd;
         private DateTime? dataZleceniaDo;
         private int idMaszyna;
@@ -80,13 +80,13 @@ namespace ecoplastol.planowanie
             dpDataZleceniaDo.SelectedDate = data;
             dpMeldunekData.SelectedDate = DateTime.Now;
 
-            listaMaszyn = produkcja_db.PobierzMaszyny();
+            listaMaszyn = konf_produkcja_db.PobierzMaszyny();
             cbbMaszyna.ItemsSource = listaMaszyn;
             cbbMaszyna.SelectedValuePath = "id";
             cbbMaszyna.DisplayMemberPath = "nazwa";
             cbbMaszyna.SelectedValue = idMaszyna;
 
-            listaZmian = produkcja_db.PobierzZmiany();
+            listaZmian = konf_produkcja_db.PobierzZmiany();
             cbbZmiana.ItemsSource = listaZmian;
             cbbZmiana.SelectedValuePath = "id";
             cbbZmiana.DisplayMemberPath = "nazwa";
@@ -97,11 +97,11 @@ namespace ecoplastol.planowanie
 
             cbbZlecenie.SelectedValue = idZlecenie;
 
-            listaOperatorzy = produkcja_db.PobierzOperatorow();
+            listaOperatorzy = konf_produkcja_db.PobierzOperatorow();
             cbbOperator.ItemsSource = listaOperatorzy;
             cbbOperator.SelectedValuePath = "id";
 
-            listaMeldunekOperatorzy = produkcja_db.PobierzOperatorow();
+            listaMeldunekOperatorzy = konf_produkcja_db.PobierzOperatorow();
             cbbMeldunekOperator.ItemsSource = listaMeldunekOperatorzy;
             cbbMeldunekOperator.SelectedValuePath = "id";
 
@@ -255,6 +255,10 @@ namespace ecoplastol.planowanie
             listaMeldunkow = frmMeldunki_db.PobierzMeldunki2(dataZleceniaOd.Value, dataZleceniaDo.Value, idMaszyna, idZlecenie, idZmiana, idOperator);
             dgrdMeldunki.ItemsSource = listaMeldunkow;
 
+            var list = (from lm in listaMeldunkow
+                        select lm.ilosc).ToList();
+            lblPozytywne.Content = list.Sum().ToString();
+
             if (listaMeldunkow.Count == 0)
             {
                 UstawPrzyciski(0);
@@ -272,7 +276,7 @@ namespace ecoplastol.planowanie
         {
             if (this.IsLoaded)
             {
-                
+
                 WyszukajMeldunki();
             }
         }
@@ -313,7 +317,7 @@ namespace ecoplastol.planowanie
             dgBookmark = dgrdMeldunki.SelectedIndex;
             rowMeldunek = new MeldunekView();
 
-            rowMeldunek.data_meldunku =dpDataZleceniaOd.DisplayDate;
+            rowMeldunek.data_meldunku = dpDataZleceniaOd.DisplayDate;
             rowMeldunek.id_zlecenie = ((zlecenia_produkcyjne)cbbZlecenie.SelectedItem).id;
             rowMeldunek.przeglad_codz_masz = 1;
             rowMeldunek.wynik_spr_wtr = 1;
@@ -624,7 +628,7 @@ namespace ecoplastol.planowanie
         {
             if (this.IsLoaded)
             {
-                
+
                 WyszukajMeldunki();
             }
         }
