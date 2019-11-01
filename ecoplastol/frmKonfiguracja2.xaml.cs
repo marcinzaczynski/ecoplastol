@@ -59,7 +59,11 @@ namespace ecoplastol
         private PanelProdMaszyny panelProdMaszyny;
         private PanelProdWyroby panelProdWyroby;
         private PanelProdOperatorzy panelProdOperatorzy;
-
+        private PanelProdWyrobyTypy panelProdWyrobyTypy;
+        private PanelProdZaworyTypy panelProdZaworyTypy;
+        private PanelProdWyrobZakresSDR panelProdWyrobZakresSDR;
+        private PanelProdWyrobyDruty panelProdWyrobyDruty;
+        private PanelProdWyrobyWadyNN panelProdWyrobyWadyNN;
 
         public frmKonfiguracja2()
         {
@@ -264,7 +268,6 @@ namespace ecoplastol
         private void BtnProdWyroby_Click(object sender, RoutedEventArgs e)
         {
             lblProdinfo.Content = btnProdWyroby.Content;
-            
 
             grdTraceDane.Children.Clear();
             panelProdWyroby = null;
@@ -292,22 +295,48 @@ namespace ecoplastol
 
         private void BtnProdTypWyrobu_Click(object sender, RoutedEventArgs e)
         {
+            lblProdinfo.Content = btnProdTypWyrobu.Content;
 
+            grdTraceDane.Children.Clear();
+            panelProdWyrobyTypy = null;
+            panelProdWyrobyTypy = new PanelProdWyrobyTypy();
+
+            grdProdDane.Children.Add(panelProdWyrobyTypy);
         }
 
         private void BtnProdTypZaworu_Click(object sender, RoutedEventArgs e)
         {
+            lblProdinfo.Content = btnProdTypZaworu.Content;
 
+            grdTraceDane.Children.Clear();
+            panelProdZaworyTypy = null;
+            panelProdZaworyTypy = new PanelProdZaworyTypy();
+
+            grdProdDane.Children.Add(panelProdZaworyTypy);
         }
 
         private void BtnProdZakresSDR_Click(object sender, RoutedEventArgs e)
         {
+            lblProdinfo.Content = btnProdZakresSDR.Content;
 
+
+            grdTraceDane.Children.Clear();
+            panelProdWyrobZakresSDR = null;
+            panelProdWyrobZakresSDR = new PanelProdWyrobZakresSDR();
+
+            grdProdDane.Children.Add(panelProdWyrobZakresSDR);
         }
 
         private void BtnProdRodzajDrutu_Click(object sender, RoutedEventArgs e)
         {
+            lblProdinfo.Content = btnProdRodzajDrutu.Content;
 
+
+            grdTraceDane.Children.Clear();
+            panelProdWyrobyDruty = null;
+            panelProdWyrobyDruty = new PanelProdWyrobyDruty();
+
+            grdProdDane.Children.Add(panelProdWyrobyDruty);
         }
 
         private void BtnProdOperatorzy_Click(object sender, RoutedEventArgs e)
@@ -320,6 +349,17 @@ namespace ecoplastol
             panelProdOperatorzy = new PanelProdOperatorzy(listProdOperatorzy);
 
             grdProdDane.Children.Add(panelProdOperatorzy);
+        }
+
+        private void BtnProdWadyNN_Click(object sender, RoutedEventArgs e)
+        {
+            lblProdinfo.Content = btnProdWadyNN.Content;
+
+            grdTraceDane.Children.Clear();
+            panelProdWyrobyWadyNN = null;
+            panelProdWyrobyWadyNN = new PanelProdWyrobyWadyNN();
+
+            grdProdDane.Children.Add(panelProdWyrobyWadyNN);
         }
     }
 }

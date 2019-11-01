@@ -95,6 +95,7 @@ namespace ecoplastol.planowanie
             cbbMeldunekZmiana.SelectedValuePath = "id";
             cbbMeldunekZmiana.DisplayMemberPath = "nazwa";
 
+            WyszukajZlecenia();
             cbbZlecenie.SelectedValue = idZlecenie;
 
             listaOperatorzy = konf_produkcja_db.PobierzOperatorow();
@@ -141,7 +142,7 @@ namespace ecoplastol.planowanie
             //    UstawPrzyciski(1);
             //}
             grdDane.IsEnabled = false;
-
+            WyszukajMeldunki();
         }
         private void UstawPrzyciski(int i)
         {
@@ -242,8 +243,20 @@ namespace ecoplastol.planowanie
             var item = cbbMaszyna.SelectedItem as maszyny;
             if (item == null) { idMaszyna = 0; } else { idMaszyna = item.id; }
 
-            var item2 = cbbZlecenie.SelectedItem as zlecenia_produkcyjne;
-            if (item2 == null) { idZlecenie = 0; } else { idZlecenie = item2.id; }
+            // item2 może być puste albo zawierać obiekt ZlecenieView z pustymi wartościami (sztuczka żeby na początku listy wyświetlało się puste pole, oznaczające "Wszystkie")
+            var item2 = cbbZlecenie.SelectedItem as ZlecenieView;
+            if (item2 == null)
+                // jeżeli item2 jest puste - null
+                { idZlecenie = 0; }
+                else
+                // jeżeli item2 zawiera obiekt ZlecenieView z pustymi wartościami
+                {
+                    if (item2.id.HasValue)
+                    {
+                        idZlecenie = item2.id.Value;
+                    } else
+                    { idZlecenie = 0; }
+                }
 
             var item3 = cbbZmiana.SelectedItem as zmiany;
             if (item3 == null) { idZmiana = 0; } else { idZmiana = item3.id; }
@@ -309,39 +322,6 @@ namespace ecoplastol.planowanie
             frmMeldunkiWadyNN.ShowDialog();
         }
 
-
-
-        private void BtnDodaj_Click(object sender, RoutedEventArgs e)
-        {
-            akcja = "D";
-            dgBookmark = dgrdMeldunki.SelectedIndex;
-            rowMeldunek = new MeldunekView();
-
-            rowMeldunek.data_meldunku = dpDataZleceniaOd.DisplayDate;
-            rowMeldunek.id_zlecenie = ((zlecenia_produkcyjne)cbbZlecenie.SelectedItem).id;
-            rowMeldunek.przeglad_codz_masz = 1;
-            rowMeldunek.wynik_spr_wtr = 1;
-            rowMeldunek.wyglad_zew = 1;
-            rowMeldunek.wyglad_grzejnika = 1;
-            grdDane.DataContext = rowMeldunek;
-
-            dpDataZleceniaOd.IsEnabled = false;
-            dpDataZleceniaDo.IsEnabled = false;
-            cbbMaszyna.IsEnabled = false;
-            cbbZlecenie.IsEnabled = false;
-            cbbZmiana.IsEnabled = false;
-            dgrdMeldunki.IsEnabled = false;
-            btnZamknij.IsEnabled = false;
-
-            btnDodaj.IsEnabled = false;
-            btnPopraw.IsEnabled = false;
-            btnUsun.IsEnabled = false;
-            btnAnuluj.IsEnabled = true;
-            btnZatwierdz.IsEnabled = true;
-
-            grdDane.IsEnabled = true;
-        }
-
         private void BtnPopraw_Click(object sender, RoutedEventArgs e)
         {
             akcja = "P";
@@ -372,21 +352,7 @@ namespace ecoplastol.planowanie
                 frmMeldunki_db.UsunMeldunek(poz);
                 frmMeldunki_db.UsunPrzyczynyBrakow(poz.id);
             }
-
-            //listaMeldunkow = frmMeldunki_db.PobierzMeldunki2(((zlecenia_produkcyjne)cbbZlecenie.SelectedItem).id);
-            //dgrdMeldunki.ItemsSource = listaMeldunkow;
-
-            //if (listaMeldunkow.Count == 0)
-            //{
-            //    UstawPrzyciski(0);
-            //}
-            //else
-            //{
-            //    dgrdMeldunki.Focus();
-            //    dgrdMeldunki.SelectedIndex = 0;
-
-            //    UstawPrzyciski(1);
-            //}
+            WyszukajMeldunki();
         }
 
         private void BtnAnuluj_Click(object sender, RoutedEventArgs e)
@@ -540,6 +506,7 @@ namespace ecoplastol.planowanie
                         row.czasm = DateTime.Now;
                         frmMeldunki_db.DodajMeldunek(row);
                         frmMeldunki_db.PoprawIDPrzyczynyBrakow(row.id);
+                        WyszukajMeldunki();
                     }
                     break;
                 case "P":
@@ -635,9 +602,59 @@ namespace ecoplastol.planowanie
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            WyszukajZlecenia();
+            //WyszukajZlecenia();
 
-            WyszukajMeldunki();
+            //WyszukajMeldunki();
+        }
+
+        private void CzyMoznaDodac(object sender, CanExecuteRoutedEventArgs e)
+        {
+            bool moznaDodac = true;
+
+            if (cbbMaszyna.SelectedIndex == 0) moznaDodac = false;
+
+            if (cbbZlecenie.SelectedIndex == 0) moznaDodac = false;
+
+            if (moznaDodac) e.CanExecute = true;
+        }
+
+        private void Dodaj(object sender, ExecutedRoutedEventArgs e)
+        {
+            akcja = "D";
+            dgBookmark = dgrdMeldunki.SelectedIndex;
+            rowMeldunek = new MeldunekView();
+            // ustawienie daty
+            if (dpDataZleceniaOd.SelectedDate.HasValue) { rowMeldunek.data_meldunku = dpDataZleceniaOd.SelectedDate.Value; }
+            else { rowMeldunek.data_meldunku = dpDataZleceniaOd.DisplayDate; }
+
+            // wpisanie numeru zlecenia "do pamięci"
+            if (((ZlecenieView)cbbZlecenie.SelectedItem).id.HasValue)
+                rowMeldunek.id_zlecenie = ((ZlecenieView)cbbZlecenie.SelectedItem).id.Value;
+
+            // ustawienie wybranej u góry zmiany
+            if (cbbZmiana.SelectedItem == null) { rowMeldunek.zmiana = 0; } else { rowMeldunek.zmiana = ((zmiany)cbbZmiana.SelectedItem).id; }
+
+            rowMeldunek.przeglad_codz_masz = 1;
+            rowMeldunek.wynik_spr_wtr = 1;
+            rowMeldunek.wyglad_zew = 1;
+            rowMeldunek.wyglad_grzejnika = 1;
+            grdDane.DataContext = rowMeldunek;
+
+            dpDataZleceniaOd.IsEnabled = false;
+            dpDataZleceniaDo.IsEnabled = false;
+            cbbMaszyna.IsEnabled = false;
+            cbbZlecenie.IsEnabled = false;
+            cbbZmiana.IsEnabled = false;
+            dgrdMeldunki.IsEnabled = false;
+            btnZamknij.IsEnabled = false;
+
+            btnDodaj.IsEnabled = false;
+            btnPopraw.IsEnabled = false;
+            btnUsun.IsEnabled = false;
+            btnAnuluj.IsEnabled = true;
+            btnZatwierdz.IsEnabled = true;
+
+            grdDane.IsEnabled = true;
         }
     }
 }

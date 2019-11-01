@@ -312,5 +312,266 @@ namespace ecoplastol.konfiguracja.produkcja
                 return list;
             }
         }
+
+        /// <summary>
+        /// WYROBY - TYPY
+        /// </summary>
+        
+        public static List<wyroby_typ> PobierzWyrobyTypy()
+        {
+            using (var db = new ecoplastolEntities())
+            {
+                var list = (from w in db.wyroby_typ
+                            orderby w.id ascending
+                            select w).ToList();
+                return list;
+            }
+        }
+
+        public static void UsunWyrobTyp(wyroby_typ poz)
+        {
+            using (var db = new ecoplastolEntities())
+            {
+                db.wyroby_typ.Attach(poz);
+                db.wyroby_typ.Remove(poz);
+                db.SaveChanges();
+            }
+        }
+
+        public static int IdWyrobyTyp()
+        {
+            using (var db = new ecoplastolEntities())
+            {
+                int newId = db.wyroby_typ.Max(p => p.id) + 1;
+                return newId;
+            }
+        }
+
+        public static void DodajWyrobTyp(wyroby_typ poz)
+        {
+            using (var db = new ecoplastolEntities())
+            {
+
+                db.wyroby_typ.Add(poz);
+                db.SaveChanges();
+            }
+        }
+
+        public static void PoprawWyrobTyp(wyroby_typ poz)
+        {
+            using (var db = new ecoplastolEntities())
+            {
+                db.Entry(poz).State = System.Data.Entity.EntityState.Modified;
+                db.SaveChanges();
+            }
+        }
+
+        /// <summary>
+        /// WYROBY - ZAWORY - TYPY
+        /// </summary>
+
+        public static List<wyroby_zast_zaworu> PobierzWyrobyZaworyTypy()
+        {
+            using (var db = new ecoplastolEntities())
+            {
+                var list = (from w in db.wyroby_zast_zaworu
+                            orderby w.id ascending
+                            select w).ToList();
+                return list;
+            }
+        }
+
+        public static void UsunWyrobZaworTyp(wyroby_zast_zaworu poz)
+        {
+            using (var db = new ecoplastolEntities())
+            {
+                db.wyroby_zast_zaworu.Attach(poz);
+                db.wyroby_zast_zaworu.Remove(poz);
+                db.SaveChanges();
+            }
+        }
+
+        public static int IdWyrobyZaworTyp()
+        {
+            using (var db = new ecoplastolEntities())
+            {
+                int newId = db.wyroby_zast_zaworu.Max(p => p.id) + 1;
+                return newId;
+            }
+        }
+
+        public static void DodajWyrobZaworTyp(wyroby_zast_zaworu poz)
+        {
+            using (var db = new ecoplastolEntities())
+            {
+                db.wyroby_zast_zaworu.Add(poz);
+                db.SaveChanges();
+            }
+        }
+
+        public static void PoprawWyrobZaworTyp(wyroby_zast_zaworu poz)
+        {
+            using (var db = new ecoplastolEntities())
+            {
+                db.Entry(poz).State = System.Data.Entity.EntityState.Modified;
+                db.SaveChanges();
+            }
+        }
+
+        /// <summary>
+        /// WYROBY - ZAKRESY SDR
+        /// </summary>
+
+        public static List<wyroby_zakres_sdr> PobierzWyrobyZakresySDR()
+        {
+            using (var db = new ecoplastolEntities())
+            {
+                var list = (from w in db.wyroby_zakres_sdr
+                            orderby w.id ascending
+                            select w).ToList();
+                return list;
+            }
+        }
+
+        public static void UsunWyrobZakresSDR(wyroby_zakres_sdr poz)
+        {
+            using (var db = new ecoplastolEntities())
+            {
+                db.wyroby_zakres_sdr.Attach(poz);
+                db.wyroby_zakres_sdr.Remove(poz);
+                db.SaveChanges();
+            }
+        }
+
+        public static int IdWyrobyZakresSDR()
+        {
+            using (var db = new ecoplastolEntities())
+            {
+                int newId = db.wyroby_zakres_sdr.Max(p => p.id) + 1;
+                return newId;
+            }
+        }
+
+        public static void DodajWyrobZakresSDR(wyroby_zakres_sdr poz)
+        {
+            using (var db = new ecoplastolEntities())
+            {
+                db.wyroby_zakres_sdr.Add(poz);
+                db.SaveChanges();
+            }
+        }
+
+        public static void PoprawWyrobZakresSDR(wyroby_zakres_sdr poz)
+        {
+            using (var db = new ecoplastolEntities())
+            {
+                db.Entry(poz).State = System.Data.Entity.EntityState.Modified;
+                db.SaveChanges();
+            }
+        }
+
+        /// <summary>
+        /// WYROBY - DRUTY
+        /// </summary>
+
+        public static List<wyroby_druty> PobierzWyrobyDruty()
+        {
+            using (var db = new ecoplastolEntities())
+            {
+                var list = (from w in db.wyroby_druty
+                            orderby w.id ascending
+                            select w).ToList();
+                return list;
+            }
+        }
+
+        public static void UsunWyrobDrut(wyroby_druty poz)
+        {
+            using (var db = new ecoplastolEntities())
+            {
+                db.wyroby_druty.Attach(poz);
+                db.wyroby_druty.Remove(poz);
+                db.SaveChanges();
+            }
+        }
+
+        public static int IdWyrobyDruty()
+        {
+            using (var db = new ecoplastolEntities())
+            {
+                int newId = db.wyroby_druty.Max(p => p.id) + 1;
+                return newId;
+            }
+        }
+
+        public static void DodajWyrobDrut(wyroby_druty poz)
+        {
+            using (var db = new ecoplastolEntities())
+            {
+                db.wyroby_druty.Add(poz);
+                db.SaveChanges();
+            }
+        }
+
+        public static void PoprawWyrobDrut(wyroby_druty poz)
+        {
+            using (var db = new ecoplastolEntities())
+            {
+                db.Entry(poz).State = System.Data.Entity.EntityState.Modified;
+                db.SaveChanges();
+            }
+        }
+
+        /// <summary>
+        /// WYROBY - WADY NN
+        /// </summary>
+
+        public static List<wady_nn> PobierzWyrobyWadyNN()
+        {
+            using (var db = new ecoplastolEntities())
+            {
+                var list = (from w in db.wady_nn
+                            orderby w.id ascending
+                            select w).ToList();
+                return list;
+            }
+        }
+
+        public static void UsunWyrobWadaNN(wady_nn poz)
+        {
+            using (var db = new ecoplastolEntities())
+            {
+                db.wady_nn.Attach(poz);
+                db.wady_nn.Remove(poz);
+                db.SaveChanges();
+            }
+        }
+
+        public static int IdWyrobyWadyNN()
+        {
+            using (var db = new ecoplastolEntities())
+            {
+                int newId = db.wady_nn.Max(p => p.id) + 1;
+                return newId;
+            }
+        }
+
+        public static void DodajWyrobWadaNN(wady_nn poz)
+        {
+            using (var db = new ecoplastolEntities())
+            {
+                db.wady_nn.Add(poz);
+                db.SaveChanges();
+            }
+        }
+
+        public static void PoprawWyrobWadaNN(wady_nn poz)
+        {
+            using (var db = new ecoplastolEntities())
+            {
+                db.Entry(poz).State = System.Data.Entity.EntityState.Modified;
+                db.SaveChanges();
+            }
+        }
     }
 }

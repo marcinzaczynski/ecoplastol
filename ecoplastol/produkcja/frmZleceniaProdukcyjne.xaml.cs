@@ -25,6 +25,7 @@ namespace ecoplastol
     public partial class frmZleceniaProdukcyjne : Window
     {
         private List<ZleceniaView> listaZlecen;
+        private ZleceniaView rowZlecenie;
         private List<maszyny> listaMaszyn;
         private List<wyroby> listaWyrobow;
 
@@ -107,13 +108,16 @@ namespace ecoplastol
         {
             if (this.IsLoaded)
             {
-                WyszukajZlecenia();
+                if (cbbMaszyna.SelectedItem != null) { WyszukajZlecenia(); }
+                
             }
         }
 
         private void DgrdMeldunki_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            rowZlecenie = dgrdZlecenia.SelectedItem as ZleceniaView;
 
+            grdDane.DataContext = rowZlecenie;
         }
 
         private void CzyMoznaZatwierdzic(object sender, CanExecuteRoutedEventArgs e)

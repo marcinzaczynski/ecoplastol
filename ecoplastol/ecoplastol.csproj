@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\EntityFramework.6.3.0\build\EntityFramework.props" Condition="Exists('..\packages\EntityFramework.6.3.0\build\EntityFramework.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -14,6 +15,8 @@
     <WarningLevel>4</WarningLevel>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -36,39 +39,48 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+      <HintPath>..\packages\EntityFramework.6.3.0\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <HintPath>..\packages\EntityFramework.6.3.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
-    <Reference Include="EntityFramework6.Npgsql, Version=3.2.0.0, Culture=neutral, PublicKeyToken=5d8b90d52f46fda7, processorArchitecture=MSIL">
-      <HintPath>..\packages\EntityFramework6.Npgsql.3.2.0\lib\net45\EntityFramework6.Npgsql.dll</HintPath>
+    <Reference Include="EntityFramework6.Npgsql, Version=6.3.0.0, Culture=neutral, PublicKeyToken=5d8b90d52f46fda7, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework6.Npgsql.6.3.0\lib\net45\EntityFramework6.Npgsql.dll</HintPath>
     </Reference>
-    <Reference Include="Npgsql, Version=4.0.6.0, Culture=neutral, PublicKeyToken=5d8b90d52f46fda7, processorArchitecture=MSIL">
-      <HintPath>..\packages\Npgsql.4.0.6\lib\net451\Npgsql.dll</HintPath>
+    <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=1.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Bcl.AsyncInterfaces.1.0.0\lib\net461\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
+    </Reference>
+    <Reference Include="Npgsql, Version=4.1.1.0, Culture=neutral, PublicKeyToken=5d8b90d52f46fda7, processorArchitecture=MSIL">
+      <HintPath>..\packages\Npgsql.4.1.1\lib\net461\Npgsql.dll</HintPath>
     </Reference>
     <Reference Include="System" />
-    <Reference Include="System.Buffers, Version=4.0.2.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Buffers.4.4.0\lib\netstandard2.0\System.Buffers.dll</HintPath>
+    <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Buffers.4.5.0\lib\netstandard2.0\System.Buffers.dll</HintPath>
     </Reference>
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
-    <Reference Include="System.Memory, Version=4.0.1.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Memory.4.5.2\lib\netstandard2.0\System.Memory.dll</HintPath>
+    <Reference Include="System.Memory, Version=4.0.1.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Memory.4.5.3\lib\netstandard2.0\System.Memory.dll</HintPath>
     </Reference>
     <Reference Include="System.Numerics" />
-    <Reference Include="System.Numerics.Vectors, Version=4.1.3.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Numerics.Vectors.4.4.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
+    <Reference Include="System.Numerics.Vectors, Version=4.1.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Numerics.Vectors.4.5.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
     </Reference>
-    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.4.1, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.4.5.2\lib\netstandard2.0\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.5.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.4.6.0\lib\netstandard2.0\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
     </Reference>
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
-    <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Threading.Tasks.Extensions.4.5.2\lib\netstandard2.0\System.Threading.Tasks.Extensions.dll</HintPath>
+    <Reference Include="System.Text.Encodings.Web, Version=4.0.4.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Text.Encodings.Web.4.6.0\lib\netstandard2.0\System.Text.Encodings.Web.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Text.Json, Version=4.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Text.Json.4.6.0\lib\net461\System.Text.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Threading.Tasks.Extensions.4.5.3\lib\netstandard2.0\System.Threading.Tasks.Extensions.dll</HintPath>
     </Reference>
     <Reference Include="System.Transactions" />
     <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
@@ -111,43 +123,6 @@
     <Compile Include="frmKonfiguracja2.xaml.cs">
       <DependentUpon>frmKonfiguracja2.xaml</DependentUpon>
     </Compile>
-    <Compile Include="produkcja\frmZleceniaProdukcyjne.xaml.cs">
-      <DependentUpon>frmZleceniaProdukcyjne.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="globals\converters.cs" />
-    <Compile Include="konfiguracja\produkcja\PanelProdOperatorzy.xaml.cs">
-      <DependentUpon>PanelProdOperatorzy.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="meldunki.cs">
-      <DependentUpon>PGEntity.tt</DependentUpon>
-    </Compile>
-    <Compile Include="meldunki_wady_nn.cs">
-      <DependentUpon>PGEntity.tt</DependentUpon>
-    </Compile>
-    <Compile Include="meldunki_wynik.cs">
-      <DependentUpon>PGEntity.tt</DependentUpon>
-    </Compile>
-    <Compile Include="meldunki_wynik_prz_maszyny.cs">
-      <DependentUpon>PGEntity.tt</DependentUpon>
-    </Compile>
-    <Compile Include="operatorzy_maszyn.cs">
-      <DependentUpon>PGEntity.tt</DependentUpon>
-    </Compile>
-    <Compile Include="planowanie\frmMeldunki.xaml.cs">
-      <DependentUpon>frmMeldunki.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="planowanie\frmMeldunkiWadyNN.xaml.cs">
-      <DependentUpon>frmMeldunkiWadyNN.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="planowanie\frmMeldunki_db.cs" />
-    <Compile Include="planowanie\frmPlanowanie2.xaml.cs">
-      <DependentUpon>frmPlanowanie2.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="planowanie\frmPlanowanie2_db.cs" />
-    <Compile Include="planowanie\frmZlecenieProdukcji.xaml.cs">
-      <DependentUpon>frmZlecenieProdukcji.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="planowanie\frmZlecenieProdukcji_db.cs" />
     <Compile Include="itf_cc.cs">
       <DependentUpon>PGEntity.tt</DependentUpon>
     </Compile>
@@ -169,6 +144,79 @@
     <Compile Include="itf_trn.cs">
       <DependentUpon>PGEntity.tt</DependentUpon>
     </Compile>
+    <Compile Include="konfiguracja\produkcja\PanelProdWyrobyWadyNN.xaml.cs">
+      <DependentUpon>PanelProdWyrobyWadyNN.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="konfiguracja\produkcja\PanelProdWyrobyDruty.xaml.cs">
+      <DependentUpon>PanelProdWyrobyDruty.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="konfiguracja\produkcja\PanelProdWyrobyTypy.xaml.cs">
+      <DependentUpon>PanelProdWyrobyTypy.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="konfiguracja\produkcja\PanelProdWyrobZakresSDR.xaml.cs">
+      <DependentUpon>PanelProdWyrobZakresSDR.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="konfiguracja\produkcja\PanelProdZaworyTypy.xaml.cs">
+      <DependentUpon>PanelProdZaworyTypy.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="maszyny.cs">
+      <DependentUpon>PGEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="meldunki.cs">
+      <DependentUpon>PGEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="meldunki_wady_nn.cs">
+      <DependentUpon>PGEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="meldunki_wynik.cs">
+      <DependentUpon>PGEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="meldunki_wynik_prz_maszyny.cs">
+      <DependentUpon>PGEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="operatorzy_maszyn.cs">
+      <DependentUpon>PGEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="parametry.cs">
+      <DependentUpon>PGEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PGEntity.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PGEntity.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PGEntity.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PGEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PGEntity.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PGEntity.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="produkcja\frmZleceniaProdukcyjne.xaml.cs">
+      <DependentUpon>frmZleceniaProdukcyjne.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="globals\converters.cs" />
+    <Compile Include="konfiguracja\produkcja\PanelProdOperatorzy.xaml.cs">
+      <DependentUpon>PanelProdOperatorzy.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="planowanie\frmMeldunki.xaml.cs">
+      <DependentUpon>frmMeldunki.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="planowanie\frmMeldunkiWadyNN.xaml.cs">
+      <DependentUpon>frmMeldunkiWadyNN.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="planowanie\frmMeldunki_db.cs" />
+    <Compile Include="planowanie\frmPlanowanie2.xaml.cs">
+      <DependentUpon>frmPlanowanie2.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="planowanie\frmPlanowanie2_db.cs" />
+    <Compile Include="planowanie\frmZlecenieProdukcji.xaml.cs">
+      <DependentUpon>frmZlecenieProdukcji.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="planowanie\frmZlecenieProdukcji_db.cs" />
     <Compile Include="konfiguracja\PanelITF.xaml.cs">
       <DependentUpon>PanelITF.xaml</DependentUpon>
     </Compile>
@@ -213,17 +261,6 @@
     </Compile>
     <Compile Include="planowanie\MaszynaZlecenie.xaml.cs">
       <DependentUpon>MaszynaZlecenie.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="maszyny.cs">
-      <DependentUpon>PGEntity.tt</DependentUpon>
-    </Compile>
-    <Compile Include="parametry.cs">
-      <DependentUpon>PGEntity.tt</DependentUpon>
-    </Compile>
-    <Compile Include="PGEntity.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>PGEntity.tt</DependentUpon>
     </Compile>
     <Compile Include="produkcja\produkcja_db.cs" />
     <Compile Include="trace_kategoria.cs">
@@ -306,6 +343,26 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="frmParametry.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="konfiguracja\produkcja\PanelProdWyrobyWadyNN.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="konfiguracja\produkcja\PanelProdWyrobyDruty.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="konfiguracja\produkcja\PanelProdWyrobyTypy.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="konfiguracja\produkcja\PanelProdWyrobZakresSDR.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="konfiguracja\produkcja\PanelProdZaworyTypy.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -413,16 +470,6 @@
     <Compile Include="frmWyroby_db.cs" />
     <Compile Include="kodITF.cs" />
     <Compile Include="kodTrace.cs" />
-    <Compile Include="PGEntity.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>PGEntity.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="PGEntity.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>PGEntity.edmx</DependentUpon>
-    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -464,6 +511,11 @@
   <ItemGroup>
     <Resource Include="ikony\icons8-chevron-left-32.png" />
     <Resource Include="ikony\icons8-chevron-right-32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="konfiguracja\wanna\" />
+  </ItemGroup>
+  <ItemGroup>
     <Content Include="PGEntity.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>PGEntity.edmx</DependentUpon>
@@ -475,6 +527,13 @@
       <LastGenOutput>PGEntity.cs</LastGenOutput>
     </Content>
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\EntityFramework.6.3.0\build\EntityFramework.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.3.0\build\EntityFramework.props'))" />
+    <Error Condition="!Exists('..\packages\EntityFramework.6.3.0\build\EntityFramework.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\EntityFramework.6.3.0\build\EntityFramework.targets'))" />
+  </Target>
+  <Import Project="..\packages\EntityFramework.6.3.0\build\EntityFramework.targets" Condition="Exists('..\packages\EntityFramework.6.3.0\build\EntityFramework.targets')" />
 </Project>

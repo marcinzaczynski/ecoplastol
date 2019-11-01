@@ -99,7 +99,7 @@
             </Grid.ColumnDefinitions>
             <DatePicker Grid.Column="0" FontSize="24" VerticalContentAlignment="Center" x:Name="dpDataZleceniaOd" SelectedDateChanged="DpDataZleceniaOd_SelectedDateChanged"/>
             <DatePicker Grid.Column="1" FontSize="24" VerticalContentAlignment="Center" x:Name="dpDataZleceniaDo" SelectedDateChanged="DpDataZleceniaDo_SelectedDateChanged"/>
-            <ComboBox Grid.Column="2" FontSize="24" VerticalContentAlignment="Center" x:Name="cbbMaszyna" SelectionChanged="CbbMaszyna_SelectionChanged"/>
+            <ComboBox Grid.Column="2" FontSize="24" VerticalContentAlignment="Center" x:Name="cbbMaszyna" SelectionChanged="CbbMaszyna_SelectionChanged" IsEditable="True"/>
         </Grid>
         <DataGrid Grid.Row="2" Name="dgrdZlecenia" ItemsSource="{Binding}" AutoGenerateColumns="False" SelectionChanged="DgrdMeldunki_SelectionChanged" CanUserDeleteRows="False" CanUserAddRows="False" IsReadOnly="True">
             <DataGrid.Columns>
@@ -183,8 +183,8 @@
                     <ColumnDefinition Width="10"/>
                     <ColumnDefinition />
                 </Grid.ColumnDefinitions>
-                <ComboBox Grid.Column="0" FontSize="24" VerticalContentAlignment="Center" x:Name="cbbZlecenieMaszyna"/>
-                <ComboBox Grid.Column="2" FontSize="18" VerticalContentAlignment="Center" SelectedValuePath="id" x:Name="cbbWyrobKod"  >
+                <ComboBox Grid.Column="0" FontSize="24" VerticalContentAlignment="Center" SelectedValuePath="id" x:Name="cbbZlecenieMaszyna"/>
+                <ComboBox Grid.Column="2" FontSize="18" VerticalContentAlignment="Center" SelectedValuePath="id" SelectedValue="{Binding wyrob_kod}" x:Name="cbbWyrobKod"  >
                     <ComboBox.ItemTemplateSelector>
                         <ts:ComboBoxItemTemplateSelector>
                             <ts:ComboBoxItemTemplateSelector.SelectedTemplate>

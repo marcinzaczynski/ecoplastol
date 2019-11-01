@@ -59,5 +59,6 @@ namespace ecoplastol
         public int wyrob_norma { get; set; }
         public int wyrob_il_w_partii { get; set; }
         public bool aktywny { get; set; }
+        public decimal rez { get; set; }
     }
 }

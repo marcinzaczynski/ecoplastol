@@ -5,17 +5,30 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ecoplastol"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="1149.5" WindowState="Maximized" Closing="Window_Closing">
+        Title="MainWindow" Height="750" Width="1150" WindowState="Maximized" Closing="Window_Closing">
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="100"/>
+            <ColumnDefinition Width="300"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
+            <RowDefinition Height="100"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="50"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="50"/>
         </Grid.RowDefinitions>
-        <Button Grid.Row="0" Name="btnParametry" Content="PARAMETRY stare" HorizontalContentAlignment="Left" Height="40" Width="200" FontSize="24" Padding="10,0,0,0" Click="btnParametry_Click" Margin="201,10,741,319"/>
-        <Button Grid.Row="0" Name="btnWyroby" Content="WYROBY stare" HorizontalContentAlignment="Left" Width="200" Click="btnWyroby_Click" Height="40" Padding="10,0,0,0" FontSize="24" Margin="201,55,741,274"/>
-        <Button Grid.Row="0" Content="PLANOWANIE" FontSize="22" HorizontalContentAlignment="Left" Padding="10,0,0,0" Margin="28,128,566,0" VerticalAlignment="Top" Width="200" Name="btnPlanowanie2" Click="BtnPlanowanie2_Click" Height="40"/>
-        <Button Grid.Row="0" Content="ZLECENIA" HorizontalContentAlignment="Left" FontSize="22" Padding="10,0,0,0" Margin="201,173,741,0" VerticalAlignment="Top" Name="btnZlecenia" Click="BtnZlecenia_Click" Height="40" Width="200"/>
-        <Button Grid.Row="0" Content="KONFIGURACJA" HorizontalContentAlignment="Left" FontSize="22" Padding="10,0,0,0" Margin="201,218,741,0" VerticalAlignment="Top" Click="Button_Click" Height="40" Width="200"/>
-        <Button Grid.Row="1" FontSize="20" Name="btnZamknij" Content="Z A M K N I J" Click="BtnZamknij_Click"/>
+        <Button Grid.Row="1" Grid.Column="1" Name="btnParametry" Content="PARAMETRY stare" HorizontalContentAlignment="Left" Padding="10,0,0,0" Margin="0,5,0,5" FontSize="24" Click="btnParametry_Click"/>
+        <Button Grid.Row="2" Grid.Column="1" Name="btnWyroby" Content="WYROBY stare" HorizontalContentAlignment="Left" Click="btnWyroby_Click" Padding="10,0,0,0" Margin="0,5,0,5" FontSize="24"/>
+        <Button Grid.Row="3" Grid.Column="1" Name="btnPlanowanie2" Content="PLANOWANIE" FontSize="22" HorizontalContentAlignment="Left" Padding="10,0,0,0" Margin="0,5,0,5" Click="BtnPlanowanie2_Click" />
+        <Button Grid.Row="4" Grid.Column="1" Name="btnZlecenia" Content="ZLECENIA" HorizontalContentAlignment="Left" FontSize="22" Padding="10,0,0,0" Margin="0,5,0,5" Click="BtnZlecenia_Click" />
+        <Button Grid.Row="5" Grid.Column="1" Name="btnKonfiguracja" Content="KONFIGURACJA" HorizontalContentAlignment="Left" FontSize="22" Padding="10,0,0,0" Margin="0,5,0,5" Click="btnKonfiguracja_Click" />
+        <Button Grid.Row="100" Grid.Column="0" Grid.ColumnSpan="3" FontSize="20" Name="btnZamknij" Content="Z A M K N I J" Click="BtnZamknij_Click"/>
     </Grid>
 </Window>

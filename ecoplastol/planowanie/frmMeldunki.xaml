@@ -14,6 +14,7 @@
     </Window.Resources>
     <Window.CommandBindings>
         <CommandBinding Command="ApplicationCommands.Help" CanExecute="CzyMoznaZatwierdzic" Executed="Zatwierdz"/>
+        <CommandBinding Command="ApplicationCommands.Open" CanExecute="CzyMoznaDodac" Executed="Dodaj"/>
     </Window.CommandBindings>
     <Grid>
         <Grid.RowDefinitions>
@@ -306,7 +307,7 @@
             
         </Grid>
         <StackPanel Grid.Row="6" Orientation="Horizontal">
-            <Button Width="150" FontSize="18" Content="DODAJ" Name="btnDodaj" Click="BtnDodaj_Click"/>
+            <Button Width="150" FontSize="18" Content="DODAJ" Name="btnDodaj" Command="ApplicationCommands.Open"/>
             <Button Width="150" FontSize="18" Content="POPRAW" Name="btnPopraw" Click="BtnPopraw_Click"/>
             <Button Width="150" FontSize="18" Content="USUŃ" Name="btnUsun" Click="BtnUsun_Click"/>
             <Button Width="150" FontSize="18" Content="ANULUJ" Name="btnAnuluj" Click="BtnAnuluj_Click"/>

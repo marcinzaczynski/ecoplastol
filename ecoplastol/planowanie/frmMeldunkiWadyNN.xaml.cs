@@ -216,7 +216,7 @@ namespace ecoplastol.planowanie
             switch (akcja)
             {
                 case "D":
-                    MessageBox.Show("Dodajemy");
+                    //MessageBox.Show("Dodajemy");
 
                     var row = new meldunki_wady_nn();
                     var rowAktualny = grdDane.DataContext as PrzyczynyBrakowView;
@@ -232,7 +232,7 @@ namespace ecoplastol.planowanie
                     frmMeldunki_db.DodajPrzyczyneBraku(row);
                     break;
                 case "P":
-                    MessageBox.Show("Poprawiamy");
+                    //MessageBox.Show("Poprawiamy");
 
                     var row2 = new meldunki_wady_nn();
                     var rowAktualny2 = grdDane.DataContext as PrzyczynyBrakowView;
