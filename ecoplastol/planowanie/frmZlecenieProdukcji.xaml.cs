@@ -74,7 +74,7 @@ namespace ecoplastol
 
         private void UstawKontrolki()
         {
-            listaWyrobow = konf_produkcja_db.PobierzWyroby(true);
+            listaWyrobow = konf_produkcja_db.PobierzWyroby(true, -1);
 
             listTracePEm = PanelTrace_db.PobierzTracePem();
             listWyrobRodzajDrutu = konf_produkcja_db.PobierzDruty();

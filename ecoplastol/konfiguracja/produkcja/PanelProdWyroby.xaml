@@ -63,14 +63,24 @@
                 <RowDefinition Height="25"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="150"/>
+                <ColumnDefinition Width="150"/>
+                <ColumnDefinition Width="150"/>
+                <ColumnDefinition Width="150"/>
+                <ColumnDefinition Width="150"/>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="150"/>
                 <ColumnDefinition Width="150"/>
             </Grid.ColumnDefinitions>
-            <Button Grid.Row="0" Grid.Column="1" Content="Pokaż WSZYSTKIE" Name="btnPokazWszystkie" Click="BtnPokazWszystkie_Click"/>
-            <Button Grid.Row="0" Grid.Column="2" Content="Pokaż AKTYWNE" Name="btnPokazAktywne" Click="BtnPokazAktywne_Click"/>
-            <Label Grid.Row="1" Grid.Column="1" Content="Iość pozycji :" Padding="0,0,5,0" VerticalContentAlignment="Center" HorizontalAlignment="Right"/>
-            <Label Grid.Row="1" Grid.Column="2" Content="..." Padding="5,0,0,0" VerticalContentAlignment="Center" HorizontalAlignment="Left" Name="lblIloscPozycji"/>
+            <Button Grid.Row="0" Grid.Column="0" Content="ELEKTROOPOROWE" Name="btnPokazElektro" FontSize="14" FontWeight="DemiBold" Margin="5,2,5,2" Click="btnPokazElektro_Click"/>
+            <Button Grid.Row="0" Grid.Column="1" Content="DOCZOŁOWE" Name="btnPokazDoczolowe" FontSize="14" FontWeight="DemiBold" Margin="5,2,5,2" Click="btnPokazDoczolowe_Click"/>
+            <Button Grid.Row="0" Grid.Column="2" Content="ZAWORY" Name="btnPokazZawory" FontSize="14" FontWeight="DemiBold" Margin="5,2,5,2" Click="btnPokazZawory_Click"/>
+            <Button Grid.Row="0" Grid.Column="3" Content="ADAPTERY" Name="btnPokazAdaptery" FontSize="14" FontWeight="DemiBold" Margin="5,2,5,2" Click="btnPokazAdaptery_Click"/>
+            <Button Grid.Row="0" Grid.Column="4" Content="WSZYSTKIE" Name="btnPokazWszystkieKsztaltki" FontSize="14" FontWeight="DemiBold" Margin="5,2,5,2" Click="btnPokazWszystkieKsztaltki_Click" Foreground="Blue"/>
+            <Button Grid.Row="0" Grid.Column="6" Content="WSZYSTKIE" Name="btnPokazWszystkie" FontSize="14" FontWeight="DemiBold" Margin="5,2,5,2" Click="BtnPokazWszystkie_Click"/>
+            <Button Grid.Row="0" Grid.Column="7" Content="AKTYWNE" Name="btnPokazAktywne" FontSize="14" FontWeight="DemiBold" Margin="5,2,5,2" Click="BtnPokazAktywne_Click" Foreground="Blue"/>
+            <Label Grid.Row="1" Grid.Column="6" Content="Iość pozycji :" Padding="0,0,5,0" VerticalContentAlignment="Center" HorizontalAlignment="Right"/>
+            <Label Grid.Row="1" Grid.Column="7" Content="..." Padding="5,0,0,0" VerticalContentAlignment="Center" HorizontalAlignment="Left" Name="lblIloscPozycji"/>
         </Grid>
         <DataGrid x:Name="grdLista" Grid.Row="1" AutoGenerateColumns="False" ItemsSource="{Binding}" RowDetailsVisibilityMode="VisibleWhenSelected" SelectionChanged="GrdLista_SelectionChanged" IsReadOnly="true" Margin="0,0,0,0" >
 
@@ -118,6 +128,7 @@
                 <DataGridTextColumn x:Name="czaswColumn" Binding="{Binding czasw, StringFormat=\{0:yyyy-MM-dd HH:mm:ss\}}" Header="czasw" Width="100"/>
                 <DataGridTextColumn x:Name="opmColumn" Binding="{Binding opm}" Header="opm" Width="60"/>
                 <DataGridTextColumn x:Name="czasmColumn" Binding="{Binding czasm, StringFormat=\{0:yyyy-MM-dd HH:mm:ss\}}" Header="czasm" Width="100"/>
+                <DataGridTextColumn x:Name="rezColumn" Binding="{Binding rez}" Header="rez TEST" Width="SizeToHeader"/>
             </DataGrid.Columns>
         </DataGrid>
         <Grid x:Name="grdPozycje" ShowGridLines="False"  Grid.Row="2" Margin="0,0,0,0" >
@@ -760,6 +771,7 @@
                 <Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" FontSize="14" FontWeight="DemiBold" HorizontalContentAlignment="Center" Padding="0,3" Content="INNE"/>
                 <Label VerticalAlignment="Center" FontSize="14" Grid.Row="1" Grid.Column="0" Padding="10,0,0,0" Content="Zastosowanie zaworu :" />
                 <Label VerticalAlignment="Center" FontSize="14" Grid.Row="2" Grid.Column="0" Padding="10,0,0,0" Content="Rodzaj drutu :" />
+                <Label VerticalAlignment="Center" FontSize="14" Grid.Row="4" Grid.Column="0" Padding="10,0,0,0" Content="Rezystancja TEST :" />
                 <ComboBox x:Name="cbbWyrobZastZaworu" Grid.Row="1" Grid.Column="1" FontSize="14" SelectedValuePath="id" SelectedValue="{Binding wyrob_zast_zaworu}">
                     <ComboBox.ItemTemplateSelector>
                         <ts:ComboBoxItemTemplateSelector>
@@ -800,7 +812,9 @@
                         </ts:ComboBoxItemTemplateSelector>
                     </ComboBox.ItemTemplateSelector>
                 </ComboBox>
-
+                <TextBox Grid.Row="4" Grid.Column="1" x:Name="txtRezystancjaTEST" Text="{Binding rez}" FontSize="14" />
+                
+                
                 <Label Grid.Row="9" Grid.Column="0"  VerticalAlignment="Center" FontSize="14" Padding="10,0,0,0" Content="Aktywny :" />
                 <CheckBox Grid.Row="9" Grid.Column="1" VerticalAlignment="Center" FontSize="14" Padding="10,0,0,0" IsChecked="{Binding aktywny}" />
             </Grid>

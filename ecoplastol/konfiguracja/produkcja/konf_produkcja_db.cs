@@ -102,35 +102,77 @@ namespace ecoplastol.konfiguracja.produkcja
         /// WYROBY
         /// </summary>
 
-        public static List<wyroby> PobierzWyroby(bool aktywne)
+        public static List<wyroby> PobierzWyroby(bool aktywne, int typWyrobu)
         {
             using (var db = new ecoplastolEntities())
             {
                 List<wyroby> list = new List<wyroby>();
-                switch (aktywne)
+
+                switch (typWyrobu)
                 {
-                    case (true):
-                        list = (from wyr in db.wyroby
-                                    where wyr.aktywny == aktywne
-                                    orderby wyr.wyrob_kod ascending, wyr.wyrob_kod_indeks ascending
-                                    select wyr).ToList();
-                        break;
-                    case (false):
-                        list = (from wyr in db.wyroby
-                                orderby wyr.wyrob_kod ascending, wyr.wyrob_kod_indeks ascending
-                                select wyr).ToList();
-                        break;
-                    default:
-                        list = (from wyr in db.wyroby
-                                    where wyr.aktywny == aktywne
-                                    orderby wyr.wyrob_kod ascending, wyr.wyrob_kod_indeks ascending
-                                    select wyr).ToList();
+                    // wszystkie
+                    case (-1):
+                        switch (aktywne)
+                        {
+                            // wyświetl aktywne
+                            case (true):
+                                list = (from wyr in db.wyroby
+                                        where wyr.aktywny == aktywne
+                                        orderby wyr.wyrob_kod ascending, wyr.wyrob_kod_indeks ascending
+                                        select wyr).ToList();
+                                break;
+
+                            // wyświetl wszystkie
+                            case (false):
+                                list = (from wyr in db.wyroby
+                                        orderby wyr.wyrob_kod ascending, wyr.wyrob_kod_indeks ascending
+                                        select wyr).ToList();
+                                break;
+
+                            // defaultowo wyświetl aktywne
+                            default:
+                                list = (from wyr in db.wyroby
+                                        where wyr.aktywny == aktywne
+                                        orderby wyr.wyrob_kod ascending, wyr.wyrob_kod_indeks ascending
+                                        select wyr).ToList();
+                                break;
+                        }
+
                         break;
 
+                    
+                    case (0): // elektrooporowe
+                    case (1): // doczołowe
+                    case (2): // zawory
+                    case (3): // adaptery
+                        switch (aktywne)
+                        {
+                            // wyświetl aktywne
+                            case (true):
+                                list = (from wyr in db.wyroby
+                                        where wyr.aktywny == aktywne && wyr.wyrob_typ == typWyrobu
+                                        orderby wyr.wyrob_kod ascending, wyr.wyrob_kod_indeks ascending
+                                        select wyr).ToList();
+                                break;
+
+                            // wyświetl wszystkie
+                            case (false):
+                                list = (from wyr in db.wyroby
+                                        where wyr.wyrob_typ == typWyrobu
+                                        orderby wyr.wyrob_kod ascending, wyr.wyrob_kod_indeks ascending
+                                        select wyr).ToList();
+                                break;
+
+                            // defaultowo wyświetl aktywne
+                            default:
+                                list = (from wyr in db.wyroby
+                                        where wyr.aktywny == aktywne
+                                        orderby wyr.wyrob_kod ascending, wyr.wyrob_kod_indeks ascending
+                                        select wyr).ToList();
+                                break;
+                        }
+                        break;
                 }
-
-
-                
                 return list;
             }
         }
