@@ -123,6 +123,10 @@
     <Compile Include="frmKonfiguracja2.xaml.cs">
       <DependentUpon>frmKonfiguracja2.xaml</DependentUpon>
     </Compile>
+    <Compile Include="frmTools.xaml.cs">
+      <DependentUpon>frmTools.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="frmTools_db.cs" />
     <Compile Include="itf_cc.cs">
       <DependentUpon>PGEntity.tt</DependentUpon>
     </Compile>
@@ -342,7 +346,7 @@
       <DependentUpon>frmMain.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="frmParametry.xaml">
+    <Page Include="frmTools.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -387,10 +391,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="frmUzytkownicy.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="frmWyroby.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -456,18 +456,10 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="frmParametry.xaml.cs">
-      <DependentUpon>frmParametry.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="frmParametry_db.cs" />
     <Compile Include="frmUzytkownicy.xaml.cs">
       <DependentUpon>frmUzytkownicy.xaml</DependentUpon>
     </Compile>
     <Compile Include="frmUzytkownicy_db.cs" />
-    <Compile Include="frmWyroby.xaml.cs">
-      <DependentUpon>frmWyroby.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="frmWyroby_db.cs" />
     <Compile Include="kodITF.cs" />
     <Compile Include="kodTrace.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -487,6 +479,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="raporty\wyrob_karta_technologiczna.rdlc" />
     <None Include="packages.config" />
     <EntityDeploy Include="PGEntity.edmx">
       <Generator>EntityModelCodeGenerator</Generator>

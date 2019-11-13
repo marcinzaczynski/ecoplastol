@@ -505,7 +505,7 @@ namespace ecoplastol.planowanie
                         row.opm = frmLogin.LoggedUser.login;
                         row.czasm = DateTime.Now;
                         frmMeldunki_db.DodajMeldunek(row);
-                        frmMeldunki_db.PoprawIDPrzyczynyBrakow(row.id);
+                        frmMeldunki_db.PoprawIDPrzyczynyBrakow(row.id, row.id_zlecenie);
                         WyszukajMeldunki();
                     }
                     break;
@@ -530,7 +530,7 @@ namespace ecoplastol.planowanie
                     row2.opm = frmLogin.LoggedUser.login;
                     row2.czasm = DateTime.Now;
                     frmMeldunki_db.PoprawMeldunek(row2);
-                    frmMeldunki_db.PoprawIDPrzyczynyBrakow(row2.id);
+                    frmMeldunki_db.PoprawIDPrzyczynyBrakow(row2.id, row2.id_zlecenie);
                     break;
                 default:
                     break;

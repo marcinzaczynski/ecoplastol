@@ -30,23 +30,9 @@ namespace ecoplastol
             frmL = ptrF;
         }
 
-        private void btnWyroby_Click(object sender, RoutedEventArgs e)
-        {
-            frmWyroby frmWyroby = new frmWyroby();
-            ////DialogResult result = new DialogResult();
-            frmWyroby.ShowDialog();
-        }
-
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
             frmL.Close();
-        }
-
-        private void btnParametry_Click(object sender, RoutedEventArgs e)
-        {
-            frmParametry frmParametry = new frmParametry();
-            ////DialogResult result = new DialogResult();
-            frmParametry.ShowDialog();
         }
 
         private void btnKonfiguracja_Click(object sender, RoutedEventArgs e)
@@ -70,6 +56,12 @@ namespace ecoplastol
         {
             frmZleceniaProdukcyjne frmZleceniaProdukcyjne = new frmZleceniaProdukcyjne();
             frmZleceniaProdukcyjne.ShowDialog();
+        }
+
+        private void btnTools_Click(object sender, RoutedEventArgs e)
+        {
+            frmTools frmTools = new frmTools();
+            frmTools.ShowDialog();
         }
     }
 }

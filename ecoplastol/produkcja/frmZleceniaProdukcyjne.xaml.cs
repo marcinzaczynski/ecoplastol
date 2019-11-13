@@ -27,6 +27,7 @@ namespace ecoplastol
         private List<ZleceniaView> listaZlecen;
         private ZleceniaView rowZlecenie;
         private List<maszyny> listaMaszyn;
+        private List<maszyny> listaMaszynZlecenie;
         private List<wyroby> listaWyrobow;
 
         private List<trace_pe_m> listTracePEm;
@@ -55,7 +56,8 @@ namespace ecoplastol
 
         private void UstawKontrolki()
         {
-            listaWyrobow = konf_produkcja_db.PobierzWyroby(true, -1);
+            listaWyrobow = konf_produkcja_db.PobierzWyroby(false, -1);
+            listaMaszynZlecenie = konf_produkcja_db.PobierzMaszyny();
 
             listTracePEm = PanelTrace_db.PobierzTracePem();
             listWyrobRodzajDrutu = konf_produkcja_db.PobierzDruty();
@@ -66,7 +68,10 @@ namespace ecoplastol
             listITFcc1 = PanelITF_db.PobierzITFcc();
             listITFcc2 = PanelITF_db.PobierzITFcc();
 
+
             cbbWyrobKod.ItemsSource = listaWyrobow;
+            cbbZlecenieMaszyna.ItemsSource = listaMaszynZlecenie;
+
             cbbTracePEm.ItemsSource = listTracePEm;
             cbbWyrobRodzajDrutu.ItemsSource = listWyrobRodzajDrutu;
             cbbTraceProducent.ItemsSource = listTraceProducent;

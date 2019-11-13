@@ -44,7 +44,7 @@ namespace ecoplastol
         public int itf_smax { get; set; }
         public int itf_trn { get; set; }
         public string itf_prn { get; set; }
-        public string itf_rez { get; set; }
+        public decimal itf_rez { get; set; }
         public int itf_odch { get; set; }
         public string itf_cz1 { get; set; }
         public string itf_cz2 { get; set; }

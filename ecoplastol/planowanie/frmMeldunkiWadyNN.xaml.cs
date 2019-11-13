@@ -28,12 +28,14 @@ namespace ecoplastol.planowanie
 
         private string akcja;
         private int idMeldunku;
+        private int idZlecenia;
         private int dgBookmark;
 
         public frmMeldunkiWadyNN(DateTime data, int maszyna, int zlecenie, int zmiana, int op, int idMel)
         {
             InitializeComponent();
             idMeldunku = idMel;
+            idZlecenia = zlecenie;
             lblData.Content = string.Format("{0:yyyy-MM-dd}", data);
             lblMaszyna.Content = konf_produkcja_db.PobierzNazweMaszyny(maszyna);
             lblZlecenie.Content = frmZlecenieProdukcji_db.PobierzKodZlecenia(zlecenie);
@@ -105,6 +107,7 @@ namespace ecoplastol.planowanie
             rowPrzyczyna = new PrzyczynyBrakowView();
 
             rowPrzyczyna.id_meldunek = idMeldunku;
+            rowPrzyczyna.id_zlecenie = idZlecenia;
             grdDane.DataContext = rowPrzyczyna;
 
             dgrdLista.IsEnabled = false;
@@ -222,6 +225,8 @@ namespace ecoplastol.planowanie
                     var rowAktualny = grdDane.DataContext as PrzyczynyBrakowView;
                     row.id = frmMeldunki_db.IdPrzyczynyBraku();
                     row.id_meldunek = 0;
+                    row.id_zlecenie = 0;
+                    
                     row.id_wada_nn = rowAktualny.id_wada_nn;
                     row.ilosc = rowAktualny.ilosc;
 
@@ -238,6 +243,7 @@ namespace ecoplastol.planowanie
                     var rowAktualny2 = grdDane.DataContext as PrzyczynyBrakowView;
                     row2.id = rowAktualny2.id;
                     row2.id_meldunek = rowAktualny2.id_meldunek;
+                    row2.id_zlecenie = rowAktualny2.id_zlecenie;
                     row2.id_wada_nn = rowAktualny2.id_wada_nn;
                     row2.ilosc = rowAktualny2.ilosc;
                     row2.opw = rowAktualny2.opw;

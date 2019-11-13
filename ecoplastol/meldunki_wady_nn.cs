@@ -16,6 +16,7 @@ namespace ecoplastol
     {
         public int id { get; set; }
         public int id_meldunek { get; set; }
+        public int id_zlecenie { get; set; }
         public int id_wada_nn { get; set; }
         public int ilosc { get; set; }
         public string opw { get; set; }

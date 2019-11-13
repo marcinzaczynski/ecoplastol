@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -382,15 +383,15 @@ namespace ecoplastol.konfiguracja.produkcja
         {
             var str = e.Text;
             string aa = txtITFrez.Text;
-            int count = aa.Count(f => f == ',');
+            int count = aa.Count(f => f == '.');
             //if (count == 0 )
-            if (str == "," && count > 0)
+            if (str == "." && count > 0)
             {
                 e.Handled = true;
             }
             else
             {
-                Regex _regex = new Regex("[^0-9,]+");
+                Regex _regex = new Regex("[^0-9.]+");
                 bool result = _regex.IsMatch(str);
                 e.Handled = result;
             }
@@ -1352,12 +1353,25 @@ namespace ecoplastol.konfiguracja.produkcja
 
         private void TxtITFrez_KeyUp(object sender, KeyEventArgs e)
         {
-            if (!Int32.TryParse(txtITFrez.Text, out int value))
+            //if (!Int32.TryParse(txtITFrez.Text, out int value))
+            //{
+            //    value = 0;
+            //}
+            var style = NumberStyles.AllowDecimalPoint;
+            var culture = CultureInfo.CreateSpecificCulture("en-EN");
+            if (!Decimal.TryParse(txtITFrez.Text,style, culture, out decimal value))
             {
                 value = 0;
+            } else
+            { 
+            
             }
+                
+             
 
-            string result = String.Format("{0,3:000}", value);
+            string result = String.Format("{0,1:000}", value);
+            result = value.ToString("0.00");
+            result = string.Join("", result.Where(char.IsDigit));
             kodITF.rez = result;
 
             kodITF.GenerujKody();

@@ -13,7 +13,7 @@
                 <globals:BackgroundColor x:Key="valueToBackground"/>
                 <globals:RezystancjaConverter x:Key="rezConverter"/>
             
-                <Style TargetType="Button" x:Key="btnGradientOrange">
+            <Style TargetType="Button" x:Key="btnGradientOrange">
                 <Setter Property="Background">
                     <Setter.Value>
                         <LinearGradientBrush StartPoint="1,0" EndPoint="1,1">
@@ -88,9 +88,8 @@
                 <DataGridTextColumn x:Name="idColumn" Binding="{Binding id}"  Header="id" Width="SizeToHeader" Visibility="Hidden"/>
                 <DataGridTextColumn x:Name="wyrob_kodColumn" Binding="{Binding wyrob_kod}" Header="Kod" Width="100"/>
                 <DataGridTextColumn x:Name="wyrob_kod_indeksColumn" Binding="{Binding wyrob_kod_indeks}" Header="Indeks" Width="100"/>
-                <DataGridTextColumn x:Name="wyrob_kod_opisColumn" Binding="{Binding wyrob_kod_opis}" Header="Opis" Width="*"/>
+                <!--<DataGridTextColumn x:Name="wyrob_kod_opisColumn" Binding="{Binding wyrob_kod_opis}" Header="Opis" Width="*"/>
                 <DataGridTextColumn x:Name="wyrob_typColumn" Binding="{Binding wyrob_typ}" Header="Typ" Width="SizeToHeader"/>
-                <DataGridComboBoxColumn Header="Typ" Width="100" SelectedValuePath="indeks" DisplayMemberPath="parametr" ItemsSource="{Binding listTypyWyrobow}"/>
                 <DataGridTextColumn x:Name="wyrob_il_w_op_zbColumn" Binding="{Binding wyrob_il_w_op_zb}" Header="wyrob il w op zb" Width="SizeToHeader"/>
                 <DataGridTextColumn x:Name="wyrob_waga_opColumn" Binding="{Binding wyrob_waga_op}" Header="wyrob waga op" Width="SizeToHeader"/>
                 <DataGridTextColumn x:Name="wyrob_waga_1sztColumn" Binding="{Binding wyrob_waga_1szt}" Header="wyrob waga 1 szt" Width="SizeToHeader"/>
@@ -106,9 +105,9 @@
                 <DataGridTextColumn x:Name="itf_sminColumn" Binding="{Binding itf_smin}" Header="itf smin" Width="SizeToHeader"/>
                 <DataGridTextColumn x:Name="itf_smaxColumn" Binding="{Binding itf_smax}" Header="itf smax" Width="SizeToHeader"/>
                 <DataGridTextColumn x:Name="itf_trnColumn" Binding="{Binding itf_trn}" Header="itf trn" Width="SizeToHeader"/>
-                <DataGridTextColumn x:Name="itf_prnColumn" Binding="{Binding itf_prn}" Header="itf prn" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="itf_prnColumn" Binding="{Binding itf_prn}" Header="itf prn" Width="SizeToHeader"/>-->
                 <DataGridTextColumn x:Name="itf_rezColumn" Binding="{Binding itf_rez}" Header="Rezystancja" Width="SizeToHeader"/>
-                <DataGridTextColumn x:Name="itf_odchColumn" Binding="{Binding itf_odch}" Header="itf odch" Width="SizeToHeader"/>
+                <!--<DataGridTextColumn x:Name="itf_odchColumn" Binding="{Binding itf_odch}" Header="itf odch" Width="SizeToHeader"/>
                 <DataGridTextColumn x:Name="itf_cz1Column" Binding="{Binding itf_cz1}" Header="itf cz 1" Width="SizeToHeader"/>
                 <DataGridTextColumn x:Name="itf_cz2Column" Binding="{Binding itf_cz2}" Header="itf cz 2" Width="SizeToHeader"/>
                 <DataGridTextColumn x:Name="itf_keColumn" Binding="{Binding itf_ke}" Header="itf ke" Width="SizeToHeader"/>
@@ -123,12 +122,12 @@
                 <DataGridTextColumn x:Name="trace_pe_mColumn" Binding="{Binding trace_pe_m}" Header="trace pe m" Width="SizeToHeader"/>
                 <DataGridTextColumn x:Name="trace_materialColumn" Binding="{Binding trace_material}" Header="trace material" Width="SizeToHeader"/>
                 <DataGridTextColumn x:Name="trace_pe_oColumn" Binding="{Binding trace_pe_o}" Header="trace pe o" Width="SizeToHeader"/>
-                <DataGridTextColumn x:Name="trace_mfrColumn" Binding="{Binding trace_mfr}" Header="trace mfr" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="trace_mfrColumn" Binding="{Binding trace_mfr}" Header="trace mfr" Width="SizeToHeader"/>-->
                 <DataGridTextColumn x:Name="opwColumn" Binding="{Binding opw}" Header="opw" Width="60"/>
                 <DataGridTextColumn x:Name="czaswColumn" Binding="{Binding czasw, StringFormat=\{0:yyyy-MM-dd HH:mm:ss\}}" Header="czasw" Width="100"/>
                 <DataGridTextColumn x:Name="opmColumn" Binding="{Binding opm}" Header="opm" Width="60"/>
                 <DataGridTextColumn x:Name="czasmColumn" Binding="{Binding czasm, StringFormat=\{0:yyyy-MM-dd HH:mm:ss\}}" Header="czasm" Width="100"/>
-                <DataGridTextColumn x:Name="rezColumn" Binding="{Binding rez}" Header="rez TEST" Width="SizeToHeader"/>
+                <!--<DataGridTextColumn x:Name="rezColumn" Binding="{Binding rez}" Header="rez TEST" Width="SizeToHeader"/>-->
             </DataGrid.Columns>
         </DataGrid>
         <Grid x:Name="grdPozycje" ShowGridLines="False"  Grid.Row="2" Margin="0,0,0,0" >
@@ -812,7 +811,7 @@
                         </ts:ComboBoxItemTemplateSelector>
                     </ComboBox.ItemTemplateSelector>
                 </ComboBox>
-                <TextBox Grid.Row="4" Grid.Column="1" x:Name="txtRezystancjaTEST" Text="{Binding rez}" FontSize="14" />
+                <!--<TextBox Grid.Row="4" Grid.Column="1" x:Name="txtRezystancjaTEST" Text="{Binding rez}" FontSize="14" />-->
                 
                 
                 <Label Grid.Row="9" Grid.Column="0"  VerticalAlignment="Center" FontSize="14" Padding="10,0,0,0" Content="Aktywny :" />

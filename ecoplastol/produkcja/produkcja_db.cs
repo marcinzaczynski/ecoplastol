@@ -39,7 +39,7 @@ namespace ecoplastol.produkcja
         public int itf_smax { get; set; }
         public int itf_trn { get; set; }
         public string itf_prn { get; set; }
-        public string itf_rez { get; set; }
+        public decimal itf_rez { get; set; }
         public int itf_odch { get; set; }
         public string itf_cz1 { get; set; }
         public string itf_cz2 { get; set; }
@@ -61,6 +61,13 @@ namespace ecoplastol.produkcja
         public string opm { get; set; }
         public DateTime czasm { get; set; }
 
+        //dodatkowe pola na potrzeby wyświetlania listy - opisy wartości int z tabeli meldunki
+        public string nazwa_maszyny { get; set; }
+        public string znak1 { get; set; }
+        public string znak2 { get; set; }
+        public int? ilosc_wykonanych { get; set; }
+        public int? ilosc_techn { get; set; }
+        public int? ilosc_nn { get; set; }
     }
 
 
@@ -71,11 +78,19 @@ namespace ecoplastol.produkcja
             using (var db = new ecoplastolEntities())
             {
                 var list = (from z in db.zlecenia_produkcyjne
+                            from m in db.maszyny
+                            from l in db.itf_litery
+                            from l2 in db.itf_litery
+                            //from ml in db.meldunki
                             where
                                     //m.id_zlecenie == nrZlecenia &&
                                     //(nrZlecenia > 0) ? m.id_zlecenie == nrZlecenia : m.id_zlecenie.ToString().Contains("*") &&
                                     z.zlecenie_data_rozp >= dataOd &&
-                                    z.zlecenie_data_rozp <= dataDo
+                                    z.zlecenie_data_rozp <= dataDo && 
+                                    z.zlecenie_nr_maszyny == m.id &&
+                                    z.itf_znak1 == l.id &&
+                                    z.itf_znak2 == l2.id 
+                               
                             orderby z.zlecenie_data_rozp descending
                             select new ZleceniaView
                             {
@@ -130,13 +145,22 @@ namespace ecoplastol.produkcja
                                 opw = z.opw,
                                 czasw = z.czasw,
                                 opm = z.opm,
-                                czasm = z.czasm 
+                                czasm = z.czasm,
+                            
+                                nazwa_maszyny = m.nazwa,
+                                znak1 = l.wartosc,
+                                znak2 = l2.wartosc,
+                                ilosc_wykonanych = (from ml in db.meldunki where  ml.id_zlecenie == z.id select ml.ilosc).Sum(),
+                                ilosc_techn = (from ml in db.meldunki where ml.id_zlecenie == z.id select ml.ilosc_techn).Sum(),
+                                ilosc_nn = (from ml in db.meldunki_wady_nn where ml.id_zlecenie == z.id select ml.ilosc).Sum()
                             });
 
                 if (idMaszyny > 0)
                 {
                     list = list.Where(r => r.zlecenie_nr_maszyny == idMaszyny);
                 }
+
+                //list.ToList().Select(c => c.ilosc_wykonanych).Sum();
 
                 return list.ToList();
             }

@@ -47,6 +47,7 @@ namespace ecoplastol.planowanie
         // pola z tabeli meldunki_wady_nn
         public int id { get; set; }
         public int id_meldunek { get; set; }
+        public int id_zlecenie { get; set; }
         public int id_wada_nn { get; set; }
         public int ilosc { get; set; }
         public string opw { get; set; }
@@ -324,6 +325,7 @@ namespace ecoplastol.planowanie
                                 // pola z tabeli meldunki_wady_nn
                                 id = mw.id,
                                 id_meldunek = mw.id_meldunek,
+                                id_zlecenie = mw.id_zlecenie,
                                 id_wada_nn = mw.id_wada_nn,
                                 ilosc = mw.ilosc,
                                 opw = mw.opw,
@@ -429,7 +431,7 @@ namespace ecoplastol.planowanie
             }
         }
 
-        public static void PoprawIDPrzyczynyBrakow(int idMeldunku)
+        public static void PoprawIDPrzyczynyBrakow(int idMeldunku, int idZlecenia)
         {
             // przy dodawaniu przyczyn braków, zawdze jako id_meldunku podaje 0
             // przy zatwierdzaniu poprwiam na prawidłowy numer meldunku a przy anulowaniu usuwam te z 0
@@ -438,6 +440,12 @@ namespace ecoplastol.planowanie
                 (from w in db.meldunki_wady_nn
                  where w.id_meldunek == 0
                  select w).ToList().ForEach(x => x.id_meldunek = idMeldunku);
+
+                db.SaveChanges();
+
+                (from w in db.meldunki_wady_nn
+                 where w.id_zlecenie == 0
+                 select w).ToList().ForEach(x => x.id_zlecenie = idZlecenia);
 
                 db.SaveChanges();
             }

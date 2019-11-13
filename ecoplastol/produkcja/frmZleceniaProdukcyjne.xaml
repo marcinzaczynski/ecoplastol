@@ -11,8 +11,8 @@
         Loaded="Window_Loaded">
     <Window.Resources>
         <ResourceDictionary>
-            <globals:BackgroundColor x:Key="valueToBackground"/>
-            <globals:RezystancjaConverter x:Key="rezConverter"/>
+            <!--<globals:BackgroundColor x:Key="valueToBackground"/>
+            <globals:RezystancjaConverter x:Key="rezConverter"/>-->
 
             <Style x:Key="styleCalendar" TargetType="{x:Type Calendar}">
                 <Setter Property="Template">
@@ -43,7 +43,8 @@
                 <Setter Property="Background">
                     <Setter.Value>
                         <LinearGradientBrush StartPoint="1,0" EndPoint="1,1">
-                            <GradientStop Color="LightGreen" Offset="1"/>
+                            <!--<GradientStop Color="LightGreen" Offset="1"/>-->
+                            <GradientStop Color="#FFBFEDBF" Offset="1"/>
                             <GradientStop Color="White" Offset="0.01"/>
                         </LinearGradientBrush>
                     </Setter.Value>
@@ -53,7 +54,7 @@
                 <Setter Property="Background">
                     <Setter.Value>
                         <LinearGradientBrush StartPoint="1,0" EndPoint="1,1">
-                            <GradientStop Color="#FFFF8D8D" Offset="1"/>
+                            <GradientStop Color="#FFFFCFCF" Offset="1"/>
                             <GradientStop Color="White" Offset="0.01"/>
                         </LinearGradientBrush>
                     </Setter.Value>
@@ -103,10 +104,16 @@
         </Grid>
         <DataGrid Grid.Row="2" Name="dgrdZlecenia" ItemsSource="{Binding}" AutoGenerateColumns="False" SelectionChanged="DgrdMeldunki_SelectionChanged" CanUserDeleteRows="False" CanUserAddRows="False" IsReadOnly="True">
             <DataGrid.Columns>
-                <!--id-->
+                <DataGridTextColumn Header="Nr zlecenia" Binding="{Binding id}"/>
                 <!--wyrob_kod_id-->
                 <DataGridTextColumn Header="Kod" Binding="{Binding wyrob_kod}"/>
                 <DataGridTextColumn Header="Indeks" Binding="{Binding wyrob_kod_indeks}"/>
+                <DataGridTextColumn Header="Maszyna" Binding="{Binding nazwa_maszyny}"/>
+                <DataGridTextColumn Header="Z1" Binding="{Binding znak1}"/>
+                <DataGridTextColumn Header="Z2" Binding="{Binding znak2}"/>
+                <DataGridTextColumn Header="Wykonane" Binding="{Binding ilosc_wykonanych}"/>
+                <DataGridTextColumn Header="Wady technologiczne" Binding="{Binding ilosc_techn}"/>
+                <DataGridTextColumn Header="Wady NN" Binding="{Binding ilosc_nn}"/>
                 <!--wyrob_kod_opis-->
                 <!--wyrob_typ-->
                 <!--wyrob_il_w_op_zb-->
@@ -114,18 +121,18 @@
                 <!--wyrob_waga_1szt-->
                 <!--wyrob_zakres_sdr-->
                 <!--wyrob_zast_zaworu-->
-                <DataGridTextColumn Header="Drut" Binding="{Binding wyrob_rodzaj_drutu}"/>
-                <DataGridTextColumn Header="Norma" Binding="{Binding wyrob_norma}"/>
+                <!--<DataGridTextColumn Header="Drut" Binding="{Binding wyrob_rodzaj_drutu}"/>-->
+                <!--<DataGridTextColumn Header="Norma" Binding="{Binding wyrob_norma}"/>-->
                 <!--wyrob_il_w_partii-->
-                <DataGridTextColumn Header="Maszyna" Binding="{Binding zlecenie_nr_maszyny}"/>
+                <!--<DataGridTextColumn Header="Maszyna" Binding="{Binding zlecenie_nr_maszyny}"/>-->
                 <DataGridTextColumn Header="Ilość" Binding="{Binding zlecenie_ilosc}"/>
                 <DataGridTextColumn Header="Data rozpoczęcia" Binding="{Binding zlecenie_data_rozp, StringFormat=\{0:yyyy-MM-dd\}}"/>
                 <DataGridTextColumn Header="Data zakończenia" Binding="{Binding zlecenie_data_zak, StringFormat=\{0:yyyy-MM-dd\}}"/>
-                <DataGridTextColumn Header="Nr partii surowca" Binding="{Binding zlecenie_nr_partii_surowca}"/>
-                <DataGridTextColumn Header="Nr partii drutu" Binding="{Binding zlecenie_nr_partii_drutu}"/>
+                <!--<DataGridTextColumn Header="Nr partii surowca" Binding="{Binding zlecenie_nr_partii_surowca}"/>-->
+                <!--<DataGridTextColumn Header="Nr partii drutu" Binding="{Binding zlecenie_nr_partii_drutu}"/>-->
                 <!--itf_kategoria-->
-                <DataGridTextColumn Header="Z1" Binding="{Binding itf_znak1}"/>
-                <DataGridTextColumn Header="Z2" Binding="{Binding itf_znak2}"/>
+                <!--<DataGridTextColumn Header="Z1" Binding="{Binding itf_znak1}"/>-->
+                <!--<DataGridTextColumn Header="Z2" Binding="{Binding itf_znak2}"/>-->
                 <!--itf_icc-->
                 <!--itf_cc1-->
                 <!--itf_cc2-->
@@ -133,20 +140,20 @@
                 <!--itf_smax-->
                 <!--itf_trn-->
                 <!--itf_prn-->
-                <DataGridTextColumn Header="Rez" Binding="{Binding itf_rez}"/>
+                <!--<DataGridTextColumn Header="Rez" Binding="{Binding itf_rez}"/>-->
                 <!--itf_odch-->
-                <DataGridTextColumn Header="CZ1" Binding="{Binding itf_cz1}"/>
-                <DataGridTextColumn Header="CZ2" Binding="{Binding itf_cz2}"/>
+                <!--<DataGridTextColumn Header="CZ1" Binding="{Binding itf_cz1}"/>-->
+                <!--<DataGridTextColumn Header="CZ2" Binding="{Binding itf_cz2}"/>-->
                 <!--itf_ke-->
                 <!--trace_znak1-->
                 <!--trace_znak2-->
                 <!--trace_kategoria-->
                 <!--trace_smin-->
                 <!--trace_smax-->
-                <DataGridTextColumn Header="Partia" Binding="{Binding trace_partia}"/>
+                <!--<DataGridTextColumn Header="Partia" Binding="{Binding trace_partia}"/>-->
                 <!--trace_producent-->
-                <DataGridTextColumn Header="SDR" Binding="{Binding trace_sdr}"/>
-                <DataGridTextColumn Header="Mieszanka" Binding="{Binding trace_pe_m}"/>
+                <!--<DataGridTextColumn Header="SDR" Binding="{Binding trace_sdr}"/>-->
+                <!--<DataGridTextColumn Header="Mieszanka" Binding="{Binding trace_pe_m}"/>-->
                 <!--trace_material-->
                 <!--trace_pe_o-->
                 <!--trace_mfr-->
@@ -154,6 +161,7 @@
                 <DataGridTextColumn Header="czasw" Binding="{Binding czasw, StringFormat=\{0:yyyy-MM-dd HH:mm\}}"/>
                 <DataGridTextColumn Header="opm" Binding="{Binding opm}"/>
                 <DataGridTextColumn Header="czasm" Binding="{Binding czasm, StringFormat=\{0:yyyy-MM-dd HH:mm\}}"/>
+                
             </DataGrid.Columns>
         </DataGrid>
         <Grid Grid.Row="3" Name="grdDane">
@@ -183,8 +191,8 @@
                     <ColumnDefinition Width="10"/>
                     <ColumnDefinition />
                 </Grid.ColumnDefinitions>
-                <ComboBox Grid.Column="0" FontSize="24" VerticalContentAlignment="Center" SelectedValuePath="id" x:Name="cbbZlecenieMaszyna"/>
-                <ComboBox Grid.Column="2" FontSize="18" VerticalContentAlignment="Center" SelectedValuePath="id" SelectedValue="{Binding wyrob_kod}" x:Name="cbbWyrobKod"  >
+                <ComboBox Grid.Column="0" FontSize="24" VerticalContentAlignment="Center" SelectedValuePath="id" SelectedValue="{Binding zlecenie_nr_maszyny}" DisplayMemberPath="nazwa" x:Name="cbbZlecenieMaszyna"/>
+                <ComboBox Grid.Column="2" FontSize="24" VerticalContentAlignment="Center" SelectedValuePath="id" SelectedValue="{Binding wyrob_kod_id}" x:Name="cbbWyrobKod"  >
                     <ComboBox.ItemTemplateSelector>
                         <ts:ComboBoxItemTemplateSelector>
                             <ts:ComboBoxItemTemplateSelector.SelectedTemplate>
@@ -204,8 +212,8 @@
                         </ts:ComboBoxItemTemplateSelector>
                     </ComboBox.ItemTemplateSelector>
                 </ComboBox>
-                <TextBox Grid.Column="4" FontSize="18" Padding="0" Margin="0,0,3,0" VerticalContentAlignment="Center" Text="{Binding wyrob_kod_indeks}"/>
-                <TextBox Grid.Column="6" FontSize="18" Padding="0" VerticalContentAlignment="Center" Text="{Binding wyrob_kod_opis}"/>
+                <TextBox Grid.Column="4" FontSize="24" Padding="0" Margin="0,0,3,0" VerticalContentAlignment="Center" Text="{Binding wyrob_kod_indeks}"/>
+                <TextBox Grid.Column="6" FontSize="24" Padding="0" VerticalContentAlignment="Center" Text="{Binding wyrob_kod_opis}"/>
             </Grid>
             
             <Grid Grid.Row="3" Grid.Column="1">
@@ -461,11 +469,11 @@
             </Grid>
         </Grid>
         <StackPanel Grid.Row="5" Orientation="Horizontal">
-            <Button Width="150" FontSize="18" Content="DODAJ" Name="btnDodaj" Click="BtnDodaj_Click"/>
-            <Button Width="150" FontSize="18" Content="POPRAW" Name="btnPopraw" Click="BtnPopraw_Click"/>
-            <Button Width="150" FontSize="18" Content="USUŃ" Name="btnUsun" Click="BtnUsun_Click"/>
-            <Button Width="150" FontSize="18" Content="ANULUJ" Name="btnAnuluj" Click="BtnAnuluj_Click"/>
-            <Button Width="150" FontSize="18" Content="ZATWIERDŹ" Name="btnZatwierdz" Command="ApplicationCommands.Help"/>
+            <Button Width="150" Style="{StaticResource btnGradientLightGreen}" FontSize="18" Content="DODAJ" Name="btnDodaj" Click="BtnDodaj_Click"/>
+            <Button Width="150" Style="{StaticResource btnGradientLightGreen}" FontSize="18" Content="POPRAW" Name="btnPopraw" Click="BtnPopraw_Click"/>
+            <Button Width="150" Style="{StaticResource btnGradientRed}" FontSize="18" Content="USUŃ" Name="btnUsun" Click="BtnUsun_Click"/>
+            <Button Width="150" Style="{StaticResource btnGradientRed}" FontSize="18" Content="ANULUJ" Name="btnAnuluj" Click="BtnAnuluj_Click"/>
+            <Button Width="150" Style="{StaticResource btnGradientLightGreen}" FontSize="18" Content="ZATWIERDŹ" Name="btnZatwierdz" Command="ApplicationCommands.Help"/>
         </StackPanel>
 
         <Button Grid.Row="7" FontSize="20" Content="Z A M K N I J" x:Name="btnZamknij" Click="BtnZamknij_Click"/>

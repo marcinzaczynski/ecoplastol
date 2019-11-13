@@ -25,6 +25,8 @@ namespace ecoplastol
         public int wyrob_zakres_sdr { get; set; }
         public Nullable<int> wyrob_zast_zaworu { get; set; }
         public Nullable<int> wyrob_rodzaj_drutu { get; set; }
+        public int wyrob_norma { get; set; }
+        public int wyrob_il_w_partii { get; set; }
         public int itf_kategoria { get; set; }
         public int itf_znak1 { get; set; }
         public int itf_znak2 { get; set; }
@@ -35,7 +37,7 @@ namespace ecoplastol
         public int itf_smax { get; set; }
         public int itf_trn { get; set; }
         public string itf_prn { get; set; }
-        public string itf_rez { get; set; }
+        public decimal itf_rez { get; set; }
         public int itf_odch { get; set; }
         public string itf_cz1 { get; set; }
         public string itf_cz2 { get; set; }
@@ -52,13 +54,10 @@ namespace ecoplastol
         public int trace_material { get; set; }
         public int trace_pe_o { get; set; }
         public int trace_mfr { get; set; }
+        public bool aktywny { get; set; }
         public string opw { get; set; }
         public System.DateTime czasw { get; set; }
         public string opm { get; set; }
         public System.DateTime czasm { get; set; }
-        public int wyrob_norma { get; set; }
-        public int wyrob_il_w_partii { get; set; }
-        public bool aktywny { get; set; }
-        public decimal rez { get; set; }
     }
 }
