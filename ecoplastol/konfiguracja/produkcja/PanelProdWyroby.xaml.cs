@@ -16,6 +16,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using ecoplastol.konfiguracja.traceability;
+using ecoplastol.raporty;
 
 namespace ecoplastol.konfiguracja.produkcja
 {
@@ -1669,6 +1670,12 @@ namespace ecoplastol.konfiguracja.produkcja
             listWyroby = konf_produkcja_db.PobierzWyroby(widoczneWyroby, typFiltrTypKsztaltki);
             grdLista.ItemsSource = listWyroby;
             lblIloscPozycji.Content = listWyroby.Count().ToString();
+        }
+
+        private void btnKartaTechn_Click(object sender, RoutedEventArgs e)
+        {
+            frmWyrobKartaTechnologiczna frmWyrobKartaTechnologiczna = new frmWyrobKartaTechnologiczna();
+            frmWyrobKartaTechnologiczna.ShowDialog();
         }
     }
 }
