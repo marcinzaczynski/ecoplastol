@@ -17,6 +17,10 @@ namespace ecoplastol
         public int id { get; set; }
         public string imie { get; set; }
         public string nazwisko { get; set; }
+        public string login { get; set; }
+        public string haslo { get; set; }
+        public bool aktywny { get; set; }
+        public int brygada { get; set; }
         public string opw { get; set; }
         public System.DateTime czasw { get; set; }
         public string opm { get; set; }
