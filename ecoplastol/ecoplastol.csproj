@@ -133,6 +133,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="brygadzisci.cs">
+      <DependentUpon>PGEntity.tt</DependentUpon>
+    </Compile>
     <Compile Include="frmKonfiguracja2.xaml.cs">
       <DependentUpon>frmKonfiguracja2.xaml</DependentUpon>
     </Compile>

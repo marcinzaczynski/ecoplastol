@@ -24,9 +24,8 @@ namespace ecoplastol
             InitializeComponent();
         }
 
-        private void btnWyroby_Click(object sender, RoutedEventArgs e)
+        private void btnOperatorzy_Click(object sender, RoutedEventArgs e)
         {
-
 
         }
     }

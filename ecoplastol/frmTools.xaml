@@ -7,8 +7,16 @@
         mc:Ignorable="d"
         Title="frmTools" Height="450" Width="800">
     <Grid>
-        
-        <Button Content="koiowanie wyroby -> wyroby2" Name="btnWyroby" HorizontalAlignment="Left" Margin="50,35,0,0" VerticalAlignment="Top" Width="190" Click="btnWyroby_Click"/>
+
+        <Button Content="koiowanie wyroby -> wyroby2" Name="btnOperatorzy" HorizontalAlignment="Left" Margin="50,35,0,0" VerticalAlignment="Top" Width="190" Click="btnOperatorzy_Click"/>
+        <TabControl HorizontalAlignment="Left" Height="100" Margin="102,196,0,0" VerticalAlignment="Top" Width="511">
+            <TabItem Header="Dane identyfikacyjne">
+                <Grid Background="#FFE5E5E5"/>
+            </TabItem>
+            <TabItem Header="Dane produkcyjne">
+                <Grid Background="#FFE5E5E5"/>
+            </TabItem>
+        </TabControl>
 
     </Grid>
 </Window>
