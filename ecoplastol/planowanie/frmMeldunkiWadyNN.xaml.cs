@@ -37,10 +37,10 @@ namespace ecoplastol.planowanie
             idMeldunku = idMel;
             idZlecenia = zlecenie;
             lblData.Content = string.Format("{0:yyyy-MM-dd}", data);
-            lblMaszyna.Content = konf_produkcja_db.PobierzNazweMaszyny(maszyna);
+            lblMaszyna.Content = PanelProdMaszyny_db.PobierzNazweMaszyny(maszyna);
             lblZlecenie.Content = frmZlecenieProdukcji_db.PobierzKodZlecenia(zlecenie);
-            lblZmiana.Content = konf_produkcja_db.PobierzNazweZmiany(zmiana);
-            lblOperator.Content = konf_produkcja_db.PobierzImieNazwiskoOperatora(op);
+            lblZmiana.Content = PanelProdZmiany_db.PobierzNazweZmiany(zmiana);
+            lblOperator.Content = PanelProdOperatorzy_db.PobierzImieNazwiskoOperatora(op);
 
             listaWadNN = frmMeldunki_db.PobierzWadyNN();
             cbbPrzyczyna.ItemsSource = listaWadNN;

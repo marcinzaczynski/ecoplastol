@@ -130,7 +130,7 @@
                 <DataGridTextColumn Header="Data meldunku" Binding="{Binding data_meldunku, StringFormat=\{0:yyyy-MM-dd\}}"/>
                 <DataGridTextColumn Header="Maszyna" Binding="{Binding nazwa_maszyny}"/>
                 <DataGridTextColumn Header="Zlecenie" Binding="{Binding kod_zlecenia}"/>
-                <DataGridTextColumn Header="Zmiana" Binding="{Binding zmiana}"/>
+                <DataGridTextColumn Header="Zmiana" Binding="{Binding id_zmiana}"/>
                 <DataGridTextColumn Header="Operator" IsReadOnly="True" Binding="{Binding nazwa_operatora}"/>
                 <DataGridTextColumn Header="Ilość poz." Binding="{Binding ilosc}"/>
                 <DataGridTextColumn Header="Ilość neg." Binding="{Binding ilosc_wad_nn}"/>
@@ -138,6 +138,7 @@
                 <DataGridTextColumn Header="Spr. wtryskarki" IsReadOnly="True" Binding="{Binding opis_wynik_spr_wtr}"/>
                 <DataGridTextColumn Header="Wygląd zewnętrzny" IsReadOnly="True" Binding="{Binding opis_wyglad_zew}"/>
                 <DataGridTextColumn Header="Wygląd grzejnika" IsReadOnly="True" Binding="{Binding opis_wyglad_grzejnika}"/>
+                <DataGridCheckBoxColumn Header="Zatwierdzony" Binding="{Binding zatwierdzony}" Width="SizeToHeader" />
                 <DataGridTextColumn Header="opw" IsReadOnly="True" Binding="{Binding opw}"/>
                 <DataGridTextColumn Header="czasw" IsReadOnly="True" Binding="{Binding czasw, StringFormat=\{0:yyyy-MM-dd HH:mm\}}"/>
                 <DataGridTextColumn Header="opm" IsReadOnly="True" Binding="{Binding opm}"/>
@@ -173,6 +174,7 @@
                     <RowDefinition Height="30"/>
                     <RowDefinition Height="30"/>
                     <RowDefinition Height="30"/>
+                    <RowDefinition Height="30"/>
                     <RowDefinition Height="3"/>
                     <RowDefinition Height="20"/>
                     <RowDefinition Height="3"/>
@@ -191,7 +193,7 @@
                 <Border Grid.Row="2" Grid.Column="2" BorderThickness="2" BorderBrush="Red" Visibility="Visible" Name="brdMeldunekData"/>
                 
                 <Label Grid.Row="3" Grid.Column="0" FontSize="18" Padding="10,0,0,0" VerticalContentAlignment="Center" Content="Zmiana :"/>
-                <ComboBox Grid.Row="3" Grid.Column="1" FontSize="18" Padding="10,0,0,0" VerticalContentAlignment="Center" Name="cbbMeldunekZmiana" SelectedValuePath="id" SelectedValue="{Binding zmiana}"/>
+                <ComboBox Grid.Row="3" Grid.Column="1" FontSize="18" Padding="10,0,0,0" VerticalContentAlignment="Center" Name="cbbMeldunekZmiana" SelectedValuePath="id" SelectedValue="{Binding id_zmiana}"/>
                 <Border Grid.Row="3" Grid.Column="2" BorderThickness="2" BorderBrush="Red" Visibility="Visible" Name="brdMeldunekZmiana"/>
                 
                 <Label Grid.Row="4" Grid.Column="0" FontSize="18" Padding="10,0,0,0" VerticalContentAlignment="Center" Content="Operator :"/>
@@ -221,11 +223,38 @@
                 </ComboBox>
                 <Border Grid.Row="4" Grid.Column="2" BorderThickness="2" BorderBrush="Red" Visibility="Visible" Name="brdMeldunekOperator"/>
 
-                <Border Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="2" Background="LightBlue"/>
-                <Label Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="3" Padding="10,0,0,0" VerticalContentAlignment="Center" Content="PRZEGLĄD CODZIENNY MASZYNY"/>
+                <Label Grid.Row="5" Grid.Column="0" FontSize="18" Padding="10,0,0,0" VerticalContentAlignment="Center" Content="Brygadzista :"/>
+                <ComboBox Grid.Row="5" Grid.Column="1" FontSize="18" Padding="10,0,0,0" VerticalContentAlignment="Center" x:Name="cbbMeldunekBrygadzista" SelectedValuePath="id" SelectedValue="{Binding id_brygadzista}">
+                    <ComboBox.ItemTemplateSelector>
+                        <ts:ComboBoxItemTemplateSelector>
+                            <ts:ComboBoxItemTemplateSelector.SelectedTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="{Binding nazwisko}" />
+                                        <TextBlock Text=" "/>
+                                        <TextBlock Text="{Binding imie}" />
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ts:ComboBoxItemTemplateSelector.SelectedTemplate>
+                            <ts:ComboBoxItemTemplateSelector.DropDownTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="{Binding nazwisko}" />
+                                        <TextBlock Text=" "/>
+                                        <TextBlock Text="{Binding imie}" />
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ts:ComboBoxItemTemplateSelector.DropDownTemplate>
+                        </ts:ComboBoxItemTemplateSelector>
+                    </ComboBox.ItemTemplateSelector>
+                </ComboBox>
+                <Border Grid.Row="5" Grid.Column="2" BorderThickness="2" BorderBrush="Red" Visibility="Visible" Name="brdMeldunekBrygadzista"/>
+                
+                <Border Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="2" Background="LightBlue"/>
+                <Label Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="3" Padding="10,0,0,0" VerticalContentAlignment="Center" Content="PRZEGLĄD CODZIENNY MASZYNY"/>
 
-                <ComboBox Grid.Row="8" Grid.Column="1" FontSize="18" Padding="10,0,0,0" VerticalContentAlignment="Center" Name="cbbMeldunekPrzCodzMasz" SelectedValuePath="id" SelectedValue="{Binding przeglad_codz_masz}"/>
-                <Border Grid.Row="8" Grid.Column="2" BorderThickness="2" BorderBrush="Red" Visibility="Visible" Name="brdMeldunekPrzCodzMasz"/>
+                <ComboBox Grid.Row="9" Grid.Column="1" FontSize="18" Padding="10,0,0,0" VerticalContentAlignment="Center" Name="cbbMeldunekPrzCodzMasz" SelectedValuePath="id" SelectedValue="{Binding przeglad_codz_masz}"/>
+                <Border Grid.Row="9" Grid.Column="2" BorderThickness="2" BorderBrush="Red" Visibility="Visible" Name="brdMeldunekPrzCodzMasz"/>
             </Grid>
             <Grid Grid.Row="1" Grid.Column="3">
                 <Grid.RowDefinitions>
@@ -281,6 +310,9 @@
                     <RowDefinition Height="3"/>
                     <RowDefinition Height="20"/>
                     <RowDefinition Height="3"/>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition Height="30"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
@@ -302,7 +334,10 @@
                 <Border Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="3" Background="LightBlue"/>
                 <Label Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="3" Padding="10,0,0,0" VerticalContentAlignment="Center" Content="UWAGI"/>
 
-                <TextBox Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="2" Text="{Binding uwagi}" TextWrapping="Wrap" AcceptsReturn="True"/>
+                <TextBox Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="2" Grid.RowSpan="2" Text="{Binding uwagi}" TextWrapping="Wrap" AcceptsReturn="True"/>
+
+                <Label Grid.Row="9" Grid.Column="0" FontSize="18" Padding="10,0,0,0" VerticalContentAlignment="Center" Content="Zatwierdzony :"/>
+                <CheckBox Grid.Row="9" Grid.Column="1" IsChecked="{Binding zatwierdzony}" VerticalAlignment="Center"/>
             </Grid>
             
         </Grid>

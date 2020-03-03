@@ -4,42 +4,9 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:ecoplastol.konfiguracja.produkcja"
+             xmlns:ts="clr-namespace:ecoplastol"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
-    <UserControl.Resources>
-        <ResourceDictionary>
-            <Style TargetType="Button" x:Key="btnGradientOrange">
-                <Setter Property="Background">
-                    <Setter.Value>
-                        <LinearGradientBrush StartPoint="1,0" EndPoint="1,1">
-                            <GradientStop Color="Orange" Offset="1"/>
-                            <GradientStop Color="White" Offset="0.01"/>
-                        </LinearGradientBrush>
-                    </Setter.Value>
-                </Setter>
-            </Style>
-            <Style TargetType="Button" x:Key="btnGradientLightGreen">
-                <Setter Property="Background">
-                    <Setter.Value>
-                        <LinearGradientBrush StartPoint="1,0" EndPoint="1,1">
-                            <GradientStop Color="LightGreen" Offset="1"/>
-                            <GradientStop Color="White" Offset="0.01"/>
-                        </LinearGradientBrush>
-                    </Setter.Value>
-                </Setter>
-            </Style>
-            <Style TargetType="Button" x:Key="btnGradientRed">
-                <Setter Property="Background">
-                    <Setter.Value>
-                        <LinearGradientBrush StartPoint="1,0" EndPoint="1,1">
-                            <GradientStop Color="#FFFF8D8D" Offset="1"/>
-                            <GradientStop Color="White" Offset="0.01"/>
-                        </LinearGradientBrush>
-                    </Setter.Value>
-                </Setter>
-            </Style>
-        </ResourceDictionary>
-    </UserControl.Resources>
+             d:DesignHeight="450" d:DesignWidth="1000">
     <Grid Background="White">
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
@@ -49,8 +16,12 @@
         <DataGrid Grid.Row="0" Name="grdLista" SelectionChanged="GrdLista_SelectionChanged" AutoGenerateColumns="False" EnableRowVirtualization="True" ItemsSource="{Binding}" RowDetailsVisibilityMode="VisibleWhenSelected" IsSynchronizedWithCurrentItem="True" CanUserDeleteRows="False" CanUserAddRows="False" IsReadOnly="True">
             <DataGrid.Columns>
                 <DataGridTextColumn x:Name="idColumn" Binding="{Binding id}" Header="ID" Width="SizeToHeader"/>
-                <DataGridTextColumn x:Name="imieColumn" Binding="{Binding imie}" Header="Imię" Width="200"/>
-                <DataGridTextColumn x:Name="nazwiskoColumn" Binding="{Binding nazwisko}" Header="Nazwisko" Width="*"/>
+                <DataGridTextColumn x:Name="imieColumn" Binding="{Binding imie}" Header="Imię" Width="150"/>
+                <DataGridTextColumn x:Name="nazwiskoColumn" Binding="{Binding nazwisko}" Header="Nazwisko" Width="150"/>
+                <DataGridTextColumn x:Name="loginColumn" Binding="{Binding login}" Header="Login" Width="150"/>
+                <DataGridTextColumn x:Name="brygadzistaColumn" Binding="{Binding nazwa_brygadzisty}" Header="Brygadzista" Width="150"/>
+                <DataGridCheckBoxColumn x:Name="aktywnyColumn" Binding="{Binding aktywny}" Header="Aktywny" Width="SizeToHeader" />
+                <DataGridTextColumn Width="*"/>
                 <DataGridTextColumn x:Name="opwColumn" Binding="{Binding opw}" Header="opw" Width="100"/>
                 <DataGridTextColumn x:Name="czaswColumn" Binding="{Binding czasw, StringFormat=\{0:yyyy-MM-dd HH:mm\}}" Header="czasw" Width="150"/>
                 <DataGridTextColumn x:Name="opmColumn" Binding="{Binding opm}" Header="opm" Width="100"/>
@@ -60,22 +31,53 @@
         <Grid Name="grdPozycje" Grid.Row="1" Margin="0,8" IsEnabled="false">
             <Grid.RowDefinitions>
                 <RowDefinition />
-                <RowDefinition/>
-                <RowDefinition/>
+                <RowDefinition />
+                <RowDefinition />
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="110"/>
-                <ColumnDefinition Width="600"/>
-                <ColumnDefinition/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="10"/>
+                <ColumnDefinition Width="110"/>
+                <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
 
             <Label Grid.Row="0" Grid.Column="0" FontSize="18" Content="Imię :"/>
-            <Label Grid.Row="1" Grid.Column="0" FontSize="18" Content="Nazwisko :"/>
-            <!--<Label Grid.Row="2" Grid.Column="0" FontSize="18" Content="Opis :"/>-->
-
             <TextBox Grid.Row="0" Grid.Column="1" FontSize="18" VerticalContentAlignment="Center" Text="{Binding imie, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Name="txtImie"/>
+            <Label Grid.Row="1" Grid.Column="0" FontSize="18" Content="Nazwisko :"/>
             <TextBox Grid.Row="1" Grid.Column="1" FontSize="18" VerticalContentAlignment="Center" Text="{Binding nazwisko, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Name="txtNazwisko"/>
-            <!--<TextBox Grid.Row="2" Grid.Column="1" FontSize="18" VerticalContentAlignment="Center" Text="{Binding opis, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Name="txtOpis"/>-->
+            <Label Grid.Row="2" Grid.Column="0" FontSize="18" Content="Brygadzista :"/>
+            <ComboBox Grid.Row="2" Grid.Column="1" FontSize="18" Padding="10,0,0,0" VerticalContentAlignment="Center" Name="cbbBrygadzista" SelectedValuePath="id" SelectedValue="{Binding brygada}">
+                <ComboBox.ItemTemplateSelector>
+                    <ts:ComboBoxItemTemplateSelector>
+                        <ts:ComboBoxItemTemplateSelector.SelectedTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="{Binding nazwisko}" />
+                                    <TextBlock Text=" "/>
+                                    <TextBlock Text="{Binding imie}" />
+                                </StackPanel>
+                            </DataTemplate>
+                        </ts:ComboBoxItemTemplateSelector.SelectedTemplate>
+                        <ts:ComboBoxItemTemplateSelector.DropDownTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="{Binding nazwisko}" />
+                                    <TextBlock Text=" "/>
+                                    <TextBlock Text="{Binding imie}" />
+                                </StackPanel>
+                            </DataTemplate>
+                        </ts:ComboBoxItemTemplateSelector.DropDownTemplate>
+                    </ts:ComboBoxItemTemplateSelector>
+                </ComboBox.ItemTemplateSelector>
+            </ComboBox>
+            <Label Grid.Row="0" Grid.Column="3" FontSize="18" Content="Login :"/>
+            <TextBox Grid.Row="0" Grid.Column="4" FontSize="18" VerticalContentAlignment="Center" Text="{Binding login}" Name="txtLogin" />
+            <Label Grid.Row="1" Grid.Column="3" FontSize="18" Content="Hasło :"/>
+            <TextBox Grid.Row="1" Grid.Column="4" FontSize="18" VerticalContentAlignment="Center" Text="{Binding haslo}" Name="txtHaslo" />
+            <Label Grid.Row="2" Grid.Column="3" FontSize="18" Content="Aktywny :"/>
+            <CheckBox Grid.Row="2" Grid.Column="4" IsChecked="{Binding aktywny}" VerticalAlignment="Center"/>
+
         </Grid>
         <StackPanel Grid.Row="2" Grid.Column="1" Orientation="Horizontal">
             <Button FontSize="16" Style="{StaticResource btnGradientLightGreen}" Width="120" Name="btnDodaj" Content="DODAJ" Click="BtnDodaj_Click" Height="30" VerticalAlignment="Top" />

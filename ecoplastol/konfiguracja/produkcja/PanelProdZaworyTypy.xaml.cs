@@ -30,7 +30,7 @@ namespace ecoplastol.konfiguracja.produkcja
         public PanelProdZaworyTypy()
         {
             InitializeComponent();
-            listWyrobyZaworyTypy = konf_produkcja_db.PobierzWyrobyZaworyTypy();
+            listWyrobyZaworyTypy = PanelProdZaworyTypy_db.PobierzWyrobyZaworyTypy();
             grdLista.ItemsSource = listWyrobyZaworyTypy;
             grdPozycje.IsEnabled = false;
 
@@ -131,8 +131,8 @@ namespace ecoplastol.konfiguracja.produkcja
             var Res = MessageBox.Show("Usunąć ?", "Usuwanie pozycji", MessageBoxButton.YesNo, MessageBoxImage.Exclamation);
             if (Res == MessageBoxResult.Yes)
             {
-                konf_produkcja_db.UsunWyrobZaworTyp(rowWyrobZaworTyp);
-                listWyrobyZaworyTypy = konf_produkcja_db.PobierzWyrobyZaworyTypy();
+                PanelProdZaworyTypy_db.UsunWyrobZaworTyp(rowWyrobZaworTyp);
+                listWyrobyZaworyTypy = PanelProdZaworyTypy_db.PobierzWyrobyZaworyTypy();
                 grdLista.ItemsSource = listWyrobyZaworyTypy;
             }
         }
@@ -148,7 +148,7 @@ namespace ecoplastol.konfiguracja.produkcja
             btnAnuluj.IsEnabled = false;
             btnZatwierdz.IsEnabled = false;
 
-            listWyrobyZaworyTypy = konf_produkcja_db.PobierzWyrobyZaworyTypy();
+            listWyrobyZaworyTypy = PanelProdZaworyTypy_db.PobierzWyrobyZaworyTypy();
             grdLista.ItemsSource = listWyrobyZaworyTypy;
 
             grdLista.SelectedIndex = grdBookmark;
@@ -173,23 +173,23 @@ namespace ecoplastol.konfiguracja.produkcja
                     {
                         var row = new wyroby_zast_zaworu();
                         row = grdPozycje.DataContext as wyroby_zast_zaworu;
-                        row.id = konf_produkcja_db.IdWyrobyZaworTyp();
+                        row.id = PanelProdZaworyTypy_db.IdWyrobyZaworTyp();
                         row.opw = frmLogin.LoggedUser.login;
                         row.czasw = DateTime.Now;
                         row.opm = frmLogin.LoggedUser.login;
                         row.czasm = DateTime.Now;
-                        konf_produkcja_db.DodajWyrobZaworTyp(row);
+                        PanelProdZaworyTypy_db.DodajWyrobZaworTyp(row);
                     }
                     break;
                 case "P":
                     rowWyrobZaworTyp.opm = frmLogin.LoggedUser.login;
                     rowWyrobZaworTyp.czasm = DateTime.Now;
-                    konf_produkcja_db.PoprawWyrobZaworTyp(rowWyrobZaworTyp);
+                    PanelProdZaworyTypy_db.PoprawWyrobZaworTyp(rowWyrobZaworTyp);
                     break;
                 default:
                     break;
             }
-            listWyrobyZaworyTypy = konf_produkcja_db.PobierzWyrobyZaworyTypy();
+            listWyrobyZaworyTypy = PanelProdZaworyTypy_db.PobierzWyrobyZaworyTypy();
             grdLista.ItemsSource = listWyrobyZaworyTypy;
             grdLista.SelectedIndex = grdBookmark;
             grdLista.Focus();

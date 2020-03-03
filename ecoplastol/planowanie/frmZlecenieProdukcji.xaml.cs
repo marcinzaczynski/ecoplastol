@@ -63,7 +63,7 @@ namespace ecoplastol
             //cbbWyrobKod.IsEnabled = false;
             poprawianeZP = zp;
             numerMaszyny = poprawianeZP.zlecenie_nr_maszyny;
-            lblNazwaMaszyny.Content = konfiguracja.produkcja.konf_produkcja_db.PobierzNazweMaszyny(poprawianeZP.zlecenie_nr_maszyny);
+            lblNazwaMaszyny.Content = konfiguracja.produkcja.PanelProdMaszyny_db.PobierzNazweMaszyny(poprawianeZP.zlecenie_nr_maszyny);
 
             UstawKontrolki();
             cbbWyrobKod.SelectedValue = zp.wyrob_kod_id;
@@ -74,12 +74,12 @@ namespace ecoplastol
 
         private void UstawKontrolki()
         {
-            listaWyrobow = konf_produkcja_db.PobierzWyroby(true, -1);
+            listaWyrobow = PanelProdWyroby_db.PobierzWyroby(true, -1);
 
             listTracePEm = PanelTrace_db.PobierzTracePem();
-            listWyrobRodzajDrutu = konf_produkcja_db.PobierzDruty();
+            listWyrobRodzajDrutu = PanelProdWyrobyDruty_db.PobierzWyrobyDruty();
             listTraceProducent = PanelTrace_db.PobierzTraceProducent();
-            listWyrobZakresSDR = konf_produkcja_db.PobierzZakresSDR();
+            listWyrobZakresSDR = PanelProdWyrobyZakresSDR_db.PobierzWyrobyZakresySDR();
             listTraceSDR = PanelTrace_db.PobierzTraceSdr();
             listITFtrn = PanelITF_db.PobierzITFtrn();
             listITFcc1 = PanelITF_db.PobierzITFcc();

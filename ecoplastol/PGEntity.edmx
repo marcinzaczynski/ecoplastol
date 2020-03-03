@@ -126,7 +126,8 @@
           <Property Name="id" Type="int4" Nullable="false" />
           <Property Name="id_zlecenie" Type="int4" Nullable="false" />
           <Property Name="id_operator" Type="int4" Nullable="false" />
-          <Property Name="zmiana" Type="int4" Nullable="false" />
+          <Property Name="id_brygadzista" Type="int4" Nullable="false" />
+          <Property Name="id_zmiana" Type="int4" Nullable="false" />
           <Property Name="data_meldunku" Type="date" Nullable="false" />
           <Property Name="ilosc" Type="int4" Nullable="false" />
           <Property Name="ilosc_techn" Type="int4" Nullable="false" />
@@ -134,12 +135,13 @@
           <Property Name="wynik_spr_wtr" Type="int4" Nullable="false" />
           <Property Name="wyglad_zew" Type="int4" Nullable="false" />
           <Property Name="wyglad_grzejnika" Type="int4" Nullable="false" />
+          <Property Name="przeglad_codz_masz" Type="int4" Nullable="false" />
+          <Property Name="uwagi" Type="varchar" MaxLength="8000" />
+          <Property Name="zatwierdzony" Type="bool" Nullable="false" />
           <Property Name="opw" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="czasw" Type="timestamp" Nullable="false" />
           <Property Name="opm" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="czasm" Type="timestamp" Nullable="false" />
-          <Property Name="przeglad_codz_masz" Type="int4" Nullable="false" />
-          <Property Name="uwagi" Type="varchar" MaxLength="8000" />
         </EntityType>
         <EntityType Name="meldunki_wady_nn">
           <Key>
@@ -643,39 +645,6 @@
           <Property Name="opm" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="czasm" Type="DateTime" Precision="6" Nullable="false" />
         </EntityType>
-        <EntityType Name="maszyny">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" />
-          <Property Name="nazwa" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="opw" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="czasw" Type="DateTime" Precision="6" Nullable="false" />
-          <Property Name="opm" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="czasm" Type="DateTime" Precision="6" Nullable="false" />
-        </EntityType>
-        <EntityType Name="meldunki">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" />
-          <Property Name="id_zlecenie" Type="Int32" Nullable="false" />
-          <Property Name="id_operator" Type="Int32" Nullable="false" />
-          <Property Name="zmiana" Type="Int32" Nullable="false" />
-          <Property Name="data_meldunku" Type="DateTime" Precision="0" Nullable="false" />
-          <Property Name="ilosc" Type="Int32" Nullable="false" />
-          <Property Name="ilosc_techn" Type="Int32" Nullable="false" />
-          <Property Name="godz_spr_wtr" Type="Time" Precision="6" Nullable="false" />
-          <Property Name="wynik_spr_wtr" Type="Int32" Nullable="false" />
-          <Property Name="wyglad_zew" Type="Int32" Nullable="false" />
-          <Property Name="wyglad_grzejnika" Type="Int32" Nullable="false" />
-          <Property Name="opw" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="czasw" Type="DateTime" Precision="6" Nullable="false" />
-          <Property Name="opm" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="czasm" Type="DateTime" Precision="6" Nullable="false" />
-          <Property Name="przeglad_codz_masz" Type="Int32" Nullable="false" />
-          <Property Name="uwagi" Type="String" MaxLength="8000" FixedLength="false" Unicode="true" />
-        </EntityType>
         <EntityType Name="meldunki_wynik">
           <Key>
             <PropertyRef Name="id" />
@@ -920,8 +889,6 @@
           <EntitySet Name="itf_odch" EntityType="Self.itf_odch" />
           <EntitySet Name="itf_sr" EntityType="Self.itf_sr" />
           <EntitySet Name="itf_trn" EntityType="Self.itf_trn" />
-          <EntitySet Name="maszyny" EntityType="Self.maszyny" />
-          <EntitySet Name="meldunki" EntityType="Self.meldunki" />
           <EntitySet Name="meldunki_wynik" EntityType="Self.meldunki_wynik" />
           <EntitySet Name="meldunki_wynik_prz_maszyny" EntityType="Self.meldunki_wynik_prz_maszyny" />
           <EntitySet Name="parametry" EntityType="Self.parametry" />
@@ -946,6 +913,8 @@
           <EntitySet Name="meldunki_wady_nn" EntityType="ecoplastolModel.meldunki_wady_nn" />
           <EntitySet Name="brygadzisci" EntityType="ecoplastolModel.brygadzisci" />
           <EntitySet Name="operatorzy_maszyn" EntityType="ecoplastolModel.operatorzy_maszyn" />
+          <EntitySet Name="maszyny" EntityType="ecoplastolModel.maszyny" />
+          <EntitySet Name="meldunki" EntityType="ecoplastolModel.meldunki" />
         </EntityContainer>
         <EntityType Name="wyroby">
           <Key>
@@ -1095,6 +1064,41 @@
           <Property Name="opm" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="czasm" Type="DateTime" Nullable="false" Precision="6" />
         </EntityType>
+        <EntityType Name="maszyny">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="nazwa" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="opw" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="czasw" Type="DateTime" Nullable="false" Precision="6" />
+          <Property Name="opm" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="czasm" Type="DateTime" Nullable="false" Precision="6" />
+        </EntityType>
+        <EntityType Name="meldunki">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="id_zlecenie" Type="Int32" Nullable="false" />
+          <Property Name="id_operator" Type="Int32" Nullable="false" />
+          <Property Name="id_brygadzista" Type="Int32" Nullable="false" />
+          <Property Name="id_zmiana" Type="Int32" Nullable="false" />
+          <Property Name="data_meldunku" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="ilosc" Type="Int32" Nullable="false" />
+          <Property Name="ilosc_techn" Type="Int32" Nullable="false" />
+          <Property Name="godz_spr_wtr" Type="Time" Nullable="false" Precision="6" />
+          <Property Name="wynik_spr_wtr" Type="Int32" Nullable="false" />
+          <Property Name="wyglad_zew" Type="Int32" Nullable="false" />
+          <Property Name="wyglad_grzejnika" Type="Int32" Nullable="false" />
+          <Property Name="przeglad_codz_masz" Type="Int32" Nullable="false" />
+          <Property Name="uwagi" Type="String" MaxLength="8000" FixedLength="false" Unicode="true" />
+          <Property Name="zatwierdzony" Type="Boolean" Nullable="false" />
+          <Property Name="opw" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="czasw" Type="DateTime" Nullable="false" Precision="6" />
+          <Property Name="opm" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="czasm" Type="DateTime" Nullable="false" Precision="6" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1196,41 +1200,6 @@
                 <ScalarProperty Name="czasw" ColumnName="czasw" />
                 <ScalarProperty Name="opm" ColumnName="opm" />
                 <ScalarProperty Name="czasm" ColumnName="czasm" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="maszyny">
-            <EntityTypeMapping TypeName="ecoplastolModel.maszyny">
-              <MappingFragment StoreEntitySet="maszyny">
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="nazwa" ColumnName="nazwa" />
-                <ScalarProperty Name="opw" ColumnName="opw" />
-                <ScalarProperty Name="czasw" ColumnName="czasw" />
-                <ScalarProperty Name="opm" ColumnName="opm" />
-                <ScalarProperty Name="czasm" ColumnName="czasm" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="meldunki">
-            <EntityTypeMapping TypeName="ecoplastolModel.meldunki">
-              <MappingFragment StoreEntitySet="meldunki">
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="id_zlecenie" ColumnName="id_zlecenie" />
-                <ScalarProperty Name="id_operator" ColumnName="id_operator" />
-                <ScalarProperty Name="zmiana" ColumnName="zmiana" />
-                <ScalarProperty Name="data_meldunku" ColumnName="data_meldunku" />
-                <ScalarProperty Name="ilosc" ColumnName="ilosc" />
-                <ScalarProperty Name="ilosc_techn" ColumnName="ilosc_techn" />
-                <ScalarProperty Name="godz_spr_wtr" ColumnName="godz_spr_wtr" />
-                <ScalarProperty Name="wynik_spr_wtr" ColumnName="wynik_spr_wtr" />
-                <ScalarProperty Name="wyglad_zew" ColumnName="wyglad_zew" />
-                <ScalarProperty Name="wyglad_grzejnika" ColumnName="wyglad_grzejnika" />
-                <ScalarProperty Name="opw" ColumnName="opw" />
-                <ScalarProperty Name="czasw" ColumnName="czasw" />
-                <ScalarProperty Name="opm" ColumnName="opm" />
-                <ScalarProperty Name="czasm" ColumnName="czasm" />
-                <ScalarProperty Name="przeglad_codz_masz" ColumnName="przeglad_codz_masz" />
-                <ScalarProperty Name="uwagi" ColumnName="uwagi" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -1642,7 +1611,44 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-        </EntityContainerMapping>
+          <EntitySetMapping Name="maszyny">
+            <EntityTypeMapping TypeName="ecoplastolModel.maszyny">
+              <MappingFragment StoreEntitySet="maszyny">
+                <ScalarProperty Name="czasm" ColumnName="czasm" />
+                <ScalarProperty Name="opm" ColumnName="opm" />
+                <ScalarProperty Name="czasw" ColumnName="czasw" />
+                <ScalarProperty Name="opw" ColumnName="opw" />
+                <ScalarProperty Name="nazwa" ColumnName="nazwa" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="meldunki">
+            <EntityTypeMapping TypeName="ecoplastolModel.meldunki">
+              <MappingFragment StoreEntitySet="meldunki">
+                <ScalarProperty Name="czasm" ColumnName="czasm" />
+                <ScalarProperty Name="opm" ColumnName="opm" />
+                <ScalarProperty Name="czasw" ColumnName="czasw" />
+                <ScalarProperty Name="opw" ColumnName="opw" />
+                <ScalarProperty Name="zatwierdzony" ColumnName="zatwierdzony" />
+                <ScalarProperty Name="uwagi" ColumnName="uwagi" />
+                <ScalarProperty Name="przeglad_codz_masz" ColumnName="przeglad_codz_masz" />
+                <ScalarProperty Name="wyglad_grzejnika" ColumnName="wyglad_grzejnika" />
+                <ScalarProperty Name="wyglad_zew" ColumnName="wyglad_zew" />
+                <ScalarProperty Name="wynik_spr_wtr" ColumnName="wynik_spr_wtr" />
+                <ScalarProperty Name="godz_spr_wtr" ColumnName="godz_spr_wtr" />
+                <ScalarProperty Name="ilosc_techn" ColumnName="ilosc_techn" />
+                <ScalarProperty Name="ilosc" ColumnName="ilosc" />
+                <ScalarProperty Name="data_meldunku" ColumnName="data_meldunku" />
+                <ScalarProperty Name="id_zmiana" ColumnName="id_zmiana" />
+                <ScalarProperty Name="id_brygadzista" ColumnName="id_brygadzista" />
+                <ScalarProperty Name="id_operator" ColumnName="id_operator" />
+                <ScalarProperty Name="id_zlecenie" ColumnName="id_zlecenie" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
   </edmx:Runtime>

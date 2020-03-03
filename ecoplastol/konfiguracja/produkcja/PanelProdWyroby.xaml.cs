@@ -72,7 +72,7 @@ namespace ecoplastol.konfiguracja.produkcja
             InitializeComponent();
             widoczneWyroby = czyAktywne;
             typFiltrTypKsztaltki = -1;
-            listWyroby = konf_produkcja_db.PobierzWyroby(widoczneWyroby, typFiltrTypKsztaltki);
+            listWyroby = PanelProdWyroby_db.PobierzWyroby(widoczneWyroby, typFiltrTypKsztaltki);
             grdLista.ItemsSource = listWyroby;
             lblIloscPozycji.Content = listWyroby.Count().ToString();
             grdPozycje.IsEnabled = false;
@@ -100,16 +100,16 @@ namespace ecoplastol.konfiguracja.produkcja
 
         private void UstawWyrob()
         {
-            listTypyWyrobow = konf_produkcja_db.PobierzTypy();
+            listTypyWyrobow = PanelProdWyrobyTypy_db.PobierzTypy();
             cbbWyrobTyp.ItemsSource = listTypyWyrobow;
 
-            listWyrobZakresSDR = konf_produkcja_db.PobierzZakresSDR();
+            listWyrobZakresSDR = PanelProdWyrobyZakresSDR_db.PobierzWyrobyZakresySDR();
             cbbWyrobZakresSDR.ItemsSource = listWyrobZakresSDR;
 
-            listWyrobZastZaworu = konf_produkcja_db.PobierzZastZaworu();
+            listWyrobZastZaworu = PanelProdZaworyTypy_db.PobierzZastZaworu();
             cbbWyrobZastZaworu.ItemsSource = listWyrobZastZaworu;
 
-            listWyrobRodzajDrutu = konf_produkcja_db.PobierzDruty();
+            listWyrobRodzajDrutu = PanelProdWyrobyDruty_db.PobierzWyrobyDruty();
             cbbWyrobRodzajDrutu.ItemsSource = listWyrobRodzajDrutu;
         }
 
@@ -249,8 +249,8 @@ namespace ecoplastol.konfiguracja.produkcja
             var Res = MessageBox.Show("Usunąć ?", "Usuwanie pozycji", MessageBoxButton.YesNo, MessageBoxImage.Exclamation);
             if (Res == MessageBoxResult.Yes)
             {
-                konf_produkcja_db.UsunWyrob(rowWyrob);
-                listWyroby = konf_produkcja_db.PobierzWyroby(widoczneWyroby, typFiltrTypKsztaltki);
+                PanelProdWyroby_db.UsunWyrob(rowWyrob);
+                listWyroby = PanelProdWyroby_db.PobierzWyroby(widoczneWyroby, typFiltrTypKsztaltki);
                 grdLista.ItemsSource = listWyroby;
             }
         }
@@ -266,7 +266,7 @@ namespace ecoplastol.konfiguracja.produkcja
             btnAnuluj.IsEnabled = false;
             btnZatwierdz.IsEnabled = false;
 
-            listWyroby = konf_produkcja_db.PobierzWyroby(widoczneWyroby, typFiltrTypKsztaltki);
+            listWyroby = PanelProdWyroby_db.PobierzWyroby(widoczneWyroby, typFiltrTypKsztaltki);
             grdLista.ItemsSource = listWyroby;
 
             grdLista.SelectedIndex = grdBookmark;
@@ -291,23 +291,23 @@ namespace ecoplastol.konfiguracja.produkcja
                     {
                         var row = new wyroby();
                         row = grdPozycje.DataContext as wyroby;
-                        row.id = konf_produkcja_db.IdWyroby();
+                        row.id = PanelProdWyroby_db.IdWyroby();
                         row.opw = frmLogin.LoggedUser.login;
                         row.czasw = DateTime.Now;
                         row.opm = frmLogin.LoggedUser.login;
                         row.czasm = DateTime.Now;
-                        konf_produkcja_db.DodajWyrob(row);
+                        PanelProdWyroby_db.DodajWyrob(row);
                     }
                     break;
                 case "P":
                     rowWyrob.opm = frmLogin.LoggedUser.login;
                     rowWyrob.czasm = DateTime.Now;
-                    konf_produkcja_db.PoprawWyrob(rowWyrob);
+                    PanelProdWyroby_db.PoprawWyrob(rowWyrob);
                     break;
                 default:
                     break;
             }
-            listWyroby = konf_produkcja_db.PobierzWyroby(widoczneWyroby, typFiltrTypKsztaltki);
+            listWyroby = PanelProdWyroby_db.PobierzWyroby(widoczneWyroby, typFiltrTypKsztaltki);
             grdLista.ItemsSource = listWyroby;
             grdLista.SelectedIndex = grdBookmark;
             grdLista.Focus();
@@ -1580,7 +1580,7 @@ namespace ecoplastol.konfiguracja.produkcja
             
             
             widoczneWyroby = false;
-            listWyroby = konf_produkcja_db.PobierzWyroby(widoczneWyroby, typFiltrTypKsztaltki);
+            listWyroby = PanelProdWyroby_db.PobierzWyroby(widoczneWyroby, typFiltrTypKsztaltki);
             grdLista.ItemsSource = listWyroby;
             lblIloscPozycji.Content = listWyroby.Count().ToString();
         }
@@ -1592,7 +1592,7 @@ namespace ecoplastol.konfiguracja.produkcja
             btnPokazAktywne.Foreground = Brushes.Blue;
 
             widoczneWyroby = true;
-            listWyroby = konf_produkcja_db.PobierzWyroby(widoczneWyroby, typFiltrTypKsztaltki);
+            listWyroby = PanelProdWyroby_db.PobierzWyroby(widoczneWyroby, typFiltrTypKsztaltki);
             grdLista.ItemsSource = listWyroby;
             lblIloscPozycji.Content = listWyroby.Count().ToString();
         }
@@ -1607,7 +1607,7 @@ namespace ecoplastol.konfiguracja.produkcja
             btnPokazElektro.Foreground = Brushes.Blue;
             typFiltrTypKsztaltki = 0;
 
-            listWyroby = konf_produkcja_db.PobierzWyroby(widoczneWyroby, typFiltrTypKsztaltki);
+            listWyroby = PanelProdWyroby_db.PobierzWyroby(widoczneWyroby, typFiltrTypKsztaltki);
             grdLista.ItemsSource = listWyroby;
             lblIloscPozycji.Content = listWyroby.Count().ToString();
         }
@@ -1622,7 +1622,7 @@ namespace ecoplastol.konfiguracja.produkcja
             btnPokazDoczolowe.Foreground = Brushes.Blue;
             typFiltrTypKsztaltki = 1;
 
-            listWyroby = konf_produkcja_db.PobierzWyroby(widoczneWyroby, typFiltrTypKsztaltki);
+            listWyroby = PanelProdWyroby_db.PobierzWyroby(widoczneWyroby, typFiltrTypKsztaltki);
             grdLista.ItemsSource = listWyroby;
             lblIloscPozycji.Content = listWyroby.Count().ToString();
         }
@@ -1637,7 +1637,7 @@ namespace ecoplastol.konfiguracja.produkcja
             btnPokazZawory.Foreground = Brushes.Blue;
             typFiltrTypKsztaltki = 2;
 
-            listWyroby = konf_produkcja_db.PobierzWyroby(widoczneWyroby, typFiltrTypKsztaltki);
+            listWyroby = PanelProdWyroby_db.PobierzWyroby(widoczneWyroby, typFiltrTypKsztaltki);
             grdLista.ItemsSource = listWyroby;
             lblIloscPozycji.Content = listWyroby.Count().ToString();
         }
@@ -1652,7 +1652,7 @@ namespace ecoplastol.konfiguracja.produkcja
             btnPokazAdaptery.Foreground = Brushes.Blue;
             typFiltrTypKsztaltki = 3;
 
-            listWyroby = konf_produkcja_db.PobierzWyroby(widoczneWyroby, typFiltrTypKsztaltki);
+            listWyroby = PanelProdWyroby_db.PobierzWyroby(widoczneWyroby, typFiltrTypKsztaltki);
             grdLista.ItemsSource = listWyroby;
             lblIloscPozycji.Content = listWyroby.Count().ToString();
         }
@@ -1667,7 +1667,7 @@ namespace ecoplastol.konfiguracja.produkcja
             btnPokazWszystkieKsztaltki.Foreground = Brushes.Blue;
             typFiltrTypKsztaltki = -1;
 
-            listWyroby = konf_produkcja_db.PobierzWyroby(widoczneWyroby, typFiltrTypKsztaltki);
+            listWyroby = PanelProdWyroby_db.PobierzWyroby(widoczneWyroby, typFiltrTypKsztaltki);
             grdLista.ItemsSource = listWyroby;
             lblIloscPozycji.Content = listWyroby.Count().ToString();
         }

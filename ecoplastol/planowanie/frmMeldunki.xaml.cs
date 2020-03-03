@@ -26,6 +26,7 @@ namespace ecoplastol.planowanie
         private List<zmiany> listaZmian;
         private List<ZlecenieView> listaZlecen;
         private List<operatorzy_maszyn> listaOperatorzy;
+        private List<brygadzisci> listaBrygadzistow;
         private List<operatorzy_maszyn> listaMeldunekOperatorzy;
         private List<meldunki_wynik> listaWynikSprWtr;
         private List<meldunki_wynik> listaWygladZew;
@@ -80,13 +81,13 @@ namespace ecoplastol.planowanie
             dpDataZleceniaDo.SelectedDate = data;
             dpMeldunekData.SelectedDate = DateTime.Now;
 
-            listaMaszyn = konf_produkcja_db.PobierzMaszyny();
+            listaMaszyn = PanelProdMaszyny_db.PobierzMaszyny();
             cbbMaszyna.ItemsSource = listaMaszyn;
             cbbMaszyna.SelectedValuePath = "id";
             cbbMaszyna.DisplayMemberPath = "nazwa";
             cbbMaszyna.SelectedValue = idMaszyna;
 
-            listaZmian = konf_produkcja_db.PobierzZmiany();
+            listaZmian = PanelProdZmiany_db.PobierzZmiany();
             cbbZmiana.ItemsSource = listaZmian;
             cbbZmiana.SelectedValuePath = "id";
             cbbZmiana.DisplayMemberPath = "nazwa";
@@ -98,14 +99,17 @@ namespace ecoplastol.planowanie
             WyszukajZlecenia();
             cbbZlecenie.SelectedValue = idZlecenie;
 
-            listaOperatorzy = konf_produkcja_db.PobierzOperatorow();
+            listaOperatorzy = PanelProdOperatorzy_db.PobierzOperatorow(0);
             cbbOperator.ItemsSource = listaOperatorzy;
             cbbOperator.SelectedValuePath = "id";
 
-            listaMeldunekOperatorzy = konf_produkcja_db.PobierzOperatorow();
+            listaMeldunekOperatorzy = PanelProdOperatorzy_db.PobierzOperatorow(0);
             cbbMeldunekOperator.ItemsSource = listaMeldunekOperatorzy;
             cbbMeldunekOperator.SelectedValuePath = "id";
 
+            listaBrygadzistow = PanelProdBrygadzisci_db.PobierzBrygadzistow(0);
+            cbbMeldunekBrygadzista.ItemsSource = listaBrygadzistow;
+            cbbMeldunekBrygadzista.SelectedValuePath = "id";
 
             listaWynikSprWtr = frmMeldunki_db.PobierzWynikiDlaMeldunki();
             cbbMeldunekWynikSprWtr.ItemsSource = listaWynikSprWtr;
@@ -316,7 +320,7 @@ namespace ecoplastol.planowanie
             frmMeldunkiWadyNN frmMeldunkiWadyNN = new frmMeldunkiWadyNN(dpMeldunekData.SelectedDate.Value,
                                                                         meldunek.id_maszyny,
                                                                         meldunek.id_zlecenie,
-                                                                        meldunek.zmiana,
+                                                                        meldunek.id_zmiana,
                                                                         meldunek.id_operator,
                                                                         idMeld);
             frmMeldunkiWadyNN.ShowDialog();
@@ -373,6 +377,7 @@ namespace ecoplastol.planowanie
 
             grdDane.IsEnabled = false;
 
+            WyszukajMeldunki();
             dgrdMeldunki.SelectedIndex = dgBookmark;
             DgrdMeldunki_SelectionChanged(null, null);
             frmMeldunki_db.UsunPrzyczynyBrakow();
@@ -410,6 +415,16 @@ namespace ecoplastol.planowanie
             else
             {
                 brdMeldunekOperator.Visibility = Visibility.Visible;
+                moznaZatwierdzic = false;
+            }
+
+            if (cbbMeldunekBrygadzista.SelectedIndex > 0)
+            {
+                brdMeldunekBrygadzista.Visibility = Visibility.Hidden;
+            }
+            else
+            {
+                brdMeldunekBrygadzista.Visibility = Visibility.Visible;
                 moznaZatwierdzic = false;
             }
 
@@ -489,7 +504,8 @@ namespace ecoplastol.planowanie
                         row.id = frmMeldunki_db.IdMeldunki();
                         row.id_zlecenie = rowAktualny.id_zlecenie;
                         row.id_operator = rowAktualny.id_operator;
-                        row.zmiana = rowAktualny.zmiana;
+                        row.id_brygadzista = rowAktualny.id_brygadzista;
+                        row.id_zmiana = rowAktualny.id_zmiana;
                         row.data_meldunku = rowAktualny.data_meldunku;
                         row.ilosc = rowAktualny.ilosc;
                         row.ilosc_techn = rowAktualny.ilosc_techn;
@@ -499,6 +515,7 @@ namespace ecoplastol.planowanie
                         row.wyglad_grzejnika = rowAktualny.wyglad_grzejnika;
                         row.przeglad_codz_masz = rowAktualny.przeglad_codz_masz;
                         row.uwagi = rowAktualny.uwagi;
+                        row.zatwierdzony = rowAktualny.zatwierdzony;
 
                         row.opw = frmLogin.LoggedUser.login;
                         row.czasw = DateTime.Now;
@@ -515,7 +532,8 @@ namespace ecoplastol.planowanie
                     row2.id = rowAktualny2.id;
                     row2.id_zlecenie = rowAktualny2.id_zlecenie;
                     row2.id_operator = rowAktualny2.id_operator;
-                    row2.zmiana = rowAktualny2.zmiana;
+                    row2.id_brygadzista = rowAktualny2.id_brygadzista;
+                    row2.id_zmiana = rowAktualny2.id_zmiana;
                     row2.data_meldunku = rowAktualny2.data_meldunku;
                     row2.ilosc = rowAktualny2.ilosc;
                     row2.ilosc_techn = rowAktualny2.ilosc_techn;
@@ -525,12 +543,14 @@ namespace ecoplastol.planowanie
                     row2.wyglad_grzejnika = rowAktualny2.wyglad_grzejnika;
                     row2.przeglad_codz_masz = rowAktualny2.przeglad_codz_masz;
                     row2.uwagi = rowAktualny2.uwagi;
+                    row2.zatwierdzony = rowAktualny2.zatwierdzony;
                     row2.opw = rowAktualny2.opw;
                     row2.czasw = rowAktualny2.czasw;
                     row2.opm = frmLogin.LoggedUser.login;
                     row2.czasm = DateTime.Now;
                     frmMeldunki_db.PoprawMeldunek(row2);
                     frmMeldunki_db.PoprawIDPrzyczynyBrakow(row2.id, row2.id_zlecenie);
+                    WyszukajMeldunki();
                     break;
                 default:
                     break;
@@ -632,7 +652,7 @@ namespace ecoplastol.planowanie
                 rowMeldunek.id_zlecenie = ((ZlecenieView)cbbZlecenie.SelectedItem).id.Value;
 
             // ustawienie wybranej u góry zmiany
-            if (cbbZmiana.SelectedItem == null) { rowMeldunek.zmiana = 0; } else { rowMeldunek.zmiana = ((zmiany)cbbZmiana.SelectedItem).id; }
+            if (cbbZmiana.SelectedItem == null) { rowMeldunek.id_zmiana = 0; } else { rowMeldunek.id_zmiana = ((zmiany)cbbZmiana.SelectedItem).id; }
 
             rowMeldunek.przeglad_codz_masz = 1;
             rowMeldunek.wynik_spr_wtr = 1;

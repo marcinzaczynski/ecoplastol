@@ -12,8 +12,6 @@
         <EntityTypeShape EntityType="ecoplastolModel.itf_odch" Width="1.5" PointX="0.75" PointY="3.25" IsExpanded="false" />
         <EntityTypeShape EntityType="ecoplastolModel.itf_sr" Width="1.5" PointX="0.75" PointY="3.75" IsExpanded="false" />
         <EntityTypeShape EntityType="ecoplastolModel.itf_trn" Width="1.5" PointX="0.75" PointY="2.25" IsExpanded="false" />
-        <EntityTypeShape EntityType="ecoplastolModel.maszyny" Width="1.5" PointX="4" PointY="1.25" IsExpanded="false" />
-        <EntityTypeShape EntityType="ecoplastolModel.meldunki" Width="1.5" PointX="7.25" PointY="0.75" IsExpanded="false" />
         <EntityTypeShape EntityType="ecoplastolModel.meldunki_wynik" Width="1.5" PointX="7.25" PointY="1.75" IsExpanded="false" />
         <EntityTypeShape EntityType="ecoplastolModel.meldunki_wynik_prz_maszyny" Width="1.5" PointX="7.25" PointY="1.25" IsExpanded="false" />
         <EntityTypeShape EntityType="ecoplastolModel.parametry" Width="1.5" PointX="4" PointY="2.75" IsExpanded="false" />
@@ -38,7 +36,9 @@
         <EntityTypeShape EntityType="ecoplastolModel.meldunki_wady_nn" Width="1.5" PointX="7.25" PointY="2.25" IsExpanded="false" />
         <EntityTypeShape EntityType="ecoplastolModel.brygadzisci" Width="1.5" PointX="4" PointY="2.25" IsExpanded="false" />
         <EntityTypeShape EntityType="ecoplastolModel.operatorzy_maszyn" Width="1.5" PointX="4" PointY="1.75" IsExpanded="false" />
-      </Diagram>
+        <EntityTypeShape EntityType="ecoplastolModel.maszyny" Width="1.5" PointX="4" PointY="1.25" IsExpanded="false" />
+        <EntityTypeShape EntityType="ecoplastolModel.meldunki" Width="1.5" PointX="7.25" PointY="0.75" IsExpanded="false" />
+        </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
 </edmx:Edmx>

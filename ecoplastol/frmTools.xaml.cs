@@ -26,7 +26,7 @@ namespace ecoplastol
 
         private void btnOperatorzy_Click(object sender, RoutedEventArgs e)
         {
-
+          
         }
     }
 }

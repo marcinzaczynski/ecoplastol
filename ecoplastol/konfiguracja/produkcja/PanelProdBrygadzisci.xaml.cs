@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,24 +16,21 @@ using System.Windows.Shapes;
 namespace ecoplastol.konfiguracja.produkcja
 {
     /// <summary>
-    /// Interaction logic for PanelProdWyrobWadyNN.xaml
+    /// Interaction logic for PanelProdBrygadzisci.xaml
     /// </summary>
-    public partial class PanelProdWyrobyWadyNN : UserControl
+    public partial class PanelProdBrygadzisci : UserControl
     {
         private int grdBookmark;
         private string akcja;
-        private wady_nn rowWyrobWadaNN;
+        private brygadzisci rowBrygadzista;
+        private List<brygadzisci> listBrygadzisci;
 
-        private List<wady_nn> listWyrobyWadyNN;
-
-        public PanelProdWyrobyWadyNN()
+        public PanelProdBrygadzisci(List<brygadzisci> lista)
         {
             InitializeComponent();
-            listWyrobyWadyNN = PanelProdWyrobyWadyNN_db.PobierzWyrobyWadyNN();
-            grdLista.ItemsSource = listWyrobyWadyNN;
-            grdPozycje.IsEnabled = false;
-
-            if (listWyrobyWadyNN.Count == 0)
+            listBrygadzisci = lista;
+            grdLista.ItemsSource = listBrygadzisci;
+            if (lista.Count == 0)
             {
                 UstawPrzyciski(0);
             }
@@ -73,17 +69,12 @@ namespace ecoplastol.konfiguracja.produkcja
             }
         }
 
-        private void GrdLista_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            rowWyrobWadaNN = grdLista.SelectedItem as wady_nn;
-            grdPozycje.DataContext = rowWyrobWadaNN;
-        }
-
         private void BtnDodaj_Click(object sender, RoutedEventArgs e)
         {
             akcja = "D";
-
+            grdBookmark = grdLista.SelectedIndex;
             grdLista.IsEnabled = false;
+            grdPozycje.IsEnabled = true;
             btnDodaj.IsEnabled = false;
             btnKlonuj.IsEnabled = false;
             btnPopraw.IsEnabled = false;
@@ -91,8 +82,8 @@ namespace ecoplastol.konfiguracja.produkcja
             btnAnuluj.IsEnabled = true;
             btnZatwierdz.IsEnabled = true;
 
-            grdPozycje.IsEnabled = true;
-            WyczyscKontrolkiWyrobWadaNN();
+            brygadzisci poz = new brygadzisci();
+            grdPozycje.DataContext = poz;
         }
 
         private void BtnKlonuj_Click(object sender, RoutedEventArgs e)
@@ -107,8 +98,9 @@ namespace ecoplastol.konfiguracja.produkcja
             btnAnuluj.IsEnabled = true;
             btnZatwierdz.IsEnabled = true;
 
-            wady_nn poz = new wady_nn();
-            poz = rowWyrobWadaNN;
+            brygadzisci poz = new brygadzisci();
+            poz.imie = rowBrygadzista.imie;
+            poz.nazwisko = rowBrygadzista.nazwisko;
             grdPozycje.DataContext = poz;
         }
 
@@ -131,9 +123,9 @@ namespace ecoplastol.konfiguracja.produkcja
             var Res = MessageBox.Show("Usunąć ?", "Usuwanie pozycji", MessageBoxButton.YesNo, MessageBoxImage.Exclamation);
             if (Res == MessageBoxResult.Yes)
             {
-                PanelProdWyrobyWadyNN_db.UsunWyrobWadaNN(rowWyrobWadaNN);
-                listWyrobyWadyNN = PanelProdWyrobyWadyNN_db.PobierzWyrobyWadyNN();
-                grdLista.ItemsSource = listWyrobyWadyNN;
+                PanelProdBrygadzisci_db.UsunBrygadziste(rowBrygadzista);
+                listBrygadzisci = PanelProdBrygadzisci_db.PobierzBrygadzistow(1);
+                grdLista.ItemsSource = listBrygadzisci;
             }
         }
 
@@ -148,8 +140,8 @@ namespace ecoplastol.konfiguracja.produkcja
             btnAnuluj.IsEnabled = false;
             btnZatwierdz.IsEnabled = false;
 
-            listWyrobyWadyNN = PanelProdWyrobyWadyNN_db.PobierzWyrobyWadyNN();
-            grdLista.ItemsSource = listWyrobyWadyNN;
+            listBrygadzisci = PanelProdBrygadzisci_db.PobierzBrygadzistow(1);
+            grdLista.ItemsSource = listBrygadzisci;
 
             grdLista.SelectedIndex = grdBookmark;
         }
@@ -169,68 +161,34 @@ namespace ecoplastol.konfiguracja.produkcja
             {
                 case "D":
                 case "K":
-                    if (grdPozycje.DataContext is wady_nn)
+                    if (grdPozycje.DataContext is brygadzisci)
                     {
-                        var row = new wady_nn();
-                        row = grdPozycje.DataContext as wady_nn;
-                        row.id = PanelProdWyrobyWadyNN_db.IdWyrobyWadyNN();
+                        var row = new brygadzisci();
+                        row = grdPozycje.DataContext as brygadzisci;
+                        row.id = PanelProdBrygadzisci_db.IdBrygadzisty();
                         row.opw = frmLogin.LoggedUser.login;
                         row.czasw = DateTime.Now;
                         row.opm = frmLogin.LoggedUser.login;
                         row.czasm = DateTime.Now;
-                        PanelProdWyrobyWadyNN_db.DodajWyrobWadaNN(row);
+                        PanelProdBrygadzisci_db.DodajBrygadziste(row);
                     }
                     break;
                 case "P":
-                    rowWyrobWadaNN.opm = frmLogin.LoggedUser.login;
-                    rowWyrobWadaNN.czasm = DateTime.Now;
-                    PanelProdWyrobyWadyNN_db.PoprawWyrobWadaNN(rowWyrobWadaNN);
+                    rowBrygadzista.opm = frmLogin.LoggedUser.login;
+                    rowBrygadzista.czasm = DateTime.Now;
+                    PanelProdBrygadzisci_db.PoprawBrygadziste(rowBrygadzista);
                     break;
                 default:
                     break;
             }
-            listWyrobyWadyNN = PanelProdWyrobyWadyNN_db.PobierzWyrobyWadyNN();
-            grdLista.ItemsSource = listWyrobyWadyNN;
-            grdLista.SelectedIndex = grdBookmark;
-            grdLista.Focus();
+            listBrygadzisci = PanelProdBrygadzisci_db.PobierzBrygadzistow(1);
+            grdLista.ItemsSource = listBrygadzisci;
         }
 
-        public static List<T> GetLogicalChildCollection<T>(object parent) where T : DependencyObject
+        private void GrdLista_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            List<T> logicalCollection = new List<T>();
-            GetLogicalChildCollection(parent as DependencyObject, logicalCollection);
-            return logicalCollection;
-        }
-
-        private static void GetLogicalChildCollection<T>(DependencyObject parent, List<T> logicalCollection) where T : DependencyObject
-        {
-            IEnumerable children = LogicalTreeHelper.GetChildren(parent);
-            foreach (object child in children)
-            {
-                if (child is DependencyObject)
-                {
-                    DependencyObject depChild = child as DependencyObject;
-                    if (child is T)
-                    {
-                        logicalCollection.Add(child as T);
-                    }
-                    GetLogicalChildCollection(depChild, logicalCollection);
-                }
-            }
-        }
-
-        private void WyczyscKontrolkiWyrobWadaNN()
-        {
-            txtParametr.Text = "";
-            txtWartosc.Text = "";
-            txtOpis.Text = "";
-
-            List<ComboBox> comboBoxes = GetLogicalChildCollection<ComboBox>(grdPozycje);
-            foreach (var cmbBox in comboBoxes)
-            {
-                cmbBox.SelectedValue = -1;
-                //MessageBox.Show(cmbBox.Name);
-            }
+            rowBrygadzista = grdLista.SelectedItem as brygadzisci;
+            grdPozycje.DataContext = rowBrygadzista;
         }
     }
 }

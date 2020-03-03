@@ -22,15 +22,18 @@ namespace ecoplastol.konfiguracja.produkcja
     {
         private int grdBookmark;
         private string akcja;
-        private operatorzy_maszyn rowOperatorzy;
-        private List<operatorzy_maszyn> listOperatorzy;
+        private OperatorzyView rowOperatorzy;
+        private List<OperatorzyView> listOperatorzy;
 
-        public PanelProdOperatorzy(List<operatorzy_maszyn> lista)
+        public PanelProdOperatorzy()
         {
             InitializeComponent();
-            listOperatorzy = lista;
+            listOperatorzy = PanelProdOperatorzy_db.PobierzOperatorowView();
+
+            cbbBrygadzista.ItemsSource = PanelProdBrygadzisci_db.PobierzBrygadzistow(1);
+            cbbBrygadzista.SelectedValuePath = "id";
             grdLista.ItemsSource = listOperatorzy;
-            if (lista.Count == 0)
+            if (listOperatorzy.Count == 0)
             {
                 UstawPrzyciski(0);
             }
@@ -82,8 +85,7 @@ namespace ecoplastol.konfiguracja.produkcja
             btnAnuluj.IsEnabled = true;
             btnZatwierdz.IsEnabled = true;
 
-            operatorzy_maszyn poz = new operatorzy_maszyn();
-            grdPozycje.DataContext = poz;
+            grdPozycje.DataContext = new OperatorzyView();
         }
 
         private void BtnKlonuj_Click(object sender, RoutedEventArgs e)
@@ -98,10 +100,6 @@ namespace ecoplastol.konfiguracja.produkcja
             btnAnuluj.IsEnabled = true;
             btnZatwierdz.IsEnabled = true;
 
-            operatorzy_maszyn poz = new operatorzy_maszyn();
-            poz.imie = rowOperatorzy.imie;
-            poz.nazwisko = rowOperatorzy.nazwisko;
-            grdPozycje.DataContext = poz;
         }
 
         private void BtnPopraw_Click(object sender, RoutedEventArgs e)
@@ -123,8 +121,9 @@ namespace ecoplastol.konfiguracja.produkcja
             var Res = MessageBox.Show("Usunąć ?", "Usuwanie pozycji", MessageBoxButton.YesNo, MessageBoxImage.Exclamation);
             if (Res == MessageBoxResult.Yes)
             {
-                konf_produkcja_db.UsunOperatora(rowOperatorzy);
-                listOperatorzy = konf_produkcja_db.PobierzOperatorow();
+                var poz = grdLista.SelectedItem as OperatorzyView;
+                PanelProdOperatorzy_db.UsunOperatora(poz);
+                listOperatorzy = PanelProdOperatorzy_db.PobierzOperatorowView();
                 grdLista.ItemsSource = listOperatorzy;
             }
         }
@@ -140,7 +139,7 @@ namespace ecoplastol.konfiguracja.produkcja
             btnAnuluj.IsEnabled = false;
             btnZatwierdz.IsEnabled = false;
 
-            listOperatorzy = konf_produkcja_db.PobierzOperatorow();
+            listOperatorzy = PanelProdOperatorzy_db.PobierzOperatorowView();
             grdLista.ItemsSource = listOperatorzy;
 
             grdLista.SelectedIndex = grdBookmark;
@@ -161,33 +160,49 @@ namespace ecoplastol.konfiguracja.produkcja
             {
                 case "D":
                 case "K":
-                    if (grdPozycje.DataContext is operatorzy_maszyn)
-                    {
                         var row = new operatorzy_maszyn();
-                        row = grdPozycje.DataContext as operatorzy_maszyn;
-                        row.id = konf_produkcja_db.IdOperatora();
+                        var rowAktualny = grdPozycje.DataContext as OperatorzyView;
+                        row.id = PanelProdOperatorzy_db.IdOperatora();
+
+                        row.imie = rowAktualny.imie;
+                        row.nazwisko = rowAktualny.nazwisko;
+                        row.login = rowAktualny.login;
+                        row.haslo = rowAktualny.haslo;
+                        row.aktywny = rowAktualny.aktywny;
+                        row.brygada = rowAktualny.brygada;
                         row.opw = frmLogin.LoggedUser.login;
                         row.czasw = DateTime.Now;
                         row.opm = frmLogin.LoggedUser.login;
                         row.czasm = DateTime.Now;
-                        konf_produkcja_db.DodajOperatora(row);
-                    }
+                        PanelProdOperatorzy_db.DodajOperatora(row);
                     break;
                 case "P":
-                    rowOperatorzy.opm = frmLogin.LoggedUser.login;
-                    rowOperatorzy.czasm = DateTime.Now;
-                    konf_produkcja_db.PoprawOperatora(rowOperatorzy);
+
+                    var row2 = new operatorzy_maszyn();
+                    var rowAktualny2 = grdPozycje.DataContext as OperatorzyView;
+                    row2.id = rowAktualny2.id;
+                    row2.imie = rowAktualny2.imie;
+                    row2.nazwisko = rowAktualny2.nazwisko;
+                    row2.login = rowAktualny2.login;
+                    row2.haslo = rowAktualny2.haslo;
+                    row2.aktywny = rowAktualny2.aktywny;
+                    row2.brygada = rowAktualny2.brygada;
+                    row2.opw = rowAktualny2.opw;
+                    row2.czasw = rowAktualny2.czasw;
+                    row2.opm = frmLogin.LoggedUser.login;
+                    row2.czasm = DateTime.Now;
+                    PanelProdOperatorzy_db.PoprawOperatora(row2);
                     break;
                 default:
                     break;
             }
-            listOperatorzy = konf_produkcja_db.PobierzOperatorow();
+            listOperatorzy = PanelProdOperatorzy_db.PobierzOperatorowView();
             grdLista.ItemsSource = listOperatorzy;
         }
 
         private void GrdLista_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            rowOperatorzy = grdLista.SelectedItem as operatorzy_maszyn;
+            rowOperatorzy = grdLista.SelectedItem as OperatorzyView;
             grdPozycje.DataContext = rowOperatorzy;
         }
     }

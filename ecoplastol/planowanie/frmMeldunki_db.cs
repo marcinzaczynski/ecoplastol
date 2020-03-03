@@ -6,26 +6,27 @@ using System.Threading.Tasks;
 
 namespace ecoplastol.planowanie
 {
-    public class MeldunekView
+    public class MeldunekView : meldunki
     {
         // pola z tabeli meldunki
-        public int id { get; set; }
-        public int id_zlecenie { get; set; }
-        public int id_operator { get; set; }
-        public int zmiana { get; set; }
-        public DateTime data_meldunku { get; set; }
-        public int ilosc { get; set; }
-        public int ilosc_techn { get; set; }
-        public TimeSpan godz_spr_wtr { get; set; }
-        public int wynik_spr_wtr { get; set; }
-        public int wyglad_zew { get; set; }
-        public int wyglad_grzejnika { get; set; }
-        public string opw { get; set; }
-        public DateTime czasw { get; set; }
-        public string opm { get; set; }
-        public DateTime czasm { get; set; }
-        public int przeglad_codz_masz { get; set; }
-        public string uwagi { get; set; }
+        //public int id { get; set; }
+        //public int id_zlecenie { get; set; }
+        //public int id_operator { get; set; }
+        //public int id_brygadzista { get; set; }
+        //public int zmiana { get; set; }
+        //public DateTime data_meldunku { get; set; }
+        //public int ilosc { get; set; }
+        //public int ilosc_techn { get; set; }
+        //public TimeSpan godz_spr_wtr { get; set; }
+        //public int wynik_spr_wtr { get; set; }
+        //public int wyglad_zew { get; set; }
+        //public int wyglad_grzejnika { get; set; }
+        //public string opw { get; set; }
+        //public DateTime czasw { get; set; }
+        //public string opm { get; set; }
+        //public DateTime czasm { get; set; }
+        //public int przeglad_codz_masz { get; set; }
+        //public string uwagi { get; set; }
         
         // ilość wad nn
         public int ilosc_wad_nn { get; set; }
@@ -182,14 +183,15 @@ namespace ecoplastol.planowanie
                                     o.id == m.id_operator &&
                                     m.id_zlecenie == zlecenia.id &&
                                     zlecenia.zlecenie_nr_maszyny == maszyny.id
-                            orderby m.data_meldunku descending, m.zmiana ascending
+                            orderby m.data_meldunku descending, m.id_zmiana ascending
                             select new MeldunekView
                             {
                                 // pola z tabeli meldunki
                                 id = m.id,
                                 id_zlecenie = m.id_zlecenie,
                                 id_operator = m.id_operator,
-                                zmiana = m.zmiana,
+                                id_brygadzista = m.id_brygadzista,
+                                id_zmiana = m.id_zmiana,
                                 data_meldunku = m.data_meldunku,
                                 ilosc = m.ilosc,
                                 ilosc_techn = m.ilosc_techn,
@@ -205,6 +207,7 @@ namespace ecoplastol.planowanie
                                 wynik_spr_wtr = m.wynik_spr_wtr,
                                 wyglad_zew = m.wyglad_zew,
                                 wyglad_grzejnika = m.wyglad_grzejnika,
+                                zatwierdzony = m.zatwierdzony,
                                 opw = m.opw,
                                 czasw = m.czasw,
                                 opm = m.opm,
@@ -246,7 +249,7 @@ namespace ecoplastol.planowanie
 
                 if (idZmiany > 0)
                 {
-                    list = list.Where(r => r.zmiana == idZmiany);
+                    list = list.Where(r => r.id_zmiana == idZmiany);
                 }
 
                 if (idOperatora > 0)
@@ -384,7 +387,7 @@ namespace ecoplastol.planowanie
 
         public static void UsunPrzyczynyBrakow()
         {
-            // przy dodawaniu przyczyn braków, zawdze jako id_meldunku podaje 0
+            // przy dodawaniu przyczyn braków, zawsze jako id_meldunku podaje 0
             // przy zatwierdzaniu poprwiam na prawidłowy numer meldunku a przy anulowaniu usuwam te z 0
             using (var db = new ecoplastolEntities())
             {

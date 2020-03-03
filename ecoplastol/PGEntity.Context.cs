@@ -32,8 +32,6 @@ namespace ecoplastol
         public virtual DbSet<itf_odch> itf_odch { get; set; }
         public virtual DbSet<itf_sr> itf_sr { get; set; }
         public virtual DbSet<itf_trn> itf_trn { get; set; }
-        public virtual DbSet<maszyny> maszyny { get; set; }
-        public virtual DbSet<meldunki> meldunki { get; set; }
         public virtual DbSet<meldunki_wynik> meldunki_wynik { get; set; }
         public virtual DbSet<meldunki_wynik_prz_maszyny> meldunki_wynik_prz_maszyny { get; set; }
         public virtual DbSet<parametry> parametry { get; set; }
@@ -58,5 +56,7 @@ namespace ecoplastol
         public virtual DbSet<meldunki_wady_nn> meldunki_wady_nn { get; set; }
         public virtual DbSet<brygadzisci> brygadzisci { get; set; }
         public virtual DbSet<operatorzy_maszyn> operatorzy_maszyn { get; set; }
+        public virtual DbSet<maszyny> maszyny { get; set; }
+        public virtual DbSet<meldunki> meldunki { get; set; }
     }
 }

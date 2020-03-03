@@ -30,7 +30,7 @@ namespace ecoplastol.konfiguracja.produkcja
         public PanelProdWyrobyDruty()
         {
             InitializeComponent();
-            listWyrobyDruty = konf_produkcja_db.PobierzWyrobyDruty();
+            listWyrobyDruty = PanelProdWyrobyDruty_db.PobierzWyrobyDruty();
             grdLista.ItemsSource = listWyrobyDruty;
             grdPozycje.IsEnabled = false;
 
@@ -131,8 +131,8 @@ namespace ecoplastol.konfiguracja.produkcja
             var Res = MessageBox.Show("Usunąć ?", "Usuwanie pozycji", MessageBoxButton.YesNo, MessageBoxImage.Exclamation);
             if (Res == MessageBoxResult.Yes)
             {
-                konf_produkcja_db.UsunWyrobDrut(rowWyrobyDrut);
-                listWyrobyDruty = konf_produkcja_db.PobierzWyrobyDruty();
+                PanelProdWyrobyDruty_db.UsunWyrobDrut(rowWyrobyDrut);
+                listWyrobyDruty = PanelProdWyrobyDruty_db.PobierzWyrobyDruty();
                 grdLista.ItemsSource = listWyrobyDruty;
             }
         }
@@ -148,7 +148,7 @@ namespace ecoplastol.konfiguracja.produkcja
             btnAnuluj.IsEnabled = false;
             btnZatwierdz.IsEnabled = false;
 
-            listWyrobyDruty = konf_produkcja_db.PobierzWyrobyDruty();
+            listWyrobyDruty = PanelProdWyrobyDruty_db.PobierzWyrobyDruty();
             grdLista.ItemsSource = listWyrobyDruty;
 
             grdLista.SelectedIndex = grdBookmark;
@@ -173,23 +173,23 @@ namespace ecoplastol.konfiguracja.produkcja
                     {
                         var row = new wyroby_druty();
                         row = grdPozycje.DataContext as wyroby_druty;
-                        row.id = konf_produkcja_db.IdWyrobyDruty();
+                        row.id = PanelProdWyrobyDruty_db.IdWyrobyDruty();
                         row.opw = frmLogin.LoggedUser.login;
                         row.czasw = DateTime.Now;
                         row.opm = frmLogin.LoggedUser.login;
                         row.czasm = DateTime.Now;
-                        konf_produkcja_db.DodajWyrobDrut(row);
+                        PanelProdWyrobyDruty_db.DodajWyrobDrut(row);
                     }
                     break;
                 case "P":
                     rowWyrobyDrut.opm = frmLogin.LoggedUser.login;
                     rowWyrobyDrut.czasm = DateTime.Now;
-                    konf_produkcja_db.PoprawWyrobDrut(rowWyrobyDrut);
+                    PanelProdWyrobyDruty_db.PoprawWyrobDrut(rowWyrobyDrut);
                     break;
                 default:
                     break;
             }
-            listWyrobyDruty = konf_produkcja_db.PobierzWyrobyDruty();
+            listWyrobyDruty = PanelProdWyrobyDruty_db.PobierzWyrobyDruty();
             grdLista.ItemsSource = listWyrobyDruty;
             grdLista.SelectedIndex = grdBookmark;
             grdLista.Focus();

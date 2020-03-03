@@ -45,7 +45,7 @@ namespace ecoplastol
             dpDataZleceniaOd.SelectedDate = DateTime.Now;
             dpDataZleceniaDo.SelectedDate = DateTime.Now;
 
-            listaMaszyn = konf_produkcja_db.PobierzMaszyny();
+            listaMaszyn = PanelProdMaszyny_db.PobierzMaszyny();
             cbbMaszyna.ItemsSource = listaMaszyn;
             cbbMaszyna.SelectedValuePath = "id";
             cbbMaszyna.DisplayMemberPath = "nazwa";
@@ -56,13 +56,13 @@ namespace ecoplastol
 
         private void UstawKontrolki()
         {
-            listaWyrobow = konf_produkcja_db.PobierzWyroby(false, -1);
-            listaMaszynZlecenie = konf_produkcja_db.PobierzMaszyny();
+            listaWyrobow = PanelProdWyroby_db.PobierzWyroby(false, -1);
+            listaMaszynZlecenie = PanelProdMaszyny_db.PobierzMaszyny();
 
             listTracePEm = PanelTrace_db.PobierzTracePem();
-            listWyrobRodzajDrutu = konf_produkcja_db.PobierzDruty();
+            listWyrobRodzajDrutu = PanelProdWyrobyDruty_db.PobierzWyrobyDruty();
             listTraceProducent = PanelTrace_db.PobierzTraceProducent();
-            listWyrobZakresSDR = konf_produkcja_db.PobierzZakresSDR();
+            listWyrobZakresSDR = PanelProdWyrobyZakresSDR_db.PobierzWyrobyZakresySDR();
             listTraceSDR = PanelTrace_db.PobierzTraceSdr();
             listITFtrn = PanelITF_db.PobierzITFtrn();
             listITFcc1 = PanelITF_db.PobierzITFcc();

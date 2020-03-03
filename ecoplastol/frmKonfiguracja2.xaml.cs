@@ -54,14 +54,16 @@ namespace ecoplastol
 
         private List<maszyny> listProdMaszyny;
         
-        private List<operatorzy_maszyn> listProdOperatorzy;
+        
+        private List<brygadzisci> listProdBrygadzisci;
 
         private PanelProdMaszyny panelProdMaszyny;
         private PanelProdWyroby panelProdWyroby;
         private PanelProdOperatorzy panelProdOperatorzy;
+        private PanelProdBrygadzisci panelProdBrygadzisci;
         private PanelProdWyrobyTypy panelProdWyrobyTypy;
         private PanelProdZaworyTypy panelProdZaworyTypy;
-        private PanelProdWyrobZakresSDR panelProdWyrobZakresSDR;
+        private PanelProdWyrobyZakresSDR panelProdWyrobyZakresSDR;
         private PanelProdWyrobyDruty panelProdWyrobyDruty;
         private PanelProdWyrobyWadyNN panelProdWyrobyWadyNN;
 
@@ -279,7 +281,7 @@ namespace ecoplastol
         private void BtnProdMaszyny_Click(object sender, RoutedEventArgs e)
         {
             lblProdinfo.Content = btnProdMaszyny.Content;
-            listProdMaszyny = konf_produkcja_db.PobierzMaszyny();
+            listProdMaszyny = PanelProdMaszyny_db.PobierzMaszyny();
 
             grdProdDane.Children.Clear();
             panelProdMaszyny = null;
@@ -321,10 +323,10 @@ namespace ecoplastol
 
 
             grdTraceDane.Children.Clear();
-            panelProdWyrobZakresSDR = null;
-            panelProdWyrobZakresSDR = new PanelProdWyrobZakresSDR();
+            panelProdWyrobyZakresSDR = null;
+            panelProdWyrobyZakresSDR = new PanelProdWyrobyZakresSDR();
 
-            grdProdDane.Children.Add(panelProdWyrobZakresSDR);
+            grdProdDane.Children.Add(panelProdWyrobyZakresSDR);
         }
 
         private void BtnProdRodzajDrutu_Click(object sender, RoutedEventArgs e)
@@ -342,11 +344,12 @@ namespace ecoplastol
         private void BtnProdOperatorzy_Click(object sender, RoutedEventArgs e)
         {
             lblProdinfo.Content = btnProdOperatorzy.Content;
-            listProdOperatorzy = konf_produkcja_db.PobierzOperatorow();
+
+            //List<OperatorzyView> listProdOperatorzy = PanelProdOperatorzy_db.PobierzOperatorowView();
 
             grdProdDane.Children.Clear();
             panelProdOperatorzy = null;
-            panelProdOperatorzy = new PanelProdOperatorzy(listProdOperatorzy);
+            panelProdOperatorzy = new PanelProdOperatorzy();
 
             grdProdDane.Children.Add(panelProdOperatorzy);
         }
@@ -360,6 +363,23 @@ namespace ecoplastol
             panelProdWyrobyWadyNN = new PanelProdWyrobyWadyNN();
 
             grdProdDane.Children.Add(panelProdWyrobyWadyNN);
+        }
+
+        private void btnProdBrygadzisci_Click(object sender, RoutedEventArgs e)
+        {
+            lblProdinfo.Content = btnProdBrygadzisci.Content;
+            listProdBrygadzisci = PanelProdBrygadzisci_db.PobierzBrygadzistow(1);
+
+            grdProdDane.Children.Clear();
+            panelProdBrygadzisci = null;
+            panelProdBrygadzisci = new PanelProdBrygadzisci(listProdBrygadzisci);
+
+            grdProdDane.Children.Add(panelProdBrygadzisci);
+        }
+
+        private void btnProdZmiany_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

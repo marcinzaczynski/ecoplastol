@@ -30,7 +30,7 @@ namespace ecoplastol.konfiguracja.produkcja
         public PanelProdWyrobyTypy()
         {
             InitializeComponent();
-            listWyrobyTypy = konf_produkcja_db.PobierzWyrobyTypy();
+            listWyrobyTypy = PanelProdWyrobyTypy_db.PobierzWyrobyTypy();
             grdLista.ItemsSource = listWyrobyTypy;
             grdPozycje.IsEnabled = false;
 
@@ -106,8 +106,8 @@ namespace ecoplastol.konfiguracja.produkcja
             var Res = MessageBox.Show("Usunąć ?", "Usuwanie pozycji", MessageBoxButton.YesNo, MessageBoxImage.Exclamation);
             if (Res == MessageBoxResult.Yes)
             {
-                konf_produkcja_db.UsunWyrobTyp(rowWyrobTyp);
-                listWyrobyTypy = konf_produkcja_db.PobierzWyrobyTypy();
+                PanelProdWyrobyTypy_db.UsunWyrobTyp(rowWyrobTyp);
+                listWyrobyTypy = PanelProdWyrobyTypy_db.PobierzWyrobyTypy();
                 grdLista.ItemsSource = listWyrobyTypy;
             }
         }
@@ -123,7 +123,7 @@ namespace ecoplastol.konfiguracja.produkcja
             btnAnuluj.IsEnabled = false;
             btnZatwierdz.IsEnabled = false;
 
-            listWyrobyTypy = konf_produkcja_db.PobierzWyrobyTypy();
+            listWyrobyTypy = PanelProdWyrobyTypy_db.PobierzWyrobyTypy();
             grdLista.ItemsSource = listWyrobyTypy;
 
             grdLista.SelectedIndex = grdBookmark;
@@ -148,23 +148,23 @@ namespace ecoplastol.konfiguracja.produkcja
                     {
                         var row = new wyroby_typ();
                         row = grdPozycje.DataContext as wyroby_typ;
-                        row.id = konf_produkcja_db.IdWyrobyTyp();
+                        row.id = PanelProdWyrobyTypy_db.IdWyrobyTyp();
                         row.opw = frmLogin.LoggedUser.login;
                         row.czasw = DateTime.Now;
                         row.opm = frmLogin.LoggedUser.login;
                         row.czasm = DateTime.Now;
-                        konf_produkcja_db.DodajWyrobTyp(row);
+                        PanelProdWyrobyTypy_db.DodajWyrobTyp(row);
                     }
                     break;
                 case "P":
                     rowWyrobTyp.opm = frmLogin.LoggedUser.login;
                     rowWyrobTyp.czasm = DateTime.Now;
-                    konf_produkcja_db.PoprawWyrobTyp(rowWyrobTyp);
+                    PanelProdWyrobyTypy_db.PoprawWyrobTyp(rowWyrobTyp);
                     break;
                 default:
                     break;
             }
-            listWyrobyTypy = konf_produkcja_db.PobierzWyrobyTypy();
+            listWyrobyTypy = PanelProdWyrobyTypy_db.PobierzWyrobyTypy();
             grdLista.ItemsSource = listWyrobyTypy;
             grdLista.SelectedIndex = grdBookmark;
             grdLista.Focus();

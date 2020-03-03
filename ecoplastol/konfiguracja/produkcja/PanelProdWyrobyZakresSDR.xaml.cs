@@ -19,17 +19,17 @@ namespace ecoplastol.konfiguracja.produkcja
     /// <summary>
     /// Interaction logic for PanelProdWyrobZakresSDR.xaml
     /// </summary>
-    public partial class PanelProdWyrobZakresSDR : UserControl
+    public partial class PanelProdWyrobyZakresSDR : UserControl
     {
         private int grdBookmark;
         private string akcja;
         private wyroby_zakres_sdr rowWyrobZakresSDR;
 
         private List<wyroby_zakres_sdr> listWyrobyZakresySDR;
-        public PanelProdWyrobZakresSDR()
+        public PanelProdWyrobyZakresSDR()
         {
             InitializeComponent();
-            listWyrobyZakresySDR = konf_produkcja_db.PobierzWyrobyZakresySDR();
+            listWyrobyZakresySDR = PanelProdWyrobyZakresSDR_db.PobierzWyrobyZakresySDR();
             grdLista.ItemsSource = listWyrobyZakresySDR;
             grdPozycje.IsEnabled = false;
 
@@ -130,8 +130,8 @@ namespace ecoplastol.konfiguracja.produkcja
             var Res = MessageBox.Show("Usunąć ?", "Usuwanie pozycji", MessageBoxButton.YesNo, MessageBoxImage.Exclamation);
             if (Res == MessageBoxResult.Yes)
             {
-                konf_produkcja_db.UsunWyrobZakresSDR(rowWyrobZakresSDR);
-                listWyrobyZakresySDR = konf_produkcja_db.PobierzWyrobyZakresySDR();
+                PanelProdWyrobyZakresSDR_db.UsunWyrobZakresSDR(rowWyrobZakresSDR);
+                listWyrobyZakresySDR = PanelProdWyrobyZakresSDR_db.PobierzWyrobyZakresySDR();
                 grdLista.ItemsSource = listWyrobyZakresySDR;
             }
         }
@@ -147,7 +147,7 @@ namespace ecoplastol.konfiguracja.produkcja
             btnAnuluj.IsEnabled = false;
             btnZatwierdz.IsEnabled = false;
 
-            listWyrobyZakresySDR = konf_produkcja_db.PobierzWyrobyZakresySDR();
+            listWyrobyZakresySDR = PanelProdWyrobyZakresSDR_db.PobierzWyrobyZakresySDR();
             grdLista.ItemsSource = listWyrobyZakresySDR;
 
             grdLista.SelectedIndex = grdBookmark;
@@ -172,23 +172,23 @@ namespace ecoplastol.konfiguracja.produkcja
                     {
                         var row = new wyroby_zakres_sdr();
                         row = grdPozycje.DataContext as wyroby_zakres_sdr;
-                        row.id = konf_produkcja_db.IdWyrobyZakresSDR();
+                        row.id = PanelProdWyrobyZakresSDR_db.IdWyrobyZakresSDR();
                         row.opw = frmLogin.LoggedUser.login;
                         row.czasw = DateTime.Now;
                         row.opm = frmLogin.LoggedUser.login;
                         row.czasm = DateTime.Now;
-                        konf_produkcja_db.DodajWyrobZakresSDR(row);
+                        PanelProdWyrobyZakresSDR_db.DodajWyrobZakresSDR(row);
                     }
                     break;
                 case "P":
                     rowWyrobZakresSDR.opm = frmLogin.LoggedUser.login;
                     rowWyrobZakresSDR.czasm = DateTime.Now;
-                    konf_produkcja_db.PoprawWyrobZakresSDR(rowWyrobZakresSDR);
+                    PanelProdWyrobyZakresSDR_db.PoprawWyrobZakresSDR(rowWyrobZakresSDR);
                     break;
                 default:
                     break;
             }
-            listWyrobyZakresySDR = konf_produkcja_db.PobierzWyrobyZakresySDR();
+            listWyrobyZakresySDR = PanelProdWyrobyZakresSDR_db.PobierzWyrobyZakresySDR();
             grdLista.ItemsSource = listWyrobyZakresySDR;
             grdLista.SelectedIndex = grdBookmark;
             grdLista.Focus();
