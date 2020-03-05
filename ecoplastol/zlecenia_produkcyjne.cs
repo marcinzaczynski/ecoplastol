@@ -24,7 +24,7 @@ namespace ecoplastol
         public int wyrob_waga_op { get; set; }
         public int wyrob_waga_1szt { get; set; }
         public int wyrob_zakres_sdr { get; set; }
-        public Nullable<int> wyrob_zast_zaworu { get; set; }
+        public Nullable<int> wyrob_zast { get; set; }
         public Nullable<int> wyrob_rodzaj_drutu { get; set; }
         public int wyrob_norma { get; set; }
         public int wyrob_il_w_partii { get; set; }

@@ -38,7 +38,7 @@ namespace ecoplastol.konfiguracja.produkcja
         private kodITF kodITF;
         private kodTrace kodTrace;
 
-        private List<wyroby> listWyroby;
+        private List<WyrobyView> listWyroby;
         private List<wyroby_typ> listTypyWyrobow;
         private List<wyroby_zakres_sdr> listWyrobZakresSDR;
         private List<wyroby_zast_zaworu> listWyrobZastZaworu;
@@ -70,16 +70,34 @@ namespace ecoplastol.konfiguracja.produkcja
         public PanelProdWyroby(bool czyAktywne)
         {
             InitializeComponent();
-            widoczneWyroby = czyAktywne;
-            typFiltrTypKsztaltki = -1;
-            listWyroby = PanelProdWyroby_db.PobierzWyroby(widoczneWyroby, typFiltrTypKsztaltki);
-            grdLista.ItemsSource = listWyroby;
-            lblIloscPozycji.Content = listWyroby.Count().ToString();
-            grdPozycje.IsEnabled = false;
-
             UstawWyrob();
             UstawITF();
             UstawTrace();
+
+            var lista = PanelProdWyrobyTypy_db.PobierzTypy();
+            cbbJakiTypWyrobu.ItemsSource = lista;
+            var TypDefault = lista.Where(l => l.id == -1).FirstOrDefault();
+            cbbJakiTypWyrobu.SelectedItem = TypDefault;
+
+            
+            
+            widoczneWyroby = czyAktywne;
+            switch (widoczneWyroby)
+            {
+                case true:
+                    cbbCzyAktywne.SelectedIndex = 1;
+                    break;
+                case false:
+                    cbbCzyAktywne.SelectedIndex = 0;
+                    break;
+            }
+            typFiltrTypKsztaltki = -1; // na początek mają się wyświetlić wszystkie wyroby
+            listWyroby = PanelProdWyroby_db.PobierzWyrobyView(widoczneWyroby, typFiltrTypKsztaltki);
+            grdLista.ItemsSource = listWyroby;
+            lblIloscPozycji.Content = listWyroby.Count().ToString();
+            grdPozycje.IsEnabled = false;
+            grdKody.Visibility = Visibility.Collapsed;
+            
 
             kodITF = new kodITF();
             kodTrace = new kodTrace();
@@ -102,6 +120,7 @@ namespace ecoplastol.konfiguracja.produkcja
         {
             listTypyWyrobow = PanelProdWyrobyTypy_db.PobierzTypy();
             cbbWyrobTyp.ItemsSource = listTypyWyrobow;
+            
 
             listWyrobZakresSDR = PanelProdWyrobyZakresSDR_db.PobierzWyrobyZakresySDR();
             cbbWyrobZakresSDR.ItemsSource = listWyrobZakresSDR;
@@ -199,6 +218,9 @@ namespace ecoplastol.konfiguracja.produkcja
         private void BtnDodaj_Click(object sender, RoutedEventArgs e)
         {
             akcja = "D";
+            rowWyrob = new wyroby();
+            rowWyrob.wyrob_typ = (cbbJakiTypWyrobu.SelectedItem as wyroby_typ).id;
+            grdPozycje.DataContext = rowWyrob;
 
             grdLista.IsEnabled = false;
             btnDodaj.IsEnabled = false;
@@ -209,7 +231,7 @@ namespace ecoplastol.konfiguracja.produkcja
             btnZatwierdz.IsEnabled = true;
 
             grdPozycje.IsEnabled = true;
-            WyczyscKontrolkiWyrob();
+            //WyczyscKontrolkiWyrob();
             WyczyscKontrolkiKodKr();
         }
 
@@ -250,7 +272,7 @@ namespace ecoplastol.konfiguracja.produkcja
             if (Res == MessageBoxResult.Yes)
             {
                 PanelProdWyroby_db.UsunWyrob(rowWyrob);
-                listWyroby = PanelProdWyroby_db.PobierzWyroby(widoczneWyroby, typFiltrTypKsztaltki);
+                listWyroby = PanelProdWyroby_db.PobierzWyrobyView(widoczneWyroby, typFiltrTypKsztaltki);
                 grdLista.ItemsSource = listWyroby;
             }
         }
@@ -266,7 +288,7 @@ namespace ecoplastol.konfiguracja.produkcja
             btnAnuluj.IsEnabled = false;
             btnZatwierdz.IsEnabled = false;
 
-            listWyroby = PanelProdWyroby_db.PobierzWyroby(widoczneWyroby, typFiltrTypKsztaltki);
+            listWyroby = PanelProdWyroby_db.PobierzWyrobyView(widoczneWyroby, typFiltrTypKsztaltki);
             grdLista.ItemsSource = listWyroby;
 
             grdLista.SelectedIndex = grdBookmark;
@@ -307,7 +329,7 @@ namespace ecoplastol.konfiguracja.produkcja
                 default:
                     break;
             }
-            listWyroby = PanelProdWyroby_db.PobierzWyroby(widoczneWyroby, typFiltrTypKsztaltki);
+            listWyroby = PanelProdWyroby_db.PobierzWyrobyView(widoczneWyroby, typFiltrTypKsztaltki);
             grdLista.ItemsSource = listWyroby;
             grdLista.SelectedIndex = grdBookmark;
             grdLista.Focus();
@@ -1572,110 +1594,81 @@ namespace ecoplastol.konfiguracja.produkcja
             CbbTraceMFR_DropDownClosed(null, null);
         }
 
-        private void BtnPokazWszystkie_Click(object sender, RoutedEventArgs e)
-        {
-            btnPokazWszystkie.Foreground = Brushes.Black;
-            btnPokazAktywne.Foreground = Brushes.Black;
-            btnPokazWszystkie.Foreground = Brushes.Blue;
-            
-            
-            widoczneWyroby = false;
-            listWyroby = PanelProdWyroby_db.PobierzWyroby(widoczneWyroby, typFiltrTypKsztaltki);
-            grdLista.ItemsSource = listWyroby;
-            lblIloscPozycji.Content = listWyroby.Count().ToString();
-        }
-
-        private void BtnPokazAktywne_Click(object sender, RoutedEventArgs e)
-        {
-            btnPokazWszystkie.Foreground = Brushes.Black;
-            btnPokazAktywne.Foreground = Brushes.Black;
-            btnPokazAktywne.Foreground = Brushes.Blue;
-
-            widoczneWyroby = true;
-            listWyroby = PanelProdWyroby_db.PobierzWyroby(widoczneWyroby, typFiltrTypKsztaltki);
-            grdLista.ItemsSource = listWyroby;
-            lblIloscPozycji.Content = listWyroby.Count().ToString();
-        }
-
-        private void btnPokazElektro_Click(object sender, RoutedEventArgs e)
-        {
-            btnPokazElektro.Foreground = Brushes.Black;
-            btnPokazDoczolowe.Foreground = Brushes.Black;
-            btnPokazZawory.Foreground = Brushes.Black;
-            btnPokazAdaptery.Foreground = Brushes.Black;
-            btnPokazWszystkieKsztaltki.Foreground = Brushes.Black;
-            btnPokazElektro.Foreground = Brushes.Blue;
-            typFiltrTypKsztaltki = 0;
-
-            listWyroby = PanelProdWyroby_db.PobierzWyroby(widoczneWyroby, typFiltrTypKsztaltki);
-            grdLista.ItemsSource = listWyroby;
-            lblIloscPozycji.Content = listWyroby.Count().ToString();
-        }
-
-        private void btnPokazDoczolowe_Click(object sender, RoutedEventArgs e)
-        {
-            btnPokazElektro.Foreground = Brushes.Black;
-            btnPokazDoczolowe.Foreground = Brushes.Black;
-            btnPokazZawory.Foreground = Brushes.Black;
-            btnPokazAdaptery.Foreground = Brushes.Black;
-            btnPokazWszystkieKsztaltki.Foreground = Brushes.Black;
-            btnPokazDoczolowe.Foreground = Brushes.Blue;
-            typFiltrTypKsztaltki = 1;
-
-            listWyroby = PanelProdWyroby_db.PobierzWyroby(widoczneWyroby, typFiltrTypKsztaltki);
-            grdLista.ItemsSource = listWyroby;
-            lblIloscPozycji.Content = listWyroby.Count().ToString();
-        }
-
-        private void btnPokazZawory_Click(object sender, RoutedEventArgs e)
-        {
-            btnPokazElektro.Foreground = Brushes.Black;
-            btnPokazDoczolowe.Foreground = Brushes.Black;
-            btnPokazZawory.Foreground = Brushes.Black;
-            btnPokazAdaptery.Foreground = Brushes.Black;
-            btnPokazWszystkieKsztaltki.Foreground = Brushes.Black;
-            btnPokazZawory.Foreground = Brushes.Blue;
-            typFiltrTypKsztaltki = 2;
-
-            listWyroby = PanelProdWyroby_db.PobierzWyroby(widoczneWyroby, typFiltrTypKsztaltki);
-            grdLista.ItemsSource = listWyroby;
-            lblIloscPozycji.Content = listWyroby.Count().ToString();
-        }
-
-        private void btnPokazAdaptery_Click(object sender, RoutedEventArgs e)
-        {
-            btnPokazElektro.Foreground = Brushes.Black;
-            btnPokazDoczolowe.Foreground = Brushes.Black;
-            btnPokazZawory.Foreground = Brushes.Black;
-            btnPokazAdaptery.Foreground = Brushes.Black;
-            btnPokazWszystkieKsztaltki.Foreground = Brushes.Black;
-            btnPokazAdaptery.Foreground = Brushes.Blue;
-            typFiltrTypKsztaltki = 3;
-
-            listWyroby = PanelProdWyroby_db.PobierzWyroby(widoczneWyroby, typFiltrTypKsztaltki);
-            grdLista.ItemsSource = listWyroby;
-            lblIloscPozycji.Content = listWyroby.Count().ToString();
-        }
-
-        private void btnPokazWszystkieKsztaltki_Click(object sender, RoutedEventArgs e)
-        {
-            btnPokazElektro.Foreground = Brushes.Black;
-            btnPokazDoczolowe.Foreground = Brushes.Black;
-            btnPokazZawory.Foreground = Brushes.Black;
-            btnPokazAdaptery.Foreground = Brushes.Black;
-            btnPokazWszystkieKsztaltki.Foreground = Brushes.Black;
-            btnPokazWszystkieKsztaltki.Foreground = Brushes.Blue;
-            typFiltrTypKsztaltki = -1;
-
-            listWyroby = PanelProdWyroby_db.PobierzWyroby(widoczneWyroby, typFiltrTypKsztaltki);
-            grdLista.ItemsSource = listWyroby;
-            lblIloscPozycji.Content = listWyroby.Count().ToString();
-        }
-
         private void btnKartaTechn_Click(object sender, RoutedEventArgs e)
         {
             frmWyrobKartaTechnologiczna frmWyrobKartaTechnologiczna = new frmWyrobKartaTechnologiczna();
             frmWyrobKartaTechnologiczna.ShowDialog();
+        }
+
+        private void cbbJakiTypWyrobu_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var JakiTypWyrobu = cbbJakiTypWyrobu.SelectedItem as wyroby_typ;
+            
+            typFiltrTypKsztaltki = JakiTypWyrobu.id;
+
+            listWyroby = PanelProdWyroby_db.PobierzWyrobyView(widoczneWyroby, typFiltrTypKsztaltki);
+            grdLista.ItemsSource = listWyroby;
+            lblIloscPozycji.Content = listWyroby.Count().ToString();
+
+            foreach (var item in grdLista.Columns)
+            {
+                item.Visibility = Visibility.Hidden;
+            }
+            switch (JakiTypWyrobu.id)
+            {
+                case -1: // wszystkie
+                case 1: // doczołówki
+                case 2: // zawory
+                case 3: // zdaptery
+                    int[] WidoczneKolumny1 = new int[] { 1, 2, 3, 4, 11, 12, 13, 14, 15 };
+                    foreach (var item in WidoczneKolumny1)
+                    {
+                        grdLista.Columns[item].Visibility = Visibility.Visible;
+                    }
+                    break;
+                case 0: // elektrooporowe
+                    int[] WidoczneKolumny2 = new int[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15 };
+                    foreach (var item in WidoczneKolumny2)
+                    {
+                        grdLista.Columns[item].Visibility = Visibility.Visible;
+                    }
+                    break;
+                
+                default:
+                    break;
+            }
+        }
+
+        private void cbbCzyAktywne_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            switch (cbbCzyAktywne.SelectedIndex)
+            {
+                case 0:
+                    widoczneWyroby = false;
+                    break;
+                case 1:
+                    widoczneWyroby = true;
+                    break;
+            }
+            
+            listWyroby = PanelProdWyroby_db.PobierzWyrobyView(widoczneWyroby, typFiltrTypKsztaltki);
+            grdLista.ItemsSource = listWyroby;
+            lblIloscPozycji.Content = listWyroby.Count().ToString();
+        }
+
+        private void btnKodyKreskowe_Click(object sender, RoutedEventArgs e)
+        {
+            if (grdKody.Visibility == Visibility.Visible)
+            {
+                grdKody.Visibility = Visibility.Collapsed;
+                return;
+                
+            }
+            if (grdKody.Visibility == Visibility.Collapsed)
+            {
+                grdKody.Visibility = Visibility.Visible;
+                return;
+            }
         }
     }
 }

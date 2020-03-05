@@ -155,7 +155,7 @@ namespace ecoplastol
             zlecenieProdukcyjne.wyrob_il_w_op_zb = Wyrob.wyrob_il_w_op_zb;
             zlecenieProdukcyjne.wyrob_waga_op = Wyrob.wyrob_waga_op;
             zlecenieProdukcyjne.wyrob_waga_1szt = Wyrob.wyrob_waga_1szt;
-            zlecenieProdukcyjne.wyrob_zast_zaworu = Wyrob.wyrob_zast_zaworu;
+            zlecenieProdukcyjne.wyrob_zast = Wyrob.wyrob_zast;
             zlecenieProdukcyjne.wyrob_norma = Wyrob.wyrob_norma;
             zlecenieProdukcyjne.wyrob_il_w_partii = Wyrob.wyrob_il_w_partii;
             zlecenieProdukcyjne.wyrob_zakres_sdr = Wyrob.wyrob_zakres_sdr;

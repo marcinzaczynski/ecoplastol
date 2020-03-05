@@ -19,7 +19,7 @@ namespace ecoplastol.produkcja
         public int wyrob_waga_op { get; set; }
         public int wyrob_waga_1szt { get; set; }
         public int wyrob_zakres_sdr { get; set; }
-        public int? wyrob_zast_zaworu { get; set; }
+        public int? wyrob_zast { get; set; }
         public int? wyrob_rodzaj_drutu { get; set; }
         public int wyrob_norma { get; set; }
         public int wyrob_il_w_partii { get; set; }
@@ -105,7 +105,7 @@ namespace ecoplastol.produkcja
                                 wyrob_waga_op = z.wyrob_waga_op,
                                 wyrob_waga_1szt = z.wyrob_waga_1szt,
                                 wyrob_zakres_sdr = z.wyrob_zakres_sdr,
-                                wyrob_zast_zaworu = z.wyrob_zast_zaworu,
+                                wyrob_zast = z.wyrob_zast,
                                 wyrob_rodzaj_drutu = z.wyrob_rodzaj_drutu,
                                 wyrob_norma = z.wyrob_norma,
                                 wyrob_il_w_partii = z.wyrob_il_w_partii,

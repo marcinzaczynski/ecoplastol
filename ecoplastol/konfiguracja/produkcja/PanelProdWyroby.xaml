@@ -7,7 +7,7 @@
              xmlns:globals="clr-namespace:ecoplastol.globals"
              xmlns:ts="clr-namespace:ecoplastol"
              mc:Ignorable="d" 
-             d:DesignHeight="600" d:DesignWidth="1600">
+             d:DesignHeight="800" d:DesignWidth="1600">
     <UserControl.Resources>
         <ResourceDictionary>
                 <globals:BackgroundColor x:Key="valueToBackground"/>
@@ -16,69 +16,82 @@
     </UserControl.Resources>
     <Grid Background="White">
         <Grid.RowDefinitions>
-            <RowDefinition Height="60"/>
+            <!-- comboboxy u góry -->
+            <RowDefinition Height="40"/>
             <!-- lista datagrid -->
             <RowDefinition Height="*"/>
             <!-- textboxy comboboxy -->
-            <RowDefinition Height="320"/>
+            <RowDefinition Height="345"/>
             <!-- kody kreskowe -->
-            <RowDefinition Height="109"/>
+            <RowDefinition Height="auto"/>
             <!-- przyciski dodaj, popraw itd.-->
             <RowDefinition Height="30"/>
         </Grid.RowDefinitions>
         <Grid Grid.Row="0">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="25"/>
-            </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="150"/>
-                <ColumnDefinition Width="150"/>
-                <ColumnDefinition Width="150"/>
-                <ColumnDefinition Width="150"/>
+                <ColumnDefinition Width="300"/>
+                <ColumnDefinition Width="300"/>
                 <ColumnDefinition Width="150"/>
                 <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="150"/>
-                <ColumnDefinition Width="150"/>
             </Grid.ColumnDefinitions>
-            <Button Grid.Row="0" Grid.Column="0" Content="ELEKTROOPOROWE" Name="btnPokazElektro" FontSize="14" FontWeight="DemiBold" Margin="5,2,5,2" Click="btnPokazElektro_Click"/>
-            <Button Grid.Row="0" Grid.Column="1" Content="DOCZOŁOWE" Name="btnPokazDoczolowe" FontSize="14" FontWeight="DemiBold" Margin="5,2,5,2" Click="btnPokazDoczolowe_Click"/>
-            <Button Grid.Row="0" Grid.Column="2" Content="ZAWORY" Name="btnPokazZawory" FontSize="14" FontWeight="DemiBold" Margin="5,2,5,2" Click="btnPokazZawory_Click"/>
-            <Button Grid.Row="0" Grid.Column="3" Content="ADAPTERY" Name="btnPokazAdaptery" FontSize="14" FontWeight="DemiBold" Margin="5,2,5,2" Click="btnPokazAdaptery_Click"/>
-            <Button Grid.Row="0" Grid.Column="4" Content="WSZYSTKIE" Name="btnPokazWszystkieKsztaltki" FontSize="14" FontWeight="DemiBold" Margin="5,2,5,2" Click="btnPokazWszystkieKsztaltki_Click" Foreground="Blue"/>
-            <Button Grid.Row="0" Grid.Column="6" Content="WSZYSTKIE" Name="btnPokazWszystkie" FontSize="14" FontWeight="DemiBold" Margin="5,2,5,2" Click="BtnPokazWszystkie_Click"/>
-            <Button Grid.Row="0" Grid.Column="7" Content="AKTYWNE" Name="btnPokazAktywne" FontSize="14" FontWeight="DemiBold" Margin="5,2,5,2" Click="BtnPokazAktywne_Click" Foreground="Blue"/>
-            <Label Grid.Row="1" Grid.Column="6" Content="Iość pozycji :" Padding="0,0,5,0" VerticalContentAlignment="Center" HorizontalAlignment="Right"/>
-            <Label Grid.Row="1" Grid.Column="7" Content="..." Padding="5,0,0,0" VerticalContentAlignment="Center" HorizontalAlignment="Left" Name="lblIloscPozycji"/>
+            
+            <Border Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3" Background="Yellow" BorderThickness="1" BorderBrush="Black"/>
+
+            <ComboBox x:Name="cbbJakiTypWyrobu" Grid.Row="0" Grid.Column="0" Margin="3" SelectionChanged="cbbJakiTypWyrobu_SelectionChanged">
+                <ComboBox.ItemTemplateSelector>
+                    <ts:ComboBoxItemTemplateSelector>
+                        <ts:ComboBoxItemTemplateSelector.SelectedTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding wartosc}" />
+                            </DataTemplate>
+                        </ts:ComboBoxItemTemplateSelector.SelectedTemplate>
+                        <ts:ComboBoxItemTemplateSelector.DropDownTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="{Binding parametr}" Width="13"/>
+                                    <TextBlock Text="-  "/>
+                                    <TextBlock Text="{Binding wartosc}" />
+                                </StackPanel>
+                            </DataTemplate>
+                        </ts:ComboBoxItemTemplateSelector.DropDownTemplate>
+                    </ts:ComboBoxItemTemplateSelector>
+                </ComboBox.ItemTemplateSelector>
+            </ComboBox>
+            <ComboBox x:Name="cbbCzyAktywne" Grid.Row="0" Grid.Column="1" Margin="3" SelectionChanged="cbbCzyAktywne_SelectionChanged">
+                <ComboBoxItem Name="Wszystkie">Wszystkie</ComboBoxItem>
+                <ComboBoxItem Name="Aktywne">Aktywne</ComboBoxItem>
+            </ComboBox>
+            <Label Grid.Row="0" Grid.Column="2" Content="..." Padding="5,0,0,0" VerticalContentAlignment="Center" HorizontalAlignment="Left" Name="lblIloscPozycji"/>
         </Grid>
-        <DataGrid x:Name="grdLista" Grid.Row="1" AutoGenerateColumns="False" ItemsSource="{Binding}" RowDetailsVisibilityMode="VisibleWhenSelected" SelectionChanged="GrdLista_SelectionChanged" IsReadOnly="true" Margin="0,0,0,0" >
+        <DataGrid x:Name="grdLista" FontSize="14" Grid.Row="1" AutoGenerateColumns="False" ItemsSource="{Binding}" RowDetailsVisibilityMode="VisibleWhenSelected" SelectionChanged="GrdLista_SelectionChanged" IsReadOnly="true" Margin="0,0,0,0" >
 
             <DataGrid.Columns>
                 <DataGridTextColumn x:Name="idColumn" Binding="{Binding id}"  Header="id" Width="SizeToHeader" Visibility="Hidden"/>
-                <DataGridTextColumn x:Name="wyrob_kodColumn" Binding="{Binding wyrob_kod}" Header="Kod" Width="100"/>
-                <DataGridTextColumn x:Name="wyrob_kod_indeksColumn" Binding="{Binding wyrob_kod_indeks}" Header="Indeks" Width="100"/>
+                <DataGridTextColumn x:Name="wyrob_kodColumn" Binding="{Binding wyrob_kod}" Header="Kod" Width="100" />
+                <DataGridTextColumn x:Name="wyrob_kod_indeksColumn" Binding="{Binding wyrob_kod_indeks}" Header="Indeks" Width="140"/>
+                <DataGridTextColumn x:Name="wyrob_waga_1sztColumn" Binding="{Binding wyrob_waga_1szt}" Header="Waga 1szt." Width="80"/>
+                <DataGridTextColumn x:Name="wyrob_il_w_op_zbColumn" Binding="{Binding wyrob_il_w_op_zb}" Header="Ilość w op." Width="80"/>
+                <DataGridTextColumn x:Name="itf_cz1Column" Binding="{Binding itf_cz1}" Header="Czas zgrzewania 1" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="itf_cz2Column" Binding="{Binding itf_cz2}" Header="Czas zgrzewania 2" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="itf_cc1Column" Binding="{Binding CzasChlodzenia1}" Header="Czas chłodzenia 1" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="itf_cc2Column" Binding="{Binding CzasChlodzenia2}" Header="Czas chłodzenia 2" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="itf_rezColumn" Binding="{Binding itf_rez}" Header="Rezystancja" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="wyrob_rodzaj_drutuColumn" Binding="{Binding RodzajDrutu}" Header="Rodzaj drutu" Width="SizeToHeader"/>
+                
                 <!--<DataGridTextColumn x:Name="wyrob_kod_opisColumn" Binding="{Binding wyrob_kod_opis}" Header="Opis" Width="*"/>
                 <DataGridTextColumn x:Name="wyrob_typColumn" Binding="{Binding wyrob_typ}" Header="Typ" Width="SizeToHeader"/>
-                <DataGridTextColumn x:Name="wyrob_il_w_op_zbColumn" Binding="{Binding wyrob_il_w_op_zb}" Header="wyrob il w op zb" Width="SizeToHeader"/>
                 <DataGridTextColumn x:Name="wyrob_waga_opColumn" Binding="{Binding wyrob_waga_op}" Header="wyrob waga op" Width="SizeToHeader"/>
-                <DataGridTextColumn x:Name="wyrob_waga_1sztColumn" Binding="{Binding wyrob_waga_1szt}" Header="wyrob waga 1 szt" Width="SizeToHeader"/>
                 <DataGridTextColumn x:Name="wyrob_zakres_sdrColumn" Binding="{Binding wyrob_zakres_sdr}" Header="wyrob zakres sdr" Width="SizeToHeader"/>
-                <DataGridTextColumn x:Name="wyrob_zast_zaworuColumn" Binding="{Binding wyrob_zast_zaworu}" Header="wyrob zast zaworu" Width="SizeToHeader"/>
-                <DataGridTextColumn x:Name="wyrob_rodzaj_drutuColumn" Binding="{Binding wyrob_rodzaj_drutu}" Header="wyrob rodzaj drutu" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="wyrob_zastColumn" Binding="{Binding wyrob_zast}" Header="wyrob zast" Width="SizeToHeader"/>
                 <DataGridTextColumn x:Name="itf_kategoriaColumn" Binding="{Binding itf_kategoria}" Header="itf kategoria" Width="SizeToHeader"/>
                 <DataGridTextColumn x:Name="itf_znak1Column" Binding="{Binding itf_znak1}" Header="itf znak 1" Width="SizeToHeader"/>
                 <DataGridTextColumn x:Name="itf_znak2Column" Binding="{Binding itf_znak2}" Header="itf znak 2" Width="SizeToHeader"/>
                 <DataGridTextColumn x:Name="itf_iccColumn" Binding="{Binding itf_icc}" Header="itf icc" Width="SizeToHeader"/>
-                <DataGridTextColumn x:Name="itf_cc1Column" Binding="{Binding itf_cc1}" Header="itf cc 1" Width="SizeToHeader"/>
-                <DataGridTextColumn x:Name="itf_cc2Column" Binding="{Binding itf_cc2}" Header="itf cc 2" Width="SizeToHeader"/>
                 <DataGridTextColumn x:Name="itf_sminColumn" Binding="{Binding itf_smin}" Header="itf smin" Width="SizeToHeader"/>
                 <DataGridTextColumn x:Name="itf_smaxColumn" Binding="{Binding itf_smax}" Header="itf smax" Width="SizeToHeader"/>
                 <DataGridTextColumn x:Name="itf_trnColumn" Binding="{Binding itf_trn}" Header="itf trn" Width="SizeToHeader"/>
-                <DataGridTextColumn x:Name="itf_prnColumn" Binding="{Binding itf_prn}" Header="itf prn" Width="SizeToHeader"/>-->
-                <DataGridTextColumn x:Name="itf_rezColumn" Binding="{Binding itf_rez}" Header="Rezystancja" Width="SizeToHeader"/>
-                <!--<DataGridTextColumn x:Name="itf_odchColumn" Binding="{Binding itf_odch}" Header="itf odch" Width="SizeToHeader"/>
-                <DataGridTextColumn x:Name="itf_cz1Column" Binding="{Binding itf_cz1}" Header="itf cz 1" Width="SizeToHeader"/>
-                <DataGridTextColumn x:Name="itf_cz2Column" Binding="{Binding itf_cz2}" Header="itf cz 2" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="itf_prnColumn" Binding="{Binding itf_prn}" Header="itf prn" Width="SizeToHeader"/>
+                <DataGridTextColumn x:Name="itf_odchColumn" Binding="{Binding itf_odch}" Header="itf odch" Width="SizeToHeader"/>
                 <DataGridTextColumn x:Name="itf_keColumn" Binding="{Binding itf_ke}" Header="itf ke" Width="SizeToHeader"/>
                 <DataGridTextColumn x:Name="trace_znak1Column" Binding="{Binding trace_znak1}" Header="trace znak 1" Width="SizeToHeader"/>
                 <DataGridTextColumn x:Name="trace_znak2Column" Binding="{Binding trace_znak2}" Header="trace znak 2" Width="SizeToHeader"/>
@@ -92,6 +105,7 @@
                 <DataGridTextColumn x:Name="trace_materialColumn" Binding="{Binding trace_material}" Header="trace material" Width="SizeToHeader"/>
                 <DataGridTextColumn x:Name="trace_pe_oColumn" Binding="{Binding trace_pe_o}" Header="trace pe o" Width="SizeToHeader"/>
                 <DataGridTextColumn x:Name="trace_mfrColumn" Binding="{Binding trace_mfr}" Header="trace mfr" Width="SizeToHeader"/>-->
+                <DataGridTextColumn Width="*"/>
                 <DataGridTextColumn x:Name="opwColumn" Binding="{Binding opw}" Header="opw" Width="60"/>
                 <DataGridTextColumn x:Name="czaswColumn" Binding="{Binding czasw, StringFormat=\{0:yyyy-MM-dd HH:mm:ss\}}" Header="czasw" Width="100"/>
                 <DataGridTextColumn x:Name="opmColumn" Binding="{Binding opm}" Header="opm" Width="60"/>
@@ -132,6 +146,7 @@
                     <RowDefinition Height="25"/>
                     <RowDefinition Height="25"/>
                     <RowDefinition Height="25"/>
+                    <RowDefinition Height="25"/>
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
                     <!-- Wyrób identyfikacja - opisy -->
@@ -151,8 +166,8 @@
                 <Label VerticalAlignment="Center" FontSize="14" Grid.Row="8" Grid.Column="0" Padding="10,0,0,0" Content="Zakres SDR :" />
                 <Label VerticalAlignment="Center" FontSize="14" Grid.Row="9" Grid.Column="0" Padding="10,0,0,0" Content="Norma na 1 zmianę :" />
                 <Label VerticalAlignment="Center" FontSize="14" Grid.Row="10" Grid.Column="0" Padding="10,0,0,0" Content="Ilość w partii :" />
-
-
+                <Label VerticalAlignment="Center" FontSize="14" Grid.Row="11" Grid.Column="0" Padding="10,0,0,0" Content="Zastosowanie :" />
+                <Label VerticalAlignment="Center" FontSize="14" Grid.Row="12" Grid.Column="0" Padding="10,0,0,0" Content="Aktywny :" />
                 <ComboBox x:Name="cbbWyrobTyp" Grid.Row="1" Grid.Column="1"  Width="200" FontSize="14" SelectedValuePath="id" SelectedValue="{Binding wyrob_typ}">
                     <ComboBox.ItemTemplateSelector>
                         <ts:ComboBoxItemTemplateSelector>
@@ -201,6 +216,27 @@
                 </ComboBox>
                 <TextBox Grid.Row="9" Grid.Column="1" FontSize="14" x:Name="txtWyrobNorma" Text="{Binding wyrob_norma}" MaxLength="4" PreviewTextInput="TxtWyrobNorma_PreviewTextInput"/>
                 <TextBox Grid.Row="10" Grid.Column="1" FontSize="14" x:Name="txtWyrobIlwPartii" Text="{Binding wyrob_il_w_partii}" MaxLength="5" PreviewTextInput="TxtWyrobIlwPartii_PreviewTextInput"/>
+                <ComboBox x:Name="cbbWyrobZastZaworu" Grid.Row="11" Grid.Column="1" FontSize="14" SelectedValuePath="id" SelectedValue="{Binding wyrob_zast}">
+                    <ComboBox.ItemTemplateSelector>
+                        <ts:ComboBoxItemTemplateSelector>
+                            <ts:ComboBoxItemTemplateSelector.SelectedTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding wartosc}" />
+                                </DataTemplate>
+                            </ts:ComboBoxItemTemplateSelector.SelectedTemplate>
+                            <ts:ComboBoxItemTemplateSelector.DropDownTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="{Binding parametr}" Width="13"/>
+                                        <TextBlock Text="-  "/>
+                                        <TextBlock Text="{Binding wartosc}" />
+                                    </StackPanel>
+                                </DataTemplate>
+                            </ts:ComboBoxItemTemplateSelector.DropDownTemplate>
+                        </ts:ComboBoxItemTemplateSelector>
+                    </ComboBox.ItemTemplateSelector>
+                </ComboBox>
+                <CheckBox Grid.Row="12" Grid.Column="1" VerticalAlignment="Center" FontSize="14" Padding="10,0,0,0" IsChecked="{Binding aktywny}" />
             </Grid>
             <!-- ITF -->
             <Grid Grid.Row="0" Grid.Column="1" x:Name="grdITF">
@@ -737,29 +773,10 @@
                 </Grid.ColumnDefinitions>
                 <Border Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" BorderThickness="1" BorderBrush="black" Background="LightGray"/>
                 <Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" FontSize="14" FontWeight="DemiBold" HorizontalContentAlignment="Center" Padding="0,3" Content="INNE"/>
-                <Label VerticalAlignment="Center" FontSize="14" Grid.Row="1" Grid.Column="0" Padding="10,0,0,0" Content="Zastosowanie zaworu :" />
+                
                 <Label VerticalAlignment="Center" FontSize="14" Grid.Row="2" Grid.Column="0" Padding="10,0,0,0" Content="Rodzaj drutu :" />
                 <Label VerticalAlignment="Center" FontSize="14" Grid.Row="4" Grid.Column="0" Padding="10,0,0,0" Content="Rezystancja TEST :" />
-                <ComboBox x:Name="cbbWyrobZastZaworu" Grid.Row="1" Grid.Column="1" FontSize="14" SelectedValuePath="id" SelectedValue="{Binding wyrob_zast_zaworu}">
-                    <ComboBox.ItemTemplateSelector>
-                        <ts:ComboBoxItemTemplateSelector>
-                            <ts:ComboBoxItemTemplateSelector.SelectedTemplate>
-                                <DataTemplate>
-                                    <TextBlock Text="{Binding wartosc}" />
-                                </DataTemplate>
-                            </ts:ComboBoxItemTemplateSelector.SelectedTemplate>
-                            <ts:ComboBoxItemTemplateSelector.DropDownTemplate>
-                                <DataTemplate>
-                                    <StackPanel Orientation="Horizontal">
-                                        <TextBlock Text="{Binding parametr}" Width="13"/>
-                                        <TextBlock Text="-  "/>
-                                        <TextBlock Text="{Binding wartosc}" />
-                                    </StackPanel>
-                                </DataTemplate>
-                            </ts:ComboBoxItemTemplateSelector.DropDownTemplate>
-                        </ts:ComboBoxItemTemplateSelector>
-                    </ComboBox.ItemTemplateSelector>
-                </ComboBox>
+                
                 <ComboBox x:Name="cbbWyrobRodzajDrutu" Grid.Row="2" Grid.Column="1" FontSize="14" SelectedValuePath="id" SelectedValue="{Binding wyrob_rodzaj_drutu}">
                     <ComboBox.ItemTemplateSelector>
                         <ts:ComboBoxItemTemplateSelector>
@@ -783,157 +800,167 @@
                 <!--<TextBox Grid.Row="4" Grid.Column="1" x:Name="txtRezystancjaTEST" Text="{Binding rez}" FontSize="14" />-->
                 
                 
-                <Label Grid.Row="9" Grid.Column="0"  VerticalAlignment="Center" FontSize="14" Padding="10,0,0,0" Content="Aktywny :" />
-                <CheckBox Grid.Row="9" Grid.Column="1" VerticalAlignment="Center" FontSize="14" Padding="10,0,0,0" IsChecked="{Binding aktywny}" />
+                
+                
             </Grid>
         </Grid>
-        <Grid x:Name="grdKody" ShowGridLines="False"  Grid.Row="3" Margin="0,10,0,0" >
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="90"/>
-                <ColumnDefinition Width="20"/>
-                <ColumnDefinition Width="20"/>
-                <ColumnDefinition Width="20"/>
-                <ColumnDefinition Width="20"/>
-                <ColumnDefinition Width="20"/>
-                <ColumnDefinition Width="20"/>
-                <ColumnDefinition Width="20"/>
-                <ColumnDefinition Width="20"/>
-                <ColumnDefinition Width="20"/>
-                <ColumnDefinition Width="20"/>
-                <ColumnDefinition Width="20"/>
-                <ColumnDefinition Width="20"/>
-                <ColumnDefinition Width="20"/>
-                <ColumnDefinition Width="20"/>
-                <ColumnDefinition Width="20"/>
-                <ColumnDefinition Width="20"/>
-                <ColumnDefinition Width="20"/>
-                <ColumnDefinition Width="20"/>
-                <ColumnDefinition Width="20"/>
-                <ColumnDefinition Width="20"/>
-                <ColumnDefinition Width="20"/>
-                <ColumnDefinition Width="20"/>
-                <ColumnDefinition Width="20"/>
-                <ColumnDefinition Width="20"/>
-                <ColumnDefinition Width="20"/>
-                <ColumnDefinition Width="20"/>
-            </Grid.ColumnDefinitions>
+        
+        <Grid x:Name="grdSterowanieKodami" ShowGridLines="False"  Grid.Row="3" Margin="0,0,0,0" >
             <Grid.RowDefinitions>
                 <RowDefinition Height="20"/>
-                <RowDefinition Height="24"/>
-                <RowDefinition Height="24"/>
-                <RowDefinition Height="24"/>
+                <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
+            <Button x:Name="btnKodyKreskowe" Grid.Row="0" Content="Kody kreskowe" FontSize="12" Click="btnKodyKreskowe_Click"/>
+            <Grid x:Name="grdKody" ShowGridLines="False"  Grid.Row="1" Visibility="Visible" >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="90"/>
+                    <ColumnDefinition Width="20"/>
+                    <ColumnDefinition Width="20"/>
+                    <ColumnDefinition Width="20"/>
+                    <ColumnDefinition Width="20"/>
+                    <ColumnDefinition Width="20"/>
+                    <ColumnDefinition Width="20"/>
+                    <ColumnDefinition Width="20"/>
+                    <ColumnDefinition Width="20"/>
+                    <ColumnDefinition Width="20"/>
+                    <ColumnDefinition Width="20"/>
+                    <ColumnDefinition Width="20"/>
+                    <ColumnDefinition Width="20"/>
+                    <ColumnDefinition Width="20"/>
+                    <ColumnDefinition Width="20"/>
+                    <ColumnDefinition Width="20"/>
+                    <ColumnDefinition Width="20"/>
+                    <ColumnDefinition Width="20"/>
+                    <ColumnDefinition Width="20"/>
+                    <ColumnDefinition Width="20"/>
+                    <ColumnDefinition Width="20"/>
+                    <ColumnDefinition Width="20"/>
+                    <ColumnDefinition Width="20"/>
+                    <ColumnDefinition Width="20"/>
+                    <ColumnDefinition Width="20"/>
+                    <ColumnDefinition Width="20"/>
+                    <ColumnDefinition Width="20"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+
+                    <RowDefinition Height="20"/>
+                    <RowDefinition Height="24"/>
+                    <RowDefinition Height="24"/>
+                    <RowDefinition Height="24"/>
+                </Grid.RowDefinitions>
 
 
-            <Label Grid.Row="0" Grid.Column="1"  Padding="0" FontSize="12" VerticalAlignment="Center" HorizontalContentAlignment="Center" Content="1" />
-            <Label Grid.Row="0" Grid.Column="2"  Padding="0" FontSize="12" VerticalAlignment="Center" HorizontalContentAlignment="Center" Content="2" />
-            <Label Grid.Row="0" Grid.Column="3"  Padding="0" FontSize="12" VerticalAlignment="Center" HorizontalContentAlignment="Center" Content="3" />
-            <Label Grid.Row="0" Grid.Column="4"  Padding="0" FontSize="12" VerticalAlignment="Center" HorizontalContentAlignment="Center" Content="4" />
-            <Label Grid.Row="0" Grid.Column="5"  Padding="0" FontSize="12" VerticalAlignment="Center" HorizontalContentAlignment="Center" Content="5" />
-            <Label Grid.Row="0" Grid.Column="6"  Padding="0" FontSize="12" VerticalAlignment="Center" HorizontalContentAlignment="Center" Content="6" />
-            <Label Grid.Row="0" Grid.Column="7"  Padding="0" FontSize="12" VerticalAlignment="Center" HorizontalContentAlignment="Center" Content="7" />
-            <Label Grid.Row="0" Grid.Column="8"  Padding="0" FontSize="12" VerticalAlignment="Center" HorizontalContentAlignment="Center" Content="8" />
-            <Label Grid.Row="0" Grid.Column="9"  Padding="0" FontSize="12" VerticalAlignment="Center" HorizontalContentAlignment="Center" Content="9" />
-            <Label Grid.Row="0" Grid.Column="10" Padding="0" FontSize="12" VerticalAlignment="Center" HorizontalContentAlignment="Center" Content="10"/>
-            <Label Grid.Row="0" Grid.Column="11" Padding="0" FontSize="12" VerticalAlignment="Center" HorizontalContentAlignment="Center" Content="11"/>
-            <Label Grid.Row="0" Grid.Column="12" Padding="0" FontSize="12" VerticalAlignment="Center" HorizontalContentAlignment="Center" Content="12"/>
-            <Label Grid.Row="0" Grid.Column="13" Padding="0" FontSize="12" VerticalAlignment="Center" HorizontalContentAlignment="Center" Content="13"/>
-            <Label Grid.Row="0" Grid.Column="14" Padding="0" FontSize="12" VerticalAlignment="Center" HorizontalContentAlignment="Center" Content="14"/>
-            <Label Grid.Row="0" Grid.Column="15" Padding="0" FontSize="12" VerticalAlignment="Center" HorizontalContentAlignment="Center" Content="15"/>
-            <Label Grid.Row="0" Grid.Column="16" Padding="0" FontSize="12" VerticalAlignment="Center" HorizontalContentAlignment="Center" Content="16"/>
-            <Label Grid.Row="0" Grid.Column="17" Padding="0" FontSize="12" VerticalAlignment="Center" HorizontalContentAlignment="Center" Content="17"/>
-            <Label Grid.Row="0" Grid.Column="18" Padding="0" FontSize="12" VerticalAlignment="Center" HorizontalContentAlignment="Center" Content="18"/>
-            <Label Grid.Row="0" Grid.Column="19" Padding="0" FontSize="12" VerticalAlignment="Center" HorizontalContentAlignment="Center" Content="19"/>
-            <Label Grid.Row="0" Grid.Column="20" Padding="0" FontSize="12" VerticalAlignment="Center" HorizontalContentAlignment="Center" Content="20"/>
-            <Label Grid.Row="0" Grid.Column="21" Padding="0" FontSize="12" VerticalAlignment="Center" HorizontalContentAlignment="Center" Content="21"/>
-            <Label Grid.Row="0" Grid.Column="22" Padding="0" FontSize="12" VerticalAlignment="Center" HorizontalContentAlignment="Center" Content="22"/>
-            <Label Grid.Row="0" Grid.Column="23" Padding="0" FontSize="12" VerticalAlignment="Center" HorizontalContentAlignment="Center" Content="23"/>
-            <Label Grid.Row="0" Grid.Column="24" Padding="0" FontSize="12" VerticalAlignment="Center" HorizontalContentAlignment="Center" Content="24"/>
-            <Label Grid.Row="0" Grid.Column="25" Padding="0" FontSize="12" VerticalAlignment="Center" HorizontalContentAlignment="Center" Content="25"/>
-            <Label Grid.Row="0" Grid.Column="26" Padding="0" FontSize="12" VerticalAlignment="Center" HorizontalContentAlignment="Center" Content="26"/>
-            <!-- ITF 1 -->
-            <TextBox x:Name="txtITFp1"  Grid.Row="1" Grid.Column="1"  Text="" Padding="0" FontSize="14" VerticalAlignment="Center" HorizontalContentAlignment="Center" IsReadOnly="True"/>
-            <TextBox x:Name="txtITFp2"  Grid.Row="1" Grid.Column="2"  Text="" Padding="0" FontSize="14" VerticalAlignment="Center" HorizontalContentAlignment="Center" IsReadOnly="True"/>
-            <TextBox x:Name="txtITFp3"  Grid.Row="1" Grid.Column="3"  Text="" Padding="0" FontSize="14" VerticalAlignment="Center" HorizontalContentAlignment="Center" IsReadOnly="True"/>
-            <TextBox x:Name="txtITFp4"  Grid.Row="1" Grid.Column="4"  Text="" Padding="0" FontSize="14" VerticalAlignment="Center" HorizontalContentAlignment="Center" IsReadOnly="True"/>
-            <TextBox x:Name="txtITFp5"  Grid.Row="1" Grid.Column="5"  Text="" Padding="0" FontSize="14" VerticalAlignment="Center" HorizontalContentAlignment="Center" IsReadOnly="True"/>
-            <TextBox x:Name="txtITFp6"  Grid.Row="1" Grid.Column="6"  Text="" Padding="0" FontSize="14" VerticalAlignment="Center" HorizontalContentAlignment="Center" IsReadOnly="True"/>
-            <TextBox x:Name="txtITFp7"  Grid.Row="1" Grid.Column="7"  Text="" Padding="0" FontSize="14" VerticalAlignment="Center" HorizontalContentAlignment="Center" IsReadOnly="True"/>
-            <TextBox x:Name="txtITFp8"  Grid.Row="1" Grid.Column="8"  Text="" Padding="0" FontSize="14" VerticalAlignment="Center" HorizontalContentAlignment="Center" IsReadOnly="True"/>
-            <TextBox x:Name="txtITFp9"  Grid.Row="1" Grid.Column="9"  Text="" Padding="0" FontSize="14" VerticalAlignment="Center" HorizontalContentAlignment="Center" IsReadOnly="True"/>
-            <TextBox x:Name="txtITFp10" Grid.Row="1" Grid.Column="10" Text="" Padding="0" FontSize="14" VerticalAlignment="Center" HorizontalContentAlignment="Center" IsReadOnly="True"/>
-            <TextBox x:Name="txtITFp11" Grid.Row="1" Grid.Column="11" Text="" Padding="0" FontSize="14" VerticalAlignment="Center" HorizontalContentAlignment="Center" IsReadOnly="True"/>
-            <TextBox x:Name="txtITFp12" Grid.Row="1" Grid.Column="12" Text="" Padding="0" FontSize="14" VerticalAlignment="Center" HorizontalContentAlignment="Center" IsReadOnly="True"/>
-            <TextBox x:Name="txtITFp13" Grid.Row="1" Grid.Column="13" Text="" Padding="0" FontSize="14" VerticalAlignment="Center" HorizontalContentAlignment="Center" IsReadOnly="True"/>
-            <TextBox x:Name="txtITFp14" Grid.Row="1" Grid.Column="14" Text="" Padding="0" FontSize="14" VerticalAlignment="Center" HorizontalContentAlignment="Center" IsReadOnly="True"/>
-            <TextBox x:Name="txtITFp15" Grid.Row="1" Grid.Column="15" Text="" Padding="0" FontSize="14" VerticalAlignment="Center" HorizontalContentAlignment="Center" IsReadOnly="True"/>
-            <TextBox x:Name="txtITFp16" Grid.Row="1" Grid.Column="16" Text="" Padding="0" FontSize="14" VerticalAlignment="Center" HorizontalContentAlignment="Center" IsReadOnly="True"/>
-            <TextBox x:Name="txtITFp17" Grid.Row="1" Grid.Column="17" Text="" Padding="0" FontSize="14" VerticalAlignment="Center" HorizontalContentAlignment="Center" IsReadOnly="True"/>
-            <TextBox x:Name="txtITFp18" Grid.Row="1" Grid.Column="18" Text="" Padding="0" FontSize="14" VerticalAlignment="Center" HorizontalContentAlignment="Center" IsReadOnly="True"/>
-            <TextBox x:Name="txtITFp19" Grid.Row="1" Grid.Column="19" Text="" Padding="0" FontSize="14" VerticalAlignment="Center" HorizontalContentAlignment="Center" IsReadOnly="True"/>
-            <TextBox x:Name="txtITFp20" Grid.Row="1" Grid.Column="20" Text="" Padding="0" FontSize="14" VerticalAlignment="Center" HorizontalContentAlignment="Center" IsReadOnly="True"/>
-            <TextBox x:Name="txtITFp21" Grid.Row="1" Grid.Column="21" Text="" Padding="0" FontSize="14" VerticalAlignment="Center" HorizontalContentAlignment="Center" IsReadOnly="True"/>
-            <TextBox x:Name="txtITFp22" Grid.Row="1" Grid.Column="22" Text="" Padding="0" FontSize="14" VerticalAlignment="Center" HorizontalContentAlignment="Center" IsReadOnly="True"/>
-            <TextBox x:Name="txtITFp23" Grid.Row="1" Grid.Column="23" Text="" Padding="0" FontSize="14" VerticalAlignment="Center" HorizontalContentAlignment="Center" IsReadOnly="True"/>
-            <TextBox x:Name="txtITFp24" Grid.Row="1" Grid.Column="24" Text="" Padding="0" FontSize="14" VerticalAlignment="Center" HorizontalContentAlignment="Center" IsReadOnly="True" Background="AntiqueWhite"/>
-            <!-- ITF 2 -->
-            <TextBox x:Name="txtITF2p1"  Grid.Row="2" Grid.Column="1"  Text="" Padding="0" FontSize="14" VerticalAlignment="Center" HorizontalContentAlignment="Center" IsReadOnly="True"/>
-            <TextBox x:Name="txtITF2p2"  Grid.Row="2" Grid.Column="2"  Text="" Padding="0" FontSize="14" VerticalAlignment="Center" HorizontalContentAlignment="Center" IsReadOnly="True"/>
-            <TextBox x:Name="txtITF2p3"  Grid.Row="2" Grid.Column="3"  Text="" Padding="0" FontSize="14" VerticalAlignment="Center" HorizontalContentAlignment="Center" IsReadOnly="True"/>
-            <TextBox x:Name="txtITF2p4"  Grid.Row="2" Grid.Column="4"  Text="" Padding="0" FontSize="14" VerticalAlignment="Center" HorizontalContentAlignment="Center" IsReadOnly="True"/>
-            <TextBox x:Name="txtITF2p5"  Grid.Row="2" Grid.Column="5"  Text="" Padding="0" FontSize="14" VerticalAlignment="Center" HorizontalContentAlignment="Center" IsReadOnly="True"/>
-            <TextBox x:Name="txtITF2p6"  Grid.Row="2" Grid.Column="6"  Text="" Padding="0" FontSize="14" VerticalAlignment="Center" HorizontalContentAlignment="Center" IsReadOnly="True"/>
-            <TextBox x:Name="txtITF2p7"  Grid.Row="2" Grid.Column="7"  Text="" Padding="0" FontSize="14" VerticalAlignment="Center" HorizontalContentAlignment="Center" IsReadOnly="True"/>
-            <TextBox x:Name="txtITF2p8"  Grid.Row="2" Grid.Column="8"  Text="" Padding="0" FontSize="14" VerticalAlignment="Center" HorizontalContentAlignment="Center" IsReadOnly="True"/>
-            <TextBox x:Name="txtITF2p9"  Grid.Row="2" Grid.Column="9"  Text="" Padding="0" FontSize="14" VerticalAlignment="Center" HorizontalContentAlignment="Center" IsReadOnly="True"/>
-            <TextBox x:Name="txtITF2p10" Grid.Row="2" Grid.Column="10" Text="" Padding="0" FontSize="14" VerticalAlignment="Center" HorizontalContentAlignment="Center" IsReadOnly="True"/>
-            <TextBox x:Name="txtITF2p11" Grid.Row="2" Grid.Column="11" Text="" Padding="0" FontSize="14" VerticalAlignment="Center" HorizontalContentAlignment="Center" IsReadOnly="True"/>
-            <TextBox x:Name="txtITF2p12" Grid.Row="2" Grid.Column="12" Text="" Padding="0" FontSize="14" VerticalAlignment="Center" HorizontalContentAlignment="Center" IsReadOnly="True"/>
-            <TextBox x:Name="txtITF2p13" Grid.Row="2" Grid.Column="13" Text="" Padding="0" FontSize="14" VerticalAlignment="Center" HorizontalContentAlignment="Center" IsReadOnly="True"/>
-            <TextBox x:Name="txtITF2p14" Grid.Row="2" Grid.Column="14" Text="" Padding="0" FontSize="14" VerticalAlignment="Center" HorizontalContentAlignment="Center" IsReadOnly="True"/>
-            <TextBox x:Name="txtITF2p15" Grid.Row="2" Grid.Column="15" Text="" Padding="0" FontSize="14" VerticalAlignment="Center" HorizontalContentAlignment="Center" IsReadOnly="True"/>
-            <TextBox x:Name="txtITF2p16" Grid.Row="2" Grid.Column="16" Text="" Padding="0" FontSize="14" VerticalAlignment="Center" HorizontalContentAlignment="Center" IsReadOnly="True"/>
-            <TextBox x:Name="txtITF2p17" Grid.Row="2" Grid.Column="17" Text="" Padding="0" FontSize="14" VerticalAlignment="Center" HorizontalContentAlignment="Center" IsReadOnly="True"/>
-            <TextBox x:Name="txtITF2p18" Grid.Row="2" Grid.Column="18" Text="" Padding="0" FontSize="14" VerticalAlignment="Center" HorizontalContentAlignment="Center" IsReadOnly="True"/>
-            <TextBox x:Name="txtITF2p19" Grid.Row="2" Grid.Column="19" Text="" Padding="0" FontSize="14" VerticalAlignment="Center" HorizontalContentAlignment="Center" IsReadOnly="True"/>
-            <TextBox x:Name="txtITF2p20" Grid.Row="2" Grid.Column="20" Text="" Padding="0" FontSize="14" VerticalAlignment="Center" HorizontalContentAlignment="Center" IsReadOnly="True"/>
-            <TextBox x:Name="txtITF2p21" Grid.Row="2" Grid.Column="21" Text="" Padding="0" FontSize="14" VerticalAlignment="Center" HorizontalContentAlignment="Center" IsReadOnly="True"/>
-            <TextBox x:Name="txtITF2p22" Grid.Row="2" Grid.Column="22" Text="" Padding="0" FontSize="14" VerticalAlignment="Center" HorizontalContentAlignment="Center" IsReadOnly="True"/>
-            <TextBox x:Name="txtITF2p23" Grid.Row="2" Grid.Column="23" Text="" Padding="0" FontSize="14" VerticalAlignment="Center" HorizontalContentAlignment="Center" IsReadOnly="True"/>
-            <TextBox x:Name="txtITF2p24" Grid.Row="2" Grid.Column="24" Text="" Padding="0" FontSize="14" VerticalAlignment="Center" HorizontalContentAlignment="Center" IsReadOnly="True" Background="AntiqueWhite"/>
-            <!-- TRACEABILITY -->
-            <TextBox x:Name="txtTracep1"  Grid.Row="3" Grid.Column="1"  Text="" Padding="0" FontSize="14" VerticalAlignment="Center" HorizontalContentAlignment="Center" IsReadOnly="True"/>
-            <TextBox x:Name="txtTracep2"  Grid.Row="3" Grid.Column="2"  Text="" Padding="0" FontSize="14" VerticalAlignment="Center" HorizontalContentAlignment="Center" IsReadOnly="True"/>
-            <TextBox x:Name="txtTracep3"  Grid.Row="3" Grid.Column="3"  Text="" Padding="0" FontSize="14" VerticalAlignment="Center" HorizontalContentAlignment="Center" IsReadOnly="True"/>
-            <TextBox x:Name="txtTracep4"  Grid.Row="3" Grid.Column="4"  Text="" Padding="0" FontSize="14" VerticalAlignment="Center" HorizontalContentAlignment="Center" IsReadOnly="True"/>
-            <TextBox x:Name="txtTracep5"  Grid.Row="3" Grid.Column="5"  Text="" Padding="0" FontSize="14" VerticalAlignment="Center" HorizontalContentAlignment="Center" IsReadOnly="True"/>
-            <TextBox x:Name="txtTracep6"  Grid.Row="3" Grid.Column="6"  Text="" Padding="0" FontSize="14" VerticalAlignment="Center" HorizontalContentAlignment="Center" IsReadOnly="True"/>
-            <TextBox x:Name="txtTracep7"  Grid.Row="3" Grid.Column="7"  Text="" Padding="0" FontSize="14" VerticalAlignment="Center" HorizontalContentAlignment="Center" IsReadOnly="True"/>
-            <TextBox x:Name="txtTracep8"  Grid.Row="3" Grid.Column="8"  Text="" Padding="0" FontSize="14" VerticalAlignment="Center" HorizontalContentAlignment="Center" IsReadOnly="True"/>
-            <TextBox x:Name="txtTracep9"  Grid.Row="3" Grid.Column="9"  Text="" Padding="0" FontSize="14" VerticalAlignment="Center" HorizontalContentAlignment="Center" IsReadOnly="True"/>
-            <TextBox x:Name="txtTracep10" Grid.Row="3" Grid.Column="10" Text="" Padding="0" FontSize="14" VerticalAlignment="Center" HorizontalContentAlignment="Center" IsReadOnly="True"/>
-            <TextBox x:Name="txtTracep11" Grid.Row="3" Grid.Column="11" Text="" Padding="0" FontSize="14" VerticalAlignment="Center" HorizontalContentAlignment="Center" IsReadOnly="True"/>
-            <TextBox x:Name="txtTracep12" Grid.Row="3" Grid.Column="12" Text="" Padding="0" FontSize="14" VerticalAlignment="Center" HorizontalContentAlignment="Center" IsReadOnly="True"/>
-            <TextBox x:Name="txtTracep13" Grid.Row="3" Grid.Column="13" Text="" Padding="0" FontSize="14" VerticalAlignment="Center" HorizontalContentAlignment="Center" IsReadOnly="True"/>
-            <TextBox x:Name="txtTracep14" Grid.Row="3" Grid.Column="14" Text="" Padding="0" FontSize="14" VerticalAlignment="Center" HorizontalContentAlignment="Center" IsReadOnly="True"/>
-            <TextBox x:Name="txtTracep15" Grid.Row="3" Grid.Column="15" Text="" Padding="0" FontSize="14" VerticalAlignment="Center" HorizontalContentAlignment="Center" IsReadOnly="True"/>
-            <TextBox x:Name="txtTracep16" Grid.Row="3" Grid.Column="16" Text="" Padding="0" FontSize="14" VerticalAlignment="Center" HorizontalContentAlignment="Center" IsReadOnly="True"/>
-            <TextBox x:Name="txtTracep17" Grid.Row="3" Grid.Column="17" Text="" Padding="0" FontSize="14" VerticalAlignment="Center" HorizontalContentAlignment="Center" IsReadOnly="True"/>
-            <TextBox x:Name="txtTracep18" Grid.Row="3" Grid.Column="18" Text="" Padding="0" FontSize="14" VerticalAlignment="Center" HorizontalContentAlignment="Center" IsReadOnly="True"/>
-            <TextBox x:Name="txtTracep19" Grid.Row="3" Grid.Column="19" Text="" Padding="0" FontSize="14" VerticalAlignment="Center" HorizontalContentAlignment="Center" IsReadOnly="True"/>
-            <TextBox x:Name="txtTracep20" Grid.Row="3" Grid.Column="20" Text="" Padding="0" FontSize="14" VerticalAlignment="Center" HorizontalContentAlignment="Center" IsReadOnly="True"/>
-            <TextBox x:Name="txtTracep21" Grid.Row="3" Grid.Column="21" Text="" Padding="0" FontSize="14" VerticalAlignment="Center" HorizontalContentAlignment="Center" IsReadOnly="True"/>
-            <TextBox x:Name="txtTracep22" Grid.Row="3" Grid.Column="22" Text="" Padding="0" FontSize="14" VerticalAlignment="Center" HorizontalContentAlignment="Center" IsReadOnly="True"/>
-            <TextBox x:Name="txtTracep23" Grid.Row="3" Grid.Column="23" Text="" Padding="0" FontSize="14" VerticalAlignment="Center" HorizontalContentAlignment="Center" IsReadOnly="True"/>
-            <TextBox x:Name="txtTracep24" Grid.Row="3" Grid.Column="24" Text="" Padding="0" FontSize="14" VerticalAlignment="Center" HorizontalContentAlignment="Center" IsReadOnly="True"/>
-            <TextBox x:Name="txtTracep25" Grid.Row="3" Grid.Column="25" Text="" Padding="0" FontSize="14" VerticalAlignment="Center" HorizontalContentAlignment="Center" IsReadOnly="True"/>
-            <TextBox x:Name="txtTracep26" Grid.Row="3" Grid.Column="26" Text="" Padding="0" FontSize="14" VerticalAlignment="Center" HorizontalContentAlignment="Center" IsReadOnly="True" Background="AntiqueWhite"/>
+                <Label Grid.Row="0" Grid.Column="1"  Padding="0" FontSize="12" VerticalAlignment="Center" HorizontalContentAlignment="Center" Content="1" />
+                <Label Grid.Row="0" Grid.Column="2"  Padding="0" FontSize="12" VerticalAlignment="Center" HorizontalContentAlignment="Center" Content="2" />
+                <Label Grid.Row="0" Grid.Column="3"  Padding="0" FontSize="12" VerticalAlignment="Center" HorizontalContentAlignment="Center" Content="3" />
+                <Label Grid.Row="0" Grid.Column="4"  Padding="0" FontSize="12" VerticalAlignment="Center" HorizontalContentAlignment="Center" Content="4" />
+                <Label Grid.Row="0" Grid.Column="5"  Padding="0" FontSize="12" VerticalAlignment="Center" HorizontalContentAlignment="Center" Content="5" />
+                <Label Grid.Row="0" Grid.Column="6"  Padding="0" FontSize="12" VerticalAlignment="Center" HorizontalContentAlignment="Center" Content="6" />
+                <Label Grid.Row="0" Grid.Column="7"  Padding="0" FontSize="12" VerticalAlignment="Center" HorizontalContentAlignment="Center" Content="7" />
+                <Label Grid.Row="0" Grid.Column="8"  Padding="0" FontSize="12" VerticalAlignment="Center" HorizontalContentAlignment="Center" Content="8" />
+                <Label Grid.Row="0" Grid.Column="9"  Padding="0" FontSize="12" VerticalAlignment="Center" HorizontalContentAlignment="Center" Content="9" />
+                <Label Grid.Row="0" Grid.Column="10" Padding="0" FontSize="12" VerticalAlignment="Center" HorizontalContentAlignment="Center" Content="10"/>
+                <Label Grid.Row="0" Grid.Column="11" Padding="0" FontSize="12" VerticalAlignment="Center" HorizontalContentAlignment="Center" Content="11"/>
+                <Label Grid.Row="0" Grid.Column="12" Padding="0" FontSize="12" VerticalAlignment="Center" HorizontalContentAlignment="Center" Content="12"/>
+                <Label Grid.Row="0" Grid.Column="13" Padding="0" FontSize="12" VerticalAlignment="Center" HorizontalContentAlignment="Center" Content="13"/>
+                <Label Grid.Row="0" Grid.Column="14" Padding="0" FontSize="12" VerticalAlignment="Center" HorizontalContentAlignment="Center" Content="14"/>
+                <Label Grid.Row="0" Grid.Column="15" Padding="0" FontSize="12" VerticalAlignment="Center" HorizontalContentAlignment="Center" Content="15"/>
+                <Label Grid.Row="0" Grid.Column="16" Padding="0" FontSize="12" VerticalAlignment="Center" HorizontalContentAlignment="Center" Content="16"/>
+                <Label Grid.Row="0" Grid.Column="17" Padding="0" FontSize="12" VerticalAlignment="Center" HorizontalContentAlignment="Center" Content="17"/>
+                <Label Grid.Row="0" Grid.Column="18" Padding="0" FontSize="12" VerticalAlignment="Center" HorizontalContentAlignment="Center" Content="18"/>
+                <Label Grid.Row="0" Grid.Column="19" Padding="0" FontSize="12" VerticalAlignment="Center" HorizontalContentAlignment="Center" Content="19"/>
+                <Label Grid.Row="0" Grid.Column="20" Padding="0" FontSize="12" VerticalAlignment="Center" HorizontalContentAlignment="Center" Content="20"/>
+                <Label Grid.Row="0" Grid.Column="21" Padding="0" FontSize="12" VerticalAlignment="Center" HorizontalContentAlignment="Center" Content="21"/>
+                <Label Grid.Row="0" Grid.Column="22" Padding="0" FontSize="12" VerticalAlignment="Center" HorizontalContentAlignment="Center" Content="22"/>
+                <Label Grid.Row="0" Grid.Column="23" Padding="0" FontSize="12" VerticalAlignment="Center" HorizontalContentAlignment="Center" Content="23"/>
+                <Label Grid.Row="0" Grid.Column="24" Padding="0" FontSize="12" VerticalAlignment="Center" HorizontalContentAlignment="Center" Content="24"/>
+                <Label Grid.Row="0" Grid.Column="25" Padding="0" FontSize="12" VerticalAlignment="Center" HorizontalContentAlignment="Center" Content="25"/>
+                <Label Grid.Row="0" Grid.Column="26" Padding="0" FontSize="12" VerticalAlignment="Center" HorizontalContentAlignment="Center" Content="26"/>
+                <!-- ITF 1 -->
+                <TextBox x:Name="txtITFp1"  Grid.Row="1" Grid.Column="1"  Text="" Padding="0" FontSize="14" VerticalAlignment="Center" HorizontalContentAlignment="Center" IsReadOnly="True"/>
+                <TextBox x:Name="txtITFp2"  Grid.Row="1" Grid.Column="2"  Text="" Padding="0" FontSize="14" VerticalAlignment="Center" HorizontalContentAlignment="Center" IsReadOnly="True"/>
+                <TextBox x:Name="txtITFp3"  Grid.Row="1" Grid.Column="3"  Text="" Padding="0" FontSize="14" VerticalAlignment="Center" HorizontalContentAlignment="Center" IsReadOnly="True"/>
+                <TextBox x:Name="txtITFp4"  Grid.Row="1" Grid.Column="4"  Text="" Padding="0" FontSize="14" VerticalAlignment="Center" HorizontalContentAlignment="Center" IsReadOnly="True"/>
+                <TextBox x:Name="txtITFp5"  Grid.Row="1" Grid.Column="5"  Text="" Padding="0" FontSize="14" VerticalAlignment="Center" HorizontalContentAlignment="Center" IsReadOnly="True"/>
+                <TextBox x:Name="txtITFp6"  Grid.Row="1" Grid.Column="6"  Text="" Padding="0" FontSize="14" VerticalAlignment="Center" HorizontalContentAlignment="Center" IsReadOnly="True"/>
+                <TextBox x:Name="txtITFp7"  Grid.Row="1" Grid.Column="7"  Text="" Padding="0" FontSize="14" VerticalAlignment="Center" HorizontalContentAlignment="Center" IsReadOnly="True"/>
+                <TextBox x:Name="txtITFp8"  Grid.Row="1" Grid.Column="8"  Text="" Padding="0" FontSize="14" VerticalAlignment="Center" HorizontalContentAlignment="Center" IsReadOnly="True"/>
+                <TextBox x:Name="txtITFp9"  Grid.Row="1" Grid.Column="9"  Text="" Padding="0" FontSize="14" VerticalAlignment="Center" HorizontalContentAlignment="Center" IsReadOnly="True"/>
+                <TextBox x:Name="txtITFp10" Grid.Row="1" Grid.Column="10" Text="" Padding="0" FontSize="14" VerticalAlignment="Center" HorizontalContentAlignment="Center" IsReadOnly="True"/>
+                <TextBox x:Name="txtITFp11" Grid.Row="1" Grid.Column="11" Text="" Padding="0" FontSize="14" VerticalAlignment="Center" HorizontalContentAlignment="Center" IsReadOnly="True"/>
+                <TextBox x:Name="txtITFp12" Grid.Row="1" Grid.Column="12" Text="" Padding="0" FontSize="14" VerticalAlignment="Center" HorizontalContentAlignment="Center" IsReadOnly="True"/>
+                <TextBox x:Name="txtITFp13" Grid.Row="1" Grid.Column="13" Text="" Padding="0" FontSize="14" VerticalAlignment="Center" HorizontalContentAlignment="Center" IsReadOnly="True"/>
+                <TextBox x:Name="txtITFp14" Grid.Row="1" Grid.Column="14" Text="" Padding="0" FontSize="14" VerticalAlignment="Center" HorizontalContentAlignment="Center" IsReadOnly="True"/>
+                <TextBox x:Name="txtITFp15" Grid.Row="1" Grid.Column="15" Text="" Padding="0" FontSize="14" VerticalAlignment="Center" HorizontalContentAlignment="Center" IsReadOnly="True"/>
+                <TextBox x:Name="txtITFp16" Grid.Row="1" Grid.Column="16" Text="" Padding="0" FontSize="14" VerticalAlignment="Center" HorizontalContentAlignment="Center" IsReadOnly="True"/>
+                <TextBox x:Name="txtITFp17" Grid.Row="1" Grid.Column="17" Text="" Padding="0" FontSize="14" VerticalAlignment="Center" HorizontalContentAlignment="Center" IsReadOnly="True"/>
+                <TextBox x:Name="txtITFp18" Grid.Row="1" Grid.Column="18" Text="" Padding="0" FontSize="14" VerticalAlignment="Center" HorizontalContentAlignment="Center" IsReadOnly="True"/>
+                <TextBox x:Name="txtITFp19" Grid.Row="1" Grid.Column="19" Text="" Padding="0" FontSize="14" VerticalAlignment="Center" HorizontalContentAlignment="Center" IsReadOnly="True"/>
+                <TextBox x:Name="txtITFp20" Grid.Row="1" Grid.Column="20" Text="" Padding="0" FontSize="14" VerticalAlignment="Center" HorizontalContentAlignment="Center" IsReadOnly="True"/>
+                <TextBox x:Name="txtITFp21" Grid.Row="1" Grid.Column="21" Text="" Padding="0" FontSize="14" VerticalAlignment="Center" HorizontalContentAlignment="Center" IsReadOnly="True"/>
+                <TextBox x:Name="txtITFp22" Grid.Row="1" Grid.Column="22" Text="" Padding="0" FontSize="14" VerticalAlignment="Center" HorizontalContentAlignment="Center" IsReadOnly="True"/>
+                <TextBox x:Name="txtITFp23" Grid.Row="1" Grid.Column="23" Text="" Padding="0" FontSize="14" VerticalAlignment="Center" HorizontalContentAlignment="Center" IsReadOnly="True"/>
+                <TextBox x:Name="txtITFp24" Grid.Row="1" Grid.Column="24" Text="" Padding="0" FontSize="14" VerticalAlignment="Center" HorizontalContentAlignment="Center" IsReadOnly="True" Background="AntiqueWhite"/>
+                <!-- ITF 2 -->
+                <TextBox x:Name="txtITF2p1"  Grid.Row="2" Grid.Column="1"  Text="" Padding="0" FontSize="14" VerticalAlignment="Center" HorizontalContentAlignment="Center" IsReadOnly="True"/>
+                <TextBox x:Name="txtITF2p2"  Grid.Row="2" Grid.Column="2"  Text="" Padding="0" FontSize="14" VerticalAlignment="Center" HorizontalContentAlignment="Center" IsReadOnly="True"/>
+                <TextBox x:Name="txtITF2p3"  Grid.Row="2" Grid.Column="3"  Text="" Padding="0" FontSize="14" VerticalAlignment="Center" HorizontalContentAlignment="Center" IsReadOnly="True"/>
+                <TextBox x:Name="txtITF2p4"  Grid.Row="2" Grid.Column="4"  Text="" Padding="0" FontSize="14" VerticalAlignment="Center" HorizontalContentAlignment="Center" IsReadOnly="True"/>
+                <TextBox x:Name="txtITF2p5"  Grid.Row="2" Grid.Column="5"  Text="" Padding="0" FontSize="14" VerticalAlignment="Center" HorizontalContentAlignment="Center" IsReadOnly="True"/>
+                <TextBox x:Name="txtITF2p6"  Grid.Row="2" Grid.Column="6"  Text="" Padding="0" FontSize="14" VerticalAlignment="Center" HorizontalContentAlignment="Center" IsReadOnly="True"/>
+                <TextBox x:Name="txtITF2p7"  Grid.Row="2" Grid.Column="7"  Text="" Padding="0" FontSize="14" VerticalAlignment="Center" HorizontalContentAlignment="Center" IsReadOnly="True"/>
+                <TextBox x:Name="txtITF2p8"  Grid.Row="2" Grid.Column="8"  Text="" Padding="0" FontSize="14" VerticalAlignment="Center" HorizontalContentAlignment="Center" IsReadOnly="True"/>
+                <TextBox x:Name="txtITF2p9"  Grid.Row="2" Grid.Column="9"  Text="" Padding="0" FontSize="14" VerticalAlignment="Center" HorizontalContentAlignment="Center" IsReadOnly="True"/>
+                <TextBox x:Name="txtITF2p10" Grid.Row="2" Grid.Column="10" Text="" Padding="0" FontSize="14" VerticalAlignment="Center" HorizontalContentAlignment="Center" IsReadOnly="True"/>
+                <TextBox x:Name="txtITF2p11" Grid.Row="2" Grid.Column="11" Text="" Padding="0" FontSize="14" VerticalAlignment="Center" HorizontalContentAlignment="Center" IsReadOnly="True"/>
+                <TextBox x:Name="txtITF2p12" Grid.Row="2" Grid.Column="12" Text="" Padding="0" FontSize="14" VerticalAlignment="Center" HorizontalContentAlignment="Center" IsReadOnly="True"/>
+                <TextBox x:Name="txtITF2p13" Grid.Row="2" Grid.Column="13" Text="" Padding="0" FontSize="14" VerticalAlignment="Center" HorizontalContentAlignment="Center" IsReadOnly="True"/>
+                <TextBox x:Name="txtITF2p14" Grid.Row="2" Grid.Column="14" Text="" Padding="0" FontSize="14" VerticalAlignment="Center" HorizontalContentAlignment="Center" IsReadOnly="True"/>
+                <TextBox x:Name="txtITF2p15" Grid.Row="2" Grid.Column="15" Text="" Padding="0" FontSize="14" VerticalAlignment="Center" HorizontalContentAlignment="Center" IsReadOnly="True"/>
+                <TextBox x:Name="txtITF2p16" Grid.Row="2" Grid.Column="16" Text="" Padding="0" FontSize="14" VerticalAlignment="Center" HorizontalContentAlignment="Center" IsReadOnly="True"/>
+                <TextBox x:Name="txtITF2p17" Grid.Row="2" Grid.Column="17" Text="" Padding="0" FontSize="14" VerticalAlignment="Center" HorizontalContentAlignment="Center" IsReadOnly="True"/>
+                <TextBox x:Name="txtITF2p18" Grid.Row="2" Grid.Column="18" Text="" Padding="0" FontSize="14" VerticalAlignment="Center" HorizontalContentAlignment="Center" IsReadOnly="True"/>
+                <TextBox x:Name="txtITF2p19" Grid.Row="2" Grid.Column="19" Text="" Padding="0" FontSize="14" VerticalAlignment="Center" HorizontalContentAlignment="Center" IsReadOnly="True"/>
+                <TextBox x:Name="txtITF2p20" Grid.Row="2" Grid.Column="20" Text="" Padding="0" FontSize="14" VerticalAlignment="Center" HorizontalContentAlignment="Center" IsReadOnly="True"/>
+                <TextBox x:Name="txtITF2p21" Grid.Row="2" Grid.Column="21" Text="" Padding="0" FontSize="14" VerticalAlignment="Center" HorizontalContentAlignment="Center" IsReadOnly="True"/>
+                <TextBox x:Name="txtITF2p22" Grid.Row="2" Grid.Column="22" Text="" Padding="0" FontSize="14" VerticalAlignment="Center" HorizontalContentAlignment="Center" IsReadOnly="True"/>
+                <TextBox x:Name="txtITF2p23" Grid.Row="2" Grid.Column="23" Text="" Padding="0" FontSize="14" VerticalAlignment="Center" HorizontalContentAlignment="Center" IsReadOnly="True"/>
+                <TextBox x:Name="txtITF2p24" Grid.Row="2" Grid.Column="24" Text="" Padding="0" FontSize="14" VerticalAlignment="Center" HorizontalContentAlignment="Center" IsReadOnly="True" Background="AntiqueWhite"/>
+                <!-- TRACEABILITY -->
+                <TextBox x:Name="txtTracep1"  Grid.Row="3" Grid.Column="1"  Text="" Padding="0" FontSize="14" VerticalAlignment="Center" HorizontalContentAlignment="Center" IsReadOnly="True"/>
+                <TextBox x:Name="txtTracep2"  Grid.Row="3" Grid.Column="2"  Text="" Padding="0" FontSize="14" VerticalAlignment="Center" HorizontalContentAlignment="Center" IsReadOnly="True"/>
+                <TextBox x:Name="txtTracep3"  Grid.Row="3" Grid.Column="3"  Text="" Padding="0" FontSize="14" VerticalAlignment="Center" HorizontalContentAlignment="Center" IsReadOnly="True"/>
+                <TextBox x:Name="txtTracep4"  Grid.Row="3" Grid.Column="4"  Text="" Padding="0" FontSize="14" VerticalAlignment="Center" HorizontalContentAlignment="Center" IsReadOnly="True"/>
+                <TextBox x:Name="txtTracep5"  Grid.Row="3" Grid.Column="5"  Text="" Padding="0" FontSize="14" VerticalAlignment="Center" HorizontalContentAlignment="Center" IsReadOnly="True"/>
+                <TextBox x:Name="txtTracep6"  Grid.Row="3" Grid.Column="6"  Text="" Padding="0" FontSize="14" VerticalAlignment="Center" HorizontalContentAlignment="Center" IsReadOnly="True"/>
+                <TextBox x:Name="txtTracep7"  Grid.Row="3" Grid.Column="7"  Text="" Padding="0" FontSize="14" VerticalAlignment="Center" HorizontalContentAlignment="Center" IsReadOnly="True"/>
+                <TextBox x:Name="txtTracep8"  Grid.Row="3" Grid.Column="8"  Text="" Padding="0" FontSize="14" VerticalAlignment="Center" HorizontalContentAlignment="Center" IsReadOnly="True"/>
+                <TextBox x:Name="txtTracep9"  Grid.Row="3" Grid.Column="9"  Text="" Padding="0" FontSize="14" VerticalAlignment="Center" HorizontalContentAlignment="Center" IsReadOnly="True"/>
+                <TextBox x:Name="txtTracep10" Grid.Row="3" Grid.Column="10" Text="" Padding="0" FontSize="14" VerticalAlignment="Center" HorizontalContentAlignment="Center" IsReadOnly="True"/>
+                <TextBox x:Name="txtTracep11" Grid.Row="3" Grid.Column="11" Text="" Padding="0" FontSize="14" VerticalAlignment="Center" HorizontalContentAlignment="Center" IsReadOnly="True"/>
+                <TextBox x:Name="txtTracep12" Grid.Row="3" Grid.Column="12" Text="" Padding="0" FontSize="14" VerticalAlignment="Center" HorizontalContentAlignment="Center" IsReadOnly="True"/>
+                <TextBox x:Name="txtTracep13" Grid.Row="3" Grid.Column="13" Text="" Padding="0" FontSize="14" VerticalAlignment="Center" HorizontalContentAlignment="Center" IsReadOnly="True"/>
+                <TextBox x:Name="txtTracep14" Grid.Row="3" Grid.Column="14" Text="" Padding="0" FontSize="14" VerticalAlignment="Center" HorizontalContentAlignment="Center" IsReadOnly="True"/>
+                <TextBox x:Name="txtTracep15" Grid.Row="3" Grid.Column="15" Text="" Padding="0" FontSize="14" VerticalAlignment="Center" HorizontalContentAlignment="Center" IsReadOnly="True"/>
+                <TextBox x:Name="txtTracep16" Grid.Row="3" Grid.Column="16" Text="" Padding="0" FontSize="14" VerticalAlignment="Center" HorizontalContentAlignment="Center" IsReadOnly="True"/>
+                <TextBox x:Name="txtTracep17" Grid.Row="3" Grid.Column="17" Text="" Padding="0" FontSize="14" VerticalAlignment="Center" HorizontalContentAlignment="Center" IsReadOnly="True"/>
+                <TextBox x:Name="txtTracep18" Grid.Row="3" Grid.Column="18" Text="" Padding="0" FontSize="14" VerticalAlignment="Center" HorizontalContentAlignment="Center" IsReadOnly="True"/>
+                <TextBox x:Name="txtTracep19" Grid.Row="3" Grid.Column="19" Text="" Padding="0" FontSize="14" VerticalAlignment="Center" HorizontalContentAlignment="Center" IsReadOnly="True"/>
+                <TextBox x:Name="txtTracep20" Grid.Row="3" Grid.Column="20" Text="" Padding="0" FontSize="14" VerticalAlignment="Center" HorizontalContentAlignment="Center" IsReadOnly="True"/>
+                <TextBox x:Name="txtTracep21" Grid.Row="3" Grid.Column="21" Text="" Padding="0" FontSize="14" VerticalAlignment="Center" HorizontalContentAlignment="Center" IsReadOnly="True"/>
+                <TextBox x:Name="txtTracep22" Grid.Row="3" Grid.Column="22" Text="" Padding="0" FontSize="14" VerticalAlignment="Center" HorizontalContentAlignment="Center" IsReadOnly="True"/>
+                <TextBox x:Name="txtTracep23" Grid.Row="3" Grid.Column="23" Text="" Padding="0" FontSize="14" VerticalAlignment="Center" HorizontalContentAlignment="Center" IsReadOnly="True"/>
+                <TextBox x:Name="txtTracep24" Grid.Row="3" Grid.Column="24" Text="" Padding="0" FontSize="14" VerticalAlignment="Center" HorizontalContentAlignment="Center" IsReadOnly="True"/>
+                <TextBox x:Name="txtTracep25" Grid.Row="3" Grid.Column="25" Text="" Padding="0" FontSize="14" VerticalAlignment="Center" HorizontalContentAlignment="Center" IsReadOnly="True"/>
+                <TextBox x:Name="txtTracep26" Grid.Row="3" Grid.Column="26" Text="" Padding="0" FontSize="14" VerticalAlignment="Center" HorizontalContentAlignment="Center" IsReadOnly="True" Background="AntiqueWhite"/>
 
-            <Label Grid.Row="1" Grid.Column="0" Content="ITF" />
-            <Label Grid.Row="2" Grid.Column="0" Content="ITF2" />
-            <Label Grid.Row="3" Grid.Column="0" Content="TRACEABILITY" />
+                <Label Grid.Row="1" Grid.Column="0" Content="ITF" FontSize="12" />
+                <Label Grid.Row="2" Grid.Column="0" Content="ITF2" FontSize="12" />
+                <Label Grid.Row="3" Grid.Column="0" Content="TRACEABILITY" FontSize="12" />
+            </Grid>
         </Grid>
-        <StackPanel Grid.Row="4" Grid.Column="1" Orientation="Horizontal">
+       
+        <StackPanel Grid.Row="5" Grid.Column="1" Orientation="Horizontal">
             <Button FontSize="16" Style="{StaticResource btnGradientLightGreen}" Width="120" Name="btnDodaj" Content="DODAJ" Click="BtnDodaj_Click" Height="30" VerticalAlignment="Bottom" />
             <Button FontSize="16" Style="{StaticResource btnGradientLightGreen}" Width="120" Name="btnKlonuj" Content="KLONUJ" Click="BtnKlonuj_Click" />
             <Button FontSize="16" Style="{StaticResource btnGradientLightGreen}" Width="120" Name="btnPopraw" Content="POPRAW" Click="BtnPopraw_Click" />
