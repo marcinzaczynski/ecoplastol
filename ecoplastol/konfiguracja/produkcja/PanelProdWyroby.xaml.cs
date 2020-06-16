@@ -29,7 +29,7 @@ namespace ecoplastol.konfiguracja.produkcja
     {
         private int grdBookmark;
         private string akcja;
-        private wyroby rowWyrob;
+        private WyrobyView rowWyrob;
 
         private int typFiltrTypKsztaltki; // 0 - elektrooporowe, 1 - doczołowe, 2 - zawory, 3 - adaptory, -1 - wszystkie                       
 
@@ -205,7 +205,7 @@ namespace ecoplastol.konfiguracja.produkcja
 
         private void GrdLista_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            rowWyrob = grdLista.SelectedItem as wyroby;
+            rowWyrob = grdLista.SelectedItem as WyrobyView;
             grdPozycje.DataContext = rowWyrob;
 
             WyczyscKontrolkiKodKr();
@@ -218,7 +218,7 @@ namespace ecoplastol.konfiguracja.produkcja
         private void BtnDodaj_Click(object sender, RoutedEventArgs e)
         {
             akcja = "D";
-            rowWyrob = new wyroby();
+            rowWyrob = new WyrobyView();
             rowWyrob.wyrob_typ = (cbbJakiTypWyrobu.SelectedItem as wyroby_typ).id;
             grdPozycje.DataContext = rowWyrob;
 
@@ -271,7 +271,8 @@ namespace ecoplastol.konfiguracja.produkcja
             var Res = MessageBox.Show("Usunąć ?", "Usuwanie pozycji", MessageBoxButton.YesNo, MessageBoxImage.Exclamation);
             if (Res == MessageBoxResult.Yes)
             {
-                PanelProdWyroby_db.UsunWyrob(rowWyrob);
+                var id = rowWyrob.id;
+                PanelProdWyroby_db.UsunWyrobPoID(id);
                 listWyroby = PanelProdWyroby_db.PobierzWyrobyView(widoczneWyroby, typFiltrTypKsztaltki);
                 grdLista.ItemsSource = listWyroby;
             }
@@ -305,26 +306,74 @@ namespace ecoplastol.konfiguracja.produkcja
             btnAnuluj.IsEnabled = false;
             btnZatwierdz.IsEnabled = false;
 
+            var rowAktualny = new WyrobyView();
+            rowAktualny = grdPozycje.DataContext as WyrobyView;
+
+            var rowDoDodania = new wyroby();
+            rowDoDodania.id = rowAktualny.id;
+            rowDoDodania.wyrob_kod = rowAktualny.wyrob_kod;
+            rowDoDodania.wyrob_kod_indeks = rowAktualny.wyrob_kod_indeks;
+            rowDoDodania.wyrob_kod_opis = rowAktualny.wyrob_kod_opis;
+            rowDoDodania.wyrob_typ = rowAktualny.wyrob_typ;
+            rowDoDodania.wyrob_il_w_op_zb = rowAktualny.wyrob_il_w_op_zb;
+            rowDoDodania.wyrob_waga_op = rowAktualny.wyrob_waga_op;
+            rowDoDodania.wyrob_waga_1szt = rowAktualny.wyrob_waga_1szt;
+            rowDoDodania.wyrob_zakres_sdr = rowAktualny.wyrob_zakres_sdr;
+            rowDoDodania.wyrob_zast = rowAktualny.wyrob_zast;
+            rowDoDodania.wyrob_rodzaj_drutu = rowAktualny.wyrob_rodzaj_drutu;
+            rowDoDodania.wyrob_norma = rowAktualny.wyrob_norma;
+            rowDoDodania.wyrob_il_w_partii = rowAktualny.wyrob_il_w_partii;
+            rowDoDodania.itf_kategoria = rowAktualny.itf_kategoria;
+            rowDoDodania.itf_znak1 = rowAktualny.itf_znak1;
+            rowDoDodania.itf_znak2 = rowAktualny.itf_znak2;
+            rowDoDodania.itf_icc = rowAktualny.itf_icc;
+            rowDoDodania.itf_cc1 = rowAktualny.itf_cc1;
+            rowDoDodania.itf_cc2 = rowAktualny.itf_cc2;
+            rowDoDodania.itf_smin = rowAktualny.itf_smin;
+            rowDoDodania.itf_smax = rowAktualny.itf_smax;
+            rowDoDodania.itf_trn = rowAktualny.itf_trn;
+            rowDoDodania.itf_prn = rowAktualny.itf_prn;
+            rowDoDodania.itf_rez = rowAktualny.itf_rez;
+            rowDoDodania.itf_odch = rowAktualny.itf_odch;
+            rowDoDodania.itf_cz1 = rowAktualny.itf_cz1;
+            rowDoDodania.itf_cz2 = rowAktualny.itf_cz2;
+            rowDoDodania.itf_ke = rowAktualny.itf_ke;
+            rowDoDodania.trace_znak1 = rowAktualny.trace_znak1;
+            rowDoDodania.trace_znak2 = rowAktualny.trace_znak2;
+            rowDoDodania.trace_kategoria = rowAktualny.trace_kategoria;
+            rowDoDodania.trace_smin = rowAktualny.trace_smin;
+            rowDoDodania.trace_smax = rowAktualny.trace_smax;
+            rowDoDodania.trace_partia = rowAktualny.trace_partia;
+            rowDoDodania.trace_producent = rowAktualny.trace_producent;
+            rowDoDodania.trace_sdr = rowAktualny.trace_sdr;
+            rowDoDodania.trace_pe_m = rowAktualny.trace_pe_m;
+            rowDoDodania.trace_material = rowAktualny.trace_material;
+            rowDoDodania.trace_pe_o = rowAktualny.trace_pe_o;
+            rowDoDodania.trace_mfr = rowAktualny.trace_mfr;
+            rowDoDodania.aktywny = rowAktualny.aktywny;
+            rowDoDodania.opw = rowAktualny.opw;
+            rowDoDodania.czasw = rowAktualny.czasw;
+            rowDoDodania.opm = rowAktualny.opm;
+            rowDoDodania.czasm = rowAktualny.czasm;              
+
             switch (akcja)
             {
                 case "D":
                 case "K":
                     if (grdPozycje.DataContext is wyroby)
                     {
-                        var row = new wyroby();
-                        row = grdPozycje.DataContext as wyroby;
-                        row.id = PanelProdWyroby_db.IdWyroby();
-                        row.opw = frmLogin.LoggedUser.login;
-                        row.czasw = DateTime.Now;
-                        row.opm = frmLogin.LoggedUser.login;
-                        row.czasm = DateTime.Now;
-                        PanelProdWyroby_db.DodajWyrob(row);
+                        rowDoDodania.id = PanelProdWyroby_db.IdWyroby();
+                        rowDoDodania.opw = frmLogin.LoggedUser.login;
+                        rowDoDodania.czasw = DateTime.Now;
+                        rowDoDodania.opm = frmLogin.LoggedUser.login;
+                        rowDoDodania.czasm = DateTime.Now;
+                        PanelProdWyroby_db.DodajWyrob(rowDoDodania);
                     }
                     break;
                 case "P":
-                    rowWyrob.opm = frmLogin.LoggedUser.login;
-                    rowWyrob.czasm = DateTime.Now;
-                    PanelProdWyroby_db.PoprawWyrob(rowWyrob);
+                    rowDoDodania.opm = frmLogin.LoggedUser.login;
+                    rowDoDodania.czasm = DateTime.Now;
+                    PanelProdWyroby_db.PoprawWyrob(rowDoDodania);
                     break;
                 default:
                     break;

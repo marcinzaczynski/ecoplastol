@@ -7,6 +7,9 @@
              xmlns:ts="clr-namespace:ecoplastol"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="1000">
+    <UserControl.CommandBindings>
+        <CommandBinding Command="ApplicationCommands.Help" CanExecute="CzyMoznaZatwierdzic" Executed="Zatwierdz"/>
+    </UserControl.CommandBindings>
     <Grid Background="White">
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
@@ -37,15 +40,21 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="110"/>
                 <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="4"/>
                 <ColumnDefinition Width="10"/>
                 <ColumnDefinition Width="110"/>
                 <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="4"/>
             </Grid.ColumnDefinitions>
 
             <Label Grid.Row="0" Grid.Column="0" FontSize="18" Content="Imię :"/>
             <TextBox Grid.Row="0" Grid.Column="1" FontSize="18" VerticalContentAlignment="Center" Text="{Binding imie, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Name="txtImie"/>
+            <Border Grid.Row="0" Grid.Column="2" BorderThickness="2" BorderBrush="Red" Visibility="Visible" Name="brdImie"/>
+            
             <Label Grid.Row="1" Grid.Column="0" FontSize="18" Content="Nazwisko :"/>
             <TextBox Grid.Row="1" Grid.Column="1" FontSize="18" VerticalContentAlignment="Center" Text="{Binding nazwisko, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Name="txtNazwisko"/>
+            <Border Grid.Row="1" Grid.Column="2" BorderThickness="2" BorderBrush="Red" Visibility="Visible" Name="brdNazwisko"/>
+            
             <Label Grid.Row="2" Grid.Column="0" FontSize="18" Content="Brygadzista :"/>
             <ComboBox Grid.Row="2" Grid.Column="1" FontSize="18" Padding="10,0,0,0" VerticalContentAlignment="Center" Name="cbbBrygadzista" SelectedValuePath="id" SelectedValue="{Binding brygada}">
                 <ComboBox.ItemTemplateSelector>
@@ -71,12 +80,18 @@
                     </ts:ComboBoxItemTemplateSelector>
                 </ComboBox.ItemTemplateSelector>
             </ComboBox>
-            <Label Grid.Row="0" Grid.Column="3" FontSize="18" Content="Login :"/>
-            <TextBox Grid.Row="0" Grid.Column="4" FontSize="18" VerticalContentAlignment="Center" Text="{Binding login}" Name="txtLogin" />
-            <Label Grid.Row="1" Grid.Column="3" FontSize="18" Content="Hasło :"/>
-            <TextBox Grid.Row="1" Grid.Column="4" FontSize="18" VerticalContentAlignment="Center" Text="{Binding haslo}" Name="txtHaslo" />
-            <Label Grid.Row="2" Grid.Column="3" FontSize="18" Content="Aktywny :"/>
-            <CheckBox Grid.Row="2" Grid.Column="4" IsChecked="{Binding aktywny}" VerticalAlignment="Center"/>
+            <Border Grid.Row="2" Grid.Column="2" BorderThickness="2" BorderBrush="Red" Visibility="Visible" Name="brdBrygadzista"/>
+            
+            <Label Grid.Row="0" Grid.Column="4" FontSize="18" Content="Login :"/>
+            <TextBox Grid.Row="0" Grid.Column="5" FontSize="18" VerticalContentAlignment="Center" Text="{Binding login}" Name="txtLogin" />
+            <Border Grid.Row="0" Grid.Column="6" BorderThickness="2" BorderBrush="Red" Visibility="Visible" Name="brdLogin"/>
+            
+            <Label Grid.Row="1" Grid.Column="4" FontSize="18" Content="Hasło :"/>
+            <TextBox Grid.Row="1" Grid.Column="5" FontSize="18" VerticalContentAlignment="Center" Text="{Binding haslo}" Name="txtHaslo" />
+            <Border Grid.Row="1" Grid.Column="6" BorderThickness="2" BorderBrush="Red" Visibility="Visible" Name="brdHaslo"/>
+            
+            <Label Grid.Row="2" Grid.Column="4" FontSize="18" Content="Aktywny :"/>
+            <CheckBox Grid.Row="2" Grid.Column="5" IsChecked="{Binding aktywny}" VerticalAlignment="Center"/>
 
         </Grid>
         <StackPanel Grid.Row="2" Grid.Column="1" Orientation="Horizontal">
@@ -85,7 +100,7 @@
             <Button FontSize="16" Style="{StaticResource btnGradientLightGreen}" Width="120" Name="btnPopraw" Content="POPRAW" Click="BtnPopraw_Click" Height="30" VerticalAlignment="Top" />
             <Button FontSize="16" Style="{StaticResource btnGradientRed}" Width="120" Name="btnUsun" Content="USUŃ" Click="BtnUsun_Click" Height="30" VerticalAlignment="Top"/>
             <Button FontSize="16" Style="{StaticResource btnGradientRed}" Width="120" Name="btnAnuluj" Content="ANULUJ" Click="BtnAnuluj_Click" />
-            <Button FontSize="16" Style="{StaticResource btnGradientLightGreen}" Width="120" Name="btnZatwierdz" Content="ZATWIERDŹ" Click="BtnZatwierdz_Click" />
+            <Button FontSize="16" Style="{StaticResource btnGradientLightGreen}" Width="120" Name="btnZatwierdz" Content="ZATWIERDŹ" Command="ApplicationCommands.Help"/>
         </StackPanel>
     </Grid>
 </UserControl>

@@ -145,7 +145,70 @@ namespace ecoplastol.konfiguracja.produkcja
             grdLista.SelectedIndex = grdBookmark;
         }
 
-        private void BtnZatwierdz_Click(object sender, RoutedEventArgs e)
+        private void GrdLista_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            rowOperatorzy = grdLista.SelectedItem as OperatorzyView;
+            grdPozycje.DataContext = rowOperatorzy;
+        }
+
+        private void CzyMoznaZatwierdzic(object sender, CanExecuteRoutedEventArgs e)
+        {
+            bool moznaZatwierdzic = true;
+
+            if (txtImie.Text.ToString() != "")
+            {
+                brdImie.Visibility = Visibility.Hidden;
+            }
+            else
+            {
+                brdImie.Visibility = Visibility.Visible;
+                moznaZatwierdzic = false;
+            }
+
+            if (txtNazwisko.Text.ToString() != "")
+            {
+                brdNazwisko.Visibility = Visibility.Hidden;
+            }
+            else
+            {
+                brdNazwisko.Visibility = Visibility.Visible;
+                moznaZatwierdzic = false;
+            }
+
+            if (cbbBrygadzista.SelectedIndex >= 0)
+            {
+                brdBrygadzista.Visibility = Visibility.Hidden;
+            }
+            else
+            {
+                brdBrygadzista.Visibility = Visibility.Visible;
+                moznaZatwierdzic = false;
+            }
+
+            if (txtLogin.Text.ToString() != "")
+            {
+                brdLogin.Visibility = Visibility.Hidden;
+            }
+            else
+            {
+                brdLogin.Visibility = Visibility.Visible;
+                moznaZatwierdzic = false;
+            }
+
+            if (txtHaslo.Text.ToString() != "")
+            {
+                brdHaslo.Visibility = Visibility.Hidden;
+            }
+            else
+            {
+                brdHaslo.Visibility = Visibility.Visible;
+                moznaZatwierdzic = false;
+            }
+
+            if (moznaZatwierdzic) e.CanExecute = true;
+        }
+
+        private void Zatwierdz(object sender, ExecutedRoutedEventArgs e)
         {
             grdLista.IsEnabled = true;
             grdPozycje.IsEnabled = false;
@@ -160,21 +223,21 @@ namespace ecoplastol.konfiguracja.produkcja
             {
                 case "D":
                 case "K":
-                        var row = new operatorzy_maszyn();
-                        var rowAktualny = grdPozycje.DataContext as OperatorzyView;
-                        row.id = PanelProdOperatorzy_db.IdOperatora();
+                    var row = new operatorzy_maszyn();
+                    var rowAktualny = grdPozycje.DataContext as OperatorzyView;
+                    row.id = PanelProdOperatorzy_db.IdOperatora();
 
-                        row.imie = rowAktualny.imie;
-                        row.nazwisko = rowAktualny.nazwisko;
-                        row.login = rowAktualny.login;
-                        row.haslo = rowAktualny.haslo;
-                        row.aktywny = rowAktualny.aktywny;
-                        row.brygada = rowAktualny.brygada;
-                        row.opw = frmLogin.LoggedUser.login;
-                        row.czasw = DateTime.Now;
-                        row.opm = frmLogin.LoggedUser.login;
-                        row.czasm = DateTime.Now;
-                        PanelProdOperatorzy_db.DodajOperatora(row);
+                    row.imie = rowAktualny.imie;
+                    row.nazwisko = rowAktualny.nazwisko;
+                    row.login = rowAktualny.login;
+                    row.haslo = rowAktualny.haslo;
+                    row.aktywny = rowAktualny.aktywny;
+                    row.brygada = rowAktualny.brygada;
+                    row.opw = frmLogin.LoggedUser.login;
+                    row.czasw = DateTime.Now;
+                    row.opm = frmLogin.LoggedUser.login;
+                    row.czasm = DateTime.Now;
+                    PanelProdOperatorzy_db.DodajOperatora(row);
                     break;
                 case "P":
 
@@ -198,12 +261,6 @@ namespace ecoplastol.konfiguracja.produkcja
             }
             listOperatorzy = PanelProdOperatorzy_db.PobierzOperatorowView();
             grdLista.ItemsSource = listOperatorzy;
-        }
-
-        private void GrdLista_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            rowOperatorzy = grdLista.SelectedItem as OperatorzyView;
-            grdPozycje.DataContext = rowOperatorzy;
         }
     }
 }
