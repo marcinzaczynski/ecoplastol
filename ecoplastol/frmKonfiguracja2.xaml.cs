@@ -55,13 +55,9 @@ namespace ecoplastol
 
         private List<maszyny> listProdMaszyny;
         
-        
-        private List<brygadzisci> listProdBrygadzisci;
-
         private PanelProdMaszyny panelProdMaszyny;
         private PanelProdWyroby panelProdWyroby;
         private PanelProdOperatorzy panelProdOperatorzy;
-        private PanelProdBrygadzisci panelProdBrygadzisci;
         private PanelProdWyrobyTypy panelProdWyrobyTypy;
         private PanelProdZaworyTypy panelProdZaworyTypy;
         private PanelProdWyrobyZakresSDR panelProdWyrobyZakresSDR;
@@ -367,18 +363,6 @@ namespace ecoplastol
             panelProdWyrobyWadyNN = new PanelProdWyrobyWadyNN();
 
             grdProdDane.Children.Add(panelProdWyrobyWadyNN);
-        }
-
-        private void btnProdBrygadzisci_Click(object sender, RoutedEventArgs e)
-        {
-            lblProdinfo.Content = btnProdBrygadzisci.Content;
-            listProdBrygadzisci = PanelProdBrygadzisci_db.PobierzBrygadzistow(1);
-
-            grdProdDane.Children.Clear();
-            panelProdBrygadzisci = null;
-            panelProdBrygadzisci = new PanelProdBrygadzisci(listProdBrygadzisci);
-
-            grdProdDane.Children.Add(panelProdBrygadzisci);
         }
 
         private void btnProdZmiany_Click(object sender, RoutedEventArgs e)

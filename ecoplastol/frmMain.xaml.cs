@@ -37,14 +37,32 @@ namespace ecoplastol
 
         private void btnKonfiguracja_Click(object sender, RoutedEventArgs e)
         {
-            frmKonfiguracja2 frmKonfiguracja2 = new frmKonfiguracja2();
-            frmKonfiguracja2.ShowDialog();
+            switch (frmLogin.LoggedUser.profil)
+            {
+                case "A":
+                    frmKonfiguracja2 frmKonfiguracja2 = new frmKonfiguracja2();
+                    frmKonfiguracja2.ShowDialog();
+                    break;
+                default:
+                    break;
+            }
+            
         }
 
         private void BtnPlanowanie2_Click(object sender, RoutedEventArgs e)
         {
-            frmPlanowanie2 frmPlanowanie2 = new frmPlanowanie2();
-            frmPlanowanie2.ShowDialog();
+            switch (frmLogin.LoggedUser.profil)
+            {
+                case "A":
+                case "B":
+                case "U1":
+                    frmPlanowanie2 frmPlanowanie2 = new frmPlanowanie2();
+                    frmPlanowanie2.ShowDialog();
+                    break;
+                default:
+                    break;
+            }
+            
         }
 
         private void BtnZamknij_Click(object sender, RoutedEventArgs e)
@@ -54,14 +72,32 @@ namespace ecoplastol
 
         private void BtnZlecenia_Click(object sender, RoutedEventArgs e)
         {
-            frmZleceniaProdukcyjne frmZleceniaProdukcyjne = new frmZleceniaProdukcyjne();
-            frmZleceniaProdukcyjne.ShowDialog();
+            switch (frmLogin.LoggedUser.profil)
+            {
+                case "A":
+                case "B":
+                case "U1":
+                    frmZleceniaProdukcyjne frmZleceniaProdukcyjne = new frmZleceniaProdukcyjne();
+                    frmZleceniaProdukcyjne.ShowDialog();
+                    break;
+                default:
+                    break;
+            }
+            
         }
 
         private void btnTools_Click(object sender, RoutedEventArgs e)
         {
-            frmTools frmTools = new frmTools();
-            frmTools.ShowDialog();
+            switch (frmLogin.LoggedUser.profil)
+            {
+                case "A":
+                    frmTools frmTools = new frmTools();
+                    frmTools.ShowDialog();
+                    break;
+                default:
+                    break;
+            }
+            
         }
     }
 }

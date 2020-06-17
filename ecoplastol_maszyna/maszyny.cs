@@ -7,16 +7,16 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace ecoplastol
+namespace ecoplastol_maszyna
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class brygadzisci
+    public partial class maszyny
     {
         public int id { get; set; }
-        public string imie { get; set; }
-        public string nazwisko { get; set; }
+        public string nazwa { get; set; }
+        public string opis { get; set; }
         public string opw { get; set; }
         public System.DateTime czasw { get; set; }
         public string opm { get; set; }

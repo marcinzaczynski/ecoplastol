@@ -51,7 +51,6 @@ namespace ecoplastol
         public virtual DbSet<wyroby_zast_zaworu> wyroby_zast_zaworu { get; set; }
         public virtual DbSet<zmiany> zmiany { get; set; }
         public virtual DbSet<meldunki_wady_nn> meldunki_wady_nn { get; set; }
-        public virtual DbSet<brygadzisci> brygadzisci { get; set; }
         public virtual DbSet<operatorzy_maszyn> operatorzy_maszyn { get; set; }
         public virtual DbSet<meldunki> meldunki { get; set; }
         public virtual DbSet<wyroby> wyroby { get; set; }

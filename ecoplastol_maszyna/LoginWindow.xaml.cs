@@ -12,41 +12,40 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace ecoplastol
+namespace ecoplastol_maszyna
 {
     /// <summary>
-    /// Interaction logic for flmLogin.xaml
+    /// Interaction logic for LoginWindow.xaml
     /// </summary>
-    public partial class frmLogin : Window
+    public partial class LoginWindow : Window
     {
-        public static uzytkownicy LoggedUser;
+        public static operatorzy_maszyn ZalogowanyOperator;
 
-        public frmLogin()
+        public LoginWindow()
         {
             InitializeComponent();
-            cbbLogin.ItemsSource = frmUzytkownicy_db.PobierzUzytkownikow();
+            cbbLogin.ItemsSource = LoginWindow_db.PobierzOperatorow();
             cbbLogin.DisplayMemberPath = "login";
             cbbLogin.SelectedIndex = 0;
         }
 
         private void btnZaloguj_Click(object sender, RoutedEventArgs e)
         {
-
             string user = cbbLogin.Text;
             string pass = psbHaslo.Password;
 
-            LoggedUser = frmUzytkownicy_db.PobierzUzytkownika(user);
-            if (LoggedUser.haslo == pass)
+            ZalogowanyOperator = cbbLogin.SelectedItem as operatorzy_maszyn;
+
+            if (ZalogowanyOperator.haslo == pass)
             {
                 this.Hide();
-                frmMain frmMain = new frmMain(this);
-                frmMain.Show();
+                MainWindow MainWindow = new MainWindow(this);
+                MainWindow.Show();
             }
             else
             {
                 MessageBox.Show("Niepopawna nazwa użytkownika lub hasło!");
             }
         }
-
     }
 }

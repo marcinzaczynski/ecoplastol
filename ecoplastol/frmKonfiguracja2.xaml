@@ -197,8 +197,7 @@
                         <Button Grid.Row="6" Grid.Column="1" FontSize="14" Padding="10,0,0,0" HorizontalContentAlignment="Left" Style="{StaticResource btnGradientLightOrange}" Name="btnProdWadyNN" Content="Wady NN" Click="BtnProdWadyNN_Click" />
                         <Button Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="2" FontSize="14" Padding="10,0,0,0" HorizontalContentAlignment="Left" Style="{StaticResource btnGradientOrange}" Name="btnProdMaszyny" Content="Maszyny" Click="BtnProdMaszyny_Click"/>
                         <Button Grid.Row="8" Grid.Column="0" Grid.ColumnSpan="2" FontSize="14" Padding="10,0,0,0" HorizontalContentAlignment="Left" Style="{StaticResource btnGradientOrange}" Name="btnProdOperatorzy" Content="Operatorzy" Click="BtnProdOperatorzy_Click"/>
-                        <Button Grid.Row="9" Grid.Column="1" FontSize="14" Padding="10,0,0,0" HorizontalContentAlignment="Left" Style="{StaticResource btnGradientLightOrange}" Name="btnProdBrygadzisci" Content="Brygadziści" Click="btnProdBrygadzisci_Click" />
-                        <Button Grid.Row="10" Grid.Column="0" Grid.ColumnSpan="2" FontSize="14" Padding="10,0,0,0" HorizontalContentAlignment="Left" Style="{StaticResource btnGradientOrange}" Name="btnProdZmiany" Content="Zmiany" Click="btnProdZmiany_Click"/>
+                        <Button Grid.Row="9" Grid.Column="0" Grid.ColumnSpan="2" FontSize="14" Padding="10,0,0,0" HorizontalContentAlignment="Left" Style="{StaticResource btnGradientOrange}" Name="btnProdZmiany" Content="Zmiany" Click="btnProdZmiany_Click"/>
                     </Grid>
                     <Grid x:Name="grdProdDane" Grid.Column="1">
 

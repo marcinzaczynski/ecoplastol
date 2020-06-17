@@ -14,6 +14,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using ecoplastol.konfiguracja.produkcja;
+using ecoplastol.konfiguracja.program;
 
 namespace ecoplastol.planowanie
 {
@@ -26,7 +27,7 @@ namespace ecoplastol.planowanie
         private List<zmiany> listaZmian;
         private List<ZlecenieView> listaZlecen;
         private List<operatorzy_maszyn> listaOperatorzy;
-        private List<brygadzisci> listaBrygadzistow;
+        private List<uzytkownicy> listaBrygadzistow;
         private List<operatorzy_maszyn> listaMeldunekOperatorzy;
         private List<meldunki_wynik> listaWynikSprWtr;
         private List<meldunki_wynik> listaWygladZew;
@@ -107,7 +108,7 @@ namespace ecoplastol.planowanie
             cbbMeldunekOperator.ItemsSource = listaMeldunekOperatorzy;
             cbbMeldunekOperator.SelectedValuePath = "id";
 
-            listaBrygadzistow = PanelProdBrygadzisci_db.PobierzBrygadzistow(0);
+            listaBrygadzistow = PanelProdOperatorzy_db.PobierzBrygadzistow();
             cbbMeldunekBrygadzista.ItemsSource = listaBrygadzistow;
             cbbMeldunekBrygadzista.SelectedValuePath = "id";
 

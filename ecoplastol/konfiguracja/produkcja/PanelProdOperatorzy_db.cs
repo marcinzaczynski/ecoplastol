@@ -43,7 +43,7 @@ namespace ecoplastol.konfiguracja.produkcja
             using (var db = new ecoplastolEntities())
             {
                 var list = (from o in db.operatorzy_maszyn
-                            from b in db.brygadzisci
+                            from b in db.uzytkownicy
                             where o.brygada == b.id && o.id > 0
                             orderby o.id ascending
                             select new OperatorzyView
@@ -120,6 +120,18 @@ namespace ecoplastol.konfiguracja.produkcja
                              where w.id == nrOperatora
                              select w.imie + " " + w.nazwisko).FirstOrDefault().ToString();
                 return nazwa;
+            }
+        }
+
+        public static List<uzytkownicy> PobierzBrygadzistow()
+        {
+            using (var db = new ecoplastolEntities())
+            {
+                var list = (from u in db.uzytkownicy
+                            where u.profil == "B"
+                            orderby u.nazwisko ascending
+                            select u).ToList();
+                return list;
             }
         }
     }

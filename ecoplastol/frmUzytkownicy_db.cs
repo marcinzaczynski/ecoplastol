@@ -13,8 +13,7 @@ namespace ecoplastol
             using (var db = new ecoplastolEntities())
             {
 
-                var dbUser = db.uzytkownicy.Single(users => users.login == _user);
-
+                var dbUser = db.uzytkownicy.Single(u => u.login == _user);
 
                 return dbUser;
             }
@@ -25,6 +24,7 @@ namespace ecoplastol
             using (var db = new ecoplastolEntities())
             {
                 var listUzytkownicy = (from us in db.uzytkownicy
+                                       where us.aktywny == true
                                        orderby us.id ascending
                                        select us).ToList();
                 return listUzytkownicy;

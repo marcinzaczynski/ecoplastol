@@ -30,7 +30,7 @@ namespace ecoplastol.konfiguracja.produkcja
             InitializeComponent();
             listOperatorzy = PanelProdOperatorzy_db.PobierzOperatorowView();
 
-            cbbBrygadzista.ItemsSource = PanelProdBrygadzisci_db.PobierzBrygadzistow(1);
+            cbbBrygadzista.ItemsSource = PanelProdOperatorzy_db.PobierzBrygadzistow();
             cbbBrygadzista.SelectedValuePath = "id";
             grdLista.ItemsSource = listOperatorzy;
             if (listOperatorzy.Count == 0)

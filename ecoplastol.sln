@@ -1,9 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.28307.489
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30114.105
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ecoplastol", "ecoplastol\ecoplastol.csproj", "{4D21BA37-F31C-49A7-8921-6DD02CAAF1F3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ecoplastol_maszyna", "ecoplastol_maszyna\ecoplastol_maszyna.csproj", "{03A0EA8C-40E0-4324-BB82-FC9F9C9CA071}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{4D21BA37-F31C-49A7-8921-6DD02CAAF1F3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4D21BA37-F31C-49A7-8921-6DD02CAAF1F3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4D21BA37-F31C-49A7-8921-6DD02CAAF1F3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{03A0EA8C-40E0-4324-BB82-FC9F9C9CA071}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{03A0EA8C-40E0-4324-BB82-FC9F9C9CA071}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{03A0EA8C-40E0-4324-BB82-FC9F9C9CA071}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{03A0EA8C-40E0-4324-BB82-FC9F9C9CA071}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -133,9 +133,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="brygadzisci.cs">
-      <DependentUpon>PGEntity.tt</DependentUpon>
-    </Compile>
     <Compile Include="frmKonfiguracja2.xaml.cs">
       <DependentUpon>frmKonfiguracja2.xaml</DependentUpon>
     </Compile>
@@ -164,10 +161,6 @@
     <Compile Include="itf_trn.cs">
       <DependentUpon>PGEntity.tt</DependentUpon>
     </Compile>
-    <Compile Include="konfiguracja\produkcja\PanelProdBrygadzisci.xaml.cs">
-      <DependentUpon>PanelProdBrygadzisci.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="konfiguracja\produkcja\PanelProdBrygadzisci_db.cs" />
     <Compile Include="konfiguracja\produkcja\PanelProdMaszyny_db.cs" />
     <Compile Include="konfiguracja\produkcja\PanelProdOperatorzy_db.cs" />
     <Compile Include="konfiguracja\produkcja\PanelProdWyrobyDruty_db.cs" />
@@ -389,10 +382,6 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="frmTools.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="konfiguracja\produkcja\PanelProdBrygadzisci.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
