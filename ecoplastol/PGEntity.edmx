@@ -5,18 +5,6 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="ecoplastolModel.Store" Provider="Npgsql" ProviderManifestToken="10.10" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <EntityType Name="brygadzisci">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="int4" Nullable="false" />
-          <Property Name="imie" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="nazwisko" Type="varchar" MaxLength="70" Nullable="false" />
-          <Property Name="opw" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="czasw" Type="timestamp" Nullable="false" />
-          <Property Name="opm" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="czasm" Type="timestamp" Nullable="false" />
-        </EntityType>
         <EntityType Name="itf_cc">
           <Key>
             <PropertyRef Name="id" />
@@ -532,7 +520,6 @@
           <Property Name="czasm" Type="timestamp" Nullable="false" />
         </EntityType>
         <EntityContainer Name="ecoplastolModelStoreContainer">
-          <EntitySet Name="brygadzisci" EntityType="Self.brygadzisci" Schema="public" store:Type="Tables" />
           <EntitySet Name="itf_cc" EntityType="Self.itf_cc" Schema="public" store:Type="Tables" />
           <EntitySet Name="itf_icc" EntityType="Self.itf_icc" Schema="public" store:Type="Tables" />
           <EntitySet Name="itf_kategorie" EntityType="Self.itf_kategorie" Schema="public" store:Type="Tables" />
@@ -912,7 +899,6 @@
           <EntitySet Name="wyroby_zast_zaworu" EntityType="Self.wyroby_zast_zaworu" />
           <EntitySet Name="zmiany" EntityType="Self.zmiany" />
           <EntitySet Name="meldunki_wady_nn" EntityType="ecoplastolModel.meldunki_wady_nn" />
-          <EntitySet Name="brygadzisci" EntityType="ecoplastolModel.brygadzisci" />
           <EntitySet Name="operatorzy_maszyn" EntityType="ecoplastolModel.operatorzy_maszyn" />
           <EntitySet Name="meldunki" EntityType="ecoplastolModel.meldunki" />
           <EntitySet Name="wyroby" EntityType="ecoplastolModel.wyroby" />
@@ -930,18 +916,6 @@
           <Property Name="id_zlecenie" Type="Int32" Nullable="false" />
           <Property Name="id_wada_nn" Type="Int32" Nullable="false" />
           <Property Name="ilosc" Type="Int32" Nullable="false" />
-          <Property Name="opw" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="czasw" Type="DateTime" Nullable="false" Precision="6" />
-          <Property Name="opm" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="czasm" Type="DateTime" Nullable="false" Precision="6" />
-        </EntityType>
-        <EntityType Name="brygadzisci">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" />
-          <Property Name="imie" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="nazwisko" Type="String" Nullable="false" MaxLength="70" FixedLength="false" Unicode="true" />
           <Property Name="opw" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="czasw" Type="DateTime" Nullable="false" Precision="6" />
           <Property Name="opm" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
@@ -1489,19 +1463,6 @@
                 <ScalarProperty Name="id_wada_nn" ColumnName="id_wada_nn" />
                 <ScalarProperty Name="id_zlecenie" ColumnName="id_zlecenie" />
                 <ScalarProperty Name="id_meldunek" ColumnName="id_meldunek" />
-                <ScalarProperty Name="id" ColumnName="id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="brygadzisci">
-            <EntityTypeMapping TypeName="ecoplastolModel.brygadzisci">
-              <MappingFragment StoreEntitySet="brygadzisci">
-                <ScalarProperty Name="czasm" ColumnName="czasm" />
-                <ScalarProperty Name="opm" ColumnName="opm" />
-                <ScalarProperty Name="czasw" ColumnName="czasw" />
-                <ScalarProperty Name="opw" ColumnName="opw" />
-                <ScalarProperty Name="nazwisko" ColumnName="nazwisko" />
-                <ScalarProperty Name="imie" ColumnName="imie" />
                 <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
