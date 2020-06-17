@@ -114,6 +114,7 @@
           </Key>
           <Property Name="id" Type="int4" Nullable="false" />
           <Property Name="nazwa" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="opis" Type="varchar" MaxLength="200" Nullable="false" />
           <Property Name="opw" Type="varchar" MaxLength="20" />
           <Property Name="czasw" Type="timestamp" Nullable="false" />
           <Property Name="opm" Type="varchar" MaxLength="20" />
@@ -324,10 +325,25 @@
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="int4" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="id" Type="int4" Nullable="false" />
+          <Property Name="imie" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="nazwisko" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="login" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="pass" Type="varchar" MaxLength="50" />
+          <Property Name="haslo" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="profil" Type="varchar" MaxLength="2" Nullable="false" />
+          <Property Name="aktywny" Type="bool" Nullable="false" />
+          <Property Name="opw" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="czasw" Type="timestamp" Nullable="false" />
+          <Property Name="opm" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="czasm" Type="timestamp" Nullable="false" />
+        </EntityType>
+        <EntityType Name="uzytkownicy_profile">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int4" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="profil" Type="varchar" MaxLength="2" Nullable="false" />
+          <Property Name="opis" Type="varchar" MaxLength="100" Nullable="false" />
           <Property Name="opw" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="czasw" Type="timestamp" Nullable="false" />
           <Property Name="opm" Type="varchar" MaxLength="50" Nullable="false" />
@@ -541,6 +557,7 @@
           <EntitySet Name="trace_sdr" EntityType="Self.trace_sdr" Schema="public" store:Type="Tables" />
           <EntitySet Name="trace_sr" EntityType="Self.trace_sr" Schema="public" store:Type="Tables" />
           <EntitySet Name="uzytkownicy" EntityType="Self.uzytkownicy" Schema="public" store:Type="Tables" />
+          <EntitySet Name="uzytkownicy_profile" EntityType="Self.uzytkownicy_profile" Schema="public" store:Type="Tables" />
           <EntitySet Name="wady_nn" EntityType="Self.wady_nn" Schema="public" store:Type="Tables" />
           <EntitySet Name="wyroby" EntityType="Self.wyroby" Schema="public" store:Type="Tables" />
           <EntitySet Name="wyroby_druty" EntityType="Self.wyroby_druty" Schema="public" store:Type="Tables" />
@@ -792,19 +809,6 @@
           <Property Name="opm" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="czasm" Type="DateTime" Precision="6" Nullable="false" />
         </EntityType>
-        <EntityType Name="uzytkownicy">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="login" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="pass" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="profil" Type="String" MaxLength="2" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="opw" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="czasw" Type="DateTime" Precision="6" Nullable="false" />
-          <Property Name="opm" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="czasm" Type="DateTime" Precision="6" Nullable="false" />
-        </EntityType>
         <EntityType Name="wady_nn">
           <Key>
             <PropertyRef Name="id" />
@@ -901,7 +905,6 @@
           <EntitySet Name="trace_producent" EntityType="Self.trace_producent" />
           <EntitySet Name="trace_sdr" EntityType="Self.trace_sdr" />
           <EntitySet Name="trace_sr" EntityType="Self.trace_sr" />
-          <EntitySet Name="uzytkownicy" EntityType="Self.uzytkownicy" />
           <EntitySet Name="wady_nn" EntityType="Self.wady_nn" />
           <EntitySet Name="wyroby_druty" EntityType="Self.wyroby_druty" />
           <EntitySet Name="wyroby_typ" EntityType="Self.wyroby_typ" />
@@ -911,10 +914,12 @@
           <EntitySet Name="meldunki_wady_nn" EntityType="ecoplastolModel.meldunki_wady_nn" />
           <EntitySet Name="brygadzisci" EntityType="ecoplastolModel.brygadzisci" />
           <EntitySet Name="operatorzy_maszyn" EntityType="ecoplastolModel.operatorzy_maszyn" />
-          <EntitySet Name="maszyny" EntityType="ecoplastolModel.maszyny" />
           <EntitySet Name="meldunki" EntityType="ecoplastolModel.meldunki" />
           <EntitySet Name="wyroby" EntityType="ecoplastolModel.wyroby" />
           <EntitySet Name="zlecenia_produkcyjne" EntityType="ecoplastolModel.zlecenia_produkcyjne" />
+          <EntitySet Name="maszyny" EntityType="ecoplastolModel.maszyny" />
+          <EntitySet Name="uzytkownicy_profile" EntityType="ecoplastolModel.uzytkownicy_profile" />
+          <EntitySet Name="uzytkownicy" EntityType="ecoplastolModel.uzytkownicy" />
         </EntityContainer>
         <EntityType Name="meldunki_wady_nn">
           <Key>
@@ -956,17 +961,6 @@
           <Property Name="opw" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="czasw" Type="DateTime" Nullable="false" Precision="6" />
           <Property Name="opm" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="czasm" Type="DateTime" Nullable="false" Precision="6" />
-        </EntityType>
-        <EntityType Name="maszyny">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" />
-          <Property Name="nazwa" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
-          <Property Name="opw" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
-          <Property Name="czasw" Type="DateTime" Nullable="false" Precision="6" />
-          <Property Name="opm" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="czasm" Type="DateTime" Nullable="false" Precision="6" />
         </EntityType>
         <EntityType Name="meldunki">
@@ -1097,6 +1091,46 @@
           <Property Name="opw" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
           <Property Name="czasw" Type="DateTime" Nullable="false" Precision="6" />
           <Property Name="opm" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="czasm" Type="DateTime" Nullable="false" Precision="6" />
+        </EntityType>
+        <EntityType Name="maszyny">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="nazwa" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="opis" Type="String" Nullable="false" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="opw" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="czasw" Type="DateTime" Nullable="false" Precision="6" />
+          <Property Name="opm" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="czasm" Type="DateTime" Nullable="false" Precision="6" />
+        </EntityType>
+        <EntityType Name="uzytkownicy_profile">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="profil" Type="String" Nullable="false" MaxLength="2" FixedLength="false" Unicode="true" />
+          <Property Name="opis" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="opw" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="czasw" Type="DateTime" Nullable="false" Precision="6" />
+          <Property Name="opm" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="czasm" Type="DateTime" Nullable="false" Precision="6" />
+        </EntityType>
+        <EntityType Name="uzytkownicy">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="imie" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="nazwisko" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="login" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="haslo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="profil" Type="String" Nullable="false" MaxLength="2" FixedLength="false" Unicode="true" />
+          <Property Name="aktywny" Type="Boolean" Nullable="false" />
+          <Property Name="opw" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="czasw" Type="DateTime" Nullable="false" Precision="6" />
+          <Property Name="opm" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="czasm" Type="DateTime" Nullable="false" Precision="6" />
         </EntityType>
       </Schema>
@@ -1362,20 +1396,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="uzytkownicy">
-            <EntityTypeMapping TypeName="ecoplastolModel.uzytkownicy">
-              <MappingFragment StoreEntitySet="uzytkownicy">
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="login" ColumnName="login" />
-                <ScalarProperty Name="pass" ColumnName="pass" />
-                <ScalarProperty Name="profil" ColumnName="profil" />
-                <ScalarProperty Name="opw" ColumnName="opw" />
-                <ScalarProperty Name="czasw" ColumnName="czasw" />
-                <ScalarProperty Name="opm" ColumnName="opm" />
-                <ScalarProperty Name="czasm" ColumnName="czasm" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="wady_nn">
             <EntityTypeMapping TypeName="ecoplastolModel.wady_nn">
               <MappingFragment StoreEntitySet="wady_nn">
@@ -1499,18 +1519,6 @@
                 <ScalarProperty Name="login" ColumnName="login" />
                 <ScalarProperty Name="nazwisko" ColumnName="nazwisko" />
                 <ScalarProperty Name="imie" ColumnName="imie" />
-                <ScalarProperty Name="id" ColumnName="id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="maszyny">
-            <EntityTypeMapping TypeName="ecoplastolModel.maszyny">
-              <MappingFragment StoreEntitySet="maszyny">
-                <ScalarProperty Name="czasm" ColumnName="czasm" />
-                <ScalarProperty Name="opm" ColumnName="opm" />
-                <ScalarProperty Name="czasw" ColumnName="czasw" />
-                <ScalarProperty Name="opw" ColumnName="opw" />
-                <ScalarProperty Name="nazwa" ColumnName="nazwa" />
                 <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -1644,6 +1652,49 @@
                 <ScalarProperty Name="wyrob_kod_indeks" ColumnName="wyrob_kod_indeks" />
                 <ScalarProperty Name="wyrob_kod" ColumnName="wyrob_kod" />
                 <ScalarProperty Name="wyrob_kod_id" ColumnName="wyrob_kod_id" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="maszyny">
+            <EntityTypeMapping TypeName="ecoplastolModel.maszyny">
+              <MappingFragment StoreEntitySet="maszyny">
+                <ScalarProperty Name="czasm" ColumnName="czasm" />
+                <ScalarProperty Name="opm" ColumnName="opm" />
+                <ScalarProperty Name="czasw" ColumnName="czasw" />
+                <ScalarProperty Name="opw" ColumnName="opw" />
+                <ScalarProperty Name="opis" ColumnName="opis" />
+                <ScalarProperty Name="nazwa" ColumnName="nazwa" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="uzytkownicy_profile">
+            <EntityTypeMapping TypeName="ecoplastolModel.uzytkownicy_profile">
+              <MappingFragment StoreEntitySet="uzytkownicy_profile">
+                <ScalarProperty Name="czasm" ColumnName="czasm" />
+                <ScalarProperty Name="opm" ColumnName="opm" />
+                <ScalarProperty Name="czasw" ColumnName="czasw" />
+                <ScalarProperty Name="opw" ColumnName="opw" />
+                <ScalarProperty Name="opis" ColumnName="opis" />
+                <ScalarProperty Name="profil" ColumnName="profil" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="uzytkownicy">
+            <EntityTypeMapping TypeName="ecoplastolModel.uzytkownicy">
+              <MappingFragment StoreEntitySet="uzytkownicy">
+                <ScalarProperty Name="czasm" ColumnName="czasm" />
+                <ScalarProperty Name="opm" ColumnName="opm" />
+                <ScalarProperty Name="czasw" ColumnName="czasw" />
+                <ScalarProperty Name="opw" ColumnName="opw" />
+                <ScalarProperty Name="aktywny" ColumnName="aktywny" />
+                <ScalarProperty Name="profil" ColumnName="profil" />
+                <ScalarProperty Name="haslo" ColumnName="haslo" />
+                <ScalarProperty Name="login" ColumnName="login" />
+                <ScalarProperty Name="nazwisko" ColumnName="nazwisko" />
+                <ScalarProperty Name="imie" ColumnName="imie" />
                 <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>

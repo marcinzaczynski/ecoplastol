@@ -104,6 +104,7 @@ namespace ecoplastol.konfiguracja.produkcja
                     case (1): // doczołowe
                     case (2): // zawory
                     case (3): // adaptery
+                    case (4): // półprodukty
                         switch (aktywne)
                         {
                             // wyświetl aktywne
@@ -224,6 +225,20 @@ namespace ecoplastol.konfiguracja.produkcja
         {
             using (var db = new ecoplastolEntities())
             {
+                db.wyroby.Attach(poz);
+                db.wyroby.Remove(poz);
+                db.SaveChanges();
+            }
+        }
+
+        public static void UsunWyrobPoID(int id)
+        {
+            using (var db = new ecoplastolEntities())
+            {
+                wyroby poz = new wyroby();
+                poz = (from wyr in db.wyroby
+                        where wyr.id == id
+                        select wyr).FirstOrDefault();
                 db.wyroby.Attach(poz);
                 db.wyroby.Remove(poz);
                 db.SaveChanges();

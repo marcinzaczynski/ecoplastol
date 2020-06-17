@@ -8,6 +8,19 @@ namespace ecoplastol
 {
     class frmTools_db
     {
+        public static List<uzytkownicy> PobierzUzytkownikow()
+        {
+            using (var db = new ecoplastolEntities())
+            {
+                var list = (from w in db.uzytkownicy
+                                //where
+                            orderby w.id ascending
+                            select w).ToList();
+                return list;
+            }
+        }
+
+
         public static List<meldunki> PobierzMeldunki()
         {
             using (var db = new ecoplastolEntities())

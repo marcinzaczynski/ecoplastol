@@ -59,6 +59,41 @@
             <RowDefinition Height="50"/>
         </Grid.RowDefinitions>
         <TabControl Grid.Row="0" FontSize="18" Grid.ColumnSpan="2" Name="tabcontrol1">
+            <TabItem Header="PROGRAM">
+                <Grid Name="gridProgram">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="150"/>
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <Grid Grid.Column="0">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="10"/>
+                            <ColumnDefinition Width="140"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="40"/>
+                            <RowDefinition Height="40"/>
+                            <RowDefinition Height="40"/>
+                            <RowDefinition Height="40"/>
+                            <RowDefinition Height="40"/>
+                            <RowDefinition Height="40"/>
+                            <RowDefinition Height="40"/>
+                            <RowDefinition Height="40"/>
+                            <RowDefinition Height="40"/>
+                            <RowDefinition Height="40"/>
+                            <RowDefinition Height="40"/>
+                            <RowDefinition Height="40"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <Label  Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" FontSize="14" Padding="10,0,0,0" Name="lblPrograminfo" Content="_" />
+                        <Button Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" FontSize="14" Padding="10,0,0,0" HorizontalContentAlignment="Left" Style="{StaticResource btnGradientOrange}" Name="btnProgramUzytkownicy" Content="Użytkownicy" Click="btnProgramUzytkownicy_Click" />
+                        <Button Grid.Row="2" Grid.Column="1" FontSize="14" Padding="10,0,0,0" HorizontalContentAlignment="Left" Style="{StaticResource btnGradientLightOrange}" Name="btnProgramProfileUzytkownikow" Content="Profile" Click="btnProgramProfileUzytkownikow_Click" />
+                    </Grid>
+                    <Grid x:Name="grdProgramDane" Grid.Column="1">
+
+                    </Grid>
+                </Grid>
+            </TabItem>
             <TabItem Header="ITF">
                 <Grid Name="gridITF">
                     <Grid.ColumnDefinitions>

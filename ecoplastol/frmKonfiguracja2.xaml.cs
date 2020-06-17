@@ -14,6 +14,7 @@ using System.Windows.Shapes;
 using ecoplastol.konfiguracja;
 using ecoplastol.konfiguracja.traceability;
 using ecoplastol.konfiguracja.produkcja;
+using ecoplastol.konfiguracja.program;
 
 namespace ecoplastol
 {
@@ -66,6 +67,9 @@ namespace ecoplastol
         private PanelProdWyrobyZakresSDR panelProdWyrobyZakresSDR;
         private PanelProdWyrobyDruty panelProdWyrobyDruty;
         private PanelProdWyrobyWadyNN panelProdWyrobyWadyNN;
+
+        private PanelProgramUzytkownicy panelProgramUzytkownicy;
+        private PanelProgramUzytkownicyProfile panelProgramUzytkownicyProfile;
 
         public frmKonfiguracja2()
         {
@@ -380,6 +384,28 @@ namespace ecoplastol
         private void btnProdZmiany_Click(object sender, RoutedEventArgs e)
         {
 
+        }
+
+        private void btnProgramProfileUzytkownikow_Click(object sender, RoutedEventArgs e)
+        {
+            lblProdinfo.Content = btnProgramProfileUzytkownikow.Content;
+
+            grdProgramDane.Children.Clear();
+            panelProgramUzytkownicyProfile = null;
+            panelProgramUzytkownicyProfile = new PanelProgramUzytkownicyProfile();
+
+            grdProgramDane.Children.Add(panelProgramUzytkownicyProfile);
+        }
+
+        private void btnProgramUzytkownicy_Click(object sender, RoutedEventArgs e)
+        {
+            lblProdinfo.Content = btnProgramUzytkownicy.Content;
+
+            grdProgramDane.Children.Clear();
+            panelProgramUzytkownicy = null;
+            panelProgramUzytkownicy = new PanelProgramUzytkownicy();
+
+            grdProgramDane.Children.Add(panelProgramUzytkownicy);
         }
     }
 }

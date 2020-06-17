@@ -38,7 +38,7 @@ namespace ecoplastol.konfiguracja.produkcja
             }
         }
 
-               public static List<OperatorzyView> PobierzOperatorowView()
+        public static List<OperatorzyView> PobierzOperatorowView()
         {
             using (var db = new ecoplastolEntities())
             {

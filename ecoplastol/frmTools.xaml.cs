@@ -19,6 +19,7 @@ namespace ecoplastol
     /// </summary>
     public partial class frmTools : Window
     {
+        List<uzytkownicy> listaUzytkownikow;
         public frmTools()
         {
             InitializeComponent();
@@ -26,7 +27,11 @@ namespace ecoplastol
 
         private void btnOperatorzy_Click(object sender, RoutedEventArgs e)
         {
-          
+            listaUzytkownikow = frmTools_db.PobierzUzytkownikow();
+            foreach (var item in listaUzytkownikow)
+            {
+
+            }
         }
     }
 }

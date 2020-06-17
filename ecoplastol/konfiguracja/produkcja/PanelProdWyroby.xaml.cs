@@ -1669,6 +1669,7 @@ namespace ecoplastol.konfiguracja.produkcja
                 case 1: // doczołówki
                 case 2: // zawory
                 case 3: // zdaptery
+                case 4: // półprodukty 
                     int[] WidoczneKolumny1 = new int[] { 1, 2, 3, 4, 11, 12, 13, 14, 15 };
                     foreach (var item in WidoczneKolumny1)
                     {
@@ -1684,6 +1685,11 @@ namespace ecoplastol.konfiguracja.produkcja
                     break;
                 
                 default:
+                    int[] WidoczneKolumny3 = new int[] { 1, 2, 3, 4, 11, 12, 13, 14, 15 };
+                    foreach (var item in WidoczneKolumny3)
+                    {
+                        grdLista.Columns[item].Visibility = Visibility.Visible;
+                    }
                     break;
             }
         }

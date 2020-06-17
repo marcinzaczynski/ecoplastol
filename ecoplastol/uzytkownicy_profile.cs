@@ -12,10 +12,10 @@ namespace ecoplastol
     using System;
     using System.Collections.Generic;
     
-    public partial class maszyny
+    public partial class uzytkownicy_profile
     {
         public int id { get; set; }
-        public string nazwa { get; set; }
+        public string profil { get; set; }
         public string opis { get; set; }
         public string opw { get; set; }
         public System.DateTime czasw { get; set; }

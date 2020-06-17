@@ -48,8 +48,8 @@
                         <ts:ComboBoxItemTemplateSelector.DropDownTemplate>
                             <DataTemplate>
                                 <StackPanel Orientation="Horizontal">
-                                    <TextBlock Text="{Binding parametr}" Width="13"/>
-                                    <TextBlock Text="-  "/>
+                                    <TextBlock Text="{Binding parametr}" Width="25"/>
+                                    <TextBlock Text=" -  "/>
                                     <TextBlock Text="{Binding wartosc}" />
                                 </StackPanel>
                             </DataTemplate>

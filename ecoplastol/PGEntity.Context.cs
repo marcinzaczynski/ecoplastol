@@ -44,7 +44,6 @@ namespace ecoplastol
         public virtual DbSet<trace_producent> trace_producent { get; set; }
         public virtual DbSet<trace_sdr> trace_sdr { get; set; }
         public virtual DbSet<trace_sr> trace_sr { get; set; }
-        public virtual DbSet<uzytkownicy> uzytkownicy { get; set; }
         public virtual DbSet<wady_nn> wady_nn { get; set; }
         public virtual DbSet<wyroby_druty> wyroby_druty { get; set; }
         public virtual DbSet<wyroby_typ> wyroby_typ { get; set; }
@@ -54,9 +53,11 @@ namespace ecoplastol
         public virtual DbSet<meldunki_wady_nn> meldunki_wady_nn { get; set; }
         public virtual DbSet<brygadzisci> brygadzisci { get; set; }
         public virtual DbSet<operatorzy_maszyn> operatorzy_maszyn { get; set; }
-        public virtual DbSet<maszyny> maszyny { get; set; }
         public virtual DbSet<meldunki> meldunki { get; set; }
         public virtual DbSet<wyroby> wyroby { get; set; }
         public virtual DbSet<zlecenia_produkcyjne> zlecenia_produkcyjne { get; set; }
+        public virtual DbSet<maszyny> maszyny { get; set; }
+        public virtual DbSet<uzytkownicy_profile> uzytkownicy_profile { get; set; }
+        public virtual DbSet<uzytkownicy> uzytkownicy { get; set; }
     }
 }
